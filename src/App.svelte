@@ -11,18 +11,8 @@
 
 </script>
 
-<!-- <div class="container mx-auto">
-  <Navbar/>
-  <div class="grid grid-cols-2 gap-2">
-		<div class="h-3/6">
-      <img src={graph} alt="">
-    </div>
-    <LoginPage />
-		<Signup />
 
-  </div>
-</div> -->
-<main>
+<main class="">
   <Navbar/>
   <Router>
     <Route path="/" component={Landing} />
@@ -31,9 +21,6 @@
     <Route path="/tips" component={Tips} />
     <Route path="/homepage" component={Home} />
   </Router>
-
-
-
 </main>
 
 

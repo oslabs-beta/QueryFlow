@@ -2,7 +2,7 @@
 
 </script>
 
-<div class="navbar bg-base-100">
+<div class="navbar bg-base-100 sticky top-0">
   <div class="flex-1">
     <a class="btn btn-ghost normal-case text-xl" href="https://google.com">QueryFlow</a>
   </div>
