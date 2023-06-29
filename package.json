@@ -12,15 +12,13 @@
   },
   "devDependencies": {
     "@floating-ui/dom": "^1.4.2",
-    "@skeletonlabs/skeleton": "^1.8.0",
     "@sveltejs/vite-plugin-svelte": "^2.0.4",
-    "@tailwindcss/forms": "^0.5.3",
-    "@tailwindcss/typography": "^0.5.9",
     "@tsconfig/svelte": "^4.0.1",
     "@typescript-eslint/eslint-plugin": "^5.60.1",
     "@typescript-eslint/parser": "^5.60.1",
     "autoprefixer": "^10.4.14",
     "concurrently": "^8.2.0",
+    "daisyui": "^3.1.7",
     "eslint": "^8.43.0",
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-svelte": "^2.32.0",
@@ -48,6 +46,7 @@
     "jwt-decode": "^3.1.2",
     "nodemon": "^2.0.22",
     "pg": "^8.11.1",
-    "redis": "^4.6.7"
+    "redis": "^4.6.7",
+    "svelte-routing": "^1.10.0"
   }
 }
