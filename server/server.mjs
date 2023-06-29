@@ -1,7 +1,9 @@
 import express from 'express';
 import { fileURLToPath } from 'url';
-import cors from 'cors'
+import cors from 'cors';
 import cookieParser from 'cookie-parser';
+import userController from './controllers/userController.mjs';
+
 
 
 //we utilize the fileURLToPath function from the url module to convert the import.meta.url to the corresponding file path.
@@ -34,7 +36,17 @@ app.get('*', (req, res) => {
 // testing post request
 app.post('/api', (req, res) => {
   res.status(201).json('ayo?');
-})
+});
+
+//Route for signing up
+app.post('/api/signup', userController.create, (req, res) => {
+  res.status(201).json('Account made');
+});
+
+//Route for logging in
+app.post('/api/login', userController.login, (req, res) => {
+  res.status(201).json('Login Successful');
+});
 
 //Route error handler
 app.use('*', (req, res) => {
@@ -56,4 +68,3 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
 });
-
