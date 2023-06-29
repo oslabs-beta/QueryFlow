@@ -1,64 +1,63 @@
 <script lang="ts">
-	import svelteLogo from './assets/svelte.svg';
-	import viteLogo from '/vite.svg';
-	import Counter from './lib/Counter.svelte';
+	
+  import '@skeletonlabs/skeleton/styles/skeleton.css';
 
-	const postData = async () => {
-		try {
-			let response = await fetch('/api', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			});
-			const data = await response.json();
-			console.log(data);
-			return data;
-		} catch (error) {
-      console.log(`Error: ${error}`);
-    }
-	};
+	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
+
+	// control rendering login OR signup within slot
+	let renderLoginPage: boolean = true;
+  
 </script>
 
-<main>
-	<button on:click={postData}> fetch </button>
-	<div>
-		<a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-			<img src={viteLogo} class="logo" alt="Vite Logo" />
-		</a>
-		<a href="https://svelte.dev" target="_blank" rel="noreferrer">
-			<img src={svelteLogo} class="logo svelte" alt="Svelte Logo" />
-		</a>
-	</div>
-	<h1>Vite + Svelte</h1>
+<AppShell>
+  
+	<svelte:fragment slot="header">
+    <AppBar>
+			<svelte:fragment slot="lead">
+				<strong class="text-xl uppercase">QueryFlow</strong>
+			</svelte:fragment>
+			<svelte:fragment slot="trail">
+				<a
+					class="btn btn-sm variant-ghost-surface"
+					href="https://discord.gg/EXqV7W8MtY"
+					target="_blank"
+					rel="noreferrer"
+				>
+					Discord
+				</a>
+				<a
+					class="btn btn-sm variant-ghost-surface"
+					href="https://twitter.com/SkeletonUI"
+					target="_blank"
+					rel="noreferrer"
+				>
+					Twitter
+				</a>
+				<a
+					class="btn btn-sm variant-ghost-surface"
+					href="https://github.com/skeletonlabs/skeleton"
+					target="_blank"
+					rel="noreferrer"
+				>
+					GitHub
+				</a>
+			</svelte:fragment>
+		</AppBar>
 
-	<div class="card">
-		<Counter />
-	</div>
 
-	<p>
-		Check out <a href="https://github.com/sveltejs/kit#readme" target="_blank" rel="noreferrer"
-			>SvelteKit</a
-		>, the official Svelte app framework powered by Vite!
-	</p>
+  </svelte:fragment>
+	<!-- (sidebarLeft) -->
+	<!-- (sidebarRight) -->
+	<!-- (pageHeader) -->
+	<!-- Router Slot -->
+	<!-- <slot /> -->
+	<!-- ---- / ---- -->
+	<svelte:fragment slot="pageFooter">Page Footer</svelte:fragment>
+	<!-- (footer) -->
+</AppShell>
 
-	<p class="read-the-docs">Click on the Vite and Svelte logos to learn more</p>
-</main>
-
-<style>
-	.logo {
-		height: 6em;
-		padding: 1.5em;
-		will-change: filter;
-		transition: filter 300ms;
+<!-- <style>
+  * {
+		display: flex;
 	}
-	.logo:hover {
-		filter: drop-shadow(0 0 2em #646cffaa);
-	}
-	.logo.svelte:hover {
-		filter: drop-shadow(0 0 2em #ff3e00aa);
-	}
-	.read-the-docs {
-		color: #888;
-	}
-</style>
+</style> -->
