@@ -46,6 +46,7 @@
     "jwt-decode": "^3.1.2",
     "nodemon": "^2.0.22",
     "pg": "^8.11.1",
-    "redis": "^4.6.7"
+    "redis": "^4.6.7",
+    "svelte-routing": "^1.10.0"
   }
 }

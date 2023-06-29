@@ -2,10 +2,16 @@
 	import LoginPage from './lib/Login.svelte'
 	import Navbar from './lib/Navbar.svelte'
 	import Signup from './lib/Signup.svelte'
-  import graph from './assets/graph.jpg'
+  import { Route, Router } from 'svelte-routing';
+  import About from './Pages/About.svelte';
+  import Contact from './Pages/Contact.svelte';
+  import Home from './Pages/Home.svelte';
+  import Landing from './Pages/Landing.svelte';
+  import Tips from './Pages/Tips.svelte';
+
 </script>
 
-<div class="container mx-auto">
+<!-- <div class="container mx-auto">
   <Navbar/>
   <div class="grid grid-cols-2 gap-2">
 		<div class="h-3/6">
@@ -15,8 +21,20 @@
 		<Signup />
 
   </div>
-</div>
+</div> -->
+<main>
+  <Navbar/>
+  <Router>
+    <Route path="/" component={Landing} />
+    <Route path="/about" component={About} />
+    <Route path="/contact" component={Contact} />
+    <Route path="/tips" component={Tips} />
+    <Route path="/homepage" component={Home} />
+  </Router>
 
+
+
+</main>
 
 
 <style>
