@@ -12,7 +12,7 @@
 </script>
 
 
-<main class="">
+<main class="md:h-full">
   <Navbar/>
   <Router>
     <Route path="/" component={Landing} />
