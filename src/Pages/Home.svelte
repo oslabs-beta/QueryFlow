@@ -2,7 +2,7 @@
 
 </script>
 
-<div class="flex flex-col items-center justify-center md:h-full mt-16">
+<div class="flex flex-col items-center justify-center mt-16">
   <p>line 1</p>
   <p>line 2</p>
   <p>line 3</p>
@@ -16,4 +16,3 @@
   <p>another line</p>
   <p>another line</p>
 </div>
-

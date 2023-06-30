@@ -6,7 +6,9 @@
   let password: string;
 
   const loginUser = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
+
+    // delete line below and uncomment try/catch block for functionality
     navigate('/home', { replace: true})
     // try {
     //   const response = await fetch('/api/login',{
@@ -54,7 +56,7 @@
 </div>
 
 <style>
-  
+
 </style>
 <!-- 
 <div class="loginSection">
