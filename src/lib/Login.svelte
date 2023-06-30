@@ -1,7 +1,8 @@
 <script lang="ts">
   
   export let renderSignup;
-  
+
+
 </script>
 
 <!-- framework for login -->
