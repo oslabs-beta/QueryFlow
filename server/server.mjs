@@ -3,6 +3,7 @@ import { fileURLToPath } from 'url';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import userController from './controllers/userController.mjs';
+import clientDBController from './controllers/clientDBController.mjs';
 
 
 
@@ -45,7 +46,11 @@ app.post('/api/signup', userController.create, (req, res) => {
 
 //Route for logging in
 app.post('/api/login', userController.login, (req, res) => {
-  res.status(201).json('Login Successful');
+  res.status(201).json(res.locals.authentication);
+});
+
+app.post('/api/metrics', clientDBController.postMetrics, (req, res) => {
+  res.status(201).json(res.locals.metrics);
 });
 
 //Route error handler
