@@ -15,6 +15,5 @@
   <p>another line</p>
   <p>another line</p>
   <p>another line</p>
-
 </div>
 

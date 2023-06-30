@@ -1,6 +1,6 @@
 import express from 'express';
 import { fileURLToPath } from 'url';
-import cors from 'cors'
+import cors from 'cors';
 import cookieParser from 'cookie-parser';
 
 
@@ -34,7 +34,7 @@ app.get('*', (req, res) => {
 // testing post request
 app.post('/api', (req, res) => {
   res.status(201).json('ayo?');
-})
+});
 
 //Route error handler
 app.use('*', (req, res) => {

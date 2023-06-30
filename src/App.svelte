@@ -19,7 +19,7 @@
     <Route path="/about" component={About} />
     <Route path="/contact" component={Contact} />
     <Route path="/tips" component={Tips} />
-    <Route path="/homepage" component={Home} />
+    <Route path="/home" component={Home} />
   </Router>
 </main>
 
