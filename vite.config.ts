@@ -9,7 +9,7 @@ export default defineConfig({
       '/api': {
         target: `http://localhost:${PORT}`,
         changeOrigin: true,
-      }
+      },
     },
   },
   plugins: [svelte()],
