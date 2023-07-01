@@ -11,29 +11,16 @@
 
 </script>
 
-<!-- <div class="container mx-auto">
-  <Navbar/>
-  <div class="grid grid-cols-2 gap-2">
-		<div class="h-3/6">
-      <img src={graph} alt="">
-    </div>
-    <LoginPage />
-		<Signup />
 
-  </div>
-</div> -->
-<main>
+<main class="md:h-screen">
   <Navbar/>
   <Router>
     <Route path="/" component={Landing} />
     <Route path="/about" component={About} />
     <Route path="/contact" component={Contact} />
     <Route path="/tips" component={Tips} />
-    <Route path="/homepage" component={Home} />
+    <Route path="/home" component={Home} />
   </Router>
-
-
-
 </main>
 
 
