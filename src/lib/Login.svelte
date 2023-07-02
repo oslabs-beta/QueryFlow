@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { navigate } from 'svelte-routing';
+	import { userInfoStore } from '../store';
 	export let renderSignup: boolean;
 
 	let email: string;
@@ -20,7 +21,9 @@
 			});
 			if (response.ok) {
 				const data = await response.json();
-				navigate('/home', { replace: true, state: data });
+				console.log('i am login data', data);
+				userInfoStore.set(data);
+				navigate('/home', { replace: true });
 			}
 		} catch (error) {}
 	};
