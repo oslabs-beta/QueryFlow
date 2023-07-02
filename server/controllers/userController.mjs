@@ -12,7 +12,7 @@ userController.create = async (req, res, next) => {
     const { first_name, last_name, email, password, organization, database} = req.body; 
 
     const hash = await bcrypt.hash(password, workFactor);
-    console.log('Line 13: ', `${hash}`);
+    // console.log('Line 13: ', `${hash}`);
 
     const string = `INSERT INTO users (first_name, last_name, email, password, organization, database) VALUES ('${first_name}', '${last_name}', '${email}', '${hash}', '${organization}', '${database}')`;
     const response = await ourDBModel(string);
@@ -28,7 +28,6 @@ userController.create = async (req, res, next) => {
 };
 
 
-//
 userController.login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
@@ -40,21 +39,23 @@ userController.login = async (req, res, next) => {
 
     const data = await ourDBModel(query);
 
-    console.log('Data.rows from ourDBModel on log is', data.rows);
+    // console.log('Data.rows from ourDBModel on log is', data.rows);
 
+    //Hashed password stored in databse for a particular email
     const hash = data.rows[0].password;
   
     const result = await bcrypt.compare(password, hash);
     
     if (data.rows[0] !== undefined && result) {
-      res.locals.authentication = data.rows;
+      const { _id, firstname, lastname } = data.rows[0];
+      res.locals.authentication = {_id, firstname, lastname};
       return next();
     }
     else {
       return next({
-        log: 'Incorrect username or password',
+        log: 'Incorrect email or password',
         status: 401,
-        message: 'Incorrect username or password'
+        message: 'Incorrect email or password'
       });
     }
   } catch (err) {

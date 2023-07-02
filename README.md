@@ -1,8 +1,8 @@
 //Port 
 
-TO-DO LIST:
+POLISHING TO-DO LIST:
 - Remove numbers in Signup.svelte to fix color scheme
-
+- Add parameterized queries in backend (security)
 
 
 <!-- # Svelte + TS + Vite
