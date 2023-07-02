@@ -11,7 +11,7 @@
 
 	export let renderSignup: boolean;
 
-	// is this necessary? no
+	// is this necessary? no, actually yes
 	let confirmPassword: string;
 
 	// ToC checker
@@ -26,7 +26,7 @@
 		const body = database
 			? { first_name, last_name, organization, database, email, password }
 			: { first_name, last_name, organization, email, password };
-		console.log(body);
+		// console.log(body);
 		try {
 			const response = await fetch('/api/signup', {
 				method: 'POST',

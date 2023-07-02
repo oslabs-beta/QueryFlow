@@ -10,13 +10,15 @@
 
 <main>
 	<Navbar />
-	<Router>
-		<Route path="/" component={Landing} />
-		<Route path="/about" component={About} />
-		<Route path="/contact" component={Contact} />
-		<Route path="/tips" component={Tips} />
-		<Route path="/homepage" component={Home} />
-	</Router>
+	<div class="pt-16">
+		<Router>
+			<Route path="/" component={Landing} />
+			<Route path="/about" component={About} />
+			<Route path="/contact" component={Contact} />
+			<Route path="/tips" component={Tips} />
+			<Route path="/home" component={Home} />
+		</Router>
+	</div>
 </main>
 
 <style>
