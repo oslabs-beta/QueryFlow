@@ -20,12 +20,12 @@
 
 		try {
 			// ===== EVENTUALLY CHANGE /API/TEST TO WHAT BACKEND CHANGES IT TO =====
-			const response = await fetch('/api/test', {
+			const response = await fetch('/api/querymetrics', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
 				},
-				body: JSON.stringify({ queryname, uri, querystring, querycount, _id: userId }),
+				body: JSON.stringify({ queryname, uri, querystring, querycount, querydelay, _id: userId }),
 			});
 			if (response.ok) {
 				const data = await response.json();

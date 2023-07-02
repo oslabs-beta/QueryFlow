@@ -7,7 +7,7 @@ clientDBController.queryMetrics = async (req, res, next) => {
 
   //Req Body. Need _id for when we redirect to our DB. Not included at the moment. 
   const { _id, uri, querystring, queryname, querycount, querydelay } = req.body;
-
+  console.log(req.body)
   //Reassign client URI String to allow clientDBModel to function. 
   const clientURI = `${uri}`;
 
