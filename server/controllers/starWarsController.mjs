@@ -11,7 +11,6 @@ starWarsController.queryMetrics = async (req, res, next) => {
         await new Promise((resolve) => setTimeout(resolve, i * 2000));
         const data = await starWarsDB(query);
         const parsedData = data.rows;
-        console.log(parsedData[0]['QUERY PLAN']);
         const planningTime = parsedData[0]['QUERY PLAN'][0]['Planning Time'];
         const executionTime = parsedData[0]['QUERY PLAN'][0]['Execution Time'];
         const cacheSize = parsedData[0]['QUERY PLAN'][0]['Settings']['effective_cache_size'];
