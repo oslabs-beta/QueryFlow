@@ -1,20 +1,16 @@
 import pg from 'pg';
-const { Pool } = pg;
 
 const clientDBController = {};
 
+//Takes in query & URI from client and gathers query metrics using client's database
 clientDBController.queryMetrics = async (req, res, next) => {
 
-  //Req Body. Need _id for when we redirect to our DB. Not included at the moment. 
   const { _id, uri, querystring, queryname, querycount, querydelay } = req.body;
-  console.log(req.body)
-  //Reassign client URI String to allow clientDBModel to function. 
-  const clientURI = `${uri}`;
-
-  //When client URI is deconstructed from the req.body, the pool and clientDBModel will be updated with this client URI
+ 
+  //Initiate new model
   const { Pool } = pg;
   const pool = new Pool({
-    connectionString: clientURI
+    connectionString: uri
   });
 
   const clientDBModel = function(text, params, callback) {
@@ -22,7 +18,7 @@ clientDBController.queryMetrics = async (req, res, next) => {
     return pool.query(text, params, callback);
   };
  
-  //Query string from passed in string. 
+  //Append Explain (options...) to client's query string. 
   const query = 'EXPLAIN (ANALYZE true, COSTS true, SETTINGS true, BUFFERS true, WAL true, SUMMARY true,  FORMAT JSON)' + `${querystring}`;
   
   try {
@@ -53,9 +49,9 @@ clientDBController.queryMetrics = async (req, res, next) => {
     return next();
   } catch (err) {
     return next({
-      log: 'Error handler caught error in starWarsController.queryMetrics middleware',
+      log: 'Error handler caught error in clientDBController.queryMetrics middleware',
       status: 400,
-      message: 'Error handler caught error in starWarsController.queryMetrics middleware',
+      message: 'Error handler caught error in clientDBController.queryMetrics middleware',
     });
   }
 };

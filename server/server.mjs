@@ -6,54 +6,57 @@ import userController from './controllers/userController.mjs';
 import clientDBController from './controllers/clientDBController.mjs';
 import starWarsController from './controllers/starWarsController.mjs';
 import ourDBController from './controllers/ourDBController.js';
-
-//we utilize the fileURLToPath function from the url module to convert the import.meta.url to the corresponding file path.
 import { dirname, resolve } from 'path';
 import compression from 'compression';
 
+//We utilize the fileURLToPath function from the url module to convert the import.meta.url to the corresponding file path??
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
 //we extract the directory name using the dirname function from the path module
+const __dirname = dirname(__filename);
 
+//Initiate express server. 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-
-// Enable compression middleware for better performance
+// Enable compression middleware for better performance & Enable other middleware
 app.use(compression());
-// Enable other middleware
 app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
 
-// Serve static assets (compiled SvelteKit files)
+// Serve static assets
 app.use(express.static(resolve(__dirname, '../src')));
 
-// Handle all routes and serve the index.html file
+//Serve index.html file
+app.get('/', (req, res) => {
+  res.sendFile(resolve(__dirname, '../index.html'));
+});
+
+//Test route to star wars database to test what metrics are being returned
 app.post('/api/test', starWarsController.queryMetrics, (req, res) => {
   res.status(201).json(res.locals.metrics);
 });
 
+//Client gets metrics from past queries stored in QueryFlow's database
 app.post('/api/getmetrics', ourDBController.queryGet, (req, res) => {
   res.status(201).json(res.locals.getmetrics);
 });
 
-app.get('*', (req, res) => {
-  res.sendFile(resolve(__dirname, '../index.html'));
+app.post('/api/deletemetrics', ourDBController.deleteQuery, (req, res) => {
+  res.status(201).json({msg: 'Query Deleted'});
 });
 
 //Route for signing up
 app.post('/api/signup', userController.create, (req, res) => {
   res.status(201).json({msg: 'Account made'});
+  res.status(201).json({msg: 'Account made'});
 });
 
 //Route for logging in
-//Add in checks for valid emails. 
 app.post('/api/login', userController.login, (req, res) => {
   res.status(201).json(res.locals.authentication);
 });
 
-// ourDBController.queryPush,
 //Route for querying our client's DB and extracting metrics. Redirect to postmetrics. 
 app.post('/api/querymetrics', clientDBController.queryMetrics, ourDBController.queryPush, (req, res) => {
   res.status(201).json(res.locals.metrics);
