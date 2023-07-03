@@ -21,7 +21,6 @@
 			});
 			if (response.ok) {
 				const data = await response.json();
-				console.log('i am login data', data);
 				userInfoStore.set(data);
 				navigate('/home', { replace: true });
 			}

@@ -10,8 +10,12 @@ ourDBController.queryPush = async (req, res, next) => {
   const string = `INSERT INTO metrics (querystring, querymetrics, queryname, querycount, querydelay, users_id, created_at)
   VALUES ($1, $2, $3, $4, $5, $6, $7);`;
   try {
-    const result = await ourDBModel(string, [querystring, stringQuerymetrics, queryname, querycount, querydelay, _id, date]);
-    res.locals.allquerydata = result;
+    const result = await ourDBModel(string, [querystring, querymetrics, queryname, querycount, querydelay, _id, date]);
+    console.log(result);
+    res.locals.querymetrics = result;
+    delete res.locals.metrics._id;
+    delete res.locals.metrics.querystring;
+    res.locals.metrics.created_at = date;
     return next();
   } catch (err) {
     return next({
