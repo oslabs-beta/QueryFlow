@@ -11,16 +11,11 @@
 
 	export let renderSignup: boolean;
 
-	// is this necessary? no, actually yes
 	let confirmPassword: string;
-
-	// ToC checker
-	let checkTerms: boolean = false;
 
 	// post request for signing up
 	const postData = async (e) => {
 		e.preventDefault();
-		// if (!checkTerms) return alert("Please agree to terms and conditions")
 		if (password !== confirmPassword) return alert('Please make sure your passwords match');
 
 		const body = database
@@ -35,9 +30,11 @@
 				},
 				body: JSON.stringify(body),
 			});
+      console.log(response);
+      console.log('i am the response.ok', response.ok);
 			if (response.ok) {
+      
 				alert('account created');
-				// const data = await (response.json());
 				navigate('/home');
 			} else {
 				// need error here

@@ -1,7 +1,8 @@
 <script lang="ts">
 	// userId from Home
+  import {metricData } from '../store'
+	import { get } from 'svelte/store';
 	export let userId: string;
-	console.log('i am data in drawer', userId);
 
 	// initializing vars for database
 	let queryname: string;
@@ -12,14 +13,8 @@
 
 	const postQuery = async (e): Promise<void> => {
 		e.preventDefault();
-		console.log('i am queryname', queryname);
-		console.log('i am uri', uri);
-		console.log('i am query string', querystring);
-		console.log('i am query count', querycount);
-		console.log('i am query delay', querydelay);
 
 		try {
-			// ===== EVENTUALLY CHANGE /API/TEST TO WHAT BACKEND CHANGES IT TO =====
 			const response = await fetch('/api/querymetrics', {
 				method: 'POST',
 				headers: {
@@ -27,9 +22,12 @@
 				},
 				body: JSON.stringify({ queryname, uri, querystring, querycount, querydelay, _id: userId }),
 			});
+			console.log('drawer fetch response: ', response.ok)
 			if (response.ok) {
 				const data = await response.json();
 				// render body again with response data
+				const oldData = get(metricData)
+				metricData.set([data, ...oldData])
 			}
 		} catch (error) {}
 	};

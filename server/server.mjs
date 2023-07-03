@@ -44,8 +44,7 @@ app.get('*', (req, res) => {
 
 //Route for signing up
 app.post('/api/signup', userController.create, (req, res) => {
-  res.status(201);
-  //.json({msg: 'Account made');
+  res.status(201).json({msg: 'Account made'});
 });
 
 //Route for logging in
@@ -57,7 +56,7 @@ app.post('/api/login', userController.login, (req, res) => {
 // ourDBController.queryPush,
 //Route for querying our client's DB and extracting metrics. Redirect to postmetrics. 
 app.post('/api/querymetrics', clientDBController.queryMetrics, ourDBController.queryPush, (req, res) => {
-  res.status(201).json(res.locals.querymetrics);
+  res.status(201).json(res.locals.metrics);
 });
 
 //Route error handler

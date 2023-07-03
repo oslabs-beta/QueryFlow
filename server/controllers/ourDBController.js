@@ -7,6 +7,7 @@ ourDBController.queryPush = async (req, res, next) => {
   const { _id, querystring, queryname, querydelay, querycount } = res.locals.metrics;
   console.log('hey i am query push seeing the metrics',res.locals.metrics);
   const date = moment().format();
+  
   const querymetrics = JSON.stringify(res.locals.metrics.querymetrics);
   console.log(querymetrics);
   console.log(typeof querydelay);
@@ -16,6 +17,9 @@ ourDBController.queryPush = async (req, res, next) => {
     const result = await ourDBModel(string, [querystring, querymetrics, queryname, querycount, querydelay, _id, date]);
     console.log(result);
     res.locals.querymetrics = result;
+    delete res.locals.metrics._id;
+    delete res.locals.metrics.querystring;
+    res.locals.metrics.created_at = date;
     return next();
   } catch (err) {
     return next({

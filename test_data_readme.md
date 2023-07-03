@@ -258,7 +258,6 @@ FROM
     LEFT JOIN "InvoiceLine" AS IL ON I."InvoiceId" = IL."InvoiceId"
     LEFT JOIN "Track" AS T ON IL."TrackId" = T."TrackId"
     LEFT JOIN "PlaylistTrack" AS AL ON T."TrackId" = AL."TrackId";
-
 ````
 
 ### 4. NorthWind
