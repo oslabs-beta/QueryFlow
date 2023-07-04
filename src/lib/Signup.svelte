@@ -35,7 +35,7 @@
 			if (response.ok) {
       
 				alert('account created');
-				navigate('/login');
+				renderSignup = false;
 			} else {
 				// need error here
 			}

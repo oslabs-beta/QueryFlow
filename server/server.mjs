@@ -49,7 +49,6 @@ app.post('/api/getmetrics', ourDBController.queryGet, (req, res) => {
 //Route for signing up
 app.post('/api/signup', userController.create, (req, res) => {
   res.status(201).json({msg: 'Account made'});
-  res.status(201).json({msg: 'Account made'});
 });
 
 //Route for logging in
