@@ -9,3 +9,15 @@
 /* main {
 	min-height: 100%;
 } */
+
+.dot.A {
+	fill: #440154ff;
+}
+
+.dot.B {
+	fill: #21908dff;
+}
+
+.dot.C {
+	fill: #fde725ff;
+}

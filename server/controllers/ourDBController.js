@@ -5,12 +5,12 @@ const ourDBController = {};
 
 ourDBController.queryPush = async (req, res, next) => {
   const { _id, querystring, queryname, querydelay, querycount, querymetrics } = res.locals.metrics;
-  const stringQuerymetrics = JSON.stringify(querymetrics);
+  const stringquerymetrics = JSON.stringify(querymetrics);
   const date = moment().format();
   const string = `INSERT INTO metrics (querystring, querymetrics, queryname, querycount, querydelay, users_id, created_at)
   VALUES ($1, $2, $3, $4, $5, $6, $7);`;
   try {
-    const result = await ourDBModel(string, [querystring, querymetrics, queryname, querycount, querydelay, _id, date]);
+    const result = await ourDBModel(string, [querystring, stringquerymetrics, queryname, querycount, querydelay, _id, date]);
     console.log(result);
     res.locals.querymetrics = result;
     delete res.locals.metrics._id;

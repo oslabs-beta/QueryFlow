@@ -7,7 +7,7 @@ starWarsController.queryMetrics = async (req, res, next) => {
   
   try {
     const delayedTasks = await Promise.all(
-      Array.from({ length: 1 }, (_, i) => i).map(async (i) => {
+      Array.from({ length: 5 }, (_, i) => i).map(async (i) => {
         await new Promise((resolve) => setTimeout(resolve, i * 2000));
         const data = await starWarsDB(query);
         const parsedData = data.rows;

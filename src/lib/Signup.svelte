@@ -35,7 +35,7 @@
 			if (response.ok) {
       
 				alert('account created');
-				navigate('/home');
+				navigate('/login');
 			} else {
 				// need error here
 			}

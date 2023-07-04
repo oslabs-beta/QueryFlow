@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Drawer from '../lib/Drawer.svelte';
+	import Metrics from '../lib/Metrics.svelte';
 	import { get } from 'svelte/store';
 	import { userInfoStore, metricData } from '../store';
 	import { onMount, onDestroy } from 'svelte';
@@ -37,23 +38,26 @@
   
   onMount(() => {
 		// if metrics in store grab it
+		
 		// if (!metricData.length) {}
 		// otherwise fetch metrics
-    fetchData()
+    if(userInfo._id !== '') fetchData()
+    
 	})
   
 	// send a query to backend
 </script>
 
-<div class="flex flex-col items-center justify-center">
+<div class="w-full flex flex-col items-center content-center justify-center">
 	<Drawer userId={userInfo._id} />
-	<div class="container">
-    <div class="grid grid-col-3">
+
+    <div class="mt-8 grid sm:grid-cols-1 md:grid-cols-2 gap-9 justify-center content-center">
 			<!-- ADD STUFF HERE -->
-			<p>{metrics.length}</p>
+      {#each metrics as metric, i} 
+        <Metrics {i} {metric} />
+      {/each}
     </div>
   </div>
-</div>
 
 <style>
 </style>
