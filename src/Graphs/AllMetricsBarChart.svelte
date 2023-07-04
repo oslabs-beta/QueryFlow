@@ -3,7 +3,7 @@
   import { max } from 'd3-array';
   import { metricData } from '../store';
   
-  export let metrics = [];
+  $: metrics = [];
   
   metricData.subscribe(data => {
     metrics = data;
@@ -11,25 +11,25 @@
   
   console.log(metrics);
   
-  const sampleData = [
-    { averagetime: 3 },
-    { averagetime: 8 },
-    { averagetime: 2 },
-    { averagetime: 4 },
-    { averagetime: 15 },
-    { averagetime: 7 },
-    { averagetime: 8 },
-    { averagetime: 5 },
-    { averagetime: 4 },
-		{ averagetime: 5 }
-  ];
+  // const sampleData = [
+  //   { averagetime: 3 },
+  //   { averagetime: 8 },
+  //   { averagetime: 2 },
+  //   { averagetime: 4 },
+  //   { averagetime: 15 },
+  //   { averagetime: 7 },
+  //   { averagetime: 8 },
+  //   { averagetime: 5 },
+  //   { averagetime: 4 },
+	// 	{ averagetime: 5 }
+  // ];
 	
 	// data conversion
-  const buckets = 8
-  const rangeX = max(sampleData, (d) => d.averagetime)
-	const convertedData = sampleData.map(() => {
+  // const buckets = 8
+  // const rangeX = max(metrics, (d) => d.averagetime)
+	// const convertedData = metrics.map(() => {
 		// make buckets 
-	})
+	// })
 
 
   
