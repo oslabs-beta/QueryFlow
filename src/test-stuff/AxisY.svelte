@@ -4,12 +4,12 @@
 	export let yScale;
 	export let margin;
 
-	let yTicks = [0, 20, 40, 60];
+	let yTicks = [0, 25, 50, 75];
 </script>
 
 <g transform="translate({margin.left} {margin.top})">
 	{#each yTicks as tick}
-		<text x={0} y={yScale(tick)} dy="-6">{tick} {tick == 60 ? ' hours studied' : ''}</text>
+		<text x={0} y={yScale(tick)} dy="-6">{tick} {tick == 60 ? ' time in ms' : ''}</text>
 		<line
 			x1="0"
 			y1={yScale(tick)}

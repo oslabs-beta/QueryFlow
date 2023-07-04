@@ -11,6 +11,8 @@
     { x: 20, y: 11 },
     { x: 30, y: 12 },
     { x: 40, y: 13 },
+    { x: 40, y: 13 },
+    { x: 40, y: 13 },
   ];
 
   // formats query(x) planning time(y) data

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Drawer from '../lib/Drawer.svelte';
 	import Metrics from '../lib/Metrics.svelte';
+	import AllMetrics from './AllMetrics.svelte';
 	import { get } from 'svelte/store';
 	import { userInfoStore, metricData } from '../store'
 	import { onMount, onDestroy } from 'svelte';
@@ -54,8 +55,9 @@
     <div class="mt-8 grid sm:grid-cols-1 md:grid-cols-2 gap-9 justify-center content-center">
 			<!-- ADD STUFF HERE -->
       {#each metrics as metric, i} 
-        <Metrics {i} {metric} />
+			<Metrics {i} {metric} />
       {/each}
+			<AllMetrics />
     </div>
   </div>
 
