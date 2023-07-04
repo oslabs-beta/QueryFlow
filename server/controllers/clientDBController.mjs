@@ -29,16 +29,19 @@ clientDBController.queryMetrics = async (req, res, next) => {
         const parsedData = data.rows;
         const planningTime = parsedData[0]['QUERY PLAN'][0]['Planning Time'];
         const executionTime = parsedData[0]['QUERY PLAN'][0]['Execution Time'];
+        const totalTime = planningTime + executionTime; 
         const cacheSize = parsedData[0]['QUERY PLAN'][0]['Settings']['effective_cache_size'];
         const workingMem = parsedData[0]['QUERY PLAN'][0]['Settings']['work_mem'];
         const sharedHitBlocks = parsedData[0]['QUERY PLAN'][0]['Planning']['Shared Hit Blocks'];
         const sharedReadBlocks = parsedData[0]['QUERY PLAN'][0]['Planning']['Shared Read Blocks'];
         return {
-          planningTime,executionTime,cacheSize,workingMem,sharedHitBlocks,sharedReadBlocks
+          planningTime,executionTime,totalTime,cacheSize,workingMem,sharedHitBlocks,sharedReadBlocks
         };
       })
     );
     const metricsObj = {};
+    // get avg query time
+    metricsObj.averagetime = Number(delayedTasks.reduce((accum, obj) => accum + obj.totalTime, 0) / querycount).toFixed(2);
     metricsObj._id = `${_id}`;
     metricsObj.querystring = querystring;
     metricsObj.queryname = queryname;

@@ -9,7 +9,7 @@ export let i;
 
 
 <section class="card border metric-box">
-
+<!-- <SingleSingleBarGraph {i} metric={metric}/> -->
   <SingleScatterPlot {i} metric={metric}/>
 </section>
 
