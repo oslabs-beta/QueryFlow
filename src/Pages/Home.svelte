@@ -2,7 +2,7 @@
 	import Drawer from '../lib/Drawer.svelte';
 	import Metrics from '../lib/Metrics.svelte';
 	import { get } from 'svelte/store';
-	import { userInfoStore, metricData } from '../store';
+	import { userInfoStore, metricData } from '../store'
 	import { onMount, onDestroy } from 'svelte';
 	
 	let userInfo = get(userInfoStore);
