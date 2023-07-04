@@ -21,3 +21,37 @@
 .dot.C {
 	fill: #fde725ff;
 }
+
+.bar {
+	fill-opacity: 0.7;
+}
+
+.bar.A {
+	fill: purple;
+}
+
+.bar.B {
+	fill: cyan;
+}
+
+.bar.C {
+	fill: green;
+}
+
+.axis-label {
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.line {
+	stroke-width: 1;
+	stroke: black;
+	fill: none;
+}
+
+.tooltip {
+	background-color: rgba(0, 0, 0, 0.7);
+	color: white;
+	padding: 5px;
+	font-size: 12px;
+}

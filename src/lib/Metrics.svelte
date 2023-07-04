@@ -1,6 +1,6 @@
 <script lang="ts">
-  import ZoomableBarChart from "../visualizations/ZoomableBarChart.svelte";
-  import Overview from "../visualizations/Overview.svelte";
+  import SingleSingleBarGraph from "../Graphs/SingleSingleBarGraph.svelte";
+  import SingleScatterPlot from "../Graphs/SingleScatterPlot.svelte";
 
 export let metric;
 export let i;
@@ -9,9 +9,8 @@ export let i;
 
 
 <section class="card border metric-box">
-  <!-- <div>{metric.queryname}</div> -->
-  <!-- <ZoomableBarChart metric={metric} /> -->
-  <Overview {i} metric={metric}/>
+
+  <SingleScatterPlot {i} metric={metric}/>
 </section>
 
 <style>
