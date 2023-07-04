@@ -42,9 +42,9 @@ app.post('/api/getmetrics', ourDBController.queryGet, (req, res) => {
   res.status(201).json(res.locals.getmetrics);
 });
 
-app.post('/api/deletemetrics', ourDBController.deleteQuery, (req, res) => {
-  res.status(201).json({msg: 'Query Deleted'});
-});
+// app.post('/api/deletemetrics', ourDBController.deleteQuery, (req, res) => {
+//   res.status(201).json({msg: 'Query Deleted'});
+// });
 
 //Route for signing up
 app.post('/api/signup', userController.create, (req, res) => {

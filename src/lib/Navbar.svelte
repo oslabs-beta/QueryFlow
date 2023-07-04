@@ -4,7 +4,7 @@
 
 <div class="navbar bg-base-100 fixed top-0">
   <div class="flex-1">
-    <a class="btn btn-ghost normal-case text-xl" href="https://google.com">QueryFlow</a>
+    <a class="btn btn-ghost normal-case text-xl" href="http://localhost:5173/">QueryFlow</a>
   </div>
   <div class="flex-none">
     <button class="btn btn-square btn-ghost">

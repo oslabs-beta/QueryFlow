@@ -1,6 +1,6 @@
 <script lang="ts">
 	// userId from Home
-  import {metricData } from '../store'
+  import { metricData } from '../store'
 	import { get } from 'svelte/store';
 	export let userId: string;
 
@@ -178,3 +178,9 @@
 		</div>
 	</div>
 </div>
+
+<style>
+	.drawer {
+		z-index: 1;
+	}
+</style>

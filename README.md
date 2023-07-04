@@ -1,9 +1,10 @@
-//Port 
+//Port
 
 POLISHING TO-DO LIST:
+
 - Remove numbers in Signup.svelte to fix color scheme
 - Add parameterized queries in backend (security)
-
+- Add option for different graph viewing (scatter plots, bar charts, pie charts, etc...)
 
 <!-- # Svelte + TS + Vite
 
@@ -52,7 +53,3 @@ If you have state that's important to retain within a component, consider creati
 import { writable } from 'svelte/store'
 export default writable(0)
 ``` -->
-
-
-
-
