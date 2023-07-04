@@ -11,7 +11,7 @@ type userType = {
 }
 
 export const userInfoStore = writable<userType>({
-  _id: '',
+  _id: '552ab7e2-45bd-42d0-a457-f873bb9d052d',
   first_name: '',
   last_name: '',
   email: '',

@@ -41,12 +41,7 @@
 .axis-label {
 	font-size: 12px;
 	font-weight: bold;
-}
-
-.line {
-	stroke-width: 1;
-	stroke: black;
-	fill: none;
+	color: white !important;
 }
 
 .tooltip {

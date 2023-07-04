@@ -6,12 +6,6 @@
   import { max } from 'd3-array';
   export let i;
 
-  const data = [
-    { x: 10, y: 5 },
-    { x: 20, y: 11 },
-    { x: 30, y: 12 },
-    { x: 40, y: 13 },
-  ];
 
   // formats query(x) planning time(y) data
   const planningTime = metric.querymetrics.map((obj, i) => {
@@ -25,7 +19,7 @@
   const totalTime = metric.querymetrics.map((obj, i) => {
     return { x: i + 1, y: obj.planningTime + obj.executionTime, type: 'C' };
   });
-  console.log('i am execution time', [...executionTime, ...planningTime, ...totalTime]);
+  // console.log('i am execution time', [...executionTime, ...planningTime, ...totalTime]);
 
   // get high value for domain
   const getHighValue = (array, property) => {
