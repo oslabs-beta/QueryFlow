@@ -4,7 +4,7 @@
   import { get } from 'svelte/store';
   import { userInfoStore, metricData,filterMetricData,filterMetricDataTwo } from '../store';
   import { onMount } from 'svelte';
-	import { loop_guard } from 'svelte/internal';
+
 
   let userInfo = get(userInfoStore);
   console.log('user info in home', userInfo);

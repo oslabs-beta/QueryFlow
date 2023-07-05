@@ -147,7 +147,8 @@
       });
   });
 </script>
-
-<svg id={`barChart${i}`} style="width: 100%; height: 100%"></svg>
+<div class="h-80">
+  <svg id={`barChart${i}`} class="w-74 h-full"></svg>
+</div>
 
 
