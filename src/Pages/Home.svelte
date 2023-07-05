@@ -3,21 +3,21 @@
 	import Metrics from '../lib/Metrics.svelte';
 	import AllMetrics from './AllMetrics.svelte';
 	import { get } from 'svelte/store';
-	import { userInfoStore, metricData } from '../store'
-	import { onMount, onDestroy } from 'svelte';
-	
+	import { userInfoStore, metricData } from '../store';
+	import { onMount } from 'svelte';
+
 	let userInfo = get(userInfoStore);
 	console.log('user info in home', userInfo);
 
 	export let metrics = [];
 
-	metricData.subscribe(data => {
+	metricData.subscribe((data) => {
 		metrics = data;
 	});
-  
-  console.log('data in metrics before post request: ', metrics)
 
-  const fetchData = async () => {
+	console.log('data in metrics before post request: ', metrics);
+
+	const fetchData = async () => {
 		try {
 			const response = await fetch('/api/getmetrics', {
 				method: 'POST',
@@ -28,38 +28,36 @@
 			});
 			if (response.ok) {
 				const data = await response.json();
-        // console.log('data in fetch data: ', data);
-        metricData.set(data)
-				console.log('data in metrics AFTER post request: ', metrics)
+				// console.log('data in fetch data: ', data);
+				metricData.set(data);
+				console.log('data in metrics AFTER post request: ', metrics);
 				// render body again with response data
 			}
 		} catch (error) {}
-    
-  }
-  
-  onMount(() => {
+	};
+
+	onMount(() => {
 		// if metrics in store grab it
-		
+
 		// if (!metricData.length) {}
 		// otherwise fetch metrics
-    if(userInfo._id !== '') fetchData()
-    
-	})
-  
+		if (userInfo._id !== '') fetchData();
+	});
+
 	// send a query to backend
 </script>
 
 <div class="w-full flex flex-col items-center content-center justify-center">
 	<Drawer userId={userInfo._id} />
 
-    <div class="mt-8 grid sm:grid-cols-1 md:grid-cols-2 gap-9 justify-center content-center">
-			<!-- ADD STUFF HERE -->
-      {#each metrics as metric, i} 
+	<div class="mt-8 grid sm:grid-cols-1 md:grid-cols-2 gap-9 justify-center content-center">
+		<!-- ADD STUFF HERE -->
+		{#each metrics as metric, i}
 			<Metrics {i} {metric} />
-      {/each}
-			<AllMetrics />
-    </div>
-  </div>
+		{/each}
+		<AllMetrics />
+	</div>
+</div>
 
 <style>
 </style>

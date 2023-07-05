@@ -1,5 +1,8 @@
 <script lang="ts">
 	import AllMetricsBarChart from '../Graphs/AllMetricsBarChart.svelte';
+	import TestGraph from '../Graphs/TestGraph.svelte';
 </script>
 
-<AllMetricsBarChart />
+<!-- <AllMetricsBarChart /> -->
+<!-- <p>test</p> -->
+<TestGraph />
