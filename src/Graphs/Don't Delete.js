@@ -1,42 +1,39 @@
 <script>
   export let metric;
-  // console.log('data in overview', metric)
-  import { onMount } from 'svelte';
+  import { onMount, afterUpdate } from 'svelte';
   import { select, scaleLinear, axisLeft, axisBottom } from 'd3';
   import { max } from 'd3-array';
   export let i;
-  
-
+  console.log('i am the metric variable in singlescatterplot', metric)
   let planningTime, executionTime, totalTime;
+  let svg, tooltip;
+  
   $: {
-  // formats query(x) planning time(y) data
-  planningTime = metric.querymetrics.map((obj, i) => {
-    return { x: i + 1, y: obj.planningTime, type: 'A' };
-  });
+    planningTime = metric.querymetrics.map((obj, i) => ({ x: i + 1, y: obj.planningTime, type: 'A' }));
+    executionTime = metric.querymetrics.map((obj, i) => ({ x: i + 1, y: obj.executionTime, type: 'B' }));
+    totalTime = metric.querymetrics.map((obj, i) => ({ x: i + 1, y: obj.planningTime + obj.executionTime, type: 'C' }));
 
-  executionTime = metric.querymetrics.map((obj, i) => {
-    return { x: i + 1, y: obj.executionTime, type: 'B' };
-  });
+    if (svg) { // If the chart has already been drawn once, clear it before redrawing
+      svg.selectAll('*').remove();
+      tooltip.remove();
+    }
 
-  totalTime = metric.querymetrics.map((obj, i) => {
-    return { x: i + 1, y: obj.planningTime + obj.executionTime, type: 'C' };
-  });
+    drawChart();
   }
 
+  // test
+  // $: {
+  //       testIsChanged(metric);
+  //   }
+  //   function testIsChanged(newValue) {
+  //     console.log('i am the new value in scatter plot',newValue)
+  //       console.log('executing')
+  //   // }
+  //   }
 
-  // function renderChart() {
-  const getHighValue = (array, property) => {
-    if (!array.length) return 0;
-    let highVal = -Infinity;
-    array.forEach((el) => {
-      if (highVal < el[property]) highVal = el[property];
-    });
-    return Math.ceil(highVal * 1.2);
-  };
 
-  // render chart on mount
-  onMount(() => {
-    const svg = select(`#scatterPlot${i}`);
+function drawChart(){
+  const svg = select(`#scatterPlot${i}`);
 
     const margin = { top: 20, right: 20, bottom: 40, left: 40 };
     const width = 300 - margin.left - margin.right;
@@ -128,43 +125,26 @@ keyBox
   .attr('x', 20)
   .attr('y', (d, i) => i * 20 + 4)
   .text((d) => d.label);
-});  
+}
 
+  const getHighValue = (array, property) => {
+    if (!array.length) return 0;
+    let highVal = -Infinity;
+    array.forEach((el) => {
+      if (highVal < el[property]) highVal = el[property];
+    });
+    return Math.ceil(highVal * 1.2);
+  };
+
+  // render chart on mount
+  onMount(() => {
+    svg = select(`#scatterPlot${i}`);
+    tooltip = select('body').append('div').attr('class', 'tooltip').style('position', 'absolute').style('visibility', 'hidden');
+    drawChart();
+  });  
+  // }
 </script>
 <p>{metric.averagetime}</p>
 <svg id={`scatterPlot${i}`} style="width: 100%; height: 100%"></svg>
-
-
-
-
-
-<!-- ========== GEORGE'S TEST STUFF PLEASE DO NOT DELETE ========== -->
-<!-- INSIDE OF SCRIPT -->
-<!-- let width = 400 - margin.left - margin.right;
-let height = 400 - margin.top - margin.bottom;
-
-const xScale = scaleLinear()
-  .domain([0, getHighValue(totalTime, 'x')])
-  .range([0, width]);
-
-const yScale = scaleLinear()
-  .domain([0, getHighValue(totalTime, 'y')])
-  .range([height, 0]); -->
-
-<!-- OUTSIDE OF SCRIPT -->
-<!-- <svg {width} {height}>
-  {#each data as d}
-  <circle cx={xScale(d.grade)}
-          cy={yScale(d.hours)}
-          r='10'
-          fill='purple'
-          stroke='black'
-          />
-  {/each}
-</svg> -->
-<!-- ========== END OF GEORGE'S TEST STUFF ========== -->
-  
-
-
 
 

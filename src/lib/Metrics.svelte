@@ -4,13 +4,14 @@
   import GroupQuery from "../Graphs/GroupQuery.svelte";
 export let metric;
 export let i;
-console.log('i am metrics.svelte',metric)
 </script>
 
 
 <section class="card border metric-box">
 <!-- <SingleSingleBarGraph {i} metric={metric}/> -->
+
   <SingleScatterPlot {i} metric={metric}/>
+  
   <GroupQuery {i} metricName={metric.queryname} />
 </section>
 

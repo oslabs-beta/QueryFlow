@@ -23,3 +23,11 @@ export const userInfoStore = writable<userType>({
 export const metricData = writable ([
 	
 ]);
+
+export const filterMetricData = writable([
+
+]);
+
+export const filterMetricDataTwo = writable([
+
+]);
