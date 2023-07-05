@@ -2,7 +2,7 @@
   import SingleSingleBarGraph from "../Graphs/SingleSingleBarGraph.svelte";
   import SingleScatterPlot from "../Graphs/SingleScatterPlot.svelte";
   import GroupQuery from "../Graphs/GroupQuery.svelte";
-  import {  metricData} from '../store';
+  import {  metricData,filterMetricData,filterMetricDataTwo} from '../store';
   import { get } from 'svelte/store';
 
 export let metric;
@@ -24,6 +24,8 @@ const deleteMetric = async () =>{
       alert('metric deleted');
       const newFilteredMetrics = allMetrics.filter(obj=>obj._id !==metric._id)
       metricData.set(newFilteredMetrics)
+      filterMetricData.update(values => values.filter(obj => obj._id !== metric._id));
+      filterMetricDataTwo.update(values => values.filter(obj => obj._id !== metric._id));
     }
   } catch (error) {
 
