@@ -72,7 +72,7 @@
 
 </script>
 <div class="w-full flex flex-col items-center content-center justify-center">
-  <div class="flex-shrink-0">
+  <div class="flex-shrink-0 ">
     <Drawer userId={userInfo._id} />
   </div>
 

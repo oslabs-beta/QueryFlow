@@ -41,10 +41,10 @@
 			<!-- Page content here -->
 			<label for="my-drawer" class="btn btn-primary drawer-button">Add a query</label>
 		</div>
-		<div class="drawer-side">
+		<div class="drawer-side ">
 			<label for="my-drawer" class="drawer-overlay" />
 			<!-- Sidebar content here -->
-			<div class="menu p-4 w-1/3 h-full bg-base-200 text-base-content">
+			<div class="menu p-4 w-1/3 h-full bg-base-200 text-base-content ">
 				<form on:submit={postQuery}>
 					<div class="flex flex-col pt-8 h-screen">
 						<!-- name of query label/input -->
@@ -181,6 +181,20 @@
 
 <style>
 	.drawer {
-		z-index: 1;
+		z-index: 9999;
 	}
+
+
+  .drawer-side {
+/* Set to desired drawer width, vw units will adjust with the viewport width */
+	left: -80vw; /* Initially set to negative of the drawer's width */
+  }
+  .drawer-overlay {
+    transition: all 0.2s ease-out; /* No transition delay */
+    /* Other properties... */
+}
+/* CSS to show the drawer when checkbox is checked */
+#my-drawer:checked ~ .drawer-side {
+	left: 0;
+}
 </style>
