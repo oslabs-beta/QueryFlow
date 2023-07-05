@@ -1,4 +1,4 @@
-<script>
+{/* <script>
   export let metric;
   import { onMount, afterUpdate } from 'svelte';
   import { select, scaleLinear, axisLeft, axisBottom } from 'd3';
@@ -147,4 +147,4 @@ keyBox
 <p>{metric.averagetime}</p>
 <svg id={`scatterPlot${i}`} style="width: 100%; height: 100%"></svg>
 
-
+ */}

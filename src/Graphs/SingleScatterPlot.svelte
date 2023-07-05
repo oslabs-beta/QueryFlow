@@ -107,7 +107,7 @@
       .style('visibility', 'hidden');
 
     //Keybox
-    const keyBox = svg.append('g').attr('transform', `translate(${width + margin.left + 10}, ${margin.top})`);
+    const keyBox = svg.append('g').attr('transform', `translate(${width-80}, ${margin.top+10})`);
 
 keyBox
   .selectAll('.legend-dot')
@@ -131,9 +131,13 @@ keyBox
 });  
 
 </script>
-<p>{metric.averagetime}</p>
-<svg id={`scatterPlot${i}`} style="width: 100%; height: 100%"></svg>
 
+<div class="h-80">
+
+  <svg id={`scatterPlot${i}`} class="w-74 h-full" ></svg>
+</div>
+
+<!-- style="width: 100%; height: 100%" -->
 
 
 
