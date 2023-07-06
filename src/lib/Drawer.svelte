@@ -1,6 +1,6 @@
 <script lang="ts">
 	// userId from Home
-  import { metricData } from '../store'
+  import { metricData, filterMetricData, filterMetricDataTwo } from '../store';
 	import { get } from 'svelte/store';
 	export let userId: string;
 
@@ -11,26 +11,36 @@
 	let querycount: number = 1;
 	let querydelay: number = 2;
 
-	const postQuery = async (e): Promise<void> => {
-		e.preventDefault();
+	const postQuery = async (e) => {
+    e.preventDefault();
 
-		try {
-			const response = await fetch('/api/querymetrics', {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({ queryname, uri, querystring, querycount, querydelay, _id: userId }),
-			});
-			console.log('drawer fetch response: ', response.ok)
-			if (response.ok) {
-				const data = await response.json();
-				// render body again with response data
-				const oldData = get(metricData)
-				metricData.set([data, ...oldData])
-			}
-		} catch (error) {}
-	};
+    try {
+      const response = await fetch('/api/querymetrics', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          queryname,
+          uri,
+          querystring,
+          querycount,
+          querydelay,
+          _id: userId,
+        }),
+      });
+      console.log('drawer fetch response: ', response.ok);
+      if (response.ok) {
+        const data = await response.json();
+        // Update metricData and filterMetricData
+        metricData.update((arr) => [data, ...arr]);
+        filterMetricData.update((arr) => [data, ...arr]);
+        filterMetricDataTwo.update((arr) => [data, ...arr]);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
 </script>
 
 <div>

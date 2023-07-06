@@ -77,7 +77,7 @@
   };
 
 </script>
-<div class="w-full flex flex-col items-center content-center justify-center">
+<div class="w-full flex flex-col items-center content-center justify-center ">
   <div class="flex-shrink-0 ">
     <Drawer userId={userInfo._id} />
   </div>
@@ -98,7 +98,7 @@
       </select>
 
       <div class="space-y-4  flex flex-col items-center
-      ">
+      mx-6">
         {#each filterMetricsArr as metric, i}
         {#key metric}
         <Metrics {i} {metric} />
@@ -121,7 +121,7 @@
         {/each}
       </select>
 
-      <div class="space-y-4 flex flex-col items-center justify-center">
+      <div class="space-y-4 flex flex-col items-center justify-center  mx-6">
         {#each filterMetricsArrTwo as metric, i}
      
         {#key metric}

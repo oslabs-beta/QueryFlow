@@ -106,7 +106,7 @@ const averageTime = groupMetrics.map((obj, i) => ({
     
   });
 </script>
-<div class="h-80">
+<div class="h-80 group-query">
 
   <svg id={`groupBarChart${i}`} class="w-74 h-full"></svg>
 </div>

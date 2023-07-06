@@ -11,6 +11,8 @@ export let i;
 
 const allMetrics = get(metricData)
 let barScatterToggle:boolean=false;
+let tableQueryToggle:boolean=false;
+const toggleGraphs = ()=>barScatterToggle = !barScatterToggle;
 console.log(metric)
 const deleteMetric = async () =>{
   try {
@@ -36,7 +38,9 @@ const deleteMetric = async () =>{
 
 <section class="card border w-full metric-box p-4 justify-center grid grid-cols-1">
     <div class="h-10 flex p-4 justify-between items-center">
-      <input type="checkbox" class="toggle" bind:checked={barScatterToggle} />
+      <div class="flex items-end h-20">
+        <input type="checkbox" class="toggle" bind:checked={tableQueryToggle} />
+      </div>
       <h4>{metric.queryname}</h4>
       <button
 						type="button"
@@ -50,21 +54,34 @@ const deleteMetric = async () =>{
       </button>
     </div>
     
-      <div class="flex w-full h-72">
-        {#if barScatterToggle}
-      <SingleSingleBarGraph {i} metric={metric}/>
-      {:else}
-      <SingleScatterPlot {i} metric={metric}/>
-      {/if}
-      <div class="mockup-code m-4 pl-4 pb-4 ">
-        <pre><code class="text-xs">{metric.querystring}</code></pre>
-      </div>
-    </div>
-      <div class="flex w-full h-72">
-        <GroupQuery {i} metricName={metric.queryname} />
+      <div class="flex justify-center w-full h-72">
+        {#if tableQueryToggle}
         <Table {i} metric={metric}/>
+        {:else}
+        <div class="mockup-code m-4 pl-4 pb-4 ">
+          <pre><code class="text-xs">{metric.querystring}</code></pre>
+        </div>
+        {/if}
+      
+    </div>
+      <div class="flex justify-center w-full h-72">
+        <GroupQuery {i} metricName={metric.queryname} />
+        <div>
+          <button class="btn btn-square btn-xs btn-outline absolute top-50 right-40 " on:click={toggleGraphs}>
+
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+              <path d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75zM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 01-1.875-1.875V8.625zM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 013 19.875v-6.75z" />
+            </svg>
+          </button>
+            
+          {#if barScatterToggle}
+          <SingleSingleBarGraph {i} metric={metric}/>
+          {:else}
+          <SingleScatterPlot {i} metric={metric}/>
+          {/if}
+        </div>
       </div>
-    
+      
 
 </section>
 

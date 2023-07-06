@@ -7,9 +7,9 @@
 	padding: 0;
 }
 
-/* main {
-	min-height: 100%;
-} */
+body::-webkit-scrollbar {
+	display: none;
+}
 
 .dot.A {
 	fill: #440154ff;
@@ -60,4 +60,14 @@
 .scrollbar-hide {
 	-ms-overflow-style: none; /* IE and Edge */
 	scrollbar-width: none; /* Firefox */
+}
+@media only screen and (max-width: 667px) {
+	.group-query {
+		display: none;
+	}
+}
+@media only screen and (min-width: 768px) and (max-width: 1285px) {
+	.group-query {
+		display: none;
+	}
 }
