@@ -20,9 +20,7 @@ export const userInfoStore = writable<userType>({
   database: '',
 });
 
-export const metricData = writable ([
-	
-]);
+export const metricData = writable([]);
 
 export const filterMetricData = writable([
 

@@ -11,7 +11,6 @@ export let i;
 
 const allMetrics = get(metricData)
 let barScatterToggle:boolean=false;
-console.log(metric)
 const deleteMetric = async () =>{
   try {
     const response =  await fetch('/api/deletemetricsid',{

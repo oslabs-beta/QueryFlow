@@ -16,7 +16,7 @@
 <g>
 	{#each xTicks as tick}
 		<text x={xScale(`${tick}`)} y={height - margin.bottom} dy="6" dominant-baseline="hanging"
-			>{tick ? bellCurveData[tick].topValue : 0}ms</text
+			>{tick ? bellCurveData[tick].topValue : 0} ms</text
 		>
 	{/each}
 </g>

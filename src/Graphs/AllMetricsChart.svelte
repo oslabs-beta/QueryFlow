@@ -1,17 +1,18 @@
 <script>
 	import { scaleBand, scaleLinear } from 'd3-scale';
 	import { max } from 'd3-array';
-	import { metricData } from '../store';
-	import { get } from 'svelte/store';
+	import { metricData, userInfoStore } from '../store';
 	import AxisX from './graphComponents/AxisX.svelte';
 	import AxisY from './graphComponents/AxisY.svelte';
 	import TooltipBell from './graphComponents/TooltipBell.svelte';
+	import { navigate } from 'svelte-routing';
 
 	$: metrics = [];
 
-	console.log('metrics data: ', get(metricData));
+
 	metricData.subscribe((data) => {
 		metrics = data;
+		console.log('metrics data: ', metrics)
 	});
 
 	const sampleData = [];
@@ -46,13 +47,16 @@
 		// return workingArr
 		return workingArr;
 	};
-	const bellCurveData = format(sampleData, 20);
+	// calculate buckets dynamically 
+	const buckets = metrics.length >= 4 ? Math.ceil(Math.log2(metrics.length - 3) * 1.7) : 2
+	// format data
+	const bellCurveData = format(metrics, buckets);
 	console.log(bellCurveData.at(-1));
 
 	let width = 600;
 	let height = 600;
 
-	const margin = { top: 20, right: 40, left: 40, bottom: 20 };
+	const margin = { top: 20, right: 40, left: 40, bottom: 25 };
 
 	const xScale = scaleBand()
 		.domain(bellCurveData.map((_, i) => `${i}`))
@@ -65,6 +69,30 @@
 
 	let hoveredData;
 </script>
+
+<!-- TEMPORARY BUTTON FOR GOING TO /home -->
+<button
+	on:click={() => {
+		navigate('/home');
+	}}
+	type="button"
+	class="text-primary border-2 border border-primary hover:bg-secondary hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-1 text-center inline-flex items-center dark:border-primary dark:text-primary dark:hover:text-primary dark:focus:ring-blue-800 dark:hover:bg-white"
+>
+	<svg
+		xmlns="http://www.w3.org/2000/svg"
+		stroke="currentColor"
+		viewBox="0 0 24 24"
+		stroke-width="2"
+		class="w-6 h-6"
+	>
+		<path
+			stroke-linecap="round"
+			stroke-linejoin="round"
+			d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"
+		/>
+	</svg>
+</button>
+<!-- END OF TEMPORARY BUTTON -->
 
 <div
 	class="chart-container"
@@ -103,7 +131,6 @@
 		<TooltipBell data={hoveredData} {xScale} {yScale} />
 	{/if}
 </div>
-
 <style>
 	.title {
 		display: flex;
