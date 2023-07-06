@@ -79,12 +79,11 @@
   
 </script>
 
-<!-- TEMPORARY BUTTON FOR GOING TO /all-metrics -->
-<button class="btn btn-primary" on:click={() => {navigate('/all-metrics')}}>navigation test</button>
-<!-- END OF TEMPORARY BUTTON -->
-
 <div class="w-full flex flex-col items-center content-center justify-center">
-  <div class="flex-shrink-0 ">
+  <!-- TEMPORARY BUTTON FOR GOING TO /all-metrics -->
+<button class="btn btn-primary m-1 border-primary hover:bg-secondary hover:text-white hover:border-secondary" on:click={() => {navigate('/all-metrics')}}>Global Metrics</button>
+<!-- END OF TEMPORARY BUTTON -->
+  <div class="flex-shrink-0">
     <Drawer userId={userInfo._id} />
   </div>
 
@@ -94,7 +93,7 @@
         bind:value={groupQueries}
         name="database"
         id="database"
-        class="bg-gray-50 border w-1/2 mx-auto border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-2"
+        class="bg-gray-50 border w-1/2 mx-auto border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 mb-2 mt-2"
         on:change={() => { filterMetrics(filterMetricData, groupQueries) }}
       >
         <option value="all" selected hidden>Please choose...</option>
@@ -118,7 +117,7 @@
         bind:value={groupQueriesTwo}
         name="database"
         id="databaseTwo"
-        class="bg-gray-50  mb-2 border w-1/2 mx-auto border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        class="bg-gray-50 mt-2 mb-2 border w-1/2 mx-auto border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
         on:change={() => { filterMetrics(filterMetricDataTwo, groupQueriesTwo) }}
       >
         <option value="all" selected hidden>Please choose...</option>

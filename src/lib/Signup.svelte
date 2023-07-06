@@ -43,6 +43,7 @@
 	};
 </script>
 
+<!-- ===== add modifications to <section> for smaller screens, not just class='flex items-center', which works only for big screens ===== -->
 <section>
 	<!-- <div class="toast toast-top toast-center">
     <div class="alert alert-success">

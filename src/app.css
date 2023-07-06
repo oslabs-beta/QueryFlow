@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@600&family=Sarabun:wght@600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,20 +9,24 @@
 	padding: 0;
 }
 
+body {
+	height: 100vh;
+}
+
 body::-webkit-scrollbar {
 	display: none;
 }
 
 .dot.A {
-	fill: #440154ff;
+	fill: #1245a8;
 }
 
 .dot.B {
-	fill: #21908dff;
+	fill: #efce00;
 }
 
 .dot.C {
-	fill: #fde725ff;
+	fill: green;
 }
 
 .bar {
@@ -28,11 +34,16 @@ body::-webkit-scrollbar {
 }
 
 .bar.A {
-	fill: purple;
+	fill: #1245a8;
 }
 
 .bar.B {
-	fill: cyan;
+	fill: #efce00;
+}
+
+.logo-text {
+	font-family: 'Sarabun', sans-serif;
+	font-size: 25px;
 }
 
 .bar.C {

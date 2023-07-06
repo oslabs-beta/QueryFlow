@@ -1,5 +1,5 @@
 <script lang="ts">
-  import SingleSingleBarGraph from "../Graphs/SingleSingleBarGraph.svelte";
+  import SingleBarGraph from "../Graphs/SingleBarGraph.svelte";
   import SingleScatterPlot from "../Graphs/SingleScatterPlot.svelte";
   import GroupQuery from "../Graphs/GroupQuery.svelte";
   import Table from "../Graphs/Table.svelte"
@@ -54,10 +54,10 @@ onMount(() => {
       <div class="flex items-end h-20">
         <input type="checkbox" class="toggle" bind:checked={tableQueryToggle} />
       </div>
-      <h4>{metric.queryname}</h4>
+      <h4 class="text-lg">{metric.queryname}</h4>
       <button
 						type="button"
-						class="text-primary border-2 border border-primary hover:bg-secondary hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-1 text-center inline-flex items-center dark:border-primary dark:text-primary dark:hover:text-primary dark:focus:ring-blue-800 dark:hover:bg-white"
+						class="text-primary btn btn-sm border-none bg-transparent hover:bg-secondary hover:text-white focus:outline-none font-medium rounded-full text-sm p-1 text-center inline-flex items-center dark:border-primary dark:text-primary dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-secondary"
             on:click={deleteMetric}
             
 					>
@@ -70,11 +70,11 @@ onMount(() => {
         {#if tableQueryToggle}
         <Table {i} metric={metric}/>
         {:else}
-        <div class="mockup-code m-4 pl-4 pb-4 relative scrollbar-hide " style="max-height:300px; overflow-y: auto;">
+        <div class="mockup-code m-4 pl-4 pb-4 relative scrollbar-hide" style="max-height:300px; overflow-y: auto;">
           <pre><code style="font-size:9px;">{metric.querystring}</code></pre>
           <!-- copy button -->
-          <button id="copyButton{i}" class="btn btn-square btn-xs btn-outline absolute right-0 top-0 mt-2 mr-2 text-lg">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
+          <button id="copyButton{i}" class="btn btn-square btn-sm absolute right-0 top-0 mt-2 mr-2 text-lg bg-transparent border-none hover:bg-transparent">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="w-5 h-5">
               <path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184" />
             </svg>
             
@@ -94,7 +94,7 @@ onMount(() => {
           </button>
             
           {#if barScatterToggle}
-          <SingleSingleBarGraph {i} metric={metric}/>
+          <SingleBarGraph {i} metric={metric}/>
           {:else}
           <SingleScatterPlot {i} metric={metric}/>
           {/if}
@@ -105,6 +105,10 @@ onMount(() => {
 </section>
 
 <style>
+  .card {
+    background-color: rgb(255, 255, 248);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 12px;
+  }
   .metric-box{
     height: 700px;
   }

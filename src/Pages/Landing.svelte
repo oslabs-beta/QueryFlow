@@ -1,12 +1,12 @@
 <script lang="ts">
 	import Login from '../lib/Login.svelte';
 	import Signup from '../lib/Signup.svelte';
-	import graph from '../assets/graph2.png';
+	import graph from '../assets/graph3.png';
 
 	let renderSignup: boolean = false;
 </script>
-
-<div class="landing-container flex flex-col  lg:flex-row">
+<!-- background-image: {graph} -->
+<div class="landing-container flex flex-col mt-5 lg:flex-row">
 	<div class="flex-1 flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0 responsive-column">
 		<img class="landing-img w-full h-auto" src={graph} alt="graph" />
 	</div>
@@ -24,7 +24,7 @@
     width: 100%;
     height: 100%;
     object-fit: fit;
-    border-radius: 15px;
+    border-radius: 15px; 
   }
   
 

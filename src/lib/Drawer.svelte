@@ -49,7 +49,7 @@
 		<input id="my-drawer" type="checkbox" class="drawer-toggle" />
 		<div class="drawer-content">
 			<!-- Page content here -->
-			<label for="my-drawer" class="btn btn-primary drawer-button">Add a query</label>
+			<label for="my-drawer" class="btn btn-primary drawer-button border-primary hover:bg-secondary hover:text-white hover:border-secondary">Add a query</label>
 		</div>
 		<div class="drawer-side">
 			<label for="my-drawer" class="drawer-overlay" />
@@ -62,7 +62,7 @@
 						<div class="w-full my-2">
 							<label
 								for="queryName"
-								class="block mb-2 text-lg font-medium text-white dark:text-white"
+								class="block mb-2 text-lg font-medium"
 							>
 								Name of your query
 							</label>
@@ -77,7 +77,7 @@
 						</div>
 						<!-- database URI label/input -->
 						<div class="w-full my-2">
-							<label for="uri" class="block mb-2 text-lg font-medium text-white dark:text-white">
+							<label for="uri" class="block mb-2 text-lg font-medium">
 								Postgres DB URI/URL
 							</label>
 							<input
@@ -93,7 +93,7 @@
 						<div class="w-full my-2">
 							<label
 								for="queryString"
-								class="block mb-2 text-lg font-medium text-white dark:text-white"
+								class="block mb-2 text-lg font-medium"
 							>
 								Query string
 							</label>
@@ -107,7 +107,7 @@
 						</div>
 						<!-- querycount label/range -->
 						<div class="w-full my-2 range-container">
-              <label for="querycount" class="block mb-2 text-lg font-medium text-white dark:text-white"># of query runs</label>
+              <label for="querycount" class="block mb-2 text-lg font-medium"># of query runs</label>
               <div class="range-input-container">
                   <input
                       name="querycount"
@@ -148,7 +148,7 @@
 						<div class="w-full my-2">
 							<label
 								for="querydelay"
-								class="block mb-2 text-lg font-medium text-white dark:text-white"
+								class="block mb-2 text-lg font-medium"
 								>Delay between queries</label
 							>
 							<input
