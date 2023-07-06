@@ -2,6 +2,7 @@
   import SingleSingleBarGraph from "../Graphs/SingleSingleBarGraph.svelte";
   import SingleScatterPlot from "../Graphs/SingleScatterPlot.svelte";
   import GroupQuery from "../Graphs/GroupQuery.svelte";
+  import Table from "../Graphs/Table.svelte"
   import {  metricData,filterMetricData,filterMetricDataTwo} from '../store';
   import { get } from 'svelte/store';
 
@@ -28,7 +29,6 @@ const deleteMetric = async () =>{
       filterMetricDataTwo.update(values => values.filter(obj => obj._id !== metric._id));
     }
   } catch (error) {
-
 }
 }
 </script>
@@ -61,8 +61,8 @@ const deleteMetric = async () =>{
       </div>
     </div>
       <div class="flex w-full h-72">
-
         <GroupQuery {i} metricName={metric.queryname} />
+        <Table {i} metric={metric}/>
       </div>
     
 

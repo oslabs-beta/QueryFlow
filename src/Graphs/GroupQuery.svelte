@@ -61,13 +61,13 @@ const averageTime = groupMetrics.map((obj, i) => ({
       .attr('class', 'axis-label')
       .attr('transform', `translate(${(width - 75)}, ${height + margin.top + 35})`)
       .style('text-anchor', 'middle')
-      .text(`${metricName}`);
+      .text(`${metricName} Avg Time`);
 
     // Y-axis label
     svg
       .append('text')
       .attr('class', 'axis-label')
-      .attr('transform', `translate(${margin.left - 25}, ${margin.top + height / 2}) rotate(-90)`)
+      .attr('transform', `translate(${margin.left - 30}, ${margin.top + height / 2}) rotate(-90)`)
       .style('text-anchor', 'middle')
       .text('Milliseconds');
 

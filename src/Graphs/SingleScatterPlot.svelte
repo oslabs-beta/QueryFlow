@@ -11,15 +11,15 @@
   $: {
   // formats query(x) planning time(y) data
   planningTime = metric.querymetrics.map((obj, i) => {
-    return { x: i + 1, y: obj.planningTime, type: 'A' };
+    return { x: i + 1, y: obj.planningTime, type: 'A',name: 'Planning Time' };
   });
 
   executionTime = metric.querymetrics.map((obj, i) => {
-    return { x: i + 1, y: obj.executionTime, type: 'B' };
+    return { x: i + 1, y: obj.executionTime, type: 'B',name: 'Execution Time'};
   });
 
   totalTime = metric.querymetrics.map((obj, i) => {
-    return { x: i + 1, y: obj.planningTime + obj.executionTime, type: 'C' };
+    return { x: i + 1, y: obj.planningTime + obj.executionTime, type: 'C',name: 'Total Time' };
   });
   }
 
@@ -72,7 +72,7 @@
       .attr('cy', (d) => yScale(d.y))
       .attr('r', 3)
       .on('mouseover', (event, d) => {
-        tooltip.style('visibility', 'visible').text(`${d.type}: ${d.y} ms`);
+        tooltip.style('visibility', 'visible').text(`${d.name}: ${d.y} ms`);
       })
       .on('mousemove', (event) => {
         tooltip
@@ -95,7 +95,7 @@
     svg
       .append('text')
       .attr('class', 'axis-label')
-      .attr('transform', `translate(${margin.left - 25}, ${margin.top + height / 2}) rotate(-90)`)
+      .attr('transform', `translate(${margin.left - 30}, ${margin.top + height / 2}) rotate(-90)`)
       .style('text-anchor', 'middle')
       .text('Milliseconds');
 
@@ -109,25 +109,25 @@
     //Keybox
     const keyBox = svg.append('g').attr('transform', `translate(${width-80}, ${margin.top+10})`);
 
-keyBox
-  .selectAll('.legend-dot')
-  .data([{ type: 'A', label: 'Planning Time' }, { type: 'B', label: 'Execution Time' }, { type: 'C', label: 'Total Time' }])
-  .enter()
-  .append('circle')
-  .attr('class', (d) => `legend-dot ${d.type}`)
-  .attr('cx', 10)
-  .attr('cy', (d, i) => i * 20)
-  .attr('r', 3);
+// keyBox
+//   .selectAll('.legend-dot')
+//   .data([{ type: 'A', label: 'Planning Time' }, { type: 'B', label: 'Execution Time' }, { type: 'C', label: 'Total Time' }])
+//   .enter()
+//   .append('circle')
+//   .attr('class', (d) => `legend-dot ${d.type}`)
+//   .attr('cx', 10)
+//   .attr('cy', (d, i) => i * 20)
+//   .attr('r', 3);
 
-keyBox
-  .selectAll('.legend-label')
-  .data([{ type: 'A', label: 'Planning Time' }, { type: 'B', label: 'Execution Time' }, { type: 'C', label: 'Total Time' }])
-  .enter()
-  .append('text')
-  .attr('class', 'legend-label')
-  .attr('x', 20)
-  .attr('y', (d, i) => i * 20 + 4)
-  .text((d) => d.label);
+// keyBox
+//   .selectAll('.legend-label')
+//   .data([{ type: 'A', label: 'Planning Time' }, { type: 'B', label: 'Execution Time' }, { type: 'C', label: 'Total Time' }])
+//   .enter()
+//   .append('text')
+//   .attr('class', 'legend-label')
+//   .attr('x', 20)
+//   .attr('y', (d, i) => i * 20 + 4)
+//   .text((d) => d.label);
 });  
 
 </script>

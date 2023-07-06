@@ -9,19 +9,22 @@
   const planningTime = metric.querymetrics.map((obj, i) => ({
     x: i + 1,
     y: obj.planningTime,
-    type: 'A'
+    type: 'A',
+    name: 'Planning Time'
   }));
 
   const executionTime = metric.querymetrics.map((obj, i) => ({
     x: i + 1,
     y: obj.executionTime,
-    type: 'B'
+    type: 'B',
+    name: 'Execution Time'
   }));
 
   const totalTime = metric.querymetrics.map((obj, i) => ({
     x: i + 1,
     y: obj.planningTime + obj.executionTime,
-    type: 'C'
+    type: 'C',
+    name: 'Total Time'
   }));
 
   // Calculate the maximum value for the y-axis domain
@@ -66,7 +69,7 @@
     svg
       .append('text')
       .attr('class', 'axis-label')
-      .attr('transform', `translate(${margin.left - 25}, ${margin.top + height / 2}) rotate(-90)`)
+      .attr('transform', `translate(${margin.left - 30}, ${margin.top + height / 2}) rotate(-90)`)
       .style('text-anchor', 'middle')
       .text('Milliseconds');
 
@@ -93,7 +96,7 @@
       .attr('width', xScale.bandwidth() / 3)
       .attr('height', d => height - yScale(d.y))
       .on('mouseover', (event, d) => {
-        tooltip.style('visibility', 'visible').text(`${d.type}: ${d.y} ms`);
+        tooltip.style('visibility', 'visible').text(`${d.name}: ${d.y} ms`);
       })
       .on('mousemove', (event) => {
         tooltip.style('top', `${event.pageY - 10}px`).style('left', `${event.pageX + 10}px`);
@@ -115,7 +118,7 @@
       .attr('width', xScale.bandwidth() / 3)
       .attr('height', d => height - yScale(d.y))
       .on('mouseover', (event, d) => {
-        tooltip.style('visibility', 'visible').text(`${d.type}: ${d.y} ms`);
+        tooltip.style('visibility', 'visible').text(`${d.name}: ${d.y} ms`);
       })
       .on('mousemove', (event) => {
         tooltip.style('top', `${event.pageY - 10}px`).style('left', `${event.pageX + 10}px`);
@@ -137,7 +140,7 @@
       .attr('width', xScale.bandwidth() / 3)
       .attr('height', d => height - yScale(d.y))
       .on('mouseover', (event, d) => {
-        tooltip.style('visibility', 'visible').text(`${d.type}: ${d.y} ms`);
+        tooltip.style('visibility', 'visible').text(`${d.name}: ${d.y} ms`);
       })
       .on('mousemove', (event) => {
         tooltip.style('top', `${event.pageY - 10}px`).style('left', `${event.pageX + 10}px`);
