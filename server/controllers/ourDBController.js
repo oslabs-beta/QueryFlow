@@ -31,7 +31,7 @@ ourDBController.queryGet = async (req, res, next) => {
   try {
     const result = await ourDBModel(string);
     const resultData = result.rows;
-    const returnDataMetrics = resultData.map(({ _id, querystring, users_id, ...rest }) => rest);  
+    const returnDataMetrics = resultData.map(({ users_id, ...rest }) => rest);  
     res.locals.getmetrics = returnDataMetrics;
     return next();
   } catch (err) {
@@ -44,38 +44,33 @@ ourDBController.queryGet = async (req, res, next) => {
 };
 
 ourDBController.deleteQueryById = async (req, res, next) => {
-
   const { _id } = req.body;
-  const string = {text: 'SELECT * FROM metrics WHERE users_id = $1', values:[_id] };
+  const string = {text: 'DELETE FROM metrics WHERE _id = $1', values:[_id] };
   try {
     const result = await ourDBModel(string);
-    const resultData = result.rows;
-    const returnDataMetrics = resultData.map(({ _id, querystring, users_id, ...rest }) => rest);  
-    res.locals.getmetrics = returnDataMetrics;
+    console.log(result);  
     return next();
   } catch (err) {
     return next({
-      log: 'Error handler caught error in ourDBController.queryGet middleware',
+      log: 'Error handler caught error in ourDBController.deleteQueryById middleware',
       status: 400,
-      message: 'Error handler caught error in ourDBController.queryGet middleware',
+      message: 'Error handler caught error in ourDBController.deleteQueryById middleware',
     });
   }
 };
 
 ourDBController.deleteQueryByName = async (req, res, next) => {
   const { queryname } = req.body;
-  const string = {text: 'SELECT * FROM metrics WHERE queryname = $1', values:[queryname] };
+  const string = {text: 'DELETE FROM metrics WHERE queryname = $1', values:[queryname] };
   try {
     const result = await ourDBModel(string);
-    const resultData = result.rows;
-    const returnDataMetrics = resultData.map(({ _id, querystring, users_id, ...rest }) => rest);  
-    res.locals.getmetrics = returnDataMetrics;
+    console.log(result);  
     return next();
   } catch (err) {
     return next({
-      log: 'Error handler caught error in ourDBController.queryGet middleware',
+      log: 'Error handler caught error in ourDBController.deleteQueryByName middleware',
       status: 400,
-      message: 'Error handler caught error in ourDBController.queryGet middleware',
+      message: 'Error handler caught error in ourDBController.deleteQueryByName middleware',
     });
   }
 };

@@ -61,6 +61,15 @@ app.post('/api/querymetrics', clientDBController.queryMetrics, ourDBController.q
   res.status(201).json(res.locals.metrics);
 });
 
+//Delete a query from the metrics table by individual query id
+app.delete('/api/deletemetricsid', ourDBController.deleteQueryById, (req, res) => {
+  res.status(201).json({msg: 'Query Deleted'});
+});
+//Delete a query from the metrics table by individual query name
+app.delete('/api/deletemetricsname', ourDBController.deleteQueryByName, (req, res) => {
+  res.status(201).json({msg: 'Query Deleted'});
+});
+
 //Route error handler
 app.use('*', (req, res) => {
   return res.status(404).send('Page not Found');

@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 #app {
-	min-height: 100vh;
+	margin: 0;
+	padding: 0;
 }
 
 /* main {
@@ -41,12 +42,7 @@
 .axis-label {
 	font-size: 12px;
 	font-weight: bold;
-}
-
-.line {
-	stroke-width: 1;
-	stroke: black;
-	fill: none;
+	color: white !important;
 }
 
 .tooltip {
@@ -54,4 +50,14 @@
 	color: white;
 	padding: 5px;
 	font-size: 12px;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+	display: none;
+}
+
+/* For IE, Edge and Firefox */
+.scrollbar-hide {
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
 }
