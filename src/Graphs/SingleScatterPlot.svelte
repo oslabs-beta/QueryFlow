@@ -7,8 +7,10 @@
   export let i;
   
 
+
   let planningTime, executionTime, totalTime;
   $: {
+
   // formats query(x) planning time(y) data
   planningTime = metric.querymetrics.map((obj, i) => {
     return { x: i + 1, y: obj.planningTime, type: 'A',name: 'Planning Time' };

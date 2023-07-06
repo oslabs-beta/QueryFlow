@@ -1,4 +1,5 @@
 <script lang="ts">
+
   import Drawer from '../lib/Drawer.svelte';
   import Metrics from '../lib/Metrics.svelte';
   import { get } from 'svelte/store';
@@ -63,6 +64,7 @@
   filterMetricDataTwo.subscribe(data=>{
     filterMetricsArrTwo=data
   })
+
 
 
   const filterMetrics = (store,group) => {
@@ -130,6 +132,7 @@
     </div>
   </div>
 </div>
+
 
 
 
