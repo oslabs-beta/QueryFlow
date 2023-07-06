@@ -6,6 +6,7 @@
 	import Home from './Pages/Home.svelte';
 	import Landing from './Pages/Landing.svelte';
 	import Tips from './Pages/Tips.svelte';
+	import AllMetrics from './Pages/AllMetrics.svelte';
 </script>
 
 <main>
@@ -17,6 +18,7 @@
 			<Route path="/contact" component={Contact} />
 			<Route path="/tips" component={Tips} />
 			<Route path="/home" component={Home} />
+			<Route path="/all-metrics" component={AllMetrics} />
 		</Router>
 	</div>
 </main>
