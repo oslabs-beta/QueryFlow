@@ -42,6 +42,7 @@ clientDBController.queryMetrics = async (req, res, next) => {
     const metricsObj = {};
     // get avg query time
     metricsObj.averagetime = Number(delayedTasks.reduce((accum, obj) => accum + obj.totalTime, 0) / querycount).toFixed(2);
+
     metricsObj._id = `${_id}`;
     metricsObj.querystring = querystring;
     metricsObj.queryname = queryname;

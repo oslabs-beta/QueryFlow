@@ -11,7 +11,7 @@
 
 <main>
 	<Navbar />
-	<div class="pt-16">
+	<div class="pt-16 ">
 		<Router>
 			<Route path="/" component={Landing} />
 			<Route path="/about" component={About} />
