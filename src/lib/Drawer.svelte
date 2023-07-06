@@ -54,7 +54,7 @@
 		<div class="drawer-side ">
 			<label for="my-drawer" class="drawer-overlay" />
 			<!-- Sidebar content here -->
-			<div class="menu p-4 w-1/3 h-full bg-base-200 text-base-content ">
+			<div class="menu p-4 w-1/3 bg-base-200 text-base-content ">
 				<form on:submit={postQuery}>
 					<div class="flex flex-col pt-8 h-screen">
 						<!-- name of query label/input -->
@@ -102,26 +102,26 @@
 								id="queryString"
 								bind:value={querystring}
 								placeholder="e.g. SELECT * FROM your_table"
-								class="textarea textarea-bordered textarea-lg w-full bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+								class="textarea textarea-bordered textarea-lg w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 							/>
 						</div>
 						<!-- querycount label/range -->
-						<div class="w-full my-2">
-							<label
-								for="querycount"
-								class="block mb-2 text-lg font-medium text-white dark:text-white"
-								># of query runs</label
-							>
-							<input
-								name="querycount"
-								type="range"
-								min="1"
-								max="20"
-								class="range range-primary"
-								step="1"
-								bind:value={querycount}
-							/>
-							<div class="w-full flex justify-between text-xs px-2">
+						<div class="w-full my-2 range-container">
+              <label for="querycount" class="block mb-2 text-lg font-medium text-white dark:text-white"># of query runs</label>
+              <div class="range-input-container">
+                  <input
+                      name="querycount"
+                      type="range"
+                      min="1"
+                      max="20"
+                      class="range range-primary"
+                      step="1"
+                      bind:value={querycount}
+                  />
+              </div>
+              <div class="w-full flex justify-between text-xs px-2 range-labels">
+                  <!-- Label spans -->
+              
 								<span>1</span>
 								<span>2</span>
 								<span>3</span>
@@ -193,11 +193,12 @@
 		z-index: 9999;
 	}
 
-
   .drawer-side {
 /* Set to desired drawer width, vw units will adjust with the viewport width */
 	left: -80vw; /* Initially set to negative of the drawer's width */
+  min-width: 1000px;
   }
+  
   .drawer-overlay {
     transition: all 0.2s ease-out; /* No transition delay */
     /* Other properties... */

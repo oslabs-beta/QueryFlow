@@ -61,6 +61,17 @@ body::-webkit-scrollbar {
 	-ms-overflow-style: none; /* IE and Edge */
 	scrollbar-width: none; /* Firefox */
 }
+
+pre {
+	text-indent: -1.2em;
+}
+
+th,
+td {
+	padding-left: 5px !important;
+	padding-right: 5px !important;
+}
+
 @media only screen and (max-width: 667px) {
 	.group-query {
 		display: none;
