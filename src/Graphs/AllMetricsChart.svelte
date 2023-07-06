@@ -2,21 +2,22 @@
 	import { scaleBand, scaleLinear } from 'd3-scale';
 	import { max } from 'd3-array';
 	import { metricData } from '../store';
-
-	export let XAxisData;
-	export let YAxisData;
+	import { get } from 'svelte/store';
+	import AxisX from './graphComponents/AxisX.svelte';
+	import AxisY from './graphComponents/AxisY.svelte';
+	import TooltipBell from './graphComponents/TooltipBell.svelte';
 
 	$: metrics = [];
 
+	console.log('metrics data: ', get(metricData));
 	metricData.subscribe((data) => {
 		metrics = data;
 	});
 
 	const sampleData = [];
-
 	// generate sample data
 	for (let i = 0; i < 100; i++) {
-		sampleData.push({ averagetime: Math.random() * 50 });
+		sampleData.push({ averagetime: Math.random() * 200 });
 	}
 
 	// data conversion to bell curve
@@ -46,7 +47,7 @@
 		return workingArr;
 	};
 	const bellCurveData = format(sampleData, 20);
-	console.log(bellCurveData);
+	console.log(bellCurveData.at(-1));
 
 	let width = 600;
 	let height = 600;
@@ -54,17 +55,13 @@
 	const margin = { top: 20, right: 40, left: 40, bottom: 20 };
 
 	const xScale = scaleBand()
-		.domain(bellCurveData.map((_, i) => i))
+		.domain(bellCurveData.map((_, i) => `${i}`))
 		.range([margin.left, width - margin.right])
 		.padding(0.1);
 
 	const yScale = scaleLinear()
 		.domain([0, max(bellCurveData, (d) => d.NumberOfQueries)])
 		.range([height - margin.top - margin.bottom, 0]);
-
-	import AxisX from './graphComponents/AxisX.svelte';
-	import AxisY from './graphComponents/AxisY.svelte';
-	import TooltipBell from './graphComponents/TooltipBell.svelte';
 
 	let hoveredData;
 </script>
@@ -78,13 +75,13 @@
 >
 	<h1 class="title">Average query times</h1>
 	<svg {width} {height}>
-		<AxisX {height} {xScale} {margin} />
-		<AxisY {height} {width} {yScale} {margin} />
+		<AxisX {bellCurveData} {height} {xScale} {margin} />
+		<AxisY {bellCurveData} {height} {width} {yScale} {margin} />
 		<g class="bars">
+			<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 			{#each bellCurveData as data, i}
-				<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 				<rect
-					x={xScale(i)}
+					x={xScale(`${i}`)}
 					y={yScale(data.NumberOfQueries)}
 					width={xScale.bandwidth()}
 					height={height - margin.top - margin.bottom - yScale(data.NumberOfQueries)}
