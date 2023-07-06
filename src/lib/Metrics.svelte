@@ -13,8 +13,7 @@ const allMetrics = get(metricData)
 let barScatterToggle:boolean=false;
 let tableQueryToggle:boolean=false;
 const toggleGraphs = ()=>barScatterToggle = !barScatterToggle;
-console.log(metric)
-
+  
 const deleteMetric = async () =>{
   try {
     const response =  await fetch('/api/deletemetricsid',{

@@ -29,7 +29,7 @@ clientDBController.queryMetrics = async (req, res, next) => {
         const parsedData = data.rows;
         const planningTime = parsedData[0]['QUERY PLAN'][0]['Planning Time'];
         const executionTime = parsedData[0]['QUERY PLAN'][0]['Execution Time'];
-        const totalTime = Number((planningTime + executionTime).toFixed(2)); 
+        const totalTime = Number((planningTime + executionTime).toFixed(2));
         const cacheSize = parsedData[0]['QUERY PLAN'][0]['Settings']['effective_cache_size'];
         const workingMem = parsedData[0]['QUERY PLAN'][0]['Settings']['work_mem'];
         const sharedHitBlocks = parsedData[0]['QUERY PLAN'][0]['Planning']['Shared Hit Blocks'];

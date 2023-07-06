@@ -6,6 +6,7 @@
   import { userInfoStore, metricData,filterMetricData,filterMetricDataTwo } from '../store';
   import { onMount } from 'svelte';
   import { derived } from 'svelte/store'
+  import { navigate } from 'svelte-routing';
 
   let userInfo = get(userInfoStore);
   console.log('user info in home', userInfo);
@@ -75,9 +76,14 @@
       store.set(filteredMetrics);
     }
   };
-
+  
 </script>
-<div class="w-full flex flex-col items-center content-center justify-center ">
+
+<!-- TEMPORARY BUTTON FOR GOING TO /all-metrics -->
+<button class="btn btn-primary" on:click={() => {navigate('/all-metrics')}}>navigation test</button>
+<!-- END OF TEMPORARY BUTTON -->
+
+<div class="w-full flex flex-col items-center content-center justify-center">
   <div class="flex-shrink-0 ">
     <Drawer userId={userInfo._id} />
   </div>

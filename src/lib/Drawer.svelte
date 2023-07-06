@@ -51,7 +51,7 @@
 			<!-- Page content here -->
 			<label for="my-drawer" class="btn btn-primary drawer-button">Add a query</label>
 		</div>
-		<div class="drawer-side ">
+		<div class="drawer-side">
 			<label for="my-drawer" class="drawer-overlay" />
 			<!-- Sidebar content here -->
 			<div class="menu p-4 w-1/3 bg-base-200 text-base-content ">

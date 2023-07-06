@@ -5,6 +5,7 @@ POLISHING TO-DO LIST:
 - Remove numbers in Signup.svelte to fix color scheme
 - Add parameterized queries in backend (security)
 - Add option for different graph viewing (scatter plots, bar charts, pie charts, etc...)
+- In the all-metrics bar chart, fix the bar positioning to start from the x-axis, rather than have a gap
 
 <!-- # Svelte + TS + Vite
 

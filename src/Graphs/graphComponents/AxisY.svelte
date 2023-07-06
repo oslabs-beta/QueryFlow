@@ -10,24 +10,22 @@
 	const calculateXTicks = (ticksAmount) => {
 		// find max value
 		const maxValue = max(bellCurveData, (d) => d.NumberOfQueries);
-		console.log(typeof maxValue);
 		// build array
 		const returnArr = [];
 		for (let i = 0; i < ticksAmount; i++) {
-			returnArr.push(Math.ceil((i * Number(maxValue)) / (ticksAmount - 1)));
+			returnArr.push(Math.round((i * Number(maxValue)) / (ticksAmount - 1)));
 		}
 		return returnArr;
 	};
-	console.log("This is calculateXTicks's response: ", calculateXTicks(4));
 
-	let yTicks = calculateXTicks(5);
+	let yTicks = calculateXTicks(4);
 </script>
 
 <g transform="translate({margin.left} {margin.top})">
 	{#each yTicks as tick}
-		<text x={0} y={yScale(tick)} dy="-6">{tick} {tick == 60 ? ' number of queries' : ''}</text>
+		<text x={-15} y={yScale(tick)} dy="-6">{tick} {tick == yTicks.at(-1) ? ' number of queries' : ''}</text>
 		<line
-			x1="0"
+			x1="-15"
 			y1={yScale(tick)}
 			x2={width}
 			y2={yScale(tick)}
