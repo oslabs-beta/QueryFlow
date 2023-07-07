@@ -1,7 +1,6 @@
 <script lang="ts">
 	// userId from Home
   import { metricData, filterMetricData, filterMetricDataTwo } from '../store';
-	import { get } from 'svelte/store';
 	export let userId: string;
 
 	// initializing vars for database
@@ -11,6 +10,7 @@
 	let querycount: number = 1;
 	let querydelay: number = 2;
 
+  //Add Query Post Function - POST Request
 	const postQuery = async (e) => {
     e.preventDefault();
 
@@ -58,7 +58,6 @@
 				<form on:submit={postQuery}>
 					<div class="flex flex-col pt-8 h-screen">
 						<!-- name of query label/input -->
-
 						<div class="w-full my-2">
 							<label
 								for="queryName"

@@ -1,6 +1,6 @@
 <script>
 export let metric;
-export let i;
+
 const queryMetrics = metric.querymetrics
 </script>
 

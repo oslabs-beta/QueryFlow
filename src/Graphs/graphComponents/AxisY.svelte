@@ -1,5 +1,4 @@
 <script>
-	export let height;
 	export let width;
 	export let yScale;
 	export let margin;

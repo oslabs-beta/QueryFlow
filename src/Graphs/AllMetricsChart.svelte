@@ -116,7 +116,7 @@
 </div>
 	<svg {width} {height}>
 		<AxisX {bellCurveData} {height} {xScale} {margin} />
-		<AxisY {bellCurveData} {height} {width} {yScale} {margin} />
+		<AxisY {bellCurveData} {width} {yScale} {margin} />
 		<g class="bars">
 			<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 			{#each bellCurveData as data, i}

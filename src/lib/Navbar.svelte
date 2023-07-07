@@ -1,4 +1,6 @@
-<script>
+<script lang="ts" >
+import logo from '../assets/QueryFlow-icon.png'
+
 
 </script>
 
@@ -6,7 +8,7 @@
   <div class="flex-1">
     
     <a class="btn btn-ghost normal-case text-xl logo-text" href="http://localhost:5173/">
-      <img src="/public/QueryFlow-icon.png" alt="logo" width="26px" />
+      <img src={logo} alt="logo" width="26px" />
       QueryFlow
     </a>
   </div>

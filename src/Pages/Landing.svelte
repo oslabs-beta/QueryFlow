@@ -3,7 +3,9 @@
 	import Signup from '../lib/Signup.svelte';
 	import graph from '../assets/graph3.png';
 
+  //toggle signup/login component
 	let renderSignup: boolean = false;
+
 </script>
 <!-- background-image: {graph} -->
 <div class="landing-container flex flex-col mt-5 lg:flex-row">
@@ -27,14 +29,12 @@
     border-radius: 15px; 
   }
   
-
   .landing-container{
     height:80vh
   }
   .responsive-column{
     height:90vh;
   }
-
 
   @media only screen and (max-width: 1025px) {
     .landing-img {

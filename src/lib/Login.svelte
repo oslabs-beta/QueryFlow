@@ -6,12 +6,11 @@
 	let email: string;
 	let password: string;
 
+
+  //Login Function-POST Request
 	const loginUser = async (e: any) => {
 		e.preventDefault();
-
-		// delete/comment line below and uncomment try/catch block for functionality
-		// navigate('/home', { replace: true})
-		try {
+    try {
 			const response = await fetch('/api/login', {
 				method: 'POST',
 				headers: {
@@ -88,9 +87,6 @@
 
 <style>
   .login{
-    width:496px;
-    
-  }
-
-  
+    width:496px;   
+  } 
 </style>
