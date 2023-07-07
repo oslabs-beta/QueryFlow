@@ -8,6 +8,11 @@ import starWarsController from './controllers/starWarsController.mjs';
 import ourDBController from './controllers/ourDBController.js';
 import { dirname, resolve } from 'path';
 import compression from 'compression';
+import redis from 'redis';
+import bodyParser from 'body-parser';
+import redisController from './controllers/redisController.mjs';
+
+
 
 //We utilize the fileURLToPath function from the url module to convert the import.meta.url to the corresponding file path??
 const __filename = fileURLToPath(import.meta.url);
@@ -23,7 +28,7 @@ app.use(compression());
 app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
-
+app.use(bodyParser.json());
 // Serve static assets
 app.use(express.static(resolve(__dirname, '../src')));
 
@@ -59,6 +64,10 @@ app.post('/api/login', userController.login, (req, res) => {
 //Route for querying our client's DB and extracting metrics. Redirect to postmetrics. 
 app.post('/api/querymetrics', clientDBController.queryMetrics, ourDBController.queryPush, (req, res) => {
   res.status(201).json(res.locals.metrics);
+});
+
+app.post('/api/test2', clientDBController.test, redisController.latency, (req, res) => {
+  res.status(201).json(res.locals.testdata);
 });
 
 //Delete a query from the metrics table by individual query id

@@ -29,3 +29,5 @@ export const filterMetricData = writable([
 export const filterMetricDataTwo = writable([
 
 ]);
+
+export const redisData = writable ([]);

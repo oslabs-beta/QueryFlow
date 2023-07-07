@@ -6,6 +6,7 @@
 	import AxisY from './graphComponents/AxisY.svelte';
 	import TooltipBell from './graphComponents/TooltipBell.svelte';
 	import { navigate } from 'svelte-routing';
+  import RedisForm from '../lib/RedisForm.svelte'
 
 	$: metrics = [];
 
@@ -76,7 +77,7 @@
 		navigate('/home');
 	}}
 	type="button"
-	class="text-primary border-2 border border-primary hover:bg-secondary hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-1 text-center inline-flex items-center dark:border-primary dark:text-primary dark:hover:text-primary dark:focus:ring-blue-800 dark:hover:bg-white"
+	class=" mt-2 ml-2 text-primary border-2 border border-primary hover:bg-secondary hover:text-white focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm p-1 text-center inline-flex items-center dark:border-primary dark:text-primary dark:hover:text-primary dark:focus:ring-blue-800 dark:hover:bg-white"
 >
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
@@ -101,7 +102,18 @@
 		hoveredData = null;
 	}}
 >
+<div class="flex justify-center ">
 	<h1 class="title">Average query times</h1>
+  <button class="btn ml-4" onclick="my_modal_2.showModal()">Get Redis Metrics</button>
+<dialog id="my_modal_2" class="modal text-primary">
+  <form method="dialog" class="modal-box">
+    <RedisForm/>
+  </form>
+  <form method="dialog" class="modal-backdrop">
+    <button>close</button>
+  </form>
+</dialog>
+</div>
 	<svg {width} {height}>
 		<AxisX {bellCurveData} {height} {xScale} {margin} />
 		<AxisY {bellCurveData} {height} {width} {yScale} {margin} />
