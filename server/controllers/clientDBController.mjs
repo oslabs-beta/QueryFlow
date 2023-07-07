@@ -60,5 +60,42 @@ clientDBController.queryMetrics = async (req, res, next) => {
   }
 };
 
+clientDBController.test = async (req, res, next) => {
+
+  const { uri , querystring } = req.body;
+  console.log('This is the req.body in clientDBController: ', req.body);
+  //Initiate new model
+  const { Pool } = pg;
+  const pool = new Pool({
+    connectionString: uri
+  });
+
+  const clientDBModel = function(text, params, callback) {
+    // console.log('executed query', text);
+    return pool.query(text, params, callback);
+  };
+ 
+  const string = `${querystring}`;
+
+  try {
+    const startTime = process.hrtime();
+    const result = await clientDBModel(string);
+    const endTime = process.hrtime(startTime);
+    const totalTime = (endTime[0] * 1000 + endTime[1] / 1000000).toFixed(2);
+    const resultData = JSON.stringify(result.rows[0]);
+    const obj = {};
+    obj.resultdata = result.rows[0];
+    obj.totalTimeQuery = totalTime;
+    res.locals.testjson = obj;
+    return next();
+  } catch (err) {
+    return next({
+      log: 'Error handler caught error in ourDBController.get middleware',
+      status: 400,
+      message: 'Error handler caught error in ourDBController.get middleware',
+    });
+  }
+};
+
 export default clientDBController;
 
