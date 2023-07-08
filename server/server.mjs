@@ -2,17 +2,10 @@ import express from 'express';
 import { fileURLToPath } from 'url';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
-import userController from './controllers/userController.mjs';
-import clientDBController from './controllers/clientDBController.mjs';
-import starWarsController from './controllers/starWarsController.mjs';
-import ourDBController from './controllers/ourDBController.js';
 import { dirname, resolve } from 'path';
 import compression from 'compression';
-import redis from 'redis';
 import bodyParser from 'body-parser';
-import redisController from './controllers/redisController.mjs';
-
-
+import apiRouter from './routes/apiRoutes.mjs';
 
 //We utilize the fileURLToPath function from the url module to convert the import.meta.url to the corresponding file path??
 const __filename = fileURLToPath(import.meta.url);
@@ -29,6 +22,7 @@ app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
 app.use(bodyParser.json());
+
 // Serve static assets
 app.use(express.static(resolve(__dirname, '../src')));
 
@@ -37,47 +31,8 @@ app.get('/', (req, res) => {
   res.sendFile(resolve(__dirname, '../index.html'));
 });
 
-//Test route to star wars database to test what metrics are being returned
-app.post('/api/test', starWarsController.queryMetrics, (req, res) => {
-  res.status(201).json(res.locals.metrics);
-});
-
-//Client gets metrics from past queries stored in QueryFlow's database
-app.post('/api/getmetrics', ourDBController.queryGet, (req, res) => {
-  res.status(201).json(res.locals.getmetrics);
-});
-
-// app.post('/api/deletemetrics', ourDBController.deleteQuery, (req, res) => {
-//   res.status(201).json({msg: 'Query Deleted'});
-// });
-
-//Route for signing up
-app.post('/api/signup', userController.create, (req, res) => {
-  res.status(201).json({msg: 'Account made'});
-});
-
-//Route for logging in
-app.post('/api/login', userController.login, (req, res) => {
-  res.status(201).json(res.locals.authentication);
-});
-
-//Route for querying our client's DB and extracting metrics. Redirect to postmetrics. 
-app.post('/api/querymetrics', clientDBController.queryMetrics, ourDBController.queryPush, (req, res) => {
-  res.status(201).json(res.locals.metrics);
-});
-
-app.post('/api/test2', clientDBController.test, redisController.latency, (req, res) => {
-  res.status(201).json(res.locals.testdata);
-});
-
-//Delete a query from the metrics table by individual query id
-app.delete('/api/deletemetricsid', ourDBController.deleteQueryById, (req, res) => {
-  res.status(201).json({msg: 'Query Deleted'});
-});
-//Delete a query from the metrics table by individual query name
-app.delete('/api/deletemetricsname', ourDBController.deleteQueryByName, (req, res) => {
-  res.status(201).json({msg: 'Query Deleted'});
-});
+//Use apiRouter
+app.use('/api', apiRouter);
 
 //Route error handler
 app.use('*', (req, res) => {
@@ -99,3 +54,5 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
 });
+
+

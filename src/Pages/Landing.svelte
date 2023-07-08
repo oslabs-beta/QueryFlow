@@ -3,22 +3,21 @@
 	import Signup from '../lib/Signup.svelte';
 	import graph from '../assets/graph3.png';
 
-  //toggle signup/login component
+  // toggle signup/login component
 	let renderSignup: boolean = false;
 
 </script>
-<!-- background-image: {graph} -->
+
 <div class="landing-container flex flex-col mt-5 lg:flex-row">
 	<div class="flex-1 flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0 responsive-column">
 		<img class="landing-img w-full h-auto" src={graph} alt="graph" />
 	</div>
-	<!-- <div class="flex-1"> -->
+  <!-- conditional statement to render signup or login -->
 		{#if renderSignup}
 			<Signup bind:renderSignup />
 		{:else}
 			<Login bind:renderSignup />
 		{/if}
-	<!-- </div> -->
 </div>
 
 <style>

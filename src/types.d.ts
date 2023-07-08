@@ -10,21 +10,46 @@ export interface QueryMetrics {
 
 export interface QueryData {
   _id: number;
-  querystring: string;
-  querymetrics: QueryMetrics[];
-  queryname: string;
-  querycount: number;
-  querydelay: number;
-  averagetime: number;
-  created_at: string;
+  queryString: string;
+  queryMetrics: QueryMetrics[];
+  queryName: string;
+  queryCount: number;
+  queryDelay: number;
+  averageTime: number;
+  createdAt: string;
+}
+
+export interface GraphData {
+  x: number;
+  y: number;
+  type: string;
+  name: string;
+}
+
+export interface RedisData{
+  totalTime: number;
+  totalTimeQuery:number;
 }
 
 export type UserType = {
   _id: string,
-  first_name: string,
-  last_name: string,
+  firstName: string,
+  lastName: string,
   email: string,
   password: string,
   organization: string,
   database: string,
+}
+
+export interface WorkingArr {
+  topValue?: number,
+  bottomValue?: number,
+  numberOfQueries?: number
+}
+
+export interface Directions {
+  top: number,
+  right: number,
+  left: number,
+  bottom: number
 }

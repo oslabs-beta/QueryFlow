@@ -1,19 +1,22 @@
-<script>
-	export let data;
-	export let xScale;
-	export let yScale;
+<script lang="ts">
+	import type { WorkingArr } from "../../types";
+	import type { ScaleBand, ScaleLinear } from "d3";
 
-	// $: console.log(xScale(data.grade));
+	export let data: WorkingArr;
+	export let xScale: ScaleBand<string>;
+	export let yScale: ScaleLinear<number, number>;
 </script>
+
 
 <div
 	class="tooltip"
 	style="position: absolute;
-    top: {yScale(data.NumberOfQueries)}px;
-    left: {xScale(data)}px"
+    top: {yScale(data.numberOfQueries)}px;
+    left: {xScale(`${data}`)}px"
 >
-	<h1>number of queries</h1>
-	<p>{data.NumberOfQueries}</p>
+<!-- CHECK DATA PARAM ABOVE ^ -->
+	<h1>Number of queries</h1>
+	<p>{data.numberOfQueries}</p>
 
 	<h1>Average time</h1>
 	<p>{data.bottomValue} - {data.topValue} ms</p>

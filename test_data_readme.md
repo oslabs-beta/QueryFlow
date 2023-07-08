@@ -33,7 +33,7 @@ psql -d <add uri/url database string> -f code/pagila-data.sql
 1.  This query retrieves the title of films, their corresponding category names, the full names of actors, and the rental dates for films in the 'Action' category rented between May 5, 2005, and May 25, 2005. The results are ordered in descending order based on the rental date.
 
 ```
-SELECT film.title, category.name AS category, actor.first_name || ' ' || actor.last_name AS actor_name, rental.rental_date
+SELECT film.title, category.name AS category, actor.firstName || ' ' || actor.lastName AS actor_name, rental.rental_date
 FROM film
 JOIN film_category ON film.film_id = film_category.film_id
 JOIN category ON film_category.category_id = category.category_id
@@ -49,7 +49,7 @@ ORDER BY rental.rental_date DESC;
 2.  Query to retrieve the top 10 customers with the highest total rental revenue
 
 ```
-SELECT customer.customer_id, customer.first_name, customer.last_name, SUM(payment.amount) AS total_revenue
+SELECT customer.customer_id, customer.firstName, customer.lastName, SUM(payment.amount) AS total_revenue
 FROM customer
 JOIN payment ON customer.customer_id = payment.customer_id
 GROUP BY customer.customer_id
@@ -72,7 +72,7 @@ ORDER BY rental_count DESC;
 4.  Query to retrieve the customers who have rented films from at least three different categories:
 
 ```
-SELECT customer.customer_id, customer.first_name, customer.last_name
+SELECT customer.customer_id, customer.firstName, customer.lastName
 FROM customer
 JOIN rental ON customer.customer_id = rental.customer_id
 JOIN inventory ON rental.inventory_id = inventory.inventory_id
@@ -85,7 +85,7 @@ HAVING COUNT(DISTINCT category.category_id) >= 3;
 5.  This query retrieves customer information, film details, and rental statistics for customers whose last name starts with 'S', films released in 2006 belonging to the 'Action', 'Drama', or 'Comedy' categories. It groups the results by customer, category, and film and applies conditions such as having at least three rentals. The results are then ordered by total revenue in descending order and limited to the top 10 records.
 
 ```
-SELECT customer.customer_id, customer.first_name, customer.last_name, category.name AS category, film.title, COUNT(rental.rental_id) AS rental_count, SUM(payment.amount) AS total_revenue
+SELECT customer.customer_id, customer.firstName, customer.lastName, category.name AS category, film.title, COUNT(rental.rental_id) AS rental_count, SUM(payment.amount) AS total_revenue
 FROM customer
 JOIN rental ON customer.customer_id = rental.customer_id
 JOIN inventory ON rental.inventory_id = inventory.inventory_id
@@ -93,7 +93,7 @@ JOIN film ON inventory.film_id = film.film_id
 JOIN film_category ON film.film_id = film_category.film_id
 JOIN category ON film_category.category_id = category.category_id
 JOIN payment ON rental.rental_id = payment.rental_id
-WHERE customer.last_name LIKE 'S%'
+WHERE customer.lastName LIKE 'S%'
   AND film.release_year = 2006
   AND category.name IN ('Action', 'Drama', 'Comedy')
 GROUP BY customer.customer_id, category.category_id, film.film_id
@@ -260,7 +260,7 @@ FROM
 
 ```
 SELECT
-    e.employee_id, e.last_name, e.first_name, t.territory_id, t.territory_description, r.region_id, r.region_description
+    e.employee_id, e.lastName, e.firstName, t.territory_id, t.territory_description, r.region_id, r.region_description
 FROM
     employees e
 LEFT JOIN
@@ -290,7 +290,7 @@ LEFT JOIN
 
 ```
 SELECT
-    e.employee_id, e.last_name, e.first_name, o.order_id, o.order_date, od.product_id, od.unit_price, od.quantity, p.product_name, c.customer_id, c.company_name
+    e.employee_id, e.lastName, e.firstName, o.order_id, o.order_date, od.product_id, od.unit_price, od.quantity, p.product_name, c.customer_id, c.company_name
 FROM
     employees e
 LEFT JOIN
@@ -309,7 +309,7 @@ LEFT JOIN
 SELECT
     c.customer_id, c.company_name, o.order_id, o.order_date, od.product_id, od.unit_price, od.quantity,
     p.product_name, s.supplier_id,
-    e.employee_id, e.first_name, e.last_name, sh.shipper_id
+    e.employee_id, e.firstName, e.lastName, sh.shipper_id
 FROM
     customers c
 LEFT JOIN

@@ -93,8 +93,8 @@ CREATE TABLE customers (
 
 CREATE TABLE employees (
     employee_id smallint NOT NULL,
-    last_name character varying(20) NOT NULL,
-    first_name character varying(10) NOT NULL,
+    lastName character varying(20) NOT NULL,
+    firstName character varying(10) NOT NULL,
     title character varying(30),
     title_of_courtesy character varying(25),
     birth_date date,

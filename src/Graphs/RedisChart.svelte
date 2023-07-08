@@ -1,17 +1,16 @@
-<script>
+<script lang="ts">
   import { onMount } from 'svelte';
   import { select } from 'd3-selection';
   import { scaleLinear, scaleBand } from 'd3-scale';
   import { axisBottom, axisLeft } from 'd3-axis';
   import { get } from 'svelte/store';
   import { redisData } from '../store';
-  const colors = ['#FF0000', '#00FF00'];
-  let redisInfo = get(redisData)
- console.log('I am the redisinfo',redisInfo)
-  // let metrics = {
-  //   totalTime: '61.69',
-  //   totalTimeQuery: '242.92'
-  // };
+  import type { RedisData } from '../types';
+  
+  const colors:string[] = ['#FF0000', '#00FF00'];
+  
+  let redisInfo:RedisData = get(redisData)
+
 
   onMount(() => {
     const svg = select('#chart');
@@ -27,12 +26,12 @@
 
     // Update the chart data
     x.domain(['Redis', 'PostgreSQL']);
-    y.domain([0, Math.max(+redisInfo.totalTime, +redisInfo.totalTimeQuery)]);
+    y.domain([0, Math.max(+redisInfo.totalTime, + redisInfo.totalTimeQuery)]);
 
     g.selectAll('.bar')
   .data([
-    { label: 'Redis', value: +redisInfo.totalTime },
-    { label: 'PostgreSQL', value: +redisInfo.totalTimeQuery }
+    { label: 'Redis', value: + redisInfo.totalTime },
+    { label: 'PostgreSQL', value: + redisInfo.totalTimeQuery }
   ])
   .enter()
   .append('rect')
@@ -52,9 +51,6 @@
   });
 </script>
 
-<style>
-  /* Add your custom CSS styles here */
-</style>
 
 <main>
 

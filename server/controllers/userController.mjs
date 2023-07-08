@@ -7,12 +7,12 @@ const workFactor = 10;
 
 userController.create = async (req, res, next) => {
   try {
-    const { first_name, last_name, email, password, organization, database} = req.body; 
+    const { firstName, lastName, email, password, organization, database} = req.body; 
 
     //Hash user's password
     const hash = await bcrypt.hash(password, workFactor);
 
-    const string = `INSERT INTO users (first_name, last_name, email, password, organization, database) VALUES ('${first_name}', '${last_name}', '${email}', '${hash}', '${organization}', '${database}')`;
+    const string = `INSERT INTO users (firstName, lastName, email, password, organization, database) VALUES ('${firstName}', '${lastName}', '${email}', '${hash}', '${organization}', '${database}')`;
     const response = await ourDBModel(string);
     console.log(response);
     return next();
@@ -37,11 +37,10 @@ userController.login = async (req, res, next) => {
     if (data.rows[0]) {
       const hash = data.rows[0].password;
       const result = await bcrypt.compare(password, hash);
-      //Compare stored hashed password to hashed password sent through frontend form
-      //If the user's email exists in the database AND bcrypt compare returns true (password entered on frontend and hashed password in database are the same)
+      
       if (data.rows[0].email && result) {
-        const { _id, firstname, lastname } = data.rows[0];
-        res.locals.authentication = {_id, firstname, lastname};
+        const { _id, firstName, lastName } = data.rows[0];
+        res.locals.authentication = {_id, firstName, lastName};
         return next();
       }
       else {

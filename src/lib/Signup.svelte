@@ -1,31 +1,30 @@
 <script lang="ts">
-	import { navigate } from 'svelte-routing';
 
 	// initializing vars for database
-	let first_name: string;
-	let last_name: string;
+	let firstName: string;
+	let lastName: string;
 	let organization: string;
 	let database: string;
 	let email: string;
 	let password: string;
 
-  //Toggle the signup and login boolean. To get back to login screen
+  // Toggle the signup and login boolean. To get back to login screen
 	export let renderSignup: boolean;
 
-  //comparison string to make sure user inputed correct password
+  // comparison string to make sure user typed correct password
 	let confirmPassword: string;
 
-//Signup Function - POST request
-	const postData = async (e) => {
+  // Signup Function - POST request
+	const postData = async (e: any) => {
 		e.preventDefault();
 		
-    //check passwords
+    // check passwords
     if (password !== confirmPassword) return alert('Please make sure your passwords match');
 
-    //body package for post request
+    // body package for post request
 		const body = database
-			? { first_name, last_name, organization, database, email, password }
-			: { first_name, last_name, organization, email, password };
+			? { firstName, lastName, organization, database, email, password }
+			: { firstName, lastName, organization, email, password };
 
 		try {
 			const response = await fetch('/api/signup', {
@@ -37,7 +36,7 @@
 			});
 			if (response.ok) {      
 				alert('account created');
-        //switch boolean to back to login component
+        // switch boolean to back to login component
 				renderSignup = false;
 			} else {
 				console.error('error in signup')
@@ -100,9 +99,9 @@
 								type="text"
 								placeholder="Jane"
 								required
-								bind:value={first_name}
+								bind:value={firstName}
 							/>
-							<!-- <p class="text-red-500 text-xs italic">Please fill out this field.</p> -->
+
 						</div>
 						<div class="w-full md:w-1/2 px-3">
 							<label
@@ -118,7 +117,7 @@
 								type="text"
 								placeholder="Doe"
 								required
-								bind:value={last_name}
+								bind:value={lastName}
 							/>
 						</div>
 					</div>

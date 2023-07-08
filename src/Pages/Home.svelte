@@ -3,16 +3,17 @@
   import Metrics from '../lib/Metrics.svelte';
   import { get } from 'svelte/store';
   import { userInfoStore,metricData,filterMetricData,filterMetricDataTwo } from '../store';
-  import type { QueryData } from '../types';
+  import type { QueryData,UserType } from '../types';
   import { onMount } from 'svelte';
   import { derived } from 'svelte/store'
   import { navigate } from 'svelte-routing';
 
-  //get user's info from the userInfo Store
-  let userInfo = get(userInfoStore);
+  // get user's info from the userInfo Store
+  let userInfo: UserType = get(userInfoStore);
 
-  //store all past metrics in this array. p
+  // store all past metrics in this array.
   let metrics: QueryData[] = [];
+  
   // The `derived` function from Svelte is used to create a new store 
   // whose value is derived from the `metricData` store.
   const uniqueNames = derived(
@@ -22,24 +23,24 @@
   // `$metricData` is the current value of `metricData`.
   $metricData => {
     // We use `map` to transform the `metricData` array into a new array 
-    // where each element is the value of `queryname` in the original object.
-    const queryNames = $metricData.map(obj => obj.queryname);
+    // where each element is the value of `queryName` in the original object.
+    const queryNames = $metricData.map(obj => obj.queryName);
     // We then use the `Set` constructor to create a new set from the `queryNames` array.
     // The `Set` constructor automatically removes any duplicates, so the resulting set 
-    // contains only unique `queryname` values.
+    // contains only unique `queryName` values.
     return new Set(queryNames);
   }
 );
 
-  //Any time the metricData store changes it trigger this function and updates are metrics array uptop
+  // Any time the metricData store changes it trigger this function and updates are metrics array uptop
   metricData.subscribe((data: QueryData[]) => {
     metrics = data;
   });
 
-  //this is out fetch query metrics data from the user's metric table by their id/cookie
+  // this is out fetch query metrics data from the user's metric table by their id/cookie
   const fetchData = async () => {
     try {
-      const response = await fetch('/api/getmetrics', {
+      const response = await fetch('/api/get-metrics', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -48,11 +49,11 @@
       });
       if (response.ok) {
         const data = await response.json();
-        //we set the awaited response data into the store
-        console.log('i am data in home',data)
+        // we set the awaited response data into the store
+        console.log('i am data in home',data);
         metricData.set(data);
-        //we also set the filteredStores data too. These stores are for the selection box at the top
-        //of the two colums
+        // we also set the filteredStores data too. These stores are for the selection box at the top
+        // of the two columns
         filterMetricData.set(data);
         filterMetricDataTwo.set(data);
       }
@@ -63,38 +64,37 @@
 
 
   onMount(async () => {
-    //if userid is not an empty string then fetch data to get the users query metrics 
+    // if userId is not an empty string then fetch data to get the users query metrics 
     if (userInfo._id !== '') {
       await fetchData();    
     }
   });
 
-  //selection dropdown variables for each column
+  // selection dropdown variables for each column
   let groupQueries: string = 'all';
-  let groupQueriesTwo: string = 'all'
+  let groupQueriesTwo: string = 'all';
 
-  //arrays for the two columns metrics which are filtered by group queries values
-  let filterMetricsArr: QueryData[] = []
-  let filterMetricsArrTwo: QueryData[] = []
+  // arrays for the two columns metrics which are filtered by group queries values
+  let filterMetricsArr: QueryData[] = [];
+  let filterMetricsArrTwo: QueryData[] = [];
   
-  //if the filterMetrics function is run on selection of Metric
-  //then the store will get update and the subscribe method will inturn
-  //update the filterMetric arrs
+  // if the filterMetrics function is run on selection of Metric
+  // then the store will get update and the subscribe method will inturn
+  // update the filterMetric arr
   filterMetricData.subscribe(data => {
-    filterMetricsArr=data
+    filterMetricsArr = data;
   })
  
-  filterMetricDataTwo.subscribe(data=>{
-    filterMetricsArrTwo=data
+  filterMetricDataTwo.subscribe(data => {
+    filterMetricsArrTwo = data;
   })
 
-  //FilterMetrics function which will trigger on change of the top selection box
-  const filterMetrics = (store,group) => {
+  // FilterMetrics function which will trigger on change of the top selection box
+  const filterMetrics = (store: any, group: string):void => {
     if (group === 'all') {
       store.set(metrics);
     } else {
-      const filteredMetrics = metrics.filter(metric => metric.queryname === group)
-      store.set(filteredMetrics);
+      store.set(metrics.filter(metric => metric.queryName === group));
     }
   };
   
@@ -120,7 +120,7 @@
         on:change={() => { filterMetrics(filterMetricData, groupQueries) }}
       >
         <option value="all" selected hidden>Please choose...</option>
-        <!-- Make the uniqueName Set into array to itterate over and get your dropdown box values -->
+        <!-- Make the uniqueName Set into array to iterate over and get your dropdown box values -->
         {#each Array.from($uniqueNames) as value}
           <option>{value}</option>
         {/each}
@@ -129,7 +129,7 @@
       <div class="space-y-4  flex flex-col items-center
       mx-6">
         {#each filterMetricsArr as metric, i}
-        <!-- Itterate through the filter metrics array and pass down one metric object and an indexed to the component -->
+        <!-- Iterate through the filter metrics array and pass down one metric object and an indexed to the component -->
         {#key metric}
         <!-- Key re-renders the component inside if the passed in value changes, metric. -->
         <Metrics {i} {metric} />
@@ -151,11 +151,10 @@
         <option>{value}</option>
         {/each}
       </select>
-
       <div class="space-y-4 flex flex-col items-center justify-center  mx-6">
         {#each filterMetricsArrTwo as metric, i}
-     
         {#key metric}
+        <!-- add 1000 to i to give id individuality and so it doesn't get confused with the first column Metric components -->
         <Metrics i={i + 1000} {metric} />
         {/key}
         {/each}
@@ -163,15 +162,4 @@
     </div>
   </div>
 </div>
-
-
-
-
-<style>
-  
-</style>
-
-
-
-
 

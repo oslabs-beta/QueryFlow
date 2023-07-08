@@ -7,7 +7,7 @@
 	let password: string;
 
 
-  //Login Function-POST Request
+  // Login Function-POST Request
 	const loginUser = async (e: any) => {
 		e.preventDefault();
     try {
@@ -23,7 +23,9 @@
 				userInfoStore.set(data);
 				navigate('/home', { replace: true });
 			}
-		} catch (error) {}
+		} catch (error) {
+      console.error(error)
+    }
 	};
 </script>
 

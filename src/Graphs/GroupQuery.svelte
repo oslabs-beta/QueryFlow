@@ -17,7 +17,7 @@ metricData.subscribe(data => {
 
 const averageTime = groupMetrics.map((obj, i) => ({
     x: i + 1,
-    y: obj.averagetime,
+    y: obj.averageTime,
     type: 'A',
     name: metricName,
     date: obj.created_at

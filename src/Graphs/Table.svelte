@@ -1,7 +1,10 @@
-<script>
-export let metric;
+<script lang="ts">
+import type { QueryMetrics,QueryData } from '../types';
 
-const queryMetrics = metric.querymetrics
+export let metric:QueryData;
+
+const queryMetrics:QueryMetrics[] = metric.queryMetrics
+
 </script>
 
 <div class="scrollbar-hide overflow-y-auto">
@@ -19,6 +22,7 @@ const queryMetrics = metric.querymetrics
         </tr>
       </thead>
       <tbody>
+        <!-- iterate through queryMetrics array and pass values into the table -->
         {#each queryMetrics as metric, i}
         <tr>
 
