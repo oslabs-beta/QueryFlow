@@ -17,12 +17,12 @@
 
   const getRedisData:Function = async () => {
 
-    const response = await fetch('http://localhost:5173/api/redis-metrics', {
+    const response = await fetch('/api/redis-metrics', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ uri: `${uri}`, querystring: `${queryString}`}),
+      body: JSON.stringify({ uri: `${uri}`, queryString: `${queryString}`}),
     });
 
     if (response.ok) {

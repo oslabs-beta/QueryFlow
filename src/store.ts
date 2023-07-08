@@ -4,7 +4,7 @@ import type { Writable } from 'svelte/store';
 
 // initially empty, updatable through source code
 export const userInfoStore = writable<UserType>({
-  _id: '552ab7e2-45bd-42d0-a457-f873bb9d052d',
+  _id: '37e2e7e2-1bcb-4b51-a811-080fb1648523',
   firstName: '',
   lastName: '',
   email: '',

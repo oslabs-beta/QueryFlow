@@ -24,6 +24,7 @@ export interface GraphData {
   y: number;
   type: string;
   name: string;
+  date?: string;
 }
 
 export interface RedisData{

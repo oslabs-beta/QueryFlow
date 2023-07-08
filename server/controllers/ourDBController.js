@@ -6,13 +6,17 @@ const ourDBController = {};
 ourDBController.queryPush = async (req, res, next) => {
   const { _id, queryString, queryName, queryDelay, queryCount, queryMetrics, averageTime } = res.locals.metrics;
   const stringQueryMetrics = JSON.stringify(queryMetrics);
-  const date = moment().format();
-  const string = `INSERT INTO metrics (querystring, querymetrics, queryname, querycount, querydelay, averagetime, users_id, created_at)
-  VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`;
+  const createdAt = moment().format();
+  const string = { text: `INSERT INTO metrics (queryString, queryMetrics, queryName, queryCount, queryDelay, averageTime, users_id, createdAt)
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8);`, values: [queryString, stringQueryMetrics, queryName, queryCount, queryDelay, averageTime, _id, createdAt] };
   try {
-    const result = await ourDBModel(string, [queryString, stringQueryMetrics, queryName, queryCount, queryDelay, averageTime, _id, date]);
+    //up to scrap lines 14-15
+    const result = await ourDBModel(string);
+
     res.locals.queryMetrics = result;
-    res.locals.metrics.created_at = date;
+    
+    res.locals.metrics.createdAt = createdAt;
+
     return next();
   } catch (err) {
     return next({
@@ -23,6 +27,7 @@ ourDBController.queryPush = async (req, res, next) => {
   }
 };
 
+// get query data for user
 ourDBController.queryGet = async (req, res, next) => {
   const { _id } = req.body;
   const string = {text: 'SELECT * FROM metrics WHERE users_id = $1', values:[_id] };
@@ -30,7 +35,9 @@ ourDBController.queryGet = async (req, res, next) => {
     const result = await ourDBModel(string);
     const resultData = result.rows;
     const returnDataMetrics = resultData.map(({ users_id, ...rest }) => rest);  
+    console.log("res.locals.getmetrics from ourDBController.queryGet: ", returnDataMetrics);
     res.locals.getMetrics = returnDataMetrics;
+    
     return next();
   } catch (err) {
     return next({

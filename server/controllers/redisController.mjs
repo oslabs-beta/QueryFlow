@@ -23,6 +23,8 @@ redisController.latency = async (req, res, next) => {
     const getResult = await redisModel.json.get('Result', {
       path: '.',
     });
+    // Below comment may work exactly as the above getResult
+    // const getResult = await redisModel.json.get('Result', '.');
     const endTime = process.hrtime(startTime);
     const totalTimeRedis = (endTime[0] * 1000 + endTime[1] / 1000000).toFixed(2);
     const resObj = {};
@@ -30,10 +32,16 @@ redisController.latency = async (req, res, next) => {
     resObj.totalTimeRedis = totalTimeRedis;
     //This is the time it takes for PostgreSQL to get the data
     resObj.totalTimeSQL = totalTimeSQL;
+
     res.locals.comparisonData = resObj;
+
     return next();
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to perform Redis operation.' });
+  } catch (err) {
+    return next({
+      log: 'Error handler caught error in redisController.latency middleware',
+      status: 500,
+      message: 'Failed to perform Redis operation'
+    });
   }
 };
 

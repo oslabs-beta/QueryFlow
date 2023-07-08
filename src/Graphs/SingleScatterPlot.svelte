@@ -8,7 +8,7 @@
 
   export let metric: QueryData;
   export let i: number;
-  
+  console.log(metric)
 
   // declare in global file namespace
   let planningTime: GraphData[], executionTime: GraphData[], totalTime: GraphData[];

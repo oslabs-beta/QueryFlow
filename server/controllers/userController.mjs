@@ -11,8 +11,7 @@ userController.create = async (req, res, next) => {
 
     //Hash user's password
     const hash = await bcrypt.hash(password, workFactor);
-
-    const string = `INSERT INTO users (firstName, lastName, email, password, organization, database) VALUES ('${firstName}', '${lastName}', '${email}', '${hash}', '${organization}', '${database}')`;
+    const string = {text:'INSERT INTO users (firstName, lastName, email, password, organization, database) VALUES ($1, $2, $3, $4, $5, $6)', values: [firstName, lastName, email, hash, organization, database] };
     const response = await ourDBModel(string);
     console.log(response);
     return next();
@@ -30,9 +29,9 @@ userController.login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     
-    const query = `SELECT * FROM users WHERE email = '${email}'`;
+    const string = {text: 'SELECT * FROM users WHERE email = $1', values: [email]};
 
-    const data = await ourDBModel(query);
+    const data = await ourDBModel(string);
   
     if (data.rows[0]) {
       const hash = data.rows[0].password;
@@ -62,7 +61,7 @@ userController.login = async (req, res, next) => {
     return next({
       log: 'Error handler caught error in userController.login middleware',
       status: 400,
-      message: 'Error handler caught error in userController.login middleware'
+      message: 'Failed to log in'
     }
     );
   }

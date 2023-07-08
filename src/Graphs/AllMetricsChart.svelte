@@ -7,7 +7,7 @@
 	import type { ScaleBand, ScaleLinear } from 'd3';
 	import AxisX from './graphComponents/AxisX.svelte';
 	import AxisY from './graphComponents/AxisY.svelte';
-	import TooltipBell from './graphComponents/TooltipBell.svelte';
+	import Tooltip from './graphComponents/Tooltip.svelte';
 	import { navigate } from 'svelte-routing';
   import RedisForm from '../lib/RedisForm.svelte'
 
@@ -47,7 +47,8 @@
 		return workingArr;
 	};
 	// calculating buckets dynamically to limit number of buckets with smaller/larger data sizes
-	const buckets = metrics.length >= 4 ? Math.ceil(Math.log2(metrics.length - 3) * 1.7) : 2;
+	let buckets = metrics.length >= 4 ? Math.ceil(Math.log2(metrics.length - 3) * 1.7) : 2;
+	if (!metrics.length) buckets = 0;
 
 	// formatting data
 	const barChartData: WorkingArr[] = format(metrics, buckets);
@@ -95,6 +96,9 @@
 </button>
 <!-- END OF TEMPORARY BUTTON -->
 
+<!-- render chart if queries exist -->
+<!-- {#if buckets} -->
+
 <div
 	class="chart-container"
 	bind:clientWidth={width}
@@ -102,6 +106,7 @@
 		hoveredData = null;
 	}}
 >
+
 <div class="flex justify-center ">
 	<h1 class="title">Average query times</h1>
 	<!-- 'onclick' below needs to be looked at later -->
@@ -141,9 +146,10 @@
 		</g>
 	</svg>
 	{#if hoveredData}
-		<TooltipBell data={hoveredData} {xScale} {yScale} />
+		<Tooltip data={hoveredData} {xScale} {yScale} />
 	{/if}
 </div>
+<!-- {/if} -->
 <style>
 	.title {
 		display: flex;

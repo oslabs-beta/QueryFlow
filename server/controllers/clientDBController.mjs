@@ -6,7 +6,8 @@ const clientDBController = {};
 clientDBController.queryMetrics = async (req, res, next) => {
 
   const { _id, uri, queryString, queryName, queryCount, queryDelay } = req.body;
- 
+  console.log('i am req.body inside of querymetrics controller', req.body);
+
   //Initiate new model
   const { Pool } = pg;
   const pool = new Pool({
@@ -15,18 +16,21 @@ clientDBController.queryMetrics = async (req, res, next) => {
 
   const clientDBModel = function(text, params, callback) {
     // console.log('executed query', text);
+    console.log('I am pool.query: ', pool.query);
     return pool.query(text, params, callback);
   };
+  console.log('I am clientDBModel: ', clientDBModel);
  
   //Append Explain (options...) to client's query string. 
   const query = 'EXPLAIN (ANALYZE true, COSTS true, SETTINGS true, BUFFERS true, WAL true, SUMMARY true,  FORMAT JSON)' + `${queryString}`;
-  
+  console.log('I am query: ', query);
   try {
     const delayedTasks = await Promise.all(
       Array.from({ length: queryCount }, (_, i) => i).map(async (i) => {
         await new Promise((resolve) => setTimeout(resolve, i * (queryDelay * 1000)));
         const data = await clientDBModel(query);
         const parsedData = data.rows;
+        console.log('i am the parsedData', parsedData);
         const planningTime = parsedData[0]['QUERY PLAN'][0]['Planning Time'];
         const executionTime = parsedData[0]['QUERY PLAN'][0]['Execution Time'];
         const totalTime = Number((planningTime + executionTime).toFixed(2));
@@ -41,7 +45,7 @@ clientDBController.queryMetrics = async (req, res, next) => {
     );
     const metricsObj = {};
     // get avg query time
-    metricsObj.averageTime = Number(delayedTasks.reduce((accum, obj) => accum + obj.totalTime, 0) / queryCount).toFixed(2);
+    metricsObj.averageTime = Number(delayedTasks.reduce((acc, obj) => acc + obj.totalTime, 0) / queryCount).toFixed(2);
 
     metricsObj._id = `${_id}`;
     metricsObj.queryString = queryString;
@@ -49,7 +53,9 @@ clientDBController.queryMetrics = async (req, res, next) => {
     metricsObj.queryMetrics = [...delayedTasks];
     metricsObj.queryDelay = queryDelay;
     metricsObj.queryCount = queryCount;
+
     res.locals.metrics = metricsObj;
+    
     return next();
   } catch (err) {
     return next({
@@ -78,20 +84,25 @@ clientDBController.queryTimeSQL = async (req, res, next) => {
   const string = `${queryString}`;
 
   try {
+    //start time of the query
     const startTime = process.hrtime();
+    //awaited query
     const result = await clientDBModel(string);
+    //end time of the query
     const endTime = process.hrtime(startTime);
     const totalTimeSQL = (endTime[0] * 1000 + endTime[1] / 1000000).toFixed(2);
     const obj = {};
     obj.resultData = result.rows[0];
     obj.totalTimeSQL = totalTimeSQL;
+    
     res.locals.queryResultSQL = obj;
+    
     return next();
   } catch (err) {
     return next({
-      log: 'Error handler caught error in ourDBController.get middleware',
+      log: 'Error handler caught error in clientDBController.queryTimeSQL middleware',
       status: 400,
-      message: 'Error handler caught error in ourDBController.get middleware',
+      message: 'Error handler caught error in clientDBController.queryTimeSQL middleware',
     });
   }
 };
