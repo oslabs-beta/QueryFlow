@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 
 const authenticationMiddleware = async (req,res,next)=>{
   const authHeader = req.headers.authorization;
-  console.log('i am auth header',!authHeader);
+
   if(!authHeader || !authHeader.startsWith('Bearer ')){
     return next({
       log: 'Error handler caught error in auth middleware, No Header',
