@@ -6,7 +6,7 @@
 	export let xScale: ScaleBand<string>;
 	export let margin: Directions;
 	export let barChartData: WorkingArr[];
-
+ 
 	// Dynamically creates ticks along the x-axis
 	let xTicks: number[] = [
 		0,

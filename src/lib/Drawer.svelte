@@ -14,14 +14,7 @@
   // Add Query Post Function - POST Request
 	const postQuery = async (e: any) => {
     e.preventDefault();
-    console.log('i am in the drawer',{
-          queryName,
-          uri,
-          queryString,
-          queryCount,
-          queryDelay,
-          _id: userId,
-        })
+   
     try {
       const response = await fetch('/api/query-metrics', {
         method: 'POST',

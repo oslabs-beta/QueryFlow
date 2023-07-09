@@ -28,8 +28,8 @@ export interface GraphData {
 }
 
 export interface RedisData{
-  totalTime: number;
-  totalTimeQuery:number;
+  totalTimeRedis: number;
+  totalTimeSQL: number;
 }
 
 export type UserType = {

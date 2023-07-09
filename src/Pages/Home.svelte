@@ -50,7 +50,6 @@
       if (response.ok) {
         const data = await response.json();
         // we set the awaited response data into the store
-        console.log('i am data in home',data);
         const getDataObj: QueryData[] = data.map((obj: any) => ({
           averageTime: obj.averagetime,
           createdAt: obj.createdat,
@@ -61,7 +60,6 @@
           queryMetrics: obj.querymetrics,
           _id: obj._id
         }))
-        console.log('i am get getDataObj',getDataObj)
         metricData.set(getDataObj);
         // we also set the filteredStores data too. These stores are for the selection box at the top
         // of the two columns

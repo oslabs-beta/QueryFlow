@@ -26,12 +26,12 @@
 
     // Update the chart data
     x.domain(['Redis', 'PostgreSQL']);
-    y.domain([0, Math.max(+redisInfo.totalTime, + redisInfo.totalTimeQuery)]);
+    y.domain([0, Math.max(+redisInfo.totalTimeRedis, + redisInfo.totalTimeSQL)]);
 
     g.selectAll('.bar')
   .data([
-    { label: 'Redis', value: + redisInfo.totalTime },
-    { label: 'PostgreSQL', value: + redisInfo.totalTimeQuery }
+    { label: 'Redis', value: + redisInfo.totalTimeRedis },
+    { label: 'PostgreSQL', value: + redisInfo.totalTimeSQL }
   ])
   .enter()
   .append('rect')

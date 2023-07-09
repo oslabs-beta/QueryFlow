@@ -6,7 +6,6 @@ const clientDBController = {};
 clientDBController.queryMetrics = async (req, res, next) => {
 
   const { _id, uri, queryString, queryName, queryCount, queryDelay } = req.body;
-  console.log('i am req.body inside of querymetrics controller', req.body);
 
   //Initiate new model
   const { Pool } = pg;
@@ -15,22 +14,20 @@ clientDBController.queryMetrics = async (req, res, next) => {
   });
 
   const clientDBModel = function(text, params, callback) {
-    // console.log('executed query', text);
-    console.log('I am pool.query: ', pool.query);
+
     return pool.query(text, params, callback);
   };
-  console.log('I am clientDBModel: ', clientDBModel);
+
  
   //Append Explain (options...) to client's query string. 
   const query = 'EXPLAIN (ANALYZE true, COSTS true, SETTINGS true, BUFFERS true, WAL true, SUMMARY true,  FORMAT JSON)' + `${queryString}`;
-  console.log('I am query: ', query);
+
   try {
     const delayedTasks = await Promise.all(
       Array.from({ length: queryCount }, (_, i) => i).map(async (i) => {
         await new Promise((resolve) => setTimeout(resolve, i * (queryDelay * 1000)));
         const data = await clientDBModel(query);
         const parsedData = data.rows;
-        console.log('i am the parsedData', parsedData);
         const planningTime = parsedData[0]['QUERY PLAN'][0]['Planning Time'];
         const executionTime = parsedData[0]['QUERY PLAN'][0]['Execution Time'];
         const totalTime = Number((planningTime + executionTime).toFixed(2));

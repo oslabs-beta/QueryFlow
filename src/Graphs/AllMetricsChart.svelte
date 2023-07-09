@@ -16,7 +16,6 @@
 
 	metricData.subscribe((data: QueryData[]) => {
 		metrics = data;
-		console.log('metrics data: ', metrics)
 	});
   
 	// declaring optional params for later defining array workingArr with proper keys in obj elements
@@ -49,7 +48,7 @@
 	// calculating buckets dynamically to limit number of buckets with smaller/larger data sizes
 	let buckets = metrics.length >= 4 ? Math.ceil(Math.log2(metrics.length - 3) * 1.7) : 2;
 	if (!metrics.length) buckets = 0;
-
+ 
 	// formatting data
 	const barChartData: WorkingArr[] = format(metrics, buckets);
 

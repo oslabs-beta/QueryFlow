@@ -12,6 +12,7 @@
 
   // if store changes then redo the redisMetrics variable
   redisData.subscribe((data) => {
+   
   redisMetrics = data;
 });
 
@@ -29,11 +30,10 @@
       const result = await response.json();
       metricRun=true;
       redisData.set({
-        totalTime: Number(result.totalTime),
-        totalTimeQuery: Number(result.totalTimeQuery),
+        totalTimeRedis: Number(result.totalTimeRedis),
+        totalTimeSQL: Number(result.totalTimeSQL),
       })
-      console.log('i am the result in the post request',result)
-      console.log('i am the result in the redis metrics in the form',redisMetrics)
+    
     } 
   };
 </script>
@@ -87,8 +87,8 @@
   {#if metricRun}
     <div class="justify-center text-black my-2">
       <h2 class="font-bold">Performance Metrics</h2>
-      <p>PostgreSQL Total Time: {redisMetrics.totalTimeQuery} milliseconds</p>
-      <p>Redis Total Time: {redisMetrics.totalTime} milliseconds</p>
+      <p>PostgreSQL Total Time: {redisMetrics.totalTimeSQL} milliseconds</p>
+      <p>Redis Total Time: {redisMetrics.totalTimeRedis} milliseconds</p>
     </div>
     <!-- Rerender the redisChart everytime new values are inputed and the redisStore/Array changes -->
     {#key redisMetrics}

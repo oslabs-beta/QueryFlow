@@ -35,7 +35,6 @@ ourDBController.queryGet = async (req, res, next) => {
     const result = await ourDBModel(string);
     const resultData = result.rows;
     const returnDataMetrics = resultData.map(({ users_id, ...rest }) => rest);  
-    console.log("res.locals.getmetrics from ourDBController.queryGet: ", returnDataMetrics);
     res.locals.getMetrics = returnDataMetrics;
     
     return next();
