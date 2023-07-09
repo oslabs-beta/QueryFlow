@@ -16,8 +16,6 @@ metricData.subscribe(data => {
   groupMetrics = data.filter(obj=>obj.queryName===metricName) 
 });
 
-// console.log('i am group metrics name',metricName)
-// console.log('i am group metrics array',groupMetrics)
 
 const averageTime: GraphData[] = groupMetrics.map((obj, i) => ({
     x: i + 1,
@@ -28,7 +26,7 @@ const averageTime: GraphData[] = groupMetrics.map((obj, i) => ({
 
   }));
 
-  // console.log('i am in the group query',averageTime)
+  
 
   const maxYValue = max([...averageTime], d => d.y) || 0;
 

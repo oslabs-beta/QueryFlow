@@ -1,6 +1,6 @@
 <script lang="ts">
   
-  // console.log('data in overview', metric)
+  
   import type { QueryData, QueryMetrics, GraphData } from '../types';
   import { onMount } from 'svelte';
   import { select, scaleLinear, axisLeft, axisBottom } from 'd3';

@@ -17,11 +17,12 @@
 });
 
   const getRedisData:Function = async () => {
-
+    const token = localStorage.getItem('token')
     const response = await fetch('/api/redis-metrics', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
       },
       body: JSON.stringify({ uri: `${uri}`, queryString: `${queryString}`}),
     });

@@ -15,7 +15,7 @@ userController.create = async (req, res, next) => {
     const hash = await bcrypt.hash(password, workFactor);
     const string = {text:'INSERT INTO users (firstName, lastName, email, password, organization, database) VALUES ($1, $2, $3, $4, $5, $6)', values: [firstName, lastName, email, hash, organization, database] };
     const response = await ourDBModel(string);
-    console.log(response);
+    
     return next();
   } catch (err) {
     return next({
@@ -41,11 +41,11 @@ userController.login = async (req, res, next) => {
       
       if (data.rows[0].email && result) {
         const { _id, firstName, lastName } = data.rows[0];
-        const token = jwt.sign({ _id, email }, process.env.JWT_SECRET, {
+        const token = jwt.sign({ _id}, process.env.JWT_SECRET, {
           expiresIn: process.env.JWT_LIFETIME,
         });
-        console.log('i am the token', token)
-        // res.locals.authentication = {_id, firstName, lastName};
+      
+        res.locals.data = { firstName, lastName};
         res.locals.authentication = token;
         return next();
       }

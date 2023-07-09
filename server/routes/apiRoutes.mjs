@@ -13,7 +13,7 @@ apiRouter.post('/signup', userController.create, (req, res) => {
 
 //Logging in
 apiRouter.post('/login', userController.login, (req, res) => {
-  res.status(201).json({token:res.locals.authentication});
+  res.status(201).json({userData: res.locals.data,token:res.locals.authentication});
 });
 
 //Post metrics to our PostgreSQL metrics table

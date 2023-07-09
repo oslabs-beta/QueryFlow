@@ -2,7 +2,7 @@
 <script lang="ts">
 	import { scaleBand, scaleLinear } from 'd3-scale';
 	import { max } from 'd3-array';
-	import { metricData, userInfoStore } from '../store';
+	import { metricData} from '../store';
 	import type { QueryData, WorkingArr, Directions } from '../types';
 	import type { ScaleBand, ScaleLinear } from 'd3';
 	import AxisX from './graphComponents/AxisX.svelte';

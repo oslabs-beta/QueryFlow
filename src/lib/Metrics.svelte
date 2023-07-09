@@ -10,10 +10,9 @@
   
   export let metric: QueryData;
   export let i: number;
-
+  
   // Get all the metrics from the store again
   const allMetrics: QueryData[] = get(metricData);
-  
   // Boolean values for toggling are bar/scatter graph or table/string div
   let barScatterToggle: boolean=false;
   let tableQueryToggle: boolean=false;
@@ -24,11 +23,13 @@
   
   // Delete Metric Function - DELETE Request
   const deleteMetric: Function = async (): Promise<void> => {
+    const token = localStorage.getItem('token')
     try {
       const response: any = await fetch('/api/delete-metrics-id', {
         method:'DELETE',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
         },
         body: JSON.stringify({_id:metric._id}),
       })

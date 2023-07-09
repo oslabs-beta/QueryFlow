@@ -20,8 +20,10 @@
 			});
 			if (response.ok) {
 				const data = await response.json();
-        config.headers['Authorization'] = `Bearer ${data.token}`
-				// userInfoStore.set(data);
+        
+        // config.headers['Authorization'] = `Bearer ${data.token}`
+        localStorage.setItem("token",`${data.token}`)
+				userInfoStore.set(data.userData);
 				navigate('/home', { replace: true });
 			}
       wrongEmailPassword=true;

@@ -5,8 +5,8 @@ const clientDBController = {};
 //Takes in query & URI from client and gathers query metrics using client's database
 clientDBController.queryMetrics = async (req, res, next) => {
 
-  const { _id, uri, queryString, queryName, queryCount, queryDelay } = req.body;
-
+  const { uri, queryString, queryName, queryCount, queryDelay } = req.body;
+  const {_id} = req.user
   //Initiate new model
   const { Pool } = pg;
   const pool = new Pool({
@@ -74,7 +74,7 @@ clientDBController.queryTimeSQL = async (req, res, next) => {
   });
 
   const clientDBModel = function(text, params, callback) {
-    // console.log('executed query', text);
+    
     return pool.query(text, params, callback);
   };
  

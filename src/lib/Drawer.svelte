@@ -14,20 +14,20 @@
   // Add Query Post Function - POST Request
 	const postQuery = async (e: any) => {
     e.preventDefault();
-   
+    const token = localStorage.getItem('token')
     try {
       const response = await fetch('/api/query-metrics', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
         },
         body: JSON.stringify({
           queryName,
           uri,
           queryString,
           queryCount,
-          queryDelay,
-          _id: userId,
+          queryDelay
         }),
       });
 

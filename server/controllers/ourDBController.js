@@ -29,7 +29,8 @@ ourDBController.queryPush = async (req, res, next) => {
 
 // get query data for user
 ourDBController.queryGet = async (req, res, next) => {
-  const { _id } = req.body;
+  const { _id } = req.user;
+  
   const string = {text: 'SELECT * FROM metrics WHERE users_id = $1', values:[_id] };
   try {
     const result = await ourDBModel(string);
@@ -49,10 +50,13 @@ ourDBController.queryGet = async (req, res, next) => {
 
 ourDBController.deleteQueryById = async (req, res, next) => {
   const { _id } = req.body;
-  const string = {text: 'DELETE FROM metrics WHERE _id = $1', values:[_id] };
+ 
+  const userId = req.user._id;
+  
+  const string = {text: 'DELETE FROM metrics WHERE _id = $1 AND users_id = $2', values:[_id,userId] };
   try {
     const result = await ourDBModel(string);
-    console.log(result);  
+     
     return next();
   } catch (err) {
     return next({

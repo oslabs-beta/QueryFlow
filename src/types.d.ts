@@ -33,13 +33,8 @@ export interface RedisData{
 }
 
 export type UserType = {
-  _id: string,
   firstName: string,
   lastName: string,
-  email: string,
-  password: string,
-  organization: string,
-  database: string,
 }
 
 export interface WorkingArr {
