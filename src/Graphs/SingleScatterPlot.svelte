@@ -49,7 +49,7 @@
     const height = 300 - margin.top - margin.bottom; // Increase the height here
 
     const xScale = scaleLinear()
-      .domain([0, getHighValue(totalTime, 'x')])
+      .domain([0, metric.queryMetrics.length + 1])
       .range([0, width]);
 
     const yScale = scaleLinear()
@@ -59,7 +59,7 @@
     const xAxis = svg
       .append('g')
       .attr('transform', `translate(${margin.left}, ${height + margin.top})`)
-      .call(axisBottom(xScale));
+      .call(axisBottom(xScale).ticks(metric.queryMetrics.length+1));
 
     const yAxis = svg
       .append('g')

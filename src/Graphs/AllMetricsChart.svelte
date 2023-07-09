@@ -10,7 +10,7 @@
 	import Tooltip from './graphComponents/Tooltip.svelte';
 	import { navigate } from 'svelte-routing';
   import RedisForm from '../lib/RedisForm.svelte'
-
+  import { Button, Modal, Label, Input, Checkbox } from 'flowbite-svelte'
   //reactive metrics array 
 	$: metrics = [];
 
@@ -18,8 +18,9 @@
 		metrics = data;
 	});
   
-	// declaring optional params for later defining array workingArr with proper keys in obj elements
+  let formModal:boolean = false;
 
+	// declaring optional params for later defining array workingArr with proper keys in obj elements
 	// data conversion for bar chart
 	const format: Function = (data: QueryData[], buckets: number): WorkingArr[] => {
 		// create return workingArr with n buckets
@@ -109,15 +110,12 @@
 <div class="flex justify-center ">
 	<h1 class="title">Average query times</h1>
 	<!-- 'onclick' below needs to be looked at later -->
-  <button class="btn ml-4" onclick="my_modal_2.showModal()">Get Redis Metrics</button>
-<dialog id="my_modal_2" class="modal text-primary">
-  <form method="dialog" class="modal-box">
-    <RedisForm />
-  </form>
-  <form method="dialog" class="modal-backdrop">
-    <button>Close</button>
-  </form>
-</dialog>
+  <button class="btn ml-4" on:click={() => formModal = true}>Get Redis Metrics</button>
+  <Modal bind:open={formModal} size="xs" autoclose={false} class="w-full">
+    <form class="flex flex-col space-y-6" action="#">
+      <RedisForm/>
+    </form>
+  </Modal>
 </div>
 	<svg {width} {height}>
 		<AxisX {barChartData} {height} {xScale} {margin} />
