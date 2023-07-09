@@ -6,7 +6,7 @@ import { dirname, resolve } from 'path';
 import compression from 'compression';
 import bodyParser from 'body-parser';
 import apiRouter from './routes/apiRoutes.mjs';
-
+import 'dotenv/config';
 //We utilize the fileURLToPath function from the url module to convert the import.meta.url to the corresponding file path??
 const __filename = fileURLToPath(import.meta.url);
 //we extract the directory name using the dirname function from the path module

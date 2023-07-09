@@ -1,5 +1,7 @@
 import ourDBModel from '../models/ourDBModel.mjs';
 import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+
 
 const userController = {};
 
@@ -39,7 +41,12 @@ userController.login = async (req, res, next) => {
       
       if (data.rows[0].email && result) {
         const { _id, firstName, lastName } = data.rows[0];
-        res.locals.authentication = {_id, firstName, lastName};
+        const token = jwt.sign({ _id, email }, process.env.JWT_SECRET, {
+          expiresIn: process.env.JWT_LIFETIME,
+        });
+        console.log('i am the token', token)
+        // res.locals.authentication = {_id, firstName, lastName};
+        res.locals.authentication = token;
         return next();
       }
       else {

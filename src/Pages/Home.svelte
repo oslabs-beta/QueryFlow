@@ -39,11 +39,13 @@
 
   // this is out fetch query metrics data from the user's metric table by their id/cookie
   const fetchData = async () => {
+    const token = localStorage.getItem('token')
     try {
       const response = await fetch('/api/get-metrics', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
         },
         body: JSON.stringify({ _id: userInfo._id }),
       });
