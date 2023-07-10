@@ -1,30 +1,32 @@
-<script>
+<script lang="ts">
   import { onMount } from 'svelte';
-  import { select, scaleBand, scaleLinear, axisBottom, axisLeft } from 'd3';
+  import { select, scaleBand, scaleLinear, axisBottom, axisLeft, type ScaleBand, type ScaleLinear } from 'd3';
   import { max } from 'd3-array';
   import { metricData } from '../store';
-  export let metricName;
-  export let i;
+  import type { QueryData, QueryMetrics, GraphData } from '../types';
+  
+  
+  
+  export let metricName: string;
+  export let i: number;
 
-  export let groupMetrics = [];
-
+  export let groupMetrics: QueryData[] = [];
+  
 metricData.subscribe(data => {
-  groupMetrics = data.filter(obj=>obj.queryname===metricName) 
+  groupMetrics = data.filter(obj=>obj.queryName===metricName) 
 });
 
-// console.log('i am group metrics name',metricName)
-// console.log('i am group metrics array',groupMetrics)
 
-const averageTime = groupMetrics.map((obj, i) => ({
+const averageTime: GraphData[] = groupMetrics.map((obj, i) => ({
     x: i + 1,
-    y: obj.averagetime,
+    y: obj.averageTime,
     type: 'A',
     name: metricName,
-    date: obj.created_at
+    date: obj.createdAt
 
   }));
 
-  // console.log('i am in the group query',averageTime)
+  
 
   const maxYValue = max([...averageTime], d => d.y) || 0;
 
@@ -36,12 +38,12 @@ const averageTime = groupMetrics.map((obj, i) => ({
     const width = 300 - margin.left - margin.right;
     const height = 300 - margin.top - margin.bottom;
 
-    const xScale = scaleBand()
-      .domain([...Array(averageTime.length + 1).keys()].slice(1))
+    const xScale: ScaleBand<string> = scaleBand()
+      .domain(`${[...Array(averageTime.length + 1).keys()].slice(1)}`)
       .range([0, width])
       .padding(0.1);
 
-    const yScale = scaleLinear()
+    const yScale: ScaleLinear<number, number> = scaleLinear()
       .domain([0, maxYValue])
       .range([height, 0]);
 
@@ -89,7 +91,7 @@ const averageTime = groupMetrics.map((obj, i) => ({
       .enter()
       .append('rect')
       .attr('class', 'bar A')
-      .attr('x', d => xScale(d.x) + xScale.bandwidth() / 3)
+      .attr('x', d => xScale(`${d.x}`) + xScale.bandwidth() / 3)
       .attr('y', d => yScale(d.y))
       .attr('width', xScale.bandwidth() / 3)
       .attr('height', d => height - yScale(d.y))

@@ -1,26 +1,28 @@
-<script>
+<script lang="ts">
   import { onMount } from 'svelte';
   import { select, scaleBand, scaleLinear, axisBottom, axisLeft } from 'd3';
+  import type { QueryData,GraphData } from '../types';
   import { max } from 'd3-array';
-  export let metric;
-  export let i;
+
+  export let metric: QueryData;
+  export let i: number;
 
   // Extract the necessary data from the metric object
-  const planningTime = metric.querymetrics.map((obj, i) => ({
+  const planningTime:GraphData[] = metric.queryMetrics.map((obj, i) => ({
     x: i + 1,
     y: obj.planningTime,
     type: 'A',
     name: 'Planning Time'
   }));
 
-  const executionTime = metric.querymetrics.map((obj, i) => ({
+  const executionTime:GraphData[] = metric.queryMetrics.map((obj, i) => ({
     x: i + 1,
     y: obj.executionTime,
     type: 'B',
     name: 'Execution Time'
   }));
 
-  const totalTime = metric.querymetrics.map((obj, i) => ({
+  const totalTime:GraphData[] = metric.queryMetrics.map((obj, i) => ({
     x: i + 1,
     y: obj.planningTime + obj.executionTime,
     type: 'C',
@@ -39,7 +41,8 @@
     const height = 300 - margin.top - margin.bottom;
 
     const xScale = scaleBand()
-      .domain([...Array(totalTime.length + 1).keys()].slice(1))
+    //scaleBand requires an array of strings for its domain. For Typing
+      .domain([...Array(totalTime.length + 1).keys()].map(String).slice(1))
       .range([0, width])
       .padding(0.1);
 
@@ -72,7 +75,8 @@
       .attr('transform', `translate(${margin.left - 30}, ${margin.top + height / 2}) rotate(-90)`)
       .style('text-anchor', 'middle')
       .text('Milliseconds');
-
+    
+    // Labels for graph bars
     const tooltip = select('body')
       .append('div')
       .attr('class', 'tooltip')
@@ -83,6 +87,7 @@
       .style('padding', '4px 8px')
       .style('font-size', '12px');
 
+    //Planning Time Bar  
     svg
       .append('g')
       .attr('transform', `translate(${margin.left}, ${margin.top})`)
@@ -91,7 +96,7 @@
       .enter()
       .append('rect')
       .attr('class', 'bar A')
-      .attr('x', d => xScale(d.x))
+      .attr('x', d => xScale(d.x.toString()))
       .attr('y', d => yScale(d.y))
       .attr('width', xScale.bandwidth() / 3)
       .attr('height', d => height - yScale(d.y))
@@ -104,7 +109,8 @@
       .on('mouseout', () => {
         tooltip.style('visibility', 'hidden');
       });
-
+    
+    //Execution Time Bar
     svg
       .append('g')
       .attr('transform', `translate(${margin.left}, ${margin.top})`)
@@ -113,7 +119,7 @@
       .enter()
       .append('rect')
       .attr('class', 'bar B')
-      .attr('x', d => xScale(d.x) + xScale.bandwidth() / 3)
+      .attr('x', d => xScale(d.x.toString()) + xScale.bandwidth() / 3)
       .attr('y', d => yScale(d.y))
       .attr('width', xScale.bandwidth() / 3)
       .attr('height', d => height - yScale(d.y))
@@ -126,7 +132,8 @@
       .on('mouseout', () => {
         tooltip.style('visibility', 'hidden');
       });
-
+    
+    //Total Time Bar
     svg
       .append('g')
       .attr('transform', `translate(${margin.left}, ${margin.top})`)
@@ -135,7 +142,7 @@
       .enter()
       .append('rect')
       .attr('class', 'bar C')
-      .attr('x', d => xScale(d.x) + (2 * xScale.bandwidth()) / 3)
+      .attr('x', d => xScale(d.x.toString()) + (2 * xScale.bandwidth()) / 3)
       .attr('y', d => yScale(d.y))
       .attr('width', xScale.bandwidth() / 3)
       .attr('height', d => height - yScale(d.y))
@@ -150,6 +157,7 @@
       });
   });
 </script>
+
 <div class="h-80">
   <svg id={`barChart${i}`} class="w-74 h-full"></svg>
 </div>

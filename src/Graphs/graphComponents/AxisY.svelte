@@ -1,24 +1,26 @@
-<script>
-	export let height;
-	export let width;
-	export let yScale;
-	export let margin;
-	export let bellCurveData;
+<script lang="ts">
+	import type { ScaleLinear } from 'd3';
+	import type { Directions, WorkingArr } from '../../types';
 	import { max } from 'd3-array';
 
+	export let width: number;
+	export let yScale: ScaleLinear<number, number>;
+	export let margin: Directions;
+	export let barChartData: WorkingArr[];
+
 	// function to
-	const calculateXTicks = (ticksAmount) => {
+	const calculateXTicks: Function = (ticksAmount: number): number[] => {
 		// find max value
-		const maxValue = max(bellCurveData, (d) => d.NumberOfQueries);
+		const maxValue: number = max(barChartData, (d) => d.numberOfQueries);
 		// build array
-		const returnArr = [];
+		const returnArr: number[] = [];
 		for (let i = 0; i < ticksAmount; i++) {
 			returnArr.push(Math.round((i * Number(maxValue)) / (ticksAmount - 1)));
 		}
 		return returnArr;
 	};
 
-	let yTicks = calculateXTicks(4);
+	let yTicks: number[] = calculateXTicks(4);
 </script>
 
 <g transform="translate({margin.left} {margin.top})">

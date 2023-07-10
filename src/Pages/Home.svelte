@@ -1,45 +1,72 @@
 <script lang="ts">
-
   import Drawer from '../lib/Drawer.svelte';
   import Metrics from '../lib/Metrics.svelte';
   import { get } from 'svelte/store';
-  import { userInfoStore, metricData,filterMetricData,filterMetricDataTwo } from '../store';
+  import { userInfoStore,metricData,filterMetricData,filterMetricDataTwo } from '../store';
+  import type { QueryData,UserType } from '../types';
   import { onMount } from 'svelte';
   import { derived } from 'svelte/store'
   import { navigate } from 'svelte-routing';
 
-  let userInfo = get(userInfoStore);
-  console.log('user info in home', userInfo);
+  // get user's info from the userInfo Store
+  let userInfo: UserType = get(userInfoStore);
 
-  let metrics = [];
-  const uniqueNames = derived(metricData, $metricData => {
-  return new Set($metricData.map(obj => obj.queryname));
-});
+  // store all past metrics in this array.
+  let metrics: QueryData[] = [];
+  
+  // The `derived` function from Svelte is used to create a new store 
+  // whose value is derived from the `metricData` store.
+  const uniqueNames = derived(
+  // `metricData` is the store from which we are deriving a new store.
+  metricData,
+  // This function is called whenever the value of `metricData` changes.
+  // `$metricData` is the current value of `metricData`.
+  $metricData => {
+    // We use `map` to transform the `metricData` array into a new array 
+    // where each element is the value of `queryName` in the original object.
+    const queryNames = $metricData.map(obj => obj.queryName);
+    // We then use the `Set` constructor to create a new set from the `queryNames` array.
+    // The `Set` constructor automatically removes any duplicates, so the resulting set 
+    // contains only unique `queryName` values.
+    return new Set(queryNames);
+  }
+);
 
-  metricData.subscribe(data => {
+  // Any time the metricData store changes it trigger this function and updates are metrics array uptop
+  metricData.subscribe((data: QueryData[]) => {
     metrics = data;
-    // if(uniqueNames===undefined){
-    //   uniqueNames = new Set(data.map(obj => obj.queryname));
-    // } else{
-    //   uniqueNames = new Set([...uniqueNames,...data.map(obj => obj.queryname)])
-    // }   
   });
 
+  const token = localStorage.getItem('token')
+  // this is out fetch query metrics data from the user's metric table by their id/cookie
   const fetchData = async () => {
+    
     try {
-      const response = await fetch('/api/getmetrics', {
+      const response = await fetch('/api/get-metrics', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ _id: userInfo._id }),
+          Authorization: `Bearer ${token}`
+        }
       });
       if (response.ok) {
         const data = await response.json();
-        metricData.set(data);
-        filterMetricData.set(data);
-      filterMetricDataTwo.set(data);
-        // console.log('data in metrics AFTER post request: ', data);
+        // we set the awaited response data into the store
+        const getDataObj: QueryData[] = data.map((obj: any) => ({
+          averageTime: obj.averagetime,
+          createdAt: obj.createdat,
+          queryCount: obj.querycount,
+          queryDelay: obj.querydelay,
+          queryName: obj.queryname,
+          queryString: obj.querystring,
+          queryMetrics: obj.querymetrics,
+          _id: obj._id
+        }))
+        metricData.set(getDataObj);
+        // we also set the filteredStores data too. These stores are for the selection box at the top
+        // of the two columns
+        filterMetricData.set(getDataObj);
+        filterMetricDataTwo.set(getDataObj);
       }
     } catch (error) {
       console.error(error);
@@ -48,32 +75,37 @@
 
 
   onMount(async () => {
-    if (userInfo._id !== '') {
+    // if userId is not an empty string then fetch data to get the users query metrics 
+    if (token) {
       await fetchData();    
     }
   });
 
+  // selection dropdown variables for each column
   let groupQueries: string = 'all';
-  let groupQueriesTwo: string = 'all'
-  let filterMetricsArr = []
-  let filterMetricsArrTwo = []
+  let groupQueriesTwo: string = 'all';
+
+  // arrays for the two columns metrics which are filtered by group queries values
+  let filterMetricsArr: QueryData[] = [];
+  let filterMetricsArrTwo: QueryData[] = [];
   
+  // if the filterMetrics function is run on selection of Metric
+  // then the store will get update and the subscribe method will inturn
+  // update the filterMetric arr
   filterMetricData.subscribe(data => {
-    filterMetricsArr=data
+    filterMetricsArr = data;
   })
  
-  filterMetricDataTwo.subscribe(data=>{
-    filterMetricsArrTwo=data
+  filterMetricDataTwo.subscribe(data => {
+    filterMetricsArrTwo = data;
   })
 
-
-
-  const filterMetrics = (store,group) => {
+  // FilterMetrics function which will trigger on change of the top selection box
+  const filterMetrics = (store: any, group: string):void => {
     if (group === 'all') {
       store.set(metrics);
     } else {
-      const filteredMetrics = metrics.filter(metric => metric.queryname === group)
-      store.set(filteredMetrics);
+      store.set(metrics.filter(metric => metric.queryName === group));
     }
   };
   
@@ -84,11 +116,13 @@
 <button class="btn btn-primary m-1 border-primary hover:bg-secondary hover:text-white hover:border-secondary" on:click={() => {navigate('/all-metrics')}}>Global Metrics</button>
 <!-- END OF TEMPORARY BUTTON -->
   <div class="flex-shrink-0">
-    <Drawer userId={userInfo._id} />
+    <!-- Add Query Sliding Drawer -->
+    <Drawer />
   </div>
 
   <div class="mt-8 w-screen grid sm:grid-cols-1 md:grid-cols-2 justify-center content-center">
     <div class="h-screen scrollbar-hide  overflow-y-auto column-width">
+      <!-- Selection dropdown input -->
       <select
         bind:value={groupQueries}
         name="database"
@@ -97,6 +131,7 @@
         on:change={() => { filterMetrics(filterMetricData, groupQueries) }}
       >
         <option value="all" selected hidden>Please choose...</option>
+        <!-- Make the uniqueName Set into array to iterate over and get your dropdown box values -->
         {#each Array.from($uniqueNames) as value}
           <option>{value}</option>
         {/each}
@@ -105,14 +140,16 @@
       <div class="space-y-4  flex flex-col items-center
       mx-6">
         {#each filterMetricsArr as metric, i}
+        <!-- Iterate through the filter metrics array and pass down one metric object and an indexed to the component -->
         {#key metric}
+        <!-- Key re-renders the component inside if the passed in value changes, metric. -->
         <Metrics {i} {metric} />
         {/key}
-  
         {/each}
       </div>
     </div>
     <div class="h-screen scrollbar-hide overflow-y-auto">
+      <!-- Second column same as above just different variable names -->
       <select
         bind:value={groupQueriesTwo}
         name="database"
@@ -125,11 +162,10 @@
         <option>{value}</option>
         {/each}
       </select>
-
       <div class="space-y-4 flex flex-col items-center justify-center  mx-6">
         {#each filterMetricsArrTwo as metric, i}
-     
         {#key metric}
+        <!-- add 1000 to i to give id individuality and so it doesn't get confused with the first column Metric components -->
         <Metrics i={i + 1000} {metric} />
         {/key}
         {/each}
@@ -137,15 +173,4 @@
     </div>
   </div>
 </div>
-
-
-
-
-<style>
-  
-</style>
-
-
-
-
 

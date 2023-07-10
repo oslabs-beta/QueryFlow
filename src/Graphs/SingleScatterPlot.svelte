@@ -1,33 +1,37 @@
-<script>
-  export let metric;
-  // console.log('data in overview', metric)
+<script lang="ts">
+  
+  
+  import type { QueryData, QueryMetrics, GraphData } from '../types';
   import { onMount } from 'svelte';
   import { select, scaleLinear, axisLeft, axisBottom } from 'd3';
   import { max } from 'd3-array';
-  export let i;
-  
+
+  export let metric: QueryData;
+  export let i: number;
 
 
-  let planningTime, executionTime, totalTime;
+  // declare in global file namespace
+  let planningTime: GraphData[], executionTime: GraphData[], totalTime: GraphData[];
+
   $: {
 
   // formats query(x) planning time(y) data
-  planningTime = metric.querymetrics.map((obj, i) => {
-    return { x: i + 1, y: obj.planningTime, type: 'A',name: 'Planning Time' };
+  planningTime = metric.queryMetrics.map((obj: QueryMetrics, i: number) => {
+    return { x: i + 1, y: obj.planningTime, type: 'A', name: 'Planning Time' };
   });
 
-  executionTime = metric.querymetrics.map((obj, i) => {
-    return { x: i + 1, y: obj.executionTime, type: 'B',name: 'Execution Time'};
+  executionTime = metric.queryMetrics.map((obj: QueryMetrics, i: number) => {
+    return { x: i + 1, y: obj.executionTime, type: 'B', name: 'Execution Time'};
   });
 
-  totalTime = metric.querymetrics.map((obj, i) => {
+  totalTime = metric.queryMetrics.map((obj: QueryMetrics, i: number) => {
     return { x: i + 1, y: obj.planningTime + obj.executionTime, type: 'C',name: 'Total Time' };
   });
   }
 
 
   // function renderChart() {
-  const getHighValue = (array, property) => {
+  const getHighValue = (array: {x: number, y: number}[], property: 'x' | 'y') => {
     if (!array.length) return 0;
     let highVal = -Infinity;
     array.forEach((el) => {
@@ -45,7 +49,7 @@
     const height = 300 - margin.top - margin.bottom; // Increase the height here
 
     const xScale = scaleLinear()
-      .domain([0, getHighValue(totalTime, 'x')])
+      .domain([0, metric.queryMetrics.length + 1])
       .range([0, width]);
 
     const yScale = scaleLinear()
@@ -55,7 +59,7 @@
     const xAxis = svg
       .append('g')
       .attr('transform', `translate(${margin.left}, ${height + margin.top})`)
-      .call(axisBottom(xScale));
+      .call(axisBottom(xScale).ticks(metric.queryMetrics.length+1));
 
     const yAxis = svg
       .append('g')
@@ -144,7 +148,7 @@
 
 
 
-<!-- ========== GEORGE'S TEST STUFF PLEASE DO NOT DELETE ========== -->
+<!-- ========== REFACTORING REFERENCE FOR SVG'S PLEASE DO NOT DELETE ========== -->
 <!-- INSIDE OF SCRIPT -->
 <!-- let width = 400 - margin.left - margin.right;
 let height = 400 - margin.top - margin.bottom;
@@ -168,7 +172,7 @@ const yScale = scaleLinear()
           />
   {/each}
 </svg> -->
-<!-- ========== END OF GEORGE'S TEST STUFF ========== -->
+<!-- ========== END OF REFACTORING REFERENCE TEST STUFF ========== -->
   
 
 

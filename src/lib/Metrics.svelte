@@ -3,43 +3,61 @@
   import SingleScatterPlot from "../Graphs/SingleScatterPlot.svelte";
   import GroupQuery from "../Graphs/GroupQuery.svelte";
   import Table from "../Graphs/Table.svelte"
-  import {  metricData,filterMetricData,filterMetricDataTwo} from '../store';
+  import { metricData, filterMetricData, filterMetricDataTwo } from '../store';
+  import type { QueryData } from '../types';
   import { get } from 'svelte/store';
   import { onMount } from 'svelte';
-export let metric;
-export let i;
-
-const allMetrics = get(metricData)
-let barScatterToggle:boolean=false;
-let tableQueryToggle:boolean=false;
-const toggleGraphs = ()=>barScatterToggle = !barScatterToggle;
   
-const deleteMetric = async () =>{
-  try {
-    const response =  await fetch('/api/deletemetricsid',{
-      method:'DELETE',
-      headers: {
-					'Content-Type': 'application/json',
-				},
-				body: JSON.stringify({_id:metric._id}),
-    })
-    if(response.ok){
-      alert('metric deleted');
-      const newFilteredMetrics = allMetrics.filter(obj=>obj._id !==metric._id)
-      metricData.set(newFilteredMetrics)
-      filterMetricData.update(values => values.filter(obj => obj._id !== metric._id));
-      filterMetricDataTwo.update(values => values.filter(obj => obj._id !== metric._id));
+  export let metric: QueryData;
+  export let i: number;
+  
+  // Get all the metrics from the store again
+  const allMetrics: QueryData[] = get(metricData);
+  // Boolean values for toggling are bar/scatter graph or table/string div
+  let barScatterToggle: boolean=false;
+  let tableQueryToggle: boolean=false;
+
+  const toggleGraphs: Function = (): void => {
+    barScatterToggle = !barScatterToggle;
+  }
+  
+  // Delete Metric Function - DELETE Request
+  const deleteMetric: Function = async (): Promise<void> => {
+    const token = localStorage.getItem('token')
+    try {
+      const response: any = await fetch('/api/delete-metrics-id', {
+        method:'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
+        },
+        body: JSON.stringify({_id:metric._id}),
+      })
+      if(response.ok){
+        alert('metric deleted');
+        // remove the metric by id from the local metrics array
+        const newFilteredMetrics: QueryData[] = allMetrics.filter(obj => obj._id !== metric._id);
+      
+        // set the main metric data store to the filtered metrics array but without the deleted metric
+        metricData.set(newFilteredMetrics);
+      
+        // also change the two columns filter metric store value
+        // updates the filterMetric stores
+        filterMetricData.update(values => values.filter(obj => obj._id !== metric._id));
+        filterMetricDataTwo.update(values => values.filter(obj => obj._id !== metric._id));
+      }
+    } catch (error) {
+      console.log(error)
     }
-  } catch (error) {
-}
-}
+  }
 
 onMount(() => {
-    const copyButton = document.getElementById(`copyButton${i}`);
+  // functionality for the copy button on the top right of the query string code box
+    const copyButton: HTMLElement = document.getElementById(`copyButton${i}`);
     copyButton.addEventListener('click', function() {
       // Create a temporary textarea to select the text and copy
-      const tempTextArea = document.createElement('textarea');
-      tempTextArea.value = metric.querystring;
+      const tempTextArea: HTMLTextAreaElement = document.createElement('textarea');
+      tempTextArea.value = metric.queryString;
       document.body.appendChild(tempTextArea);
       tempTextArea.select();
       document.execCommand('copy');
@@ -52,13 +70,16 @@ onMount(() => {
 <section class="card border w-full metric-box p-4 justify-center grid grid-cols-1">
     <div class="h-10 flex p-4 justify-between items-center">
       <div class="flex items-end h-20">
+        <!-- toggle switch for table/query string box -->
         <input type="checkbox" class="toggle" bind:checked={tableQueryToggle} />
       </div>
-      <h4 class="text-lg">{metric.queryname}</h4>
+      <!-- title of card -->
+      <h4 class="text-lg">{metric.queryName}</h4>
+       <!-- delete button - trash can -->
       <button
 						type="button"
 						class="text-primary btn btn-sm border-none bg-transparent hover:bg-secondary hover:text-white focus:outline-none font-medium rounded-full text-sm p-1 text-center inline-flex items-center dark:border-primary dark:text-primary dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-secondary"
-            on:click={deleteMetric}
+            on:click={() => deleteMetric()}
             
 					>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
@@ -67,11 +88,12 @@ onMount(() => {
       </button>
     </div>
       <div class="flex justify-center w-full h-72">
+        <!-- if else statement if boolean true then run Table component else the query string code box at the top of the metric card -->
         {#if tableQueryToggle}
-        <Table {i} metric={metric}/>
+        <Table metric={metric}/>
         {:else}
         <div class="mockup-code m-4 pl-4 pb-4 relative scrollbar-hide" style="max-height:300px; overflow-y: auto;">
-          <pre><code style="font-size:9px;">{metric.querystring}</code></pre>
+          <pre><code style="font-size:9px;">{metric.queryString}</code></pre>
           <!-- copy button -->
           <button id="copyButton{i}" class="btn btn-square btn-sm absolute right-0 top-0 mt-2 mr-2 text-lg bg-transparent border-none hover:bg-transparent">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="w-5 h-5">
@@ -84,15 +106,17 @@ onMount(() => {
       
     </div>
       <div class="flex justify-center w-full h-72">
-        <GroupQuery {i} metricName={metric.queryname} />
+        <!-- bottom left metric box group graph for a comparison of all metrics of that type -->
+        <GroupQuery {i} metricName={metric.queryName} />
         <div>
-          <button class="btn btn-square btn-xs btn-square btn-xs btn-outline absolute top-50 right-40 " on:click={toggleGraphs}>
+          <!-- button toggle between bar graph or scatter -->
+          <button class="btn btn-square btn-xs btn-square btn-xs btn-outline absolute top-50 right-40 " on:click={() => toggleGraphs()}>
 
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
               <path d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75zM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 01-1.875-1.875V8.625zM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 013 19.875v-6.75z" />
             </svg>
           </button>
-            
+            <!-- if barScatterToggle is true, display SingleBarGraph Component, else, display SingleScatterPlot -->
           {#if barScatterToggle}
           <SingleBarGraph {i} metric={metric}/>
           {:else}
@@ -100,15 +124,15 @@ onMount(() => {
           {/if}
         </div>
       </div>
-      
-
 </section>
 
 <style>
+  /* metric card styling */
   .card {
     background-color: rgb(255, 255, 248);
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 12px;
   }
+  /* card height */
   .metric-box{
     height: 700px;
   }

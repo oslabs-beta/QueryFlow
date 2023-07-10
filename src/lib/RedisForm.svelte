@@ -2,41 +2,39 @@
   import { onMount } from 'svelte';
   import RedisChart from '../Graphs/RedisChart.svelte'
   import { redisData } from '../store';
-  let uri = '';
-  let querystring = '';
+  import type { RedisData } from '../types';
+
+  let uri:string = '';
+  let queryString:string = '';
   let metricRun:boolean = false
 
-  export let redisMetrics = [];
+  let redisMetrics:RedisData;
 
+  // if store changes then redo the redisMetrics variable
   redisData.subscribe((data) => {
+   
   redisMetrics = data;
 });
 
-
-  const testRedis = async () => {
-    const startTime = performance.now();
-
-    const response = await fetch('http://localhost:5173/api/test2', {
+  const getRedisData:Function = async () => {
+    const token = localStorage.getItem('token')
+    const response = await fetch('/api/redis-metrics', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
       },
-      body: JSON.stringify({ uri: `${uri}`, querystring: `${querystring}`}),
+      body: JSON.stringify({ uri: `${uri}`, queryString: `${queryString}`}),
     });
+
     if (response.ok) {
       const result = await response.json();
       metricRun=true;
       redisData.set({
-        // @ts-ignore
-        totalTime: Number(result.totalTime),
-        totalTimeQuery: Number(result.totalTimeQuery),
+        totalTimeRedis: Number(result.totalTimeRedis),
+        totalTimeSQL: Number(result.totalTimeSQL),
       })
-      console.log('i am the result in the post request',result)
-      console.log('i am the result in the redis metrics in the form',redisMetrics)
-      // metrics = {
-      //   totalTime: Number(result.totalTime),
-      //   totalTimeQuery: Number(result.totalTimeQuery),
-      // };
+    
     } 
   };
 </script>
@@ -48,7 +46,7 @@
 <main>
   <h1 class="text-lg text-black font-bold">Redis -v- PostgreSQL Performance</h1>
   <div>
-  <form on:submit|preventDefault={testRedis}>
+  <form on:submit|preventDefault={()=>getRedisData()}>
     
       <div class="w-full my-2">
         <label
@@ -66,8 +64,6 @@
           bind:value={uri}
         />
       </div>
-      
-    
 <div>
   <div class="w-full my-2">
     <label
@@ -79,7 +75,7 @@
     <textarea
       name="queryString"
       id="queryString"
-      bind:value={querystring}
+      bind:value={queryString}
       placeholder="e.g. SELECT * FROM your_table"
       class="textarea textarea-bordered textarea-lg w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
     />
@@ -92,9 +88,10 @@
   {#if metricRun}
     <div class="justify-center text-black my-2">
       <h2 class="font-bold">Performance Metrics</h2>
-      <p>PostgreSQL Total Time: {redisMetrics.totalTimeQuery} milliseconds</p>
-      <p>Redis Total Time: {redisMetrics.totalTime} milliseconds</p>
+      <p>PostgreSQL Total Time: {redisMetrics.totalTimeSQL} milliseconds</p>
+      <p>Redis Total Time: {redisMetrics.totalTimeRedis} milliseconds</p>
     </div>
+    <!-- Rerender the redisChart everytime new values are inputed and the redisStore/Array changes -->
     {#key redisMetrics}
     <RedisChart/>
     {/key}

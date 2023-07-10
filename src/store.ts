@@ -1,33 +1,21 @@
 import { writable } from 'svelte/store';
-
-type userType = {
-  _id: string,
-  first_name: string,
-  last_name: string,
-  email: string,
-  password: string,
-  organization: string,
-  database: string,
-}
-
-export const userInfoStore = writable<userType>({
-  _id: '552ab7e2-45bd-42d0-a457-f873bb9d052d',
-  first_name: '',
-  last_name: '',
-  email: '',
-  password: '',
-  organization: '',
-  database: '',
+import type { QueryData, UserType,RedisData } from './types';
+import type { Writable } from 'svelte/store';
+//37e2e7e2-1bcb-4b51-a811-080fb1648523
+// initially empty, updatable through source code
+export const userInfoStore = writable<UserType>({
+  firstName: '',
+  lastName: '',
 });
 
-export const metricData = writable([]);
+//Store for main metrics array from metric get request in the home.svelte
+export const metricData: Writable<QueryData[]> = writable<QueryData[]>([]);
 
-export const filterMetricData = writable([
+//Store for first column on the homepage. Basically filtered metricsData based on the selection dropdown
+export const filterMetricData: Writable<QueryData[]> = writable<QueryData[]>([]);
 
-]);
+//Store for second column on the homepage. Basically filtered metricsData based on the selection dropdown
+export const filterMetricDataTwo: Writable<QueryData[]> = writable<QueryData[]>([]);
 
-export const filterMetricDataTwo = writable([
-
-]);
-
-export const redisData = writable ([]);
+//Store for Redis data
+export const redisData:Writable<RedisData> = writable<RedisData>();

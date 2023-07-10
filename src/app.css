@@ -4,19 +4,23 @@
 @tailwind components;
 @tailwind utilities;
 
+/* reset app div sizing */
 #app {
 	margin: 0;
 	padding: 0;
 }
 
+/* body full screen height */
 body {
 	height: 100vh;
 }
 
+/* body no scrollbar */
 body::-webkit-scrollbar {
 	display: none;
 }
 
+/* Dots Colors */
 .dot.A {
 	fill: #1245a8;
 }
@@ -29,6 +33,7 @@ body::-webkit-scrollbar {
 	fill: green;
 }
 
+/* Bar Colors */
 .bar {
 	fill-opacity: 0.7;
 }
@@ -50,12 +55,14 @@ body::-webkit-scrollbar {
 	fill: green;
 }
 
+/* bottom of the graph text label */
 .axis-label {
 	font-size: 12px;
 	font-weight: bold;
 	color: white !important;
 }
 
+/* for when you hover over a metric on the graph, the pop-up */
 .tooltip {
 	background-color: rgba(0, 0, 0, 0.7);
 	color: white;
@@ -63,6 +70,7 @@ body::-webkit-scrollbar {
 	font-size: 12px;
 }
 
+/* class to hide scrollbars */
 .scrollbar-hide::-webkit-scrollbar {
 	display: none;
 }
@@ -73,22 +81,27 @@ body::-webkit-scrollbar {
 	scrollbar-width: none; /* Firefox */
 }
 
+/* query-string code box no indentation in the beginning */
 pre {
 	text-indent: -1.2em;
 }
 
+/* decrease padding in between the table columns */
 th,
 td {
 	padding-left: 5px !important;
 	padding-right: 5px !important;
 }
 
+/* responsive for different media types */
 @media only screen and (max-width: 667px) {
+	/* hide the group bar graph on the bottom left */
 	.group-query {
 		display: none;
 	}
 }
 @media only screen and (min-width: 768px) and (max-width: 1285px) {
+	/* hide the group bar graph on the bottom left */
 	.group-query {
 		display: none;
 	}

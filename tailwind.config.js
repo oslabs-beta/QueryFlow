@@ -1,5 +1,5 @@
 module.exports = {
-  content: ['./src/**/*.{svelte,js,ts}'],
+  content: ['./src/**/*.{svelte,js,ts}', './node_modules/flowbite-svelte/**/*.{html,js,svelte,ts}',],
   daisyui: {
     themes: ['light',
       'dark',
@@ -56,5 +56,6 @@ module.exports = {
   },
   plugins: [
     require('daisyui'),
+    require('flowbite/plugin')
   ],
 };

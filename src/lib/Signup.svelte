@@ -1,27 +1,31 @@
 <script lang="ts">
-	import { navigate } from 'svelte-routing';
 
 	// initializing vars for database
-	let first_name: string;
-	let last_name: string;
+	let firstName: string;
+	let lastName: string;
 	let organization: string;
 	let database: string;
 	let email: string;
 	let password: string;
 
+  // Toggle the signup and login boolean. To get back to login screen
 	export let renderSignup: boolean;
 
+  // comparison string to make sure user typed correct password
 	let confirmPassword: string;
 
-	// post request for signing up
-	const postData = async (e) => {
+  // Signup Function - POST request
+	const postData = async (e: any) => {
 		e.preventDefault();
-		if (password !== confirmPassword) return alert('Please make sure your passwords match');
+		
+    // check passwords
+    if (password !== confirmPassword) return alert('Please make sure your passwords match');
 
+    // body package for post request
 		const body = database
-			? { first_name, last_name, organization, database, email, password }
-			: { first_name, last_name, organization, email, password };
-		// console.log(body);
+			? { firstName, lastName, organization, database, email, password }
+			: { firstName, lastName, organization, email, password };
+
 		try {
 			const response = await fetch('/api/signup', {
 				method: 'POST',
@@ -30,26 +34,21 @@
 				},
 				body: JSON.stringify(body),
 			});
-      console.log(response);
-      console.log('i am the response.ok', response.ok);
-			if (response.ok) {
-      
+			if (response.ok) {      
 				alert('account created');
+        // switch boolean to back to login component
 				renderSignup = false;
 			} else {
-				// need error here
+				console.error('error in signup')
 			}
-		} catch (error) {}
+		} catch (error) {
+      console.error(error)
+    }
 	};
 </script>
 
-<!-- ===== add modifications to <section> for smaller screens, not just class='flex items-center', which works only for big screens ===== -->
+
 <section>
-	<!-- <div class="toast toast-top toast-center">
-    <div class="alert alert-success">
-      <span>Message sent successfully.</span>
-    </div>
-  </div> -->
 	<div class="flex flex-col px-6 mx-auto lg:py-0">
 		<div
 			class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700"
@@ -100,9 +99,9 @@
 								type="text"
 								placeholder="Jane"
 								required
-								bind:value={first_name}
+								bind:value={firstName}
 							/>
-							<!-- <p class="text-red-500 text-xs italic">Please fill out this field.</p> -->
+
 						</div>
 						<div class="w-full md:w-1/2 px-3">
 							<label
@@ -118,7 +117,7 @@
 								type="text"
 								placeholder="Doe"
 								required
-								bind:value={last_name}
+								bind:value={lastName}
 							/>
 						</div>
 					</div>
@@ -230,9 +229,9 @@
 							<label for="terms" class="font-light text-gray-500 dark:text-gray-300"
 								>I accept the <a
 									class="font-medium text-primary-600 hover:underline dark:text-primary-500"
-									href="#">Terms and Conditions</a
+									href={'#'}>Terms and Conditions</a
 								></label
-							>
+							>"#"
 						</div>
 					</div>
 					<button
@@ -241,13 +240,16 @@
 						>Create account</button
 					>
 					<p class="text-sm font-light text-gray-500 dark:text-gray-400">
-						Already have an account? <a
-							href="#"
+						Already have an account? 
+            
+            <a
+							href={'#'}
 							on:click={() => {
 								renderSignup = false;
 							}}
 							class="font-medium text-primary-600 hover:underline dark:text-primary-500"
 							>Login here</a
+              
 						>
 					</p>
 				</form>

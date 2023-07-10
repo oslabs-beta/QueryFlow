@@ -1,35 +1,34 @@
 <script lang="ts">
 	// userId from Home
   import { metricData, filterMetricData, filterMetricDataTwo } from '../store';
-	import { get } from 'svelte/store';
-	export let userId: string;
-
+	
 	// initializing vars for database
-	let queryname: string;
+	let queryName: string;
 	let uri: string;
-	let querystring: string;
-	let querycount: number = 1;
-	let querydelay: number = 2;
+	let queryString: string;
+	let queryCount: number = 1;
+	let queryDelay: number = 2;
 
-	const postQuery = async (e) => {
+  // Add Query Post Function - POST Request
+	const postQuery = async (e: any) => {
     e.preventDefault();
-
+    const token = localStorage.getItem('token')
     try {
-      const response = await fetch('/api/querymetrics', {
+      const response = await fetch('/api/query-metrics', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
         },
         body: JSON.stringify({
-          queryname,
+          queryName,
           uri,
-          querystring,
-          querycount,
-          querydelay,
-          _id: userId,
+          queryString,
+          queryCount,
+          queryDelay
         }),
       });
-      console.log('drawer fetch response: ', response.ok);
+
       if (response.ok) {
         const data = await response.json();
         // Update metricData and filterMetricData
@@ -58,7 +57,6 @@
 				<form on:submit={postQuery}>
 					<div class="flex flex-col pt-8 h-screen">
 						<!-- name of query label/input -->
-
 						<div class="w-full my-2">
 							<label
 								for="queryName"
@@ -72,7 +70,7 @@
 								id="queryName"
 								class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 								placeholder="e.g. My query"
-								bind:value={queryname}
+								bind:value={queryName}
 							/>
 						</div>
 						<!-- database URI label/input -->
@@ -100,28 +98,28 @@
 							<textarea
 								name="queryString"
 								id="queryString"
-								bind:value={querystring}
+								bind:value={queryString}
 								placeholder="e.g. SELECT * FROM your_table"
 								class="textarea textarea-bordered textarea-lg w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 							/>
 						</div>
-						<!-- querycount label/range -->
+						<!-- queryCount label/range -->
 						<div class="w-full my-2 range-container">
-              <label for="querycount" class="block mb-2 text-lg font-medium"># of query runs</label>
+              <label for="queryCount" class="block mb-2 text-lg font-medium"># of query runs</label>
               <div class="range-input-container">
                   <input
-                      name="querycount"
+                      name="queryCount"
                       type="range"
+                      id="queryCount"
                       min="1"
                       max="20"
                       class="range range-primary"
                       step="1"
-                      bind:value={querycount}
+                      bind:value={queryCount}
                   />
               </div>
               <div class="w-full flex justify-between text-xs px-2 range-labels">
                   <!-- Label spans -->
-              
 								<span>1</span>
 								<span>2</span>
 								<span>3</span>
@@ -147,18 +145,19 @@
 						<!-- query delay label/range -->
 						<div class="w-full my-2">
 							<label
-								for="querydelay"
+								for="queryDelay"
 								class="block mb-2 text-lg font-medium"
 								>Delay between queries</label
 							>
 							<input
-								name="querydelay"
+								name="queryDelay"
+                id="queryDelay"
 								type="range"
 								min="2"
 								max="20"
 								class="range range-primary"
 								step="2"
-								bind:value={querydelay}
+								bind:value={queryDelay}
 							/>
 							<div class="w-full flex justify-between text-xs px-2">
 								<span>2</span>
@@ -194,17 +193,16 @@
 	}
 
   .drawer-side {
-/* Set to desired drawer width, vw units will adjust with the viewport width */
 	left: -80vw; /* Initially set to negative of the drawer's width */
   min-width: 1000px;
   }
   
   .drawer-overlay {
     transition: all 0.2s ease-out; /* No transition delay */
-    /* Other properties... */
 }
-/* CSS to show the drawer when checkbox is checked */
-#my-drawer:checked ~ .drawer-side {
+  /* CSS to show the drawer when checkbox is checked */
+    /* The tilde is a conditional statement */
+  #my-drawer:checked ~ .drawer-side {
 	left: 0;
-}
+  }
 </style>
