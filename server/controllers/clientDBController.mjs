@@ -6,19 +6,19 @@ const clientDBController = {};
 clientDBController.queryMetrics = async (req, res, next) => {
 
   const { uri, queryString, queryName, queryCount, queryDelay } = req.body;
-  const {_id} = req.user
+  const {_id} = req.user;
   //Initiate new model
   const { Pool } = pg;
   const pool = new Pool({
     connectionString: uri
   });
 
-  const clientDBModel = function(text, params, callback) {
 
+  const clientDBModel = function(text, params, callback) {
     return pool.query(text, params, callback);
   };
 
- 
+
   //Append Explain (options...) to client's query string. 
   const query = 'EXPLAIN (ANALYZE true, COSTS true, SETTINGS true, BUFFERS true, WAL true, SUMMARY true,  FORMAT JSON)' + `${queryString}`;
 

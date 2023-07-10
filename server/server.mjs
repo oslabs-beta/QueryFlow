@@ -32,7 +32,7 @@ app.get('/', (req, res) => {
   res.sendFile(resolve(__dirname, '../index.html'));
 });
 
-//Use apiRouter
+//Use apiRouter/loginRouter
 app.use('/api', apiRouter,loginRouter);
 
 //Route error handler
