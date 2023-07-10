@@ -2,8 +2,6 @@
 	// userId from Home
   import { metricData, filterMetricData, filterMetricDataTwo } from '../store';
 	
-	export let userId: string;
-
 	// initializing vars for database
 	let queryName: string;
 	let uri: string;
@@ -112,6 +110,7 @@
                   <input
                       name="queryCount"
                       type="range"
+                      id="queryCount"
                       min="1"
                       max="20"
                       class="range range-primary"
@@ -152,6 +151,7 @@
 							>
 							<input
 								name="queryDelay"
+                id="queryDelay"
 								type="range"
 								min="2"
 								max="20"

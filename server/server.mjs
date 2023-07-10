@@ -1,3 +1,4 @@
+import 'dotenv/config';
 import express from 'express';
 import { fileURLToPath } from 'url';
 import cors from 'cors';
@@ -6,7 +7,7 @@ import { dirname, resolve } from 'path';
 import compression from 'compression';
 import bodyParser from 'body-parser';
 import apiRouter from './routes/apiRoutes.mjs';
-import 'dotenv/config';
+import loginRouter from './routes/loginRoutes.mjs';
 //We utilize the fileURLToPath function from the url module to convert the import.meta.url to the corresponding file path??
 const __filename = fileURLToPath(import.meta.url);
 //we extract the directory name using the dirname function from the path module
@@ -32,7 +33,7 @@ app.get('/', (req, res) => {
 });
 
 //Use apiRouter
-app.use('/api', apiRouter);
+app.use('/api', apiRouter,loginRouter);
 
 //Route error handler
 app.use('*', (req, res) => {
