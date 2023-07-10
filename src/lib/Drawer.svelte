@@ -2,8 +2,6 @@
 	// userId from Home
   import { metricData, filterMetricData, filterMetricDataTwo } from '../store';
 	
-	export let userId: string;
-
 	// initializing vars for database
 	let queryName: string;
 	let uri: string;

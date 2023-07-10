@@ -117,7 +117,7 @@
 <!-- END OF TEMPORARY BUTTON -->
   <div class="flex-shrink-0">
     <!-- Add Query Sliding Drawer -->
-    <Drawer userId={userInfo._id} />
+    <Drawer />
   </div>
 
   <div class="mt-8 w-screen grid sm:grid-cols-1 md:grid-cols-2 justify-center content-center">
