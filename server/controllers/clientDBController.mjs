@@ -6,7 +6,7 @@ const clientDBController = {};
 clientDBController.queryMetrics = async (req, res, next) => {
 
   const { uri, queryString, queryName, queryCount, queryDelay } = req.body;
-  const {_id} = req.user
+  const {_id} = req.user;
   //Initiate new model
   const { Pool } = pg;
   const pool = new Pool({

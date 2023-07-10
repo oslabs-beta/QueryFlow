@@ -1,5 +1,12 @@
 <script lang="ts" >
 import logo from '../assets/QueryFlow-icon.png'
+import { navigate } from 'svelte-routing';
+
+const logout = ()=>{
+  localStorage.removeItem("token")
+  navigate('/', { replace: true });
+}
+
 </script>
 
 <div class="navbar bg-base-100 fixed top-0 z-10">
@@ -14,7 +21,8 @@ import logo from '../assets/QueryFlow-icon.png'
     <a class="navtags" href="$">About</a>
     <a class="navtags" href="$">SQL Tips</a>
     <a class="navtags" href="$">GitHub</a>
-    <a class="navtags" href="$">Logout</a>
+    <button on:click={logout} class="btn btn-active btn-primary">Logout</button>
+
     <!-- 3-dot button in top-right corner, replace all navtags with this on smaller screens -->
     <!-- <button class="btn btn-square btn-ghost">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-5 h-5 stroke-current">
