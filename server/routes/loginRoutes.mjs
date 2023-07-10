@@ -20,7 +20,7 @@ router.get('/google-login', oAuthController.login, (req, res) => {
 
 //Google Callback
 router.get('/google-login/callback', oAuthController.googleResponse, (req, res) => {
-  res.status(201).json({userData: res.locals.data,token:res.locals.authentication});
+  res.status(201).json({msg:'callback successful'});
 });
 
 

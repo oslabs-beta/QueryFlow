@@ -20,8 +20,8 @@ oAuthController.login = async (req,res,next)=>{
       access_type: 'offline',
       scope: scopes,
     });
-
-    res.redirect(url); 
+    console.log('redirecting!', url);
+    res.redirect(url);
   } catch (error) {
     next({
       log: `Error handler caught error in oAuthController.login, ${error}`,
@@ -32,27 +32,30 @@ oAuthController.login = async (req,res,next)=>{
 };
 
 oAuthController.googleResponse = async (req,res,next)=>{
-
+  console.log('hello I am under the water');
   try {
     const code = req.query.code;
     const { tokens } = await oauth2Client.getToken(code);
     const id_token = tokens.id_token;
     const decoded = jwt.decode(id_token, { complete: true });
-    // console.log('i am decoded google token', decoded);
+    console.log('i am decoded google token', decoded);
+    console.log('i am tokens', tokens);
+
     oauth2Client.setCredentials(tokens);
     const {email,given_name,family_name} = decoded.payload;
-   
+    
     const string = {text: 'SELECT * FROM users WHERE email = $1', values: [email]};
     const data = await ourDBModel(string);
+    
     if(data.rows[0]){
       const { _id, firstName, lastName } = data.rows[0];
       const token = jwt.sign({_id}, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_LIFETIME,
       });
 
-      res.locals.data = { firstName, lastName};
-      res.locals.authentication = token;
-      return next();
+      res.cookie('token',token);
+      res.cookie('revoke',tokens.access_token);
+      res.redirect('/home');
     }
 
     //create a user
@@ -74,11 +77,9 @@ oAuthController.googleResponse = async (req,res,next)=>{
     const token = jwt.sign({_id}, process.env.JWT_SECRET, {
       expiresIn: process.env.JWT_LIFETIME,
     });
-    console.log('i am token',token);
-    res.locals.data = { firstName, lastName};
-    res.locals.authentication = token;
-    return next();
-    
+    res.cookie('token',token);
+    res.cookie('revoke',tokens.access_token);
+    res.redirect('/home');
   } catch (error) {
     next({
       log: `Error handler caught error in oAuthController.login, ${error}`,

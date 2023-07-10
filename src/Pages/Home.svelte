@@ -7,6 +7,7 @@
   import { onMount } from 'svelte';
   import { derived } from 'svelte/store'
   import { navigate } from 'svelte-routing';
+  import Cookies from 'js-cookie';
 
   // get user's info from the userInfo Store
   let userInfo: UserType = get(userInfoStore);
@@ -76,6 +77,15 @@
 
   onMount(async () => {
     // if userId is not an empty string then fetch data to get the users query metrics 
+    const cookie = Cookies.get('token');
+    const revoke = Cookies.get('revoke')
+    if(cookie){
+      localStorage.setItem("token", cookie)
+      localStorage.setItem("revoke", revoke)
+      Cookies.remove('token');
+      Cookies.remove('revoke');
+    }
+		console.log('i am the cookie login', cookie);
     if (token) {
       await fetchData();    
     }

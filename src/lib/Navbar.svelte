@@ -2,8 +2,13 @@
 import logo from '../assets/QueryFlow-icon.png'
 import { navigate } from 'svelte-routing';
 
-const logout = ()=>{
-  localStorage.removeItem("token")
+const logout = async () => {
+  localStorage.removeItem("token");
+  const revoke = localStorage.getItem('revoke');
+  const revokeURL = `https://accounts.google.com/o/oauth2/revoke?token=${revoke}`;
+  
+  const response = await fetch(revokeURL);
+  localStorage.removeItem('revoke');
   navigate('/', { replace: true });
 }
 
