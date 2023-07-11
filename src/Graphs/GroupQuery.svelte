@@ -26,6 +26,7 @@ const averageTime: GraphData[] = groupMetrics.map((obj, i) => ({
 
   }));
 
+
   
 
   const maxYValue = max([...averageTime], d => d.y) || 0;

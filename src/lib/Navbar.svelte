@@ -1,16 +1,20 @@
 <script lang="ts" >
 import logo from '../assets/QueryFlow-icon.png'
 import { navigate } from 'svelte-routing';
+import {isAuthenticated} from '../store'
 
 const logout = async () => {
   localStorage.removeItem("token");
   const revoke = localStorage.getItem('revoke');
-  const revokeURL = `https://accounts.google.com/o/oauth2/revoke?token=${revoke}`;
-  
-  const response = await fetch(revokeURL);
-  localStorage.removeItem('revoke');
+  if (revoke) {
+    const revokeURL = `https://accounts.google.com/o/oauth2/revoke?token=${revoke}`;
+    await fetch(revokeURL);
+    localStorage.removeItem('revoke');
+  }
+  isAuthenticated.set(false);
   navigate('/', { replace: true });
 }
+
 
 </script>
 
@@ -25,9 +29,12 @@ const logout = async () => {
   <div class="flex-none">
     <a class="navtags" href="$">About</a>
     <a class="navtags" href="$">SQL Tips</a>
-    <a class="navtags" href="$">GitHub</a>
+    <a class="navtags" href="https://github.com/oslabs-beta/QueryFlow" target="_blank">GitHub</a>
+  
+    {#if $isAuthenticated}
     <button on:click={logout} class="btn btn-active btn-primary">Logout</button>
-
+    {/if}
+    
     <!-- 3-dot button in top-right corner, replace all navtags with this on smaller screens -->
     <!-- <button class="btn btn-square btn-ghost">
       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="inline-block w-5 h-5 stroke-current">

@@ -2,10 +2,16 @@
 	import Login from '../lib/Login.svelte';
 	import Signup from '../lib/Signup.svelte';
 	import graph from '../assets/graph3.png';
-
+	import { navigate } from 'svelte-routing';
+  import { onMount } from 'svelte';
   // toggle signup/login component
 	let renderSignup: boolean = false;
 
+  
+  onMount(async () => {
+    if (localStorage.getItem('token')) navigate('/home', { replace:true });
+  })
+  
 </script>
 
 <div class="landing-container flex flex-col mt-5 lg:flex-row">

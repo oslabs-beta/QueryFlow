@@ -2,7 +2,6 @@
 	import { navigate } from 'svelte-routing';
 	import { userInfoStore } from '../store';
 	
-	
 	export let renderSignup: boolean;
 
 	let email: string;
@@ -41,6 +40,7 @@
     e.preventDefault();
     localStorage.removeItem("token")
 		window.location.href = ('/api/google-login')	
+		
   }
 </script>
 

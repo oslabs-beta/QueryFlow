@@ -19,3 +19,5 @@ export const filterMetricDataTwo: Writable<QueryData[]> = writable<QueryData[]>(
 
 //Store for Redis data
 export const redisData:Writable<RedisData> = writable<RedisData>();
+
+export const isAuthenticated = writable(false);

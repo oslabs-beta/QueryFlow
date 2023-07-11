@@ -47,7 +47,7 @@
 		return workingArr;
 	};
 	// calculating buckets dynamically to limit number of buckets with smaller/larger data sizes
-	let buckets = metrics.length >= 4 ? Math.ceil(Math.log2(metrics.length - 3) * 1.7) : 2;
+	let buckets = metrics.length > 4 ? Math.ceil(Math.log2(metrics.length - 3) * 1.7) : 2;
 	if (!metrics.length) buckets = 0;
  
 	// formatting data
@@ -97,7 +97,7 @@
 <!-- END OF TEMPORARY BUTTON -->
 
 <!-- render chart if queries exist -->
-<!-- {#if buckets} -->
+{#if buckets}
 
 <div
 	class="chart-container"
@@ -146,7 +146,11 @@
 		<Tooltip data={hoveredData} {xScale} {yScale} />
 	{/if}
 </div>
-<!-- {/if} -->
+	{:else}
+	<div class="p-8">
+		<h1>Enter queries to see all metrics</h1>
+	</div>
+{/if}
 <style>
 	.title {
 		display: flex;

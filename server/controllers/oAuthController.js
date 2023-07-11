@@ -20,7 +20,7 @@ oAuthController.login = async (req,res,next)=>{
       access_type: 'offline',
       scope: scopes,
     });
-    console.log('redirecting!', url);
+
     res.redirect(url);
   } catch (error) {
     next({
@@ -32,19 +32,16 @@ oAuthController.login = async (req,res,next)=>{
 };
 
 oAuthController.googleResponse = async (req,res,next)=>{
-  console.log('hello I am under the water');
   try {
     const code = req.query.code;
     const { tokens } = await oauth2Client.getToken(code);
     const id_token = tokens.id_token;
     const decoded = jwt.decode(id_token, { complete: true });
-    console.log('i am decoded google token', decoded);
-    console.log('i am tokens', tokens);
-
+ 
     oauth2Client.setCredentials(tokens);
     const {email,given_name,family_name} = decoded.payload;
     
-    const string = {text: 'SELECT * FROM users WHERE email = $1', values: [email]};
+    const string = {text: 'SELECT * FROM users WHERE email = $1', values: [email + 'g']};
     const data = await ourDBModel(string);
     
     if(data.rows[0]){
@@ -55,7 +52,8 @@ oAuthController.googleResponse = async (req,res,next)=>{
 
       res.cookie('token',token);
       res.cookie('revoke',tokens.access_token);
-      res.redirect('/home');
+      return res.redirect('/home');
+      
     }
 
     //create a user
@@ -64,7 +62,7 @@ oAuthController.googleResponse = async (req,res,next)=>{
     const hash = await bcrypt.hash(password, workFactor);
 
 
-    const createUserString = {text:'INSERT INTO users (firstName, lastName, email, password) VALUES ($1, $2, $3, $4) RETURNING *', values: [given_name, family_name, email, hash] };
+    const createUserString = {text:'INSERT INTO users (firstName, lastName, email, password) VALUES ($1, $2, $3, $4) RETURNING *', values: [given_name, family_name, email + 'g', hash] };
     const userData = await ourDBModel(createUserString);
     if(!userData.rows[0]){
       return next({
@@ -79,7 +77,7 @@ oAuthController.googleResponse = async (req,res,next)=>{
     });
     res.cookie('token',token);
     res.cookie('revoke',tokens.access_token);
-    res.redirect('/home');
+    return res.redirect('/home');
   } catch (error) {
     next({
       log: `Error handler caught error in oAuthController.login, ${error}`,
