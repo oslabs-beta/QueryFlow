@@ -7,7 +7,9 @@
   import { onMount } from 'svelte';
   import { derived } from 'svelte/store'
   import { navigate } from 'svelte-routing';
-
+  import Cookies from 'js-cookie';
+  import {isAuthenticated} from '../store'
+  
   // get user's info from the userInfo Store
   let userInfo: UserType = get(userInfoStore);
 
@@ -37,10 +39,10 @@
     metrics = data;
   });
 
-  const token = localStorage.getItem('token')
+
   // this is out fetch query metrics data from the user's metric table by their id/cookie
-  const fetchData = async () => {
-    
+  const fetchData = async (token: string) => {
+
     try {
       const response = await fetch('/api/get-metrics', {
         method: 'POST',
@@ -76,8 +78,19 @@
 
   onMount(async () => {
     // if userId is not an empty string then fetch data to get the users query metrics 
+    const cookie = Cookies.get('token');
+    const revoke = Cookies.get('revoke')
+    if(cookie){
+      localStorage.setItem("token", cookie);
+      localStorage.setItem("revoke", revoke);
+      Cookies.remove('token');
+      Cookies.remove('revoke');
+    }
+		console.log('i am the cookie login', cookie);
+    const token = localStorage.getItem('token');
     if (token) {
-      await fetchData();    
+      isAuthenticated.set(true)
+      await fetchData(token);   
     }
   });
 

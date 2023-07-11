@@ -6,6 +6,10 @@ POLISHING TO-DO LIST:
 - Add parameterized queries in backend (security)
 - Add option for different graph viewing (scatter plots, bar charts, pie charts, etc...)
 - In the all-metrics bar chart, fix the bar positioning to start from the x-axis, rather than have a gap
+- Exit sidebar after clicking run query
+  - Loading animation after running a query
+- Skeleton loaders when cards aren't visible (e.g. after logging in, running query for the first time)
+- 
 
 <!-- # Svelte + TS + Vite
 
