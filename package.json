@@ -12,8 +12,6 @@
   },
   "devDependencies": {
     "@floating-ui/dom": "^1.4.2",
-    "@sveltejs/vite-plugin-svelte": "^2.4.2",
-    "@tsconfig/svelte": "^4.0.1",
     "@types/d3": "^7.4.0",
     "@types/js-cookie": "^3.0.3",
     "@typescript-eslint/eslint-plugin": "^5.60.1",
@@ -36,6 +34,8 @@
     "typescript": "^5.0.2"
   },
   "dependencies": {
+    "@tsconfig/svelte": "^4.0.1",
+    "@sveltejs/vite-plugin-svelte": "^2.4.2",
     "@popperjs/core": "^2.11.8",
     "bcrypt": "^5.1.0",
     "bcryptjs": "^2.4.3",

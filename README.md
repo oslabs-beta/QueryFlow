@@ -1,5 +1,6 @@
 //Port
-
+//moved"@tsconfig/svelte": "^4.0.1",
+"@sveltejs/vite-plugin-svelte": "^2.4.2", and vite to dependencies
 POLISHING TO-DO LIST:
 
 - Remove numbers in Signup.svelte to fix color scheme
@@ -9,7 +10,7 @@ POLISHING TO-DO LIST:
 - Exit sidebar after clicking run query
   - Loading animation after running a query
 - Skeleton loaders when cards aren't visible (e.g. after logging in, running query for the first time)
-- 
+-
 
 <!-- # Svelte + TS + Vite
 
