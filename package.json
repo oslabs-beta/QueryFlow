@@ -59,5 +59,8 @@
     "redis": "^4.6.7",
     "svelte-routing": "^1.10.0",
     "tailwind-merge": "^1.13.2"
+  },
+  "engines": {
+    "node": "18.x"
   }
 }
