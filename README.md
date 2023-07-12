@@ -1,6 +1,9 @@
 //Port
-//moved"@tsconfig/svelte": "^4.0.1",
-"@sveltejs/vite-plugin-svelte": "^2.4.2", and vite to dependencies
+
+DO NOT DELETE
+moved"@tsconfig/svelte": "^4.0.1",
+"@sveltejs/vite-plugin-svelte": "^2.4.2", vite to dependencies, autoprefixer and tailwind
+
 POLISHING TO-DO LIST:
 
 - Remove numbers in Signup.svelte to fix color scheme
