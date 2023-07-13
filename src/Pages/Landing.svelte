@@ -9,7 +9,10 @@
 
   
   onMount(async () => {
-    if (localStorage.getItem('token')) navigate('/home', { replace:true });
+    if (localStorage.getItem('token')){
+      console.log('there is a token',localStorage.getItem('token'))
+      navigate('/home', { replace:true });
+    } 
   })
   
 </script>

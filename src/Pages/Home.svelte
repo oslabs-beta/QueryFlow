@@ -86,7 +86,7 @@
       Cookies.remove('token');
       Cookies.remove('revoke');
     }
-		console.log('i am the cookie login', cookie);
+
     const token = localStorage.getItem('token');
     if (token) {
       isAuthenticated.set(true)

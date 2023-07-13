@@ -23,5 +23,4 @@ router.get('/google-login/callback', oAuthController.googleResponse, (req, res) 
   res.status(201).json({msg:'callback successful'});
 });
 
-
 export default router;
