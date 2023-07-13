@@ -16,6 +16,8 @@
 		 * of JS in `.svelte` files.
 		 */
 		"allowJs": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
 		"checkJs": true,
 		"isolatedModules": true
 	},
