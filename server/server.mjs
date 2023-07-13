@@ -27,13 +27,13 @@ app.use(bodyParser.json());
 // Serve static assets
 app.use(express.static(resolve(__dirname, '../dist')));
 
+//Use apiRouter/loginRouter
+app.use('/api', apiRouter,loginRouter);
+
 //Serve index.html file
 app.get('/*', (req, res) => {
   res.sendFile(resolve(__dirname, '../dist/index.html'));
 });
-
-//Use apiRouter/loginRouter
-app.use('/api', apiRouter,loginRouter);
 
 //Route error handler
 app.use('*', (req, res) => {

@@ -39,7 +39,7 @@
   const googleLogin = async (e:any) => {
     e.preventDefault();
     localStorage.removeItem("token")
-		window.location.href = ('/api/google-login')	
+		window.location.href = ('/api/google-login')
 		
   }
 </script>
