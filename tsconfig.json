@@ -2,24 +2,19 @@
 	"extends": "@tsconfig/svelte/tsconfig.json",
 	"compilerOptions": {
 		"noImplicitAny":true,
-		"target": "es6",
+		"target": "ES2018",
 		"useDefineForClassFields": true,
-		"module": "commonjs",
+		"module": "CommonJS",
 		"resolveJsonModule": true,
-    "declaration": true,
-    "strict": true,
-    "outDir": "./dist",
-		/**
-		 * Typecheck JS in `.svelte` and `.js` files by default.
-		 * Disable checkJs if you'd like to use dynamic types in JS.
-		 * Note that setting allowJs false does not prevent the use
-		 * of JS in `.svelte` files.
-		 */
+		"declaration": true,
+		"strict": true,
+		"outDir": "./dist",
 		"allowJs": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
 		"checkJs": true,
-		"isolatedModules": true
+		"isolatedModules": true,
+		"esModuleInterop": true,
+		"allowSyntheticDefaultImports": true,
+		"moduleResolution": "node"
 	},
 	"include": ["src/**/*.d.ts", "src/**/*.ts", "src/**/*.js", "src/**/*.svelte"],
 	"references": [{ "path": "./tsconfig.node.json" }]
