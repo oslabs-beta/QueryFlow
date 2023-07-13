@@ -2,7 +2,7 @@ import express from 'express';
 const router = express.Router();
 import clientDBController from '../controllers/clientDBController.mjs';
 import ourDBController from '../controllers/ourDBController.js';
-import redisController from '../controllers/redisController.mjs';
+// import redisController from '../controllers/redisController.mjs';
 import authenticationMiddleware from '../middleware/auth.js';
   
 
@@ -17,9 +17,9 @@ router.post('/get-metrics',  authenticationMiddleware, ourDBController.queryGet,
 });
 
 //Retrieves data from user's database, measures the time, posts to our Redis instance, measures time.
-router.post('/redis-metrics', authenticationMiddleware ,clientDBController.queryTimeSQL, redisController.latency, (req, res) => {
-  res.status(201).json(res.locals.comparisonData);
-});
+// router.post('/redis-metrics', authenticationMiddleware ,clientDBController.queryTimeSQL, redisController.latency, (req, res) => {
+//   res.status(201).json(res.locals.comparisonData);
+// });
 
 //Deletes a query from the PostgreSQL metrics table by id
 router.delete('/delete-metrics-id', authenticationMiddleware, ourDBController.deleteQueryById, (req, res) => {
