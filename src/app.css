@@ -1,57 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Heebo:wght@600&family=Sarabun:wght@600&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+/* reset app div sizing */
 #app {
-	min-height: 100vh;
+	margin: 0;
+	padding: 0;
 }
 
-/* main {
-	min-height: 100%;
-} */
+/* body full screen height */
+body {
+	height: 100vh;
+}
 
+/* body no scrollbar */
+body::-webkit-scrollbar {
+	display: none;
+}
+
+/* Dots Colors */
 .dot.A {
-	fill: #440154ff;
+	fill: #1245a8;
 }
 
 .dot.B {
-	fill: #21908dff;
+	fill: #efce00;
 }
 
 .dot.C {
-	fill: #fde725ff;
+	fill: green;
 }
 
+/* Bar Colors */
 .bar {
 	fill-opacity: 0.7;
 }
 
 .bar.A {
-	fill: purple;
+	fill: #1245a8;
 }
 
 .bar.B {
-	fill: cyan;
+	fill: #efce00;
+}
+
+.logo-text {
+	font-family: 'Sarabun', sans-serif;
+	font-size: 25px;
 }
 
 .bar.C {
 	fill: green;
 }
 
+/* bottom of the graph text label */
 .axis-label {
 	font-size: 12px;
 	font-weight: bold;
+	color: white !important;
 }
 
-.line {
-	stroke-width: 1;
-	stroke: black;
-	fill: none;
-}
-
+/* for when you hover over a metric on the graph, the pop-up */
 .tooltip {
 	background-color: rgba(0, 0, 0, 0.7);
 	color: white;
 	padding: 5px;
 	font-size: 12px;
+}
+
+/* class to hide scrollbars */
+.scrollbar-hide::-webkit-scrollbar {
+	display: none;
+}
+
+/* For IE, Edge and Firefox */
+.scrollbar-hide {
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+}
+
+/* query-string code box no indentation in the beginning */
+pre {
+	text-indent: -1.2em;
+}
+
+/* decrease padding in between the table columns */
+th,
+td {
+	padding-left: 5px !important;
+	padding-right: 5px !important;
+}
+
+/* responsive for different media types */
+@media only screen and (max-width: 667px) {
+	/* hide the group bar graph on the bottom left */
+	.group-query {
+		display: none;
+	}
+}
+@media only screen and (min-width: 768px) and (max-width: 1285px) {
+	/* hide the group bar graph on the bottom left */
+	.group-query {
+		display: none;
+	}
 }

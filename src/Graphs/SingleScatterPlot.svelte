@@ -1,34 +1,37 @@
-<script>
-  export let metric;
-  // console.log('data in overview', metric)
+<script lang="ts">
+  
+  
+  import type { QueryData, QueryMetrics, GraphData } from '../types';
   import { onMount } from 'svelte';
   import { select, scaleLinear, axisLeft, axisBottom } from 'd3';
   import { max } from 'd3-array';
-  export let i;
 
-  const data = [
-    { x: 10, y: 5 },
-    { x: 20, y: 11 },
-    { x: 30, y: 12 },
-    { x: 40, y: 13 },
-  ];
+  export let metric: QueryData;
+  export let i: number;
+
+
+  // declare in global file namespace
+  let planningTime: GraphData[], executionTime: GraphData[], totalTime: GraphData[];
+
+  $: {
 
   // formats query(x) planning time(y) data
-  const planningTime = metric.querymetrics.map((obj, i) => {
-    return { x: i + 1, y: obj.planningTime, type: 'A' };
+  planningTime = metric.queryMetrics.map((obj: QueryMetrics, i: number) => {
+    return { x: i + 1, y: obj.planningTime, type: 'A', name: 'Planning Time' };
   });
 
-  const executionTime = metric.querymetrics.map((obj, i) => {
-    return { x: i + 1, y: obj.executionTime, type: 'B' };
+  executionTime = metric.queryMetrics.map((obj: QueryMetrics, i: number) => {
+    return { x: i + 1, y: obj.executionTime, type: 'B', name: 'Execution Time'};
   });
 
-  const totalTime = metric.querymetrics.map((obj, i) => {
-    return { x: i + 1, y: obj.planningTime + obj.executionTime, type: 'C' };
+  totalTime = metric.queryMetrics.map((obj: QueryMetrics, i: number) => {
+    return { x: i + 1, y: obj.planningTime + obj.executionTime, type: 'C',name: 'Total Time' };
   });
-  console.log('i am execution time', [...executionTime, ...planningTime, ...totalTime]);
+  }
 
-  // get high value for domain
-  const getHighValue = (array, property) => {
+
+  // function renderChart() {
+  const getHighValue = (array: {x: number, y: number}[], property: 'x' | 'y') => {
     if (!array.length) return 0;
     let highVal = -Infinity;
     array.forEach((el) => {
@@ -46,7 +49,7 @@
     const height = 300 - margin.top - margin.bottom; // Increase the height here
 
     const xScale = scaleLinear()
-      .domain([0, getHighValue(totalTime, 'x')])
+      .domain([0, metric.queryMetrics.length + 1])
       .range([0, width]);
 
     const yScale = scaleLinear()
@@ -56,7 +59,7 @@
     const xAxis = svg
       .append('g')
       .attr('transform', `translate(${margin.left}, ${height + margin.top})`)
-      .call(axisBottom(xScale));
+      .call(axisBottom(xScale).ticks(metric.queryMetrics.length+1));
 
     const yAxis = svg
       .append('g')
@@ -75,7 +78,7 @@
       .attr('cy', (d) => yScale(d.y))
       .attr('r', 3)
       .on('mouseover', (event, d) => {
-        tooltip.style('visibility', 'visible').text(`${d.type}: ${d.y} ms`);
+        tooltip.style('visibility', 'visible').text(`${d.name}: ${d.y} ms`);
       })
       .on('mousemove', (event) => {
         tooltip
@@ -98,7 +101,7 @@
     svg
       .append('text')
       .attr('class', 'axis-label')
-      .attr('transform', `translate(${margin.left - 25}, ${margin.top + height / 2}) rotate(-90)`)
+      .attr('transform', `translate(${margin.left - 30}, ${margin.top + height / 2}) rotate(-90)`)
       .style('text-anchor', 'middle')
       .text('Milliseconds');
 
@@ -110,38 +113,42 @@
       .style('visibility', 'hidden');
 
     //Keybox
-    const keyBox = svg.append('g').attr('transform', `translate(${width + margin.left + 10}, ${margin.top})`);
+    const keyBox = svg.append('g').attr('transform', `translate(${width-80}, ${margin.top+10})`);
 
-keyBox
-  .selectAll('.legend-dot')
-  .data([{ type: 'A', label: 'Planning Time' }, { type: 'B', label: 'Execution Time' }, { type: 'C', label: 'Total Time' }])
-  .enter()
-  .append('circle')
-  .attr('class', (d) => `legend-dot ${d.type}`)
-  .attr('cx', 10)
-  .attr('cy', (d, i) => i * 20)
-  .attr('r', 3);
+// keyBox
+//   .selectAll('.legend-dot')
+//   .data([{ type: 'A', label: 'Planning Time' }, { type: 'B', label: 'Execution Time' }, { type: 'C', label: 'Total Time' }])
+//   .enter()
+//   .append('circle')
+//   .attr('class', (d) => `legend-dot ${d.type}`)
+//   .attr('cx', 10)
+//   .attr('cy', (d, i) => i * 20)
+//   .attr('r', 3);
 
-keyBox
-  .selectAll('.legend-label')
-  .data([{ type: 'A', label: 'Planning Time' }, { type: 'B', label: 'Execution Time' }, { type: 'C', label: 'Total Time' }])
-  .enter()
-  .append('text')
-  .attr('class', 'legend-label')
-  .attr('x', 20)
-  .attr('y', (d, i) => i * 20 + 4)
-  .text((d) => d.label);
+// keyBox
+//   .selectAll('.legend-label')
+//   .data([{ type: 'A', label: 'Planning Time' }, { type: 'B', label: 'Execution Time' }, { type: 'C', label: 'Total Time' }])
+//   .enter()
+//   .append('text')
+//   .attr('class', 'legend-label')
+//   .attr('x', 20)
+//   .attr('y', (d, i) => i * 20 + 4)
+//   .text((d) => d.label);
 });  
 
 </script>
 
-<svg id={`scatterPlot${i}`} style="width: 100%; height: 100%"></svg>
+<div class="h-80">
+
+  <svg id={`scatterPlot${i}`} class="w-74 h-full" ></svg>
+</div>
+
+<!-- style="width: 100%; height: 100%" -->
 
 
 
 
-
-<!-- ========== GEORGE'S TEST STUFF PLEASE DO NOT DELETE ========== -->
+<!-- ========== REFACTORING REFERENCE FOR SVG'S PLEASE DO NOT DELETE ========== -->
 <!-- INSIDE OF SCRIPT -->
 <!-- let width = 400 - margin.left - margin.right;
 let height = 400 - margin.top - margin.bottom;
@@ -165,7 +172,7 @@ const yScale = scaleLinear()
           />
   {/each}
 </svg> -->
-<!-- ========== END OF GEORGE'S TEST STUFF ========== -->
+<!-- ========== END OF REFACTORING REFERENCE TEST STUFF ========== -->
   
 
 
