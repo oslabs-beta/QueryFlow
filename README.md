@@ -3,6 +3,33 @@
 DO NOT DELETE
 moved @tsconfig/svelte": "^4.0.1", "@sveltejs/vite-plugin-svelte": "^2.4.2", vite to dependencies, daisyUi, autoprefixer and tailwind
 
+<!-- "build": "tsc vite build", -->
+
+changed package.json script build tsc vite build. Remove tsc
+
+<!-- Do Not Delete
+{
+	"extends": "@tsconfig/svelte/tsconfig.json",
+	"compilerOptions": {
+		"noImplicitAny":true,
+		"target": "ESNext",
+		"useDefineForClassFields": true,
+		"module": "ESNext",
+		"resolveJsonModule": true,
+		/**
+		 * Typecheck JS in `.svelte` and `.js` files by default.
+		 * Disable checkJs if you'd like to use dynamic types in JS.
+		 * Note that setting allowJs false does not prevent the use
+		 * of JS in `.svelte` files.
+		 */
+		"allowJs": true,
+		"checkJs": true,
+		"isolatedModules": true
+	},
+	"include": ["src/**/*.d.ts", "src/**/*.ts", "src/**/*.js", "src/**/*.svelte"],
+	"references": [{ "path": "./tsconfig.node.json" }]
+} -->
+
 POLISHING TO-DO LIST:
 
 - Remove numbers in Signup.svelte to fix color scheme
