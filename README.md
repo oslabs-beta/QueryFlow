@@ -1,13 +1,63 @@
 //Port
 
-DO NOT DELETE
-moved @tsconfig/svelte": "^4.0.1", "@sveltejs/vite-plugin-svelte": "^2.4.2", vite to dependencies, daisyUi, autoprefixer and tailwind
+<!-- DO NOT DELETE - Heroku Dependency stuff -->
+
+moved @tsconfig/svelte": "^4.0.1", "@sveltejs/vite-plugin-svelte": "^2.4.2", vite to dependencies, daisyUi, autoprefixer and tailwind 
+
+<!-- Vercel.json for vercel -->
+{
+  "builds": [
+    {
+      "src": "/server/server.mjs",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/server/server.mjs"
+    }
+  ]
+}
+
+<!-- Procfile for heroku -->
+web: npm run build && node server/server.mjs
+
+<!-- Also random Vite.Config File for Render -->
+
+import { defineConfig } from 'vite';
+import { svelte } from '@sveltejs/vite-plugin-svelte';
+const PORT = process.env.PORT || 3000;
+
+// https://vitejs.dev/config/
+export default defineConfig({
+  server: {
+    proxy: {
+      '/api': {
+        target: `http://localhost:${PORT}`,
+        changeOrigin: true,
+      },
+    },
+  },
+  build: {
+    rollupOptions: {
+      input: '/src/main.ts', // specify the input file
+      output: {
+        entryFileNames: '[name].js'
+      }
+    }
+  },
+  base: './',
+  plugins: [svelte()],
+});
+ 
+
 
 <!-- "build": "tsc vite build", -->
 
 changed package.json script build tsc vite build. Remove tsc
 
-<!-- Do Not Delete
+ <!-- Do Not Delete TsConfig -->
 {
 	"extends": "@tsconfig/svelte/tsconfig.json",
 	"compilerOptions": {
@@ -28,7 +78,11 @@ changed package.json script build tsc vite build. Remove tsc
 	},
 	"include": ["src/**/*.d.ts", "src/**/*.ts", "src/**/*.js", "src/**/*.svelte"],
 	"references": [{ "path": "./tsconfig.node.json" }]
-} -->
+} 
+
+
+
+
 
 POLISHING TO-DO LIST:
 
