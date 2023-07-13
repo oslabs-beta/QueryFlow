@@ -25,11 +25,11 @@ app.use(express.json());
 app.use(bodyParser.json());
 
 // Serve static assets
-app.use(express.static(resolve(__dirname, '../src')));
+app.use(express.static(resolve(__dirname, '../dist')));
 
 //Serve index.html file
 app.get('/', (req, res) => {
-  res.sendFile(resolve(__dirname, '../index.html'));
+  res.sendFile(resolve(__dirname, '../dist/index.html'));
 });
 
 //Use apiRouter/loginRouter
