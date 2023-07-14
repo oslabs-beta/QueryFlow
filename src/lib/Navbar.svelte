@@ -1,6 +1,6 @@
 <script lang="ts" >
 import logo from '../assets/QueryFlow-icon.png'
-import { navigate } from 'svelte-routing';
+import { Link, navigate } from 'svelte-routing';
 import {isAuthenticated} from '../store'
 
 const logout = async () => {
@@ -20,11 +20,10 @@ const logout = async () => {
 
 <div class="navbar bg-base-100 fixed top-0 z-10">
   <div class="flex-1">
-    
-    <a class="btn btn-ghost normal-case text-xl logo-text" href="http://localhost:5173/">
+    <Link class="btn btn-ghost normal-case text-xl logo-text" to="/home">
       <img src={logo} alt="logo" width="26px" />
       QueryFlow
-    </a>
+    </Link>
   </div>
   <div class="flex-none">
     <a class="navtags" href="$">About</a>
