@@ -1,6 +1,6 @@
 <script lang="ts" >
 import logo from '../assets/QueryFlow-icon.png'
-import { Link, navigate } from 'svelte-routing';
+import { navigate } from 'svelte-routing';
 import {isAuthenticated} from '../store'
 
 const logout = async () => {
