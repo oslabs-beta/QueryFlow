@@ -20,10 +20,10 @@ const logout = async () => {
 
 <div class="navbar bg-base-100 fixed top-0 z-10">
   <div class="flex-1">
-    <Link class="btn btn-ghost normal-case text-xl logo-text" to="/home">
+    <a class="btn btn-ghost normal-case text-xl logo-text" href="/home">
       <img src={logo} alt="logo" width="26px" />
       QueryFlow
-    </Link>
+    </a>
   </div>
   <div class="flex-none">
     <a class="navtags" href="$">About</a>
