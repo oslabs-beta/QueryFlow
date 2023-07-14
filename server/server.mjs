@@ -31,18 +31,9 @@ app.use(express.static(resolve(__dirname, '../dist')));
 app.use('/api', apiRouter,loginRouter);
 
 //Serve index.html file
-// app.get('/*', (req, res) => {
-//   res.sendFile(resolve(__dirname, '../dist/index.html'));
-// });
-
-app.get('/*', function(req, res, next) {
-  if (req.accepts('html')) {
-    res.sendFile(path.resolve(__dirname, '../dist/index.html'));
-  } else {
-    next();
-  }
+app.get('/*', (req, res) => {
+  res.sendFile(resolve(__dirname, '../dist/index.html'));
 });
-
 
 //Route error handler
 app.use('*', (req, res) => {
