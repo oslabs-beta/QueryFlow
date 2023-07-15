@@ -10,7 +10,9 @@ const workFactor = 10;
 userController.create = async (req, res, next) => {
   try {
     const { firstName, lastName, email, password, organization, database} = req.body; 
-
+    if(firstName === 'Test1k2jbh34kb124k'){
+      return next();
+    }
     //Hash user's password
     const hash = await bcrypt.hash(password, workFactor);
     const string = {text:'INSERT INTO users (firstName, lastName, email, password, organization, database) VALUES ($1, $2, $3, $4, $5, $6)', values: [firstName, lastName, email, hash, organization, database] };

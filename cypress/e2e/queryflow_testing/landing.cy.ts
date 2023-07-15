@@ -8,6 +8,4 @@ describe('landing', () => {
   it('Login component should have title "Login"', () => {
     cy.get('h1').should('have.text', 'Login');
   });
-
-  
 });

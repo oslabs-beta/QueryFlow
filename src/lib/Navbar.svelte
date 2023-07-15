@@ -27,8 +27,8 @@ const logout = async () => {
     </a>
   </div>
   <div class="flex-none">
-    <a class="navtags" href="$">About</a>
-    <a class="navtags" href="$">SQL Tips</a>
+    <a class="navtags" href="/about">About</a>
+    <a class="navtags" href="/tips">SQL Tips</a>
     <a class="navtags" href="https://github.com/oslabs-beta/QueryFlow" target="_blank">GitHub</a>
   
     {#if $isAuthenticated}
