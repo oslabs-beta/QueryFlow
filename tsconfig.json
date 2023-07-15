@@ -14,7 +14,9 @@
 		 */
 		"allowJs": true,
 		"checkJs": true,
-		"isolatedModules": true
+		"isolatedModules": true,
+    "inlineSourceMap": true,
+    "sourceMap": false
 	},
 	"include": ["src/**/*.d.ts", "src/**/*.ts", "src/**/*.js", "src/**/*.svelte"],
 	"references": [{ "path": "./tsconfig.node.json" }]
