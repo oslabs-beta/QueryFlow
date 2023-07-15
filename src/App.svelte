@@ -5,6 +5,7 @@
 	import Contact from './Pages/Contact.svelte';
 	import Home from './Pages/Home.svelte';
 	import Landing from './Pages/Landing.svelte';
+	// import LandingPage from './Pages/LandingPage.svelte';
 	import Tips from './Pages/Tips.svelte';
 	import AllMetrics from './Pages/AllMetrics.svelte';
 </script>
