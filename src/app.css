@@ -12,7 +12,7 @@
 
 /* body full screen height */
 body {
-	height: 100vh;
+	min-height: 100vh;
 }
 
 /* body no scrollbar */
@@ -105,4 +105,8 @@ td {
 	.group-query {
 		display: none;
 	}
+}
+
+article > h1 {
+	text-align: center;
 }
