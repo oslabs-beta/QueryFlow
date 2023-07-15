@@ -13,14 +13,13 @@
 	</p>
 	<h1>Getting Started</h1>
 	<p>
-		To get comfortable, you can test query strings using our sandbox database. By using our sandbox
-		PostgreSQL database.
+		To get comfortable, you can test query strings in our sandbox PostgreSQL database. Start by
+		navigating to our homepage then select “Add A Query”
 	</p>
-	<p>On the homepage, select “Add A Query”</p>
 	<img src={addAQueryPNG} alt="screenshot of Add a Query here" />
-	<p>When the Drawer opens, enter the following information</p>
+	<p>A drawer will open, enter the following information into the provided fields:</p>
 	<p>
-		<strong>name of your query:</strong><br />
+		<strong>Name of your query:</strong><br />
 		pagila-customer-select-10 <br /><br />
 		<strong>Postgres DB URI/URL:</strong><br />
 		postgres://yttdzhlk:HnLO6cyc9fLwqqNjttS-HhsEnie7-aT5@mahmud.db.elephantsql.com/yttdzhlk<br /><br
@@ -35,7 +34,7 @@
 		ORDER BY total_revenue DESC<br />
 		LIMIT 10;<br /><br />
 
-		<strong>set # of query runs to 3 and leave Delay between queries at 2</strong> <br /><br />
+		<strong>Set # of query runs to 3 and leave Delay between queries at 2</strong> <br /><br />
 		The data should look like this:
 	</p>
 	<img src={drawerExamplePNG} class="w-52" alt="drawer with data above as input" />
