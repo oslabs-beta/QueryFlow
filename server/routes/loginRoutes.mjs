@@ -10,7 +10,7 @@ router.post('/signup', userController.create, (req, res) => {
 
 //Logging in
 router.post('/login', userController.login, (req, res) => {
-  res.status(201).json({userData: res.locals.data,token:res.locals.authentication});
+  res.status(200).json({userData: res.locals.data,token:res.locals.authentication});
 });
 
 //Google Login

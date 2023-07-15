@@ -44,22 +44,6 @@
   }
 </script>
 
-
-
-<!-- //   try 
-// 		const response = await fetch('/api/google-login',{
-//       method:'GET',
-//       mode: 'no-cors',
-//       headers: {
-// 				'Content-Type': 'application/json',
-// 			},
-//     })
-//     const data = await response.json();
-//     console.log('i am data',data)
-// }catch(error){
-
-// } -->
-
 <!-- framework for login -->
 <div class="flex flex-col items-center justify-center px-6 py-8 mx-9 mx-auto md:h-full lg:py-0 w-96 login">
 	<div

@@ -14,7 +14,10 @@
 		 */
 		"allowJs": true,
 		"checkJs": true,
-		"isolatedModules": true
+		"isolatedModules": true,
+    "inlineSourceMap": true,
+    "sourceMap": false,
+    "types": ["cypress", "node"]
 	},
 	"include": ["src/**/*.d.ts", "src/**/*.ts", "src/**/*.js", "src/**/*.svelte"],
 	"references": [{ "path": "./tsconfig.node.json" }]
