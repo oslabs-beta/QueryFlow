@@ -1,10 +1,24 @@
 <script lang="ts">
-	import denormalize from '../assets/denormalize.png';
-	import cacheAside from '../assets/cache-aside.png';
-	import joinNotOptimized from '../assets/join-not-optimized.png';
+	import denormalize from '../assets/denormalize.avif';
+	import cacheAside from '../assets/cache-aside.avif';
+	import joinNotOptimized from '../assets/join-not-optimized.avif';
+	import {isAuthenticated} from '../store'
+	import { get } from 'svelte/store';
+	import { onMount } from 'svelte';
+	
 	let DenormalizedLinkURL = 'https://rubygarage.org/blog/database-denormalization-with-examples';
 	let cacheAsideURL = 'https://blog.cdemi.io/design-patterns-cache-aside-pattern/';
 	let joinNotOptimizedUrl = 'https://stephenn.com/2021/03/sql-join-queries-temporary-tables/';
+	
+	onMount(()=>{
+		if (localStorage.getItem('token')){
+			isAuthenticated.set(true)  
+		}   
+	})
+
+
+
+
 </script>
 
 <article class="mt-10 mx-auto pb-10 mb-0 prose">

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import logo from '../assets/QueryFlow-icon.png';
+	import logo from '../assets/QueryFlow-icon.avif';
 	import { navigate } from 'svelte-routing';
 	import { isAuthenticated } from '../store';
 
@@ -25,10 +25,11 @@
 		</a>
 	</div>
 	<div class="flex-none">
+		<a class="navtags" href="/login">App</a>
 		<a class="navtags" href="/about">About</a>
 		<a class="navtags" href="/tips">SQL Tips</a>
 		<a class="navtags" href="https://github.com/oslabs-beta/QueryFlow" target="_blank">GitHub</a>
-
+		
 		{#if $isAuthenticated}
 			<button on:click={logout} class="btn btn-active btn-primary">Logout</button>
 		{/if}
