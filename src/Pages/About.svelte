@@ -3,7 +3,7 @@
 	import drawerExamplePNG from '../assets/drawer-example.png';
 </script>
 
-<article class="mt-10 m-10 pb-10 mb-0 prose md:mx-20 lg:mx-40 xl:mx-60">
+<article class="mt-10 mx-auto pb-10 mb-0 prose">
 	<h1>Purpose and Benefits</h1>
 	<p>
 		QueryFlow enables you to analyze the database performance of PostgreSQL queries by plotting
