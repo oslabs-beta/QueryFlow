@@ -5,6 +5,10 @@ describe('landing', () => {
     cy.visit('http://localhost:5173/');
   });
 
+  it('Renders Login component by default', () => {
+    cy.get('div.landing-container').contains('Login');
+  });
+  
   it('Login component should have title "Login"', () => {
     cy.get('h1').should('have.text', 'Login');
   });
