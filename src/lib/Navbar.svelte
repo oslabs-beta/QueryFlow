@@ -50,15 +50,24 @@
 		</a>
 	</div>
 	<div class="flex-none">
-		<a class="navtags" href="/login">Home</a>
-		<a class="navtags" href="/about">About</a>
-		<a class="navtags" href="/tips">SQL Tips</a>
-		<a class="navtags" href="https://github.com/oslabs-beta/QueryFlow" target="_blank">GitHub</a>
-		{#if $isAuthenticated}
-		<button on:click={logout} class="navtags btn btn-active btn-primary">Logout</button>
+		<ul class="menu menu-horizontal text-lg">
+      <li><a class="navtags active:shadow-lg active:ring active:ring-primary-100" href="/login">Home</a></li>
+			<li><a class="navtags active:shadow-lg active:ring active:ring-primary-100" href="/about">About</a></li>
+      <li><a class="navtags active:shadow-lg active:ring active:ring-primary-100" href="/tips">SQL Tips</a></li>
+			<li><a class="navtags active:shadow-lg active:ring active:ring-primary-100" href="https://github.com/oslabs-beta/QueryFlow" target="_blank">GitHub</a></li>
+			<li>
+				{#if $isAuthenticated}
+				<a on:click={logout} href="/login" class="navtags">Logout</a>
+				{:else}
+				<button on:click={login} class="navtags btn-active btn-primary font-semibold active:shadow-lg active:ring active:ring-primary-100">Login</button>
+				{/if}
+			</li>
+		</ul>
+		<!-- {#if $isAuthenticated}
+		<a on:click={logout} href="/login" class="navtags">Logout</a>
 		{:else}
 		<button on:click={login} class="navtags btn btn-primary">Login</button>
-	{/if}
+	{/if} -->
 		<div id="hamburger-menu" class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto px-4">
 			<button on:click={toggleNavWindow} data-collapse-toggle="navbar-hamburger" type="button" class="inline-flex items-center justify-center p-2 w-10 h-10 ml-3 text-sm text-gray-500 rounded-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="navbar-hamburger" aria-expanded="false">
 				<svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
@@ -66,7 +75,7 @@
 				</svg>
 			</button>
 			<div class={`${revealNavDropdown ? '' : 'hidden'} w-full`} style="position: fixed; top: 48px; right: 0px; z-index: 10;" id="navbar-hamburger">
-				<ul class="flex flex-col font-medium mt-4 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
+				<ul class="flex flex-col font-medium mt-4 bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
 					<li>
 						<a href="/" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" aria-current="page">Home</a>
 					</li>
@@ -97,9 +106,6 @@
 		border-bottom: 1px solid #cecece;
 	}
 
-	.navtags {
-		margin-right: 25px;
-	}
 	#hamburger-menu {
 		display: none;
 	}
