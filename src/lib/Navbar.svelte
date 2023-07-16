@@ -51,15 +51,15 @@
 	</div>
 	<div class="flex-none">
 		<ul class="menu menu-horizontal text-lg">
-      <li><a class="navtags active:shadow-lg active:ring active:ring-primary-100" href="/login">Home</a></li>
-			<li><a class="navtags active:shadow-lg active:ring active:ring-primary-100" href="/about">About</a></li>
-      <li><a class="navtags active:shadow-lg active:ring active:ring-primary-100" href="/tips">SQL Tips</a></li>
-			<li><a class="navtags active:shadow-lg active:ring active:ring-primary-100" href="https://github.com/oslabs-beta/QueryFlow" target="_blank">GitHub</a></li>
+      <li><a class="navtags active:shadow-xl active:ring active:ring-primary-100" href="/login">Home</a></li>
+			<li><a class="navtags active:shadow-xl active:ring active:ring-primary-100" href="/about">About</a></li>
+      <li><a class="navtags active:shadow-xl active:ring active:ring-primary-100" href="/tips">SQL Tips</a></li>
+			<li><a class="navtags active:shadow-xl active:ring active:ring-primary-100" href="https://github.com/oslabs-beta/QueryFlow" target="_blank">GitHub</a></li>
 			<li>
 				{#if $isAuthenticated}
-				<a on:click={logout} href="/login" class="navtags">Logout</a>
+				<a on:click={logout} href="/login" class="navtags active:shadow-xl active:ring active:ring-primary-100">Logout</a>
 				{:else}
-				<button on:click={login} class="navtags btn-active btn-primary font-semibold active:shadow-lg active:ring active:ring-primary-100">Login</button>
+				<button on:click={login} class="navtags btn-active btn-primary font-semibold active:shadow-xl active:ring active:ring-primary-100">Login</button>
 				{/if}
 			</li>
 		</ul>
