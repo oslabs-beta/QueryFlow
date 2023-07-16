@@ -1,92 +1,93 @@
-<script>
-	let sections = [
-		{
-			title: 'Introduction',
-			content:
-				"QueryFlow is an open source project built to optimize database performance by automatically caching slow queries. By leveraging Svelte and Tailwind CSS, it provides a seamless and efficient way to enhance your application's response time.",
-		},
-		{
-			title: 'Features',
-			content:
-				'Automatic caching of slow queries\nEfficient and scalable performance optimization\nEasy integration with existing projects\nCustomizable cache settings\nReal-time query monitoring and statistics',
-		},
-		{
-			title: 'Getting Started',
-			content:
-				'To get started with QueryFlow, follow the steps below:\n\n1. Install the QueryFlow package via npm or yarn: `npm install query-flow`\n2. Import QueryFlow into your project\n3. Initialize the cache with your preferred settings\n4. Enjoy faster query responses!',
-		},
-		{
-			title: 'Contribute',
-			content:
-				"QueryFlow is an open source project, and we welcome contributions from the community. If you'd like to contribute, please visit our GitHub repository and follow the guidelines for submitting pull requests.",
-			githubLink: 'https://github.com/your-repository-link',
-		},
-	];
+<script lang="ts">
+import { onMount } from 'svelte';
+
+onMount(() => {
+  // functionality for the copy button on the top right of the query string code box
+    const copyButton2: HTMLElement = document.getElementById(`copyButton`);
+    copyButton2.addEventListener('click', function() {
+      // Create a temporary textarea to select the text and copy
+      const tempTextArea: HTMLTextAreaElement = document.createElement('textarea');
+      tempTextArea.value = 'npm -install query-flow'
+      document.body.appendChild(tempTextArea);
+      tempTextArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(tempTextArea);
+    });
+  });
 </script>
 
-<header class="bg-indigo-500 py-4">
-	<div class="container mx-auto px-4">
-		<h1 class="text-white text-3xl font-bold corporate-font">QueryFlow</h1>
-		<p class="text-white mt-2">Visualizing and caching slow queries in real time.</p>
-	</div>
-</header>
-
-<main class="py-8">
-	<div class="container mx-auto px-4">
-		{#each sections as section}
-			<section class="mb-12">
-				<div class="bg-white rounded-lg p-6 card custom-border">
-					<h2 class="text-2xl font-bold mb-4 custom-color corporate-font">{section.title}</h2>
-					{#if section.content}
-						<p class="text-gray-800">{section.content}</p>
-					{/if}
-					{#if section.githubLink}
-						<a
-							href={section.githubLink}
-							class="inline-block bg-indigo-500 hover:bg-indigo-600 text-white font-semibold px-6 py-3 mt-4 rounded-md transition-colors duration-300 button corporate-font"
-							>GitHub Repository</a
-						>
-					{/if}
-				</div>
-			</section>
-		{/each}
-	</div>
+<main>
+  <section class="landing-background object-cover w-full h-full inset-0">
+    <div class="landing-background-text">
+      <h1>QueryFlow</h1>
+      <p>Visualizing and Caching Slow Queries in Real-Time</p>
+      <button class="get-started btn btn-lg btn-primary drawer-button border-primary m-8 hover:bg-secondary hover:text-white hover:border-secondary">Get started</button>
+    </div>
+  </section>
+  <section class="transition-section">
+    <h3>Dynamic Query Engine</h3>
+  </section>
+  <section>
+    <div class="grid justify-center mt-4 npm-package-container">
+      <h1>QueryFlow NPM Package </h1>
+      <div class="flex rounded-md bg-slate-600 text-slate-100 h-10">
+        <div class="ml-40 grid justify-center place-items-center">npm install query-flow</div>
+        <button id="copyButton" class="ml-40 btn btn-square btn-sm right-0 top-0 text-lg bg-transparent border-none hover:bg-transparent">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="white" class="w-5 h-5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184" />
+          </svg>
+      </div>
+      
+    </div>
+  </section>
+  <div style="height: 1000px;"></div>
 </main>
 
-<footer class="bg-gray-800 py-4">
-	<div class="container mx-auto px-4 text-center text-gray-300">
-		<p class="corporate-font">© 2023 QueryFlow. All rights reserved.</p>
-	</div>
-</footer>
 
 <style>
-	/* Customize additional styles here */
-	.card {
-		box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-	}
+.transition-section {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  color:white;
+  height: 5vh;
+  /* background: #112452; */
+	background: linear-gradient(181deg, rgba(2,0,36,1) 0%, rgba(121,9,93,1) 35%, rgba(87,0,255,1) 82%);
+  
+}
 
-	.button {
-		box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-	}
+.transition-section h3{
+  font-size: 30px;
+	font-weight: 500;
+}
 
-	.custom-bg {
-		background-color: #f8fafc;
-	}
+.landing-background{
+  background-image: url('../assets/graph3.avif');
+  background-size: cover;
+  background-position: center;
+  /* width: 100wh; scale up the div, you can change this to suit your needs */
+  height: 85vh;
+	background-repeat: no-repeat;
+}
+.landing-background-text{
+  position: absolute;
+  color:white;
+  left: 10vw;
+  top: 10vh;
+}
 
-	.custom-color {
-		color: #333333;
-	}
+.landing-background-text h1{
+ font-size: 85px;
+ font-weight: 500;
+}
+.landing-background-text p{
+  font-size: 45px;
+}
 
-	.custom-border {
-		border-width: 2px;
-		border-color: #e2e8f0;
-	}
-
-	.custom-padding {
-		padding: 2rem;
-	}
-
-	.corporate-font {
-		font-family: Arial, sans-serif;
-	}
+.npm-package-container{
+  height: 200px;
+}
+.npm-package-container h1{
+  font-size: 45px;
+}
 </style>

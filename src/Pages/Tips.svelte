@@ -9,12 +9,6 @@
 	let DenormalizedLinkURL = 'https://rubygarage.org/blog/database-denormalization-with-examples';
 	let cacheAsideURL = 'https://blog.cdemi.io/design-patterns-cache-aside-pattern/';
 	let joinNotOptimizedUrl = 'https://stephenn.com/2021/03/sql-join-queries-temporary-tables/';
-	
-	onMount(()=>{
-		if (localStorage.getItem('token')){
-			isAuthenticated.set(true)  
-		}   
-	})
 
 
 

@@ -5,13 +5,6 @@
 	import { get } from 'svelte/store';
 	import { onMount } from 'svelte';
 	
-	onMount(()=>{
-		if (localStorage.getItem('token')){
-			isAuthenticated.set(true)  
-		}   
-	})
-
-	
 
 </script>
 
