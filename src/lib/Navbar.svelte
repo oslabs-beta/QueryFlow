@@ -1,5 +1,5 @@
 <script lang="ts">
-	import logo from '../assets/QueryFlow-icon.avif';
+	import logo from '../assets/Query-Flow-icon.png';
 	import { navigate } from 'svelte-routing';
 	import { isAuthenticated } from '../store';
 	import { onMount } from 'svelte';
@@ -50,7 +50,7 @@
 		</a>
 	</div>
 	<div class="flex-none">
-		<ul class="menu menu-horizontal text-lg">
+		<ul class="flex space-x-1 menu menu-horizontal text-lg">
       <li><a class="navtags active:shadow-xl active:ring active:ring-primary-100" href="/login">Home</a></li>
 			<li><a class="navtags active:shadow-xl active:ring active:ring-primary-100" href="/about">About</a></li>
       <li><a class="navtags active:shadow-xl active:ring active:ring-primary-100" href="/tips">SQL Tips</a></li>
