@@ -48,7 +48,6 @@
 		<input id="my-drawer" type="checkbox" class="drawer-toggle" />
 		<div class="drawer-content">
 			<!-- Page content here -->
-			<label for="my-drawer" class="btn btn-primary drawer-button border-primary hover:bg-secondary hover:text-white hover:border-secondary">Add a query</label>
 		</div>
 		<div class="drawer-side">
 			<label for="my-drawer" class="drawer-overlay" />
@@ -189,7 +188,7 @@
 
 <style>
 	.drawer {
-		z-index: 9999;
+		z-index: 5;
 	}
 
   .drawer-side {
