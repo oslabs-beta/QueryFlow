@@ -36,6 +36,8 @@
 	}
 
 	@media only screen and (max-width: 1025px) {
-		
+		.landing-login-container img {
+			display: none;
+		}
 	}
 </style>
