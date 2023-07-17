@@ -100,7 +100,7 @@ td {
 		display: none;
 	}
 }
-@media only screen and (min-width: 768px) and (max-width: 1285px) {
+@media only screen and (min-width: 768px) and (max-width: 1300px) {
 	/* hide the group bar graph on the bottom left */
 	.group-query {
 		display: none;

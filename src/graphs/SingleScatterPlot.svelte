@@ -139,8 +139,8 @@
 </script>
 
 <div class="h-80">
-
-  <svg id={`scatterPlot${i}`} class="w-74 h-full" ></svg>
+  <h4 class="flex justify-center -my-3 font-semibold">Single {metric.queryName} metrics</h4>
+  <svg id={`scatterPlot${i}`} class="w-74 h-full"></svg>
 </div>
 
 <!-- style="width: 100%; height: 100%" -->

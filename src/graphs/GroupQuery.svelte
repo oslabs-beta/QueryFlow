@@ -78,7 +78,7 @@
       .style('padding', '4px 8px')
       .style('font-size', '12px');
 
-    // 
+    // tooltip info
     svg
       .append('g')
       .attr('transform', `translate(${margin.left}, ${margin.top})`)
@@ -108,7 +108,7 @@
 
 
 <div class="h-80 group-query">
-
+  <h4 class="flex justify-center -my-3 font-semibold">Average {metricName} metrics</h4>
   <svg id={`groupBarChart${i}`} class="w-74 h-full"></svg>
 </div>
 
