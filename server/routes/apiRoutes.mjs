@@ -26,9 +26,10 @@ router.delete('/delete-metrics-id', authenticationMiddleware, ourDBController.de
   res.status(200).json({msg: 'Query Deleted'});
 });
 
+// ===== Unused route, preserving for later use if needed =====
 // Deletes a query from the PostgreSQL metrics table by name
-router.delete('/delete-metrics-name', ourDBController.deleteQueryByName, (req, res) => {
-  res.status(200).json({msg: 'Query Deleted'});
-});
+// router.delete('/delete-metrics-name', ourDBController.deleteQueryByName, (req, res) => {
+//   res.status(200).json({msg: 'Query Deleted'});
+// });
 
 export default router;

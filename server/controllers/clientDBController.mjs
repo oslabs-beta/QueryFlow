@@ -64,6 +64,7 @@ clientDBController.queryMetrics = async (req, res, next) => {
   }
 };
 
+// Calculates necessary statistics while querying the database
 clientDBController.queryTimeSQL = async (req, res, next) => {
 
   const { uri , queryString } = req.body;

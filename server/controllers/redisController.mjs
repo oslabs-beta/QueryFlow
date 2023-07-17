@@ -1,4 +1,3 @@
-import redis from 'redis';
 import redisModel from '../models/redisModel.mjs';
 
 const redisController = {};
@@ -8,17 +7,17 @@ redisController.latency = async (req, res, next) => {
     console.log('connected to redis successfully!');
   });
 
-  const { resultData, totalTimeSQL} = res.locals.queryResultSQL;
+  const { resultData, totalTimeSQL } = res.locals.queryResultSQL;
 
   try {
     redisModel.json.set('Result', '.', resultData, (err) => {
       if (err) {
-        console.error('Error storing data in Redis:', err);
+        console.error('Error storing data in Redis: ', err);
         return res.status(500).json({ error: 'Failed to store data in Redis' });
       }
       return res.status(200).json({ message: 'Data stored successfully' });
     });
-    // Calculate performance metrics (e.g., time taken to retrieve the value)
+    // Calculates performance metrics (e.g., time taken to retrieve the value)
     const startTime = process.hrtime();
     const getResult = await redisModel.json.get('Result', {
       path: '.',
@@ -28,9 +27,9 @@ redisController.latency = async (req, res, next) => {
     const endTime = process.hrtime(startTime);
     const totalTimeRedis = (endTime[0] * 1000 + endTime[1] / 1000000).toFixed(2);
     const resObj = {};
-    //This is the time it takes for redis to get the key-value data
+    // Time for redis to get the key-value data
     resObj.totalTimeRedis = totalTimeRedis;
-    //This is the time it takes for PostgreSQL to get the data
+    // Time for PostgreSQL to get the data
     resObj.totalTimeSQL = totalTimeSQL;
 
     res.locals.comparisonData = resObj;
