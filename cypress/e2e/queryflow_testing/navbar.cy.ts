@@ -2,9 +2,9 @@
 
 describe('Navbar Tests', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:5173/', {
+    cy.visit('http://localhost:5173/login', {
       onBeforeLoad(win) {
-        // Mock the localStorage getItem method to return a token
+        // Mocks the localStorage getItem method to return a token
         cy.stub(win.localStorage, 'getItem').returns('token');
       },
     });
@@ -12,7 +12,7 @@ describe('Navbar Tests', () => {
 
   it('displays the logo and link to homepage', () => {
     cy.get('.logo-text').should('have.attr', 'href', 'http://localhost:5173/');
-    cy.get('.logo-text img').should('have.attr', 'src', '/src/assets/QueryFlow-icon.avif'); // Replace 'path/to/logo.png' with the actual path to your logo image
+    cy.get('.logo-text img').should('have.attr', 'src', '/src/assets/Query-Flow-icon.png');
     cy.get('.logo-text').contains('QueryFlow');
   });
 
@@ -26,21 +26,20 @@ describe('Navbar Tests', () => {
 
   it('logs out and redirects to homepage', () => {
     cy.intercept('https://accounts.google.com/o/oauth2/revoke*').as('revokeToken');
-    cy.url().should('eq', 'http://localhost:5173/home'); // Replace 'http://localhost:5173/' with the actual URL of your homepage
+    cy.url().should('eq', 'http://localhost:5173/home');
   });
 
   it('navigates to the About page', () => {
     cy.get('.navtags').contains('About').click();
-    cy.url().should('include', 'http://localhost:5173/about'); // Replace '/about' with the actual URL of your About page
+    cy.url().should('include', 'http://localhost:5173/about');
   });
 
   it('navigates to the SQL Tips page', () => {
     cy.get('.navtags').contains('SQL Tips').click();
-    cy.url().should('include', 'http://localhost:5173/tips'); // Replace '/sql-tips' with the actual URL of your SQL Tips page
+    cy.url().should('include', 'http://localhost:5173/tips');
   });
 
   it('opens the GitHub link in a new tab', () => {
     cy.get('.navtags').contains('GitHub').should('have.attr', 'target', '_blank');
   });
-
 });

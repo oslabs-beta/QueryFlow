@@ -184,7 +184,7 @@ describe('IsAuthenticated Store', () => {
 
   it('should update isAuthenticated', () => {
     isAuthenticated.set(true);
-    isAuthenticated.subscribe(value=>{
+    isAuthenticated.subscribe(value => {
       expect(value).to.deep.equal(true);
     });
   });

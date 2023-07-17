@@ -6,27 +6,27 @@ import {
 
 describe('Home Tests', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:5173/home',{
+    cy.visit('http://localhost:5173/home', {
     });
   });
-  it('Loads the homepage', () => {
+  it('loads the homepage', () => {
     cy.url().should('include', '/');
   });
 
-  it('Checks Global Metrics Button', () => {
+  it('checks Global Metrics Button', () => {
     cy.get('button').contains('Global Metrics').click(); 
     cy.url().should('include', '/all-metrics'); 
   });
 
-  it('Checks the dropdown selection', () => {
+  it('checks the dropdown selection', () => {
     cy.get('select').should('have.value', 'all');
   });
 
-  it('Tests if the query metrics are being fetched', () => {
+  it('tests if the query metrics are being fetched', () => {
     cy.intercept('POST', '/api/get-metrics').as('getMetrics');
   });
 
-  it('Tests if user can navigate to all-metrics page', () => {
+  it('tests if user can navigate to /all-metrics', () => {
     cy.get('button').contains('Global Metrics').click();
     cy.url().should('include', '/all-metrics');
   });
@@ -61,7 +61,4 @@ describe('Home Tests', () => {
     cy.visit('http://localhost:5173/home');
     metricData.set(metricDataSample);
   });
-
- 
-
 });

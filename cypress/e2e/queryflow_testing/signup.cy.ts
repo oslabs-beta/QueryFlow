@@ -8,18 +8,15 @@ describe('Signup tests', () => {
   });
 
   it('displays validation error on empty submission', () => {
-    // Clicking on the submit button without filling out the fields
     cy.get('button[type=submit]').click();
   });
 
   it('displays validation error on incorrect input', () => {
-    // Filling out the form with incorrect information
     cy.get('input[name=email]').type('incorrectemail@test.com');
     cy.get('input[name=password]').type('incorrectpassword{enter}');
   });
 
-  it('navigates to home on successful login', () => {
-    // Filling out the form with correct information
+  it('navigates to home on successful login with correct input', () => {
     cy.get('input[name=email]').type('correctemail@test.com');
     cy.get('input[name=password]').type('correctpassword{enter}');
   });

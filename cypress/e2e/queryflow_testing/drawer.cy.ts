@@ -3,7 +3,7 @@
 describe('Drawer Tests', () => {
   beforeEach(() => {
     cy.visit('http://localhost:5173/home');
-    cy.get('label').contains('Add a query').click();; // visit the url where your app runs
+    cy.get('label').contains('Add a query').click();
   });
 
   it('should open the drawer when the button is clicked', () => {
@@ -36,7 +36,7 @@ describe('Drawer Tests', () => {
   });
 
 
-  it('Click outside of the drawer should close the drawer', () => {
+  it('clicking outside of the drawer should close the drawer', () => {
     cy.get('.drawer-side').should('have.css', 'left', '0px');
     cy.get('.drawer-overlay').click();
     cy.get('.drawer-side').should('have.css', 'left', '-1536px');
