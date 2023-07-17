@@ -1,6 +1,11 @@
 <script lang="ts">
-	import addAQueryPNG from '../assets/add-a-query.png';
-	import drawerExamplePNG from '../assets/drawer-example.png';
+	import addAQuery from '../assets/add-a-query.avif';
+	import drawerExample from '../assets/drawer-example.avif';
+	import {isAuthenticated} from '../store'
+	import { get } from 'svelte/store';
+	import { onMount } from 'svelte';
+	
+
 </script>
 
 <article class="mt-10 mx-auto pb-10 mb-0 prose">
@@ -16,7 +21,7 @@
 		To get comfortable, you can test query strings in our sandbox PostgreSQL database. Start by
 		navigating to our homepage then select “Add A Query”
 	</p>
-	<img src={addAQueryPNG} alt="screenshot of Add a Query here" />
+	<img src={addAQuery} alt="screenshot of Add a Query here" />
 	<p>A drawer will open, enter the following information into the provided fields:</p>
 	<p>
 		<strong>Name of your query:</strong><br />
@@ -37,7 +42,7 @@
 		<strong>Set # of query runs to 3 and leave Delay between queries at 2</strong> <br /><br />
 		The data should look like this:
 	</p>
-	<img src={drawerExamplePNG} class="w-52" alt="drawer with data above as input" />
+	<img src={drawerExample} class="w-52" alt="drawer with data above as input" />
 	<p>Run the query and browse the metrics data</p>
 	<p>
 		Try changing the query string, # of query runs and Delay between queries to see how metrics are

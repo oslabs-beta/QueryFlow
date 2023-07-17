@@ -86,7 +86,6 @@
       Cookies.remove('token');
       Cookies.remove('revoke');
     }
-		console.log('i am the cookie login', cookie);
     const token = localStorage.getItem('token');
     if (token) {
       isAuthenticated.set(true)
@@ -124,10 +123,11 @@
   
 </script>
 
-<div class="w-full flex flex-col items-center content-center justify-center">
+<div class="w-full flex flex-col items-center content-center justify-center mt-6">
   <!-- TEMPORARY BUTTON FOR GOING TO /all-metrics -->
 <button class="btn btn-primary m-1 border-primary hover:bg-secondary hover:text-white hover:border-secondary" on:click={() => {navigate('/all-metrics')}}>Global Metrics</button>
 <!-- END OF TEMPORARY BUTTON -->
+<label for="my-drawer" class="btn btn-primary drawer-button border-primary hover:bg-secondary hover:text-white hover:border-secondary">Add a query</label>
   <div class="flex-shrink-0">
     <!-- Add Query Sliding Drawer -->
     <Drawer />

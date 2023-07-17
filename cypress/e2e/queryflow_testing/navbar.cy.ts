@@ -12,7 +12,7 @@ describe('Navbar Tests', () => {
 
   it('displays the logo and link to homepage', () => {
     cy.get('.logo-text').should('have.attr', 'href', 'http://localhost:5173/');
-    cy.get('.logo-text img').should('have.attr', 'src', '/src/assets/QueryFlow-icon.png'); // Replace 'path/to/logo.png' with the actual path to your logo image
+    cy.get('.logo-text img').should('have.attr', 'src', '/src/assets/QueryFlow-icon.avif'); // Replace 'path/to/logo.png' with the actual path to your logo image
     cy.get('.logo-text').contains('QueryFlow');
   });
 
