@@ -188,7 +188,7 @@
 
 <style>
 	.drawer {
-		z-index: 5;
+		z-index: 11;
 	}
 
   .drawer-side {

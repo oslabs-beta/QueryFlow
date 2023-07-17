@@ -1,8 +1,8 @@
 <script lang="ts">
-  import SingleBarGraph from "../Graphs/SingleBarGraph.svelte";
-  import SingleScatterPlot from "../Graphs/SingleScatterPlot.svelte";
-  import GroupQuery from "../Graphs/GroupQuery.svelte";
-  import Table from "../Graphs/Table.svelte"
+  import SingleBarGraph from "../graphs/SingleBarGraph.svelte";
+  import SingleScatterPlot from "../graphs/SingleScatterPlot.svelte";
+  import GroupQuery from "../graphs/GroupQuery.svelte";
+  import Table from "../graphs/Table.svelte"
   import { metricData, filterMetricData, filterMetricDataTwo } from '../store';
   import type { QueryData } from '../types';
   import { get } from 'svelte/store';
