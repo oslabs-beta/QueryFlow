@@ -2,12 +2,13 @@ import pg from 'pg';
 
 const clientDBController = {};
 
-//Takes in query & URI from client and gathers query metrics using client's database
+// Takes in query & URI from client and gathers query metrics using client's database
 clientDBController.queryMetrics = async (req, res, next) => {
 
   const { uri, queryString, queryName, queryCount, queryDelay } = req.body;
-  const {_id} = req.user;
-  //Initiate new model
+  const { _id } = req.user;
+
+  // Initiating new model
   const { Pool } = pg;
   const pool = new Pool({
     connectionString: uri
@@ -18,9 +19,8 @@ clientDBController.queryMetrics = async (req, res, next) => {
     return pool.query(text, params, callback);
   };
 
-
-  //Append Explain (options...) to client's query string. 
-  const query = 'EXPLAIN (ANALYZE true, COSTS true, SETTINGS true, BUFFERS true, WAL true, SUMMARY true,  FORMAT JSON)' + `${queryString}`;
+  // Append EXPLAIN (options...) to client's query string
+  const query = 'EXPLAIN (ANALYZE true, COSTS true, SETTINGS true, BUFFERS true, WAL true, SUMMARY true, FORMAT JSON)' + `${queryString}`;
 
   try {
     const delayedTasks = await Promise.all(
@@ -36,12 +36,13 @@ clientDBController.queryMetrics = async (req, res, next) => {
         const sharedHitBlocks = parsedData[0]['QUERY PLAN'][0]['Planning']['Shared Hit Blocks'];
         const sharedReadBlocks = parsedData[0]['QUERY PLAN'][0]['Planning']['Shared Read Blocks'];
         return {
-          planningTime,executionTime,totalTime,cacheSize,workingMem,sharedHitBlocks,sharedReadBlocks
+          planningTime, executionTime, totalTime, cacheSize ,workingMem, sharedHitBlocks, sharedReadBlocks
         };
       })
     );
     const metricsObj = {};
-    // get avg query time
+
+    // Gets avg query time
     metricsObj.averageTime = Number(delayedTasks.reduce((acc, obj) => acc + obj.totalTime, 0) / queryCount).toFixed(2);
 
     metricsObj._id = `${_id}`;
@@ -58,7 +59,7 @@ clientDBController.queryMetrics = async (req, res, next) => {
     return next({
       log: 'Error handler caught error in clientDBController.queryMetrics middleware',
       status: 400,
-      message: 'Error handler caught error in clientDBController.queryMetrics middleware',
+      message: 'An error occurred while generating metrics',
     });
   }
 };
@@ -67,7 +68,7 @@ clientDBController.queryTimeSQL = async (req, res, next) => {
 
   const { uri , queryString } = req.body;
 
-  //Initiate new model
+  // Initiating new model
   const { Pool } = pg;
   const pool = new Pool({
     connectionString: uri
@@ -81,12 +82,15 @@ clientDBController.queryTimeSQL = async (req, res, next) => {
   const string = `${queryString}`;
 
   try {
-    //start time of the query
+    // Start time of the query
     const startTime = process.hrtime();
-    //awaited query
+
+    // Awaited query
     const result = await clientDBModel(string);
-    //end time of the query
+
+    // End time of the query
     const endTime = process.hrtime(startTime);
+
     const totalTimeSQL = (endTime[0] * 1000 + endTime[1] / 1000000).toFixed(2);
     const obj = {};
     obj.resultData = result.rows[0];
@@ -99,7 +103,7 @@ clientDBController.queryTimeSQL = async (req, res, next) => {
     return next({
       log: 'Error handler caught error in clientDBController.queryTimeSQL middleware',
       status: 400,
-      message: 'Error handler caught error in clientDBController.queryTimeSQL middleware',
+      message: 'An error occurred while measuring time taken to query the primary database',
     });
   }
 };
