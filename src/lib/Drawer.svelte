@@ -1,5 +1,4 @@
 <script lang="ts">
-	// userId from Home
   import { metricData, filterMetricData, filterMetricDataTwo } from '../store';
 	
 	// initializing vars for database
@@ -9,16 +8,19 @@
 	let queryCount: number = 1;
 	let queryDelay: number = 2;
 
-  // Add Query Post Function - POST Request
+	let isDrawerOpen: boolean = false;
+
+  // POST Request
 	const postQuery = async (e: any) => {
     e.preventDefault();
     const token = localStorage.getItem('token')
+		isDrawerOpen = false;
     try {
       const response = await fetch('/api/query-metrics', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${token}` // needed for jwt
         },
         body: JSON.stringify({
           queryName,
@@ -31,7 +33,7 @@
 
       if (response.ok) {
         const data = await response.json();
-        // Update metricData and filterMetricData
+        // updates metricData and filterMetricData
         metricData.update((arr) => [data, ...arr]);
         filterMetricData.update((arr) => [data, ...arr]);
         filterMetricDataTwo.update((arr) => [data, ...arr]);
@@ -43,15 +45,15 @@
 </script>
 
 <div>
-	<!-- left div 1/3 of screen -->
+	<!-- sidebar named drawer -->
 	<div class="drawer">
-		<input id="my-drawer" type="checkbox" class="drawer-toggle" />
+		<input id="my-drawer" type="checkbox" class="drawer-toggle" bind:checked={isDrawerOpen}/>
 		<div class="drawer-content">
-			<!-- Page content here -->
+			<!-- page content here -->
 		</div>
 		<div class="drawer-side">
 			<label for="my-drawer" class="drawer-overlay" />
-			<!-- Sidebar content here -->
+			<!-- sidebar content here -->
 			<div class="menu p-4 w-1/3 bg-base-200 text-base-content ">
 				<form on:submit={postQuery}>
 					<div class="flex flex-col pt-8 h-screen">
@@ -188,7 +190,7 @@
 
 <style>
 	.drawer {
-		z-index: 11;
+		z-index: 11; /* places drawer above everything else */
 	}
 
   .drawer-side {
@@ -198,10 +200,15 @@
   
   .drawer-overlay {
     transition: all 0.2s ease-out; /* No transition delay */
-}
+	}
   /* CSS to show the drawer when checkbox is checked */
     /* The tilde is a conditional statement */
   #my-drawer:checked ~ .drawer-side {
-	left: 0;
+		left: 0;
   }
+
+	#my-drawer:not(:checked) ~ .drawer-side {
+		transition: all 0.8s ease-in;
+	}
+
 </style>
