@@ -3,7 +3,7 @@
   import { select, scaleBand, scaleLinear, axisBottom, axisLeft, type ScaleBand, type ScaleLinear } from 'd3';
   import { max } from 'd3-array';
   import { metricData } from '../store';
-  import type { QueryData, GraphData } from '../types';
+  import type { QueryData, GraphData, Directions } from '../types';
 
   export let metricName: string;
   export let i: number;
@@ -21,15 +21,15 @@
     date: obj.createdAt,
   }));
 
-  // pulls max value for later use on yScale var
-  const maxYValue = max([...averageTime], d => d.y) || 0;
+  // gets max value for later use on yScale var
+  const maxYValue: number = max([...averageTime], d => d.y) || 0;
 
   // renders chart on mount
   onMount(() => {
     const svg = select(`#groupBarChart${i}`);
-    const margin = { top: 20, right: 20, bottom: 40, left: 40 };
-    const width = 300 - margin.left - margin.right;
-    const height = 300 - margin.top - margin.bottom;
+    const margin: Directions = { top: 20, right: 20, bottom: 40, left: 40 };
+    const width: number = 300 - margin.left - margin.right;
+    const height: number = 300 - margin.top - margin.bottom;
 
     const xScale: ScaleBand<string> = scaleBand()
       .domain(`${[...Array(averageTime.length + 1).keys()].slice(1)}`)
@@ -105,14 +105,10 @@
   });
 </script>
 
-
-
 <div class="h-80 group-query">
   <h4 class="flex justify-center -my-3 font-semibold">Average {metricName} metrics</h4>
   <svg id={`groupBarChart${i}`} class="w-74 h-full"></svg>
 </div>
-
-
 
 <style>
 

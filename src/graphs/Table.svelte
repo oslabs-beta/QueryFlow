@@ -1,18 +1,17 @@
 <script lang="ts">
-import type { QueryMetrics,QueryData } from '../types';
+import type { QueryMetrics, QueryData } from '../types';
 
-export let metric:QueryData;
+export let metric: QueryData;
 
-const queryMetrics:QueryMetrics[] = metric.queryMetrics
-
+const queryMetrics: QueryMetrics[] = metric.queryMetrics;
 </script>
 
 <div class="scrollbar-hide overflow-y-auto">
-  <div class="overflow-x-auto ">
+  <div class="overflow-x-auto">
     <table class="table">
-      <!-- head -->
       <thead>
         <tr>
+          <!-- table headings -->
           <th>#</th>
           <th>Planning Time</th>
           <th>Execution Time</th>
@@ -22,10 +21,9 @@ const queryMetrics:QueryMetrics[] = metric.queryMetrics
         </tr>
       </thead>
       <tbody>
-        <!-- iterate through queryMetrics array and pass values into the table -->
+        <!-- table cells, broken down through #each loop -->
         {#each queryMetrics as metric, i}
           <tr>
-
             <th>{i+1}</th>
             <td>{metric.planningTime}</td>
             <td>{metric.executionTime}</td>
