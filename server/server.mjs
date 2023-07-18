@@ -27,11 +27,13 @@ app.use(express.json());
 app.use(bodyParser.json());
 
 // Serve static assets
-app.use(express.static(resolve(__dirname, '../src')));
+// Change to '../src' if problem this current setup is for distrubtion
+app.use(express.static(resolve(__dirname, '../dist')));
 
 // Serve index.html file
+// Change to '../index.html' if problem this current setup is for distrubtion
 app.get('/', (req, res) => {
-  res.sendFile(resolve(__dirname, '../index.html'));
+  res.sendFile(resolve(__dirname, '../dist/index.html'));
 });
 
 // Use apiRouter/loginRouter
