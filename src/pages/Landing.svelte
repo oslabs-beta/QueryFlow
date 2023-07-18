@@ -69,7 +69,7 @@ onMount(() => {
     <div class="flex justify-center">
       <div style="width: 600px;" class="rounded p-6" > 
         <div class="icon-div">
-          <img class="icon" alt="package" src="../src/assets/Icons/package.png"/>
+          <img class="icon" alt="package" src="../src/assets/package.png"/>
         </div>
         <h1 class="text-2xl font-medium">An NPM Package designed to automatically cache slow queries into a Redis database.</h1>   
         <p class="pt-4"> The NPM package incorporates QueryFlow.autoCache, an automatic caching feature for middleware and backend operations. This tool analyzes database queries and, if the execution time exceeds a set threshold, stores the results in a Redis cache database. Developers input the SQL and Redis models, the query string, variables and values, caching speed threshold, and TTL. This results in faster future queries, as data is swiftly retrieved from the cache. Regardless of data source, QueryFlow.autoCache delivers the queried results seamlessly into the middleware's response cycle.
@@ -79,7 +79,7 @@ onMount(() => {
     <div class="flex justify-center">
       <div style="width: 600px;" class="rounded  p-6">
         <div class="icon-div">
-          <img class="icon" alt="graph" src='../src/assets/Icons/PNG/480px/registry-editor_hires.png'/>
+          <img class="icon" alt="graph" src='../src/assets/registry-editor_hires.png'/>
         </div>
         <h1 class="text-2xl font-medium">Use our powerful visualization tool to analyze and interpret slow PostgreSQL queries</h1>   
         <p class="pt-4">QueryFlow is a tool designed to optimize the performance of PostgreSQL queries by mapping out planning, execution, and overall timing in comparison to other queries. It also provides a detailed table view showcasing shared, hit, and read blocks, facilitating the identification of performance deficiencies. Additionally, QueryFlow allows for comprehensive query comparisons and even offers a specific benchmarking feature against a Redis database. These capabilities make QueryFlow an essential tool for enhancing the performance of your PostgreSQL databases.</p>
@@ -126,7 +126,9 @@ onMount(() => {
     
     <div class="p-6">
       <h1 class="text-2xl xl:text-4xl font-bold">Explore your slow queries from various perspectives.</h1>
+     
       <p class="mt-2 xl:text-lg">With the QueryFlow Visualizer, you have the flexibility to analyze your slow queries in a variety of ways. It enables you to juxtapose various SQL query strings using interactive graphs and detailed tables. This tool provides comprehensive visualization of execution time, planning time, and average time for all your queries, enhancing your understanding and aiding in optimization.</p>
+    
       <h1 class="text-2xl xl:text-4xl font-bold mt-4">Side by side query comparisons</h1>
       <p class="mt-2 xl:text-lg">
         QueryFlow optimizes your SQL queries by offering performance comparisons and a global metrics chart for an overview of all your queries. Our standout feature, done with your consent, benchmarks your queries against Redis performance, showcasing caching benefits. You can leverage these insights using our NPM package, enabling seamless, dynamic caching for your application.</p>
@@ -208,9 +210,7 @@ onMount(() => {
 </section>
 </main>
 
-
 <style>
-
 .icon-div {
   width: 50px;
   height: 50px;
