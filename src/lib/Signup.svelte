@@ -39,7 +39,7 @@
         // switch boolean to back to login component
 				renderSignup = false;
 			} else {
-				console.error('error in signup')
+				console.error('Error signing up')
 			}
 		} catch (error) {
       console.error(error)
@@ -47,11 +47,11 @@
 	};
 </script>
 
-
+<!-- signup component -->
 <section>
-	<div class="flex flex-col px-6 mx-auto lg:py-0">
+	<div class="flex-col px-6 mx-auto lg:py-0">
 		<div
-			class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700"
+			class="w-full bg-white rounded-lg shadow shadow-xl dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700"
 		>
 			<div class="p-6 space-y-4 md:space-y-6 sm:p-8">
 				<div class="flex items-center">

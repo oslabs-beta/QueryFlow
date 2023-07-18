@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Login from '../lib/Login.svelte';
 	import Signup from '../lib/Signup.svelte';
-	import loginPic from '../assets/landing-background-img.avif';
+	import loginPic from '../assets/login-background-img.avif';
 	import { navigate } from 'svelte-routing';
 	import { onMount } from 'svelte';
 	// toggle signup/login component
@@ -14,16 +14,18 @@
 
 <div class="landing-login-container flex flex-col mt-5 lg:flex-row">
 	<div
-		class="flex-1 flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0 responsive-column"
+		class="flex-1 flex items-center justify-center flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0 responsive-column"
 	>
 		<img class="object-contain rounded-lg" src={loginPic} alt="graph" />
 	</div>
 	<!-- conditional statement to render signup or login -->
-	{#if renderSignup}
-		<Signup bind:renderSignup />
-	{:else}
-		<Login bind:renderSignup />
-	{/if}
+	<div class="flex items-center">
+		{#if renderSignup}
+			<Signup bind:renderSignup />
+		{:else}
+			<Login bind:renderSignup />
+		{/if}
+	</div>
 </div>
 
 <style>

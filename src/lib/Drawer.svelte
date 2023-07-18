@@ -10,12 +10,11 @@
 
 	let isDrawerOpen: boolean = false;
 
-  // POST Request
-
+  // submit query POST Request
 	const postQuery = async (e: any) => {
     e.preventDefault();
     isDrawerOpen = false;
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem('token');
     try {
       const response = await fetch('/api/query-metrics', {
         method: 'POST',
