@@ -3,16 +3,15 @@
 	import type { Directions, WorkingArr } from '../../types';
 	import { max } from 'd3-array';
 
+	// drilled in from AllMetrics.svelte
+	export let barChartData: WorkingArr[];
 	export let width: number;
 	export let yScale: ScaleLinear<number, number>;
 	export let margin: Directions;
-	export let barChartData: WorkingArr[];
 
-	// function to
-	const calculateXTicks: Function = (ticksAmount: number): number[] => {
-		// find max value
+	// calculates the proper Y ticks to create
+	const calculateTicks: Function = (ticksAmount: number): number[] => {
 		const maxValue: number = max(barChartData, (d) => d.numberOfQueries);
-		// build array
 		const returnArr: number[] = [];
 		for (let i = 0; i < ticksAmount; i++) {
 			returnArr.push(Math.round((i * Number(maxValue)) / (ticksAmount - 1)));
@@ -20,7 +19,8 @@
 		return returnArr;
 	};
 
-	let yTicks: number[] = calculateXTicks(4);
+	// calling the function, sets to var
+	let yTicks: number[] = calculateTicks(4);
 </script>
 
 <g transform="translate({margin.left} {margin.top})">

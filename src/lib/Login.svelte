@@ -6,7 +6,7 @@
 
 	let email: string;
 	let password: string;
-  let wrongEmailPassword:boolean = false
+  let wrongEmailPassword: boolean = false
 
   // Login Function-POST Request
 	const loginUser = async (e: any) => {
@@ -25,17 +25,17 @@
 				userInfoStore.set(data.userData);
 				navigate('/home', { replace: true });
 			}
-      wrongEmailPassword=true;
-      setTimeout(()=>{
-        wrongEmailPassword=false
+      wrongEmailPassword = true;
+      setTimeout(() => {
+        wrongEmailPassword = false;
       }, 3000)
 		} catch (error) {
       
-      console.error(error)
+      console.error(error);
     }
 	};
 
-  //google login
+  // google login get request
   const googleLogin = async (e:any) => {
     e.preventDefault();
     localStorage.removeItem("token")

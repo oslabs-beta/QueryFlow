@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import RedisChart from '../Graphs/RedisChart.svelte';
+	import RedisChart from '../graphs/RedisChart.svelte';
 	import { redisData } from '../store';
 	import type { RedisData } from '../types';
 

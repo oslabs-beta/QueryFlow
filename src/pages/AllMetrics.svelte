@@ -4,9 +4,9 @@
 	import { metricData } from '../store';
 	import type { QueryData, WorkingArr, Directions } from '../types';
 	import type { ScaleBand, ScaleLinear } from 'd3';
-	import AxisX from '../Graphs/graphComponents/AxisX.svelte';
-	import AxisY from '../Graphs/graphComponents/AxisY.svelte';
-	import Tooltip from '../Graphs/graphComponents/Tooltip.svelte';
+	import AxisX from '../graphs/graph-components/AxisX.svelte';
+	import AxisY from '../graphs/graph-components/AxisY.svelte';
+	import Tooltip from '../graphs/graph-components/Tooltip.svelte';
 	import { navigate } from 'svelte-routing';
 	import RedisForm from '../lib/RedisForm.svelte';
 	import { Button, Modal, Label, Input, Checkbox } from 'flowbite-svelte';
