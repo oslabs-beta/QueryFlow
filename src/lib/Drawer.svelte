@@ -32,8 +32,8 @@
       });
 
       if (response.ok) {
+				// updates metricData and filterMetricData
         const data = await response.json();
-        // updates metricData and filterMetricData
         metricData.update((arr) => [data, ...arr]);
         filterMetricData.update((arr) => [data, ...arr]);
         filterMetricDataTwo.update((arr) => [data, ...arr]);
@@ -44,6 +44,7 @@
   };
 </script>
 
+<!-- binded values automatically update -->
 <div>
 	<!-- sidebar named drawer -->
 	<div class="drawer">
@@ -194,12 +195,12 @@
 	}
 
   .drawer-side {
-	left: -80vw; /* Initially set to negative of the drawer's width */
+	left: -80vw; /* Initially set to negative of the drawer's width to guarantee staying off screen */
   min-width: 1000px;
   }
   
   .drawer-overlay {
-    transition: all 0.2s ease-out; /* No transition delay */
+    transition: all 0.2s ease-out;
 	}
   /* CSS to show the drawer when checkbox is checked */
     /* The tilde is a conditional statement */
