@@ -44,7 +44,7 @@
 <div class="navbar bg-base-100 fixed top-0 z-10">
 
 	<div class="flex-1">
-		<a class="btn btn-ghost normal-case text-xl logo-text" href="http://localhost:5173/">
+		<a class="btn btn-ghost normal-case text-xl logo-text" href="/">
 			<img src={logo} alt="logo" class="w-6 mt-1" />
 			QueryFlow
 		</a>

@@ -30,14 +30,15 @@ app.use(bodyParser.json());
 // Change to '../src' if problem. This current setup is for distribution
 app.use(express.static(resolve(__dirname, '../dist')));
 
+// Use apiRouter/loginRouter
+app.use('/api', apiRouter, loginRouter);
+
 // Serve index.html file
 // Change to '../index.html' if problem. This current setup is for distribution
-app.get('/', (req, res) => {
+app.get('/*', (req, res) => {
   res.sendFile(resolve(__dirname, '../dist/index.html'));
 });
 
-// Use apiRouter/loginRouter
-app.use('/api', apiRouter,loginRouter);
 
 // Route error handler
 app.use('*', (req, res) => {
