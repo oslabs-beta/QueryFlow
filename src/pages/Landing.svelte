@@ -61,13 +61,13 @@ onMount(() => {
   <section class="transition-section">
   </section>
   <div class="flex justify-center items-center my-16">
-    <h1 class="text-4xl font-bold">A Package And A Visualizer Working Together</h1>
+    <h1 class="text-4xl font-bold text-center">A Package And A Visualizer Working Together</h1>
   </div>
 
   <!-- A Package And A Visualizer -->
   <section class="grid md:grid-cols-2 sm:grid-cols-1 justify-center">
     <div class="flex justify-center">
-      <div style="width: 600px;" class="rounded p-6" > 
+      <div class="rounded p-6 top-column" > 
         <div class="icon-div">
           <img class="icon" alt="package" src="../src/assets/package.png"/>
         </div>
@@ -77,7 +77,7 @@ onMount(() => {
       </div>
     </div>
     <div class="flex justify-center">
-      <div style="width: 600px;" class="rounded  p-6">
+      <div class="rounded p-6 top-column">
         <div class="icon-div">
           <img class="icon" alt="graph" src='../src/assets/registry-editor_hires.png'/>
         </div>
@@ -227,7 +227,6 @@ onMount(() => {
   padding: 5px;
 }
 
-
 .transition-section {
   display:flex;
   justify-content: center;
@@ -237,7 +236,9 @@ onMount(() => {
   background: linear-gradient(180deg, rgb(0, 0, 9) 0%, rgb(255, 255, 255) 100%);
 }
 
-
+.top-column{
+  width:600px;
+}
 .landing-background{
   background-image: url('../assets/graph3.avif');
   background-size: cover;
@@ -309,9 +310,53 @@ onMount(() => {
     align-items: center;
     height:1500px;
   }
-
   .grid-cols-5 {
     grid-template-columns: 1fr;
+  }
+  .landing-background-text{
+    margin-right:5px;
+  }
+  .landing-background-text h1 {
+    font-size: 60px;
+  }
+  .landing-background-text p {
+    font-size: 40px;
+  }
+  .get-started {
+    padding: 12px 24px;
+    font-size: 16px;
+  }
+  .top-column{
+    width:500px;
+  }
+}
+@media (max-width: 420px) {
+  .landing-background-text{
+    margin-right:5px;
+    margin-top:30px;
+  }
+
+  .top-column{
+    width:400px;
+  }
+}
+@media only screen and (min-width: 641px) and (max-width: 1030px) {
+  .meet-team {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height:700px;
+  }
+
+  .grid-cols-5 {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .grid-cols-5 > div {
+    flex: 1 0 calc(50% - 10px);
+    margin: 5px; 
   }
 }
 </style>
