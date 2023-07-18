@@ -12,13 +12,14 @@
 
 /* body full screen height */
 body {
-	height: 100vh;
+	min-height: 100vh;
 }
 
 /* body no scrollbar */
 body::-webkit-scrollbar {
 	display: none;
 }
+
 
 /* Dots Colors */
 .dot.A {
@@ -100,9 +101,13 @@ td {
 		display: none;
 	}
 }
-@media only screen and (min-width: 768px) and (max-width: 1285px) {
+@media only screen and (min-width: 768px) and (max-width: 1300px) {
 	/* hide the group bar graph on the bottom left */
 	.group-query {
 		display: none;
 	}
+}
+
+article > h1 {
+	text-align: center;
 }

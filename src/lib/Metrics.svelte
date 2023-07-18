@@ -1,8 +1,8 @@
 <script lang="ts">
-  import SingleBarGraph from "../Graphs/SingleBarGraph.svelte";
-  import SingleScatterPlot from "../Graphs/SingleScatterPlot.svelte";
-  import GroupQuery from "../Graphs/GroupQuery.svelte";
-  import Table from "../Graphs/Table.svelte"
+  import SingleBarGraph from "../graphs/SingleBarGraph.svelte";
+  import SingleScatterPlot from "../graphs/SingleScatterPlot.svelte";
+  import GroupQuery from "../graphs/GroupQuery.svelte";
+  import Table from "../graphs/Table.svelte"
   import { metricData, filterMetricData, filterMetricDataTwo } from '../store';
   import type { QueryData } from '../types';
   import { get } from 'svelte/store';
@@ -69,9 +69,17 @@ onMount(() => {
 
 <section class="card border w-full metric-box p-4 justify-center grid grid-cols-1">
     <div class="h-10 flex p-4 justify-between items-center">
+      
+      
+      
+      
       <div class="flex items-end h-20">
-        <!-- toggle switch for table/query string box -->
-        <input type="checkbox" class="toggle" bind:checked={tableQueryToggle} />
+        <label class="relative inline-flex items-center mb-5 cursor-pointer">
+          <input type="checkbox" value="" class="sr-only peer"  bind:checked={tableQueryToggle}>
+          <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+          
+        </label>
+        <!-- <input type="checkbox" class="toggle" /> -->
       </div>
       <!-- title of card -->
       <h4 class="text-lg">{metric.queryName}</h4>
@@ -103,25 +111,23 @@ onMount(() => {
           </button>
         </div>
         {/if}
-      
     </div>
       <div class="flex justify-center w-full h-72">
         <!-- bottom left metric box group graph for a comparison of all metrics of that type -->
         <GroupQuery {i} metricName={metric.queryName} />
-        <div>
-          <!-- button toggle between bar graph or scatter -->
-          <button class="btn btn-square btn-xs btn-square btn-xs btn-outline absolute top-50 right-40 " on:click={() => toggleGraphs()}>
-
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
-              <path d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75zM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 01-1.875-1.875V8.625zM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 013 19.875v-6.75z" />
-            </svg>
-          </button>
+        <div class="flex">
             <!-- if barScatterToggle is true, display SingleBarGraph Component, else, display SingleScatterPlot -->
           {#if barScatterToggle}
           <SingleBarGraph {i} metric={metric}/>
           {:else}
           <SingleScatterPlot {i} metric={metric}/>
           {/if}
+          <!-- button toggle between bar graph or scatter -->
+          <button class="btn btn-square btn-xs btn-square btn-xs btn-outline -ml-5" on:click={() => toggleGraphs()}>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4">
+              <path d="M18.375 2.25c-1.035 0-1.875.84-1.875 1.875v15.75c0 1.035.84 1.875 1.875 1.875h.75c1.035 0 1.875-.84 1.875-1.875V4.125c0-1.036-.84-1.875-1.875-1.875h-.75zM9.75 8.625c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v11.25c0 1.035-.84 1.875-1.875 1.875h-.75a1.875 1.875 0 01-1.875-1.875V8.625zM3 13.125c0-1.036.84-1.875 1.875-1.875h.75c1.036 0 1.875.84 1.875 1.875v6.75c0 1.035-.84 1.875-1.875 1.875h-.75A1.875 1.875 0 013 19.875v-6.75z" />
+            </svg>
+          </button>
         </div>
       </div>
 </section>

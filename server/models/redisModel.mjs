@@ -8,6 +8,10 @@ const redisModel = redis.createClient({
   },
 });
 
-await redisModel.connect();
+redisModel.on('connect',() => {
+  console.log('Connected to Redis successfully!');
+});
+
+redisModel.connect();
 
 export default redisModel;

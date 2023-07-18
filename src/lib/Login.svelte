@@ -6,7 +6,7 @@
 
 	let email: string;
 	let password: string;
-  let wrongEmailPassword:boolean = false
+  let wrongEmailPassword: boolean = false
 
   // Login Function-POST Request
 	const loginUser = async (e: any) => {
@@ -25,17 +25,17 @@
 				userInfoStore.set(data.userData);
 				navigate('/home', { replace: true });
 			}
-      wrongEmailPassword=true;
-      setTimeout(()=>{
-        wrongEmailPassword=false
-      },3000)
+      wrongEmailPassword = true;
+      setTimeout(() => {
+        wrongEmailPassword = false;
+      }, 3000)
 		} catch (error) {
       
-      console.error(error)
+      console.error(error);
     }
 	};
 
-  //google login
+  // google login get request
   const googleLogin = async (e:any) => {
     e.preventDefault();
     localStorage.removeItem("token")
@@ -44,24 +44,8 @@
   }
 </script>
 
-
-
-<!-- //   try 
-// 		const response = await fetch('/api/google-login',{
-//       method:'GET',
-//       mode: 'no-cors',
-//       headers: {
-// 				'Content-Type': 'application/json',
-// 			},
-//     })
-//     const data = await response.json();
-//     console.log('i am data',data)
-// }catch(error){
-
-// } -->
-
 <!-- framework for login -->
-<div class="flex flex-col items-center justify-center px-6 py-8 mx-9 mx-auto md:h-full lg:py-0 w-96 login">
+<div class="flex flex-col items-center justify-center px-6 pt-8 mx-9 mx-auto md:h-full lg:py-0 w-96 login">
 	<div
 		class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700 "
 	>

@@ -8,16 +8,18 @@ import compression from 'compression';
 import bodyParser from 'body-parser';
 import apiRouter from './routes/apiRoutes.mjs';
 import loginRouter from './routes/loginRoutes.mjs';
-//We utilize the fileURLToPath function from the url module to convert the import.meta.url to the corresponding file path??
+
+// We utilize the fileURLToPath function from the url module to convert the import.meta.url to the corresponding file path??
 const __filename = fileURLToPath(import.meta.url);
-//we extract the directory name using the dirname function from the path module
+
+// We extract the directory name using the dirname function from the path module
 const __dirname = dirname(__filename);
 
-//Initiate express server. 
+// Initiate express server
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Enable compression middleware for better performance & Enable other middleware
+// Enable compression middleware for better performance & other middleware
 app.use(compression());
 app.use(cors());
 app.use(cookieParser());
@@ -25,22 +27,24 @@ app.use(express.json());
 app.use(bodyParser.json());
 
 // Serve static assets
-app.use(express.static(resolve(__dirname, '../src')));
+// Change to '../src' if problem. This current setup is for distribution
+app.use(express.static(resolve(__dirname, '../dist')));
 
-//Serve index.html file
+// Serve index.html file
+// Change to '../index.html' if problem. This current setup is for distribution
 app.get('/', (req, res) => {
-  res.sendFile(resolve(__dirname, '../index.html'));
+  res.sendFile(resolve(__dirname, '../dist/index.html'));
 });
 
-//Use apiRouter/loginRouter
+// Use apiRouter/loginRouter
 app.use('/api', apiRouter,loginRouter);
 
-//Route error handler
+// Route error handler
 app.use('*', (req, res) => {
   return res.status(404).send('Page not Found');
 });
 
-//GLOBAL error handler
+// GLOBAL error handler
 app.use((err, req, res, next) => {
   const defaultErr = {
     log: 'Express error handler caught unknown middleware error',

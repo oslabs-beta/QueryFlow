@@ -1,7 +1,8 @@
 module.exports = {
-  content: ['./src/**/*.{svelte,js,ts}', './node_modules/flowbite-svelte/**/*.{html,js,svelte,ts}',],
+  content: ['./src/**/*.{svelte,js,ts}', './node_modules/flowbite-svelte/**/*.{html,js,svelte,ts}'],
   daisyui: {
-    themes: ['light',
+    themes: [
+      'light',
       'dark',
       'cupcake',
       'bumblebee',
@@ -32,30 +33,26 @@ module.exports = {
       'winter',
       {
         mytheme: {
-        
-          'primary': '#1245a8',
-        
-          'secondary': '#1f5eda',
-        
-          'accent': '#1fb2a6',
-        
-          'neutral': '#2a323c',
-        
+          primary: '#1245a8',
+
+          secondary: '#1f5eda',
+
+          accent: '#1fb2a6',
+
+          neutral: '#2a323c',
+
           'base-100': 'white',
-        
-          'info': '#3abff8',
-        
-          'success': '#36d399',
-        
-          'warning': '#fbbd23',
-        
-          'error': '#f87272',
+
+          info: '#3abff8',
+
+          success: '#36d399',
+
+          warning: '#fbbd23',
+
+          error: '#f87272',
         },
       },
     ],
   },
-  plugins: [
-    require('daisyui'),
-    require('flowbite/plugin')
-  ],
+  plugins: [require('@tailwindcss/typography'), require('daisyui'), require('flowbite/plugin')],
 };

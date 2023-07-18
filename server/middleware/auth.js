@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 
-const authenticationMiddleware = async (req,res,next)=>{
+const authenticationMiddleware = async (req,res,next) => {
   const authHeader = req.headers.authorization;
 
   if(!authHeader || !authHeader.startsWith('Bearer ')){
@@ -16,8 +16,8 @@ const authenticationMiddleware = async (req,res,next)=>{
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
    
-    const {_id} = decoded;
-    req.user = {_id};
+    const { _id } = decoded;
+    req.user = { _id };
     next();
   } catch (error) {
     next({
