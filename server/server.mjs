@@ -27,11 +27,11 @@ app.use(express.json());
 app.use(bodyParser.json());
 
 // Serve static assets
-// Change to '../src' if problem this current setup is for distrubtion
+// Change to '../src' if problem. This current setup is for distribution
 app.use(express.static(resolve(__dirname, '../dist')));
 
 // Serve index.html file
-// Change to '../index.html' if problem this current setup is for distrubtion
+// Change to '../index.html' if problem. This current setup is for distribution
 app.get('/', (req, res) => {
   res.sendFile(resolve(__dirname, '../dist/index.html'));
 });
