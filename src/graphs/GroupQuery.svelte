@@ -32,7 +32,7 @@
     const height: number = 300 - margin.top - margin.bottom;
 
     const xScale: ScaleBand<string> = scaleBand()
-      .domain(`${[...Array(averageTime.length + 1).keys()].slice(1)}`)
+      .domain([...Array(averageTime.length + 1).keys()].slice(1).map(String))
       .range([0, width])
       .padding(0.1);
 
