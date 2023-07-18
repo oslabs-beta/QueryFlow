@@ -34,7 +34,7 @@ describe('User API', () => {
     });
   });
 
-  it('should login test user',()=>{
+  it('should login test user',() => {
     cy.request({
       method: 'POST',
       url: 'http://localhost:3000/api/login',

@@ -2,6 +2,7 @@
 	import type { WorkingArr } from "../../types";
 	import type { ScaleBand, ScaleLinear } from "d3";
 
+	// drilled in from AllMetrics.svelte
 	export let data: WorkingArr;
 	export let xScale: ScaleBand<string>;
 	export let yScale: ScaleLinear<number, number>;
@@ -14,7 +15,6 @@
     top: {yScale(data.numberOfQueries)}px;
     left: {xScale(`${data}`)}px"
 >
-<!-- CHECK DATA PARAM ABOVE ^ -->
 	<h1>Number of queries</h1>
 	<p>{data.numberOfQueries}</p>
 

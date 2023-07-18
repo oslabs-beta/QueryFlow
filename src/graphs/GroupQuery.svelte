@@ -3,41 +3,33 @@
   import { select, scaleBand, scaleLinear, axisBottom, axisLeft, type ScaleBand, type ScaleLinear } from 'd3';
   import { max } from 'd3-array';
   import { metricData } from '../store';
-  import type { QueryData, QueryMetrics, GraphData } from '../types';
-  
-  
-  
+  import type { QueryData, GraphData, Directions } from '../types';
+
   export let metricName: string;
   export let i: number;
-
   export let groupMetrics: QueryData[] = [];
   
-metricData.subscribe(data => {
-  groupMetrics = data.filter(obj=>obj.queryName===metricName) 
-});
+  metricData.subscribe(data => {
+    groupMetrics = data.filter(obj => obj.queryName === metricName);
+  });
 
-
-const averageTime: GraphData[] = groupMetrics.map((obj, i) => ({
+  const averageTime: GraphData[] = groupMetrics.map((obj, i) => ({
     x: i + 1,
     y: obj.averageTime,
     type: 'A',
     name: metricName,
-    date: obj.createdAt
-
+    date: obj.createdAt,
   }));
 
+  // gets max value for later use on yScale var
+  const maxYValue: number = max([...averageTime], d => d.y) || 0;
 
-  
-
-  const maxYValue = max([...averageTime], d => d.y) || 0;
-
-  // Render chart on mount
+  // renders chart on mount
   onMount(() => {
     const svg = select(`#groupBarChart${i}`);
-
-    const margin = { top: 20, right: 20, bottom: 40, left: 40 };
-    const width = 300 - margin.left - margin.right;
-    const height = 300 - margin.top - margin.bottom;
+    const margin: Directions = { top: 20, right: 20, bottom: 40, left: 40 };
+    const width: number = 300 - margin.left - margin.right;
+    const height: number = 300 - margin.top - margin.bottom;
 
     const xScale: ScaleBand<string> = scaleBand()
       .domain([...Array(averageTime.length + 1).keys()].slice(1).map(String))
@@ -48,17 +40,13 @@ const averageTime: GraphData[] = groupMetrics.map((obj, i) => ({
       .domain([0, maxYValue])
       .range([height, 0]);
 
-    const xAxis = svg
+    // actual x-axis
+    svg
       .append('g')
       .attr('transform', `translate(${margin.left}, ${height + margin.top})`)
       .call(axisBottom(xScale));
 
-    const yAxis = svg
-      .append('g')
-      .attr('transform', `translate(${margin.left}, ${margin.top})`)
-      .call(axisLeft(yScale));
-
-    // X-axis label
+    // x-axis's label
     svg
       .append('text')
       .attr('class', 'axis-label')
@@ -66,7 +54,13 @@ const averageTime: GraphData[] = groupMetrics.map((obj, i) => ({
       .style('text-anchor', 'middle')
       .text(`${metricName} Avg Time`);
 
-    // Y-axis label
+    // actual y-axis
+    svg
+      .append('g')
+      .attr('transform', `translate(${margin.left}, ${margin.top})`)
+      .call(axisLeft(yScale));
+
+    // y-axis's label
     svg
       .append('text')
       .attr('class', 'axis-label')
@@ -84,6 +78,7 @@ const averageTime: GraphData[] = groupMetrics.map((obj, i) => ({
       .style('padding', '4px 8px')
       .style('font-size', '12px');
 
+    // tooltip info
     svg
       .append('g')
       .attr('transform', `translate(${margin.left}, ${margin.top})`)
@@ -97,7 +92,7 @@ const averageTime: GraphData[] = groupMetrics.map((obj, i) => ({
       .attr('width', xScale.bandwidth() / 3)
       .attr('height', d => height - yScale(d.y))
       .on('mouseover', (event, d) => {
-        tooltip.style('visibility', 'visible').text(`${d.name}: ${d.y} ms on ${d.date}`);
+        tooltip.style('visibility', 'visible').text(`${d.name}: ${d.y}ms - ${d.date}`);
       })
       .on('mousemove', (event) => {
         tooltip.style('top', `${event.pageY - 10}px`).style('left', `${event.pageX + 10}px`);
@@ -109,7 +104,12 @@ const averageTime: GraphData[] = groupMetrics.map((obj, i) => ({
     
   });
 </script>
-<div class="h-80 group-query">
 
+<div class="h-80 group-query">
+  <h4 class="flex justify-center -my-3 font-semibold">Average {metricName} metrics</h4>
   <svg id={`groupBarChart${i}`} class="w-74 h-full"></svg>
 </div>
+
+<style>
+
+</style>

@@ -2,12 +2,13 @@
 	import type { ScaleBand } from "d3";
 	import type { Directions, WorkingArr } from "../../types";
 
+	// drilled in from AllMetrics.svelte
+	export let barChartData: WorkingArr[];
 	export let height: number;
 	export let xScale: ScaleBand<string>;
 	export let margin: Directions;
-	export let barChartData: WorkingArr[];
  
-	// Dynamically creates ticks along the x-axis
+	// dynamically creates ticks along the x-axis
 	let xTicks: number[] = [
 		0,
 		Math.ceil(((barChartData.length - 1) * 1) / 4),

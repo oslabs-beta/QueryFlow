@@ -1,74 +1,74 @@
 <script lang="ts">
   import { onMount } from 'svelte';
-  import { select, scaleBand, scaleLinear, axisBottom, axisLeft } from 'd3';
-  import type { QueryData,GraphData } from '../types';
+  import { select, scaleBand, scaleLinear, axisBottom, axisLeft, type ScaleBand, type ScaleLinear } from 'd3';
+  import type { QueryData, GraphData, Directions } from '../types';
   import { max } from 'd3-array';
 
   export let metric: QueryData;
   export let i: number;
 
-  // Extract the necessary data from the metric object
-  const planningTime:GraphData[] = metric.queryMetrics.map((obj, i) => ({
+  // extracts the necessary data from metric obj
+  const planningTime: GraphData[] = metric.queryMetrics.map((obj, i) => ({
     x: i + 1,
     y: obj.planningTime,
     type: 'A',
     name: 'Planning Time'
   }));
 
-  const executionTime:GraphData[] = metric.queryMetrics.map((obj, i) => ({
+  const executionTime: GraphData[] = metric.queryMetrics.map((obj, i) => ({
     x: i + 1,
     y: obj.executionTime,
     type: 'B',
     name: 'Execution Time'
   }));
 
-  const totalTime:GraphData[] = metric.queryMetrics.map((obj, i) => ({
+  const totalTime: GraphData[] = metric.queryMetrics.map((obj, i) => ({
     x: i + 1,
-    y: obj.planningTime + obj.executionTime,
+    y: obj.totalTime,
     type: 'C',
     name: 'Total Time'
   }));
 
-  // Calculate the maximum value for the y-axis domain
-  const maxYValue = max([...executionTime, ...planningTime, ...totalTime], d => d.y) || 0;
+  // gets max value for later use on yScale var
+  const maxYValue: number = max([...executionTime, ...planningTime, ...totalTime], d => d.y) || 0;
 
-  // Render chart on mount
+  // renders chart on mount
   onMount(() => {
     const svg = select(`#barChart${i}`);
+    const margin: Directions = { top: 20, right: 20, bottom: 40, left: 40 };
+    const width: number = 300 - margin.left - margin.right;
+    const height: number = 300 - margin.top - margin.bottom;
 
-    const margin = { top: 20, right: 20, bottom: 40, left: 40 };
-    const width = 300 - margin.left - margin.right;
-    const height = 300 - margin.top - margin.bottom;
-
-    const xScale = scaleBand()
-    //scaleBand requires an array of strings for its domain. For Typing
+    const xScale: ScaleBand<string> = scaleBand()
       .domain([...Array(totalTime.length + 1).keys()].map(String).slice(1))
       .range([0, width])
       .padding(0.1);
 
-    const yScale = scaleLinear()
+    const yScale: ScaleLinear<number, number> = scaleLinear()
       .domain([0, maxYValue])
       .range([height, 0]);
 
-    const xAxis = svg
+    // actual x-axis
+    svg
       .append('g')
       .attr('transform', `translate(${margin.left}, ${height + margin.top})`)
       .call(axisBottom(xScale));
+      
+    // x-axis label
+    svg
+    .append('text')
+    .attr('class', 'axis-label')
+    .attr('transform', `translate(${(width - 75)}, ${height + margin.top + 35})`)
+    .style('text-anchor', 'middle')
+    .text('Number of times query run');
 
-    const yAxis = svg
+    // actual y-axis
+    svg
       .append('g')
       .attr('transform', `translate(${margin.left}, ${margin.top})`)
       .call(axisLeft(yScale));
-
-    // X-axis label
-    svg
-      .append('text')
-      .attr('class', 'axis-label')
-      .attr('transform', `translate(${(width - 75)}, ${height + margin.top + 35})`)
-      .style('text-anchor', 'middle')
-      .text('Number of times query run');
-
-    // Y-axis label
+    
+    // y-axis label
     svg
       .append('text')
       .attr('class', 'axis-label')
@@ -76,7 +76,7 @@
       .style('text-anchor', 'middle')
       .text('Milliseconds');
     
-    // Labels for graph bars
+    // labels for graph bars
     const tooltip = select('body')
       .append('div')
       .attr('class', 'tooltip')
@@ -87,7 +87,7 @@
       .style('padding', '4px 8px')
       .style('font-size', '12px');
 
-    //Planning Time Bar  
+    // planning time bar  
     svg
       .append('g')
       .attr('transform', `translate(${margin.left}, ${margin.top})`)
@@ -101,7 +101,7 @@
       .attr('width', xScale.bandwidth() / 3)
       .attr('height', d => height - yScale(d.y))
       .on('mouseover', (event, d) => {
-        tooltip.style('visibility', 'visible').text(`${d.name}: ${d.y} ms`);
+        tooltip.style('visibility', 'visible').text(`${d.name}: ${d.y.toFixed(2)} ms`);
       })
       .on('mousemove', (event) => {
         tooltip.style('top', `${event.pageY - 10}px`).style('left', `${event.pageX + 10}px`);
@@ -110,7 +110,7 @@
         tooltip.style('visibility', 'hidden');
       });
     
-    //Execution Time Bar
+    // execution time bar
     svg
       .append('g')
       .attr('transform', `translate(${margin.left}, ${margin.top})`)
@@ -124,7 +124,7 @@
       .attr('width', xScale.bandwidth() / 3)
       .attr('height', d => height - yScale(d.y))
       .on('mouseover', (event, d) => {
-        tooltip.style('visibility', 'visible').text(`${d.name}: ${d.y} ms`);
+        tooltip.style('visibility', 'visible').text(`${d.name}: ${d.y.toFixed(2)} ms`);
       })
       .on('mousemove', (event) => {
         tooltip.style('top', `${event.pageY - 10}px`).style('left', `${event.pageX + 10}px`);
@@ -133,7 +133,7 @@
         tooltip.style('visibility', 'hidden');
       });
     
-    //Total Time Bar
+    // total time bar
     svg
       .append('g')
       .attr('transform', `translate(${margin.left}, ${margin.top})`)
@@ -159,6 +159,7 @@
 </script>
 
 <div class="h-80">
+  <h4 class="flex justify-center -my-3 font-semibold">Single {metric.queryName} metrics</h4>
   <svg id={`barChart${i}`} class="w-74 h-full"></svg>
 </div>
 

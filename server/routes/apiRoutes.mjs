@@ -6,29 +6,30 @@ import redisController from '../controllers/redisController.mjs';
 import authenticationMiddleware from '../middleware/auth.js';
   
 
-//Post metrics to our PostgreSQL metrics table
+// Posts metrics to our PostgreSQL metrics table
 router.post('/query-metrics', authenticationMiddleware, clientDBController.queryMetrics, ourDBController.queryPush, (req, res) => {
   res.status(201).json(res.locals.metrics);
 });
 
-//Retrieves metrics from our PostgreSQL metrics table
+// Retrieves metrics from our PostgreSQL metrics table
 router.post('/get-metrics',  authenticationMiddleware, ourDBController.queryGet, (req, res) => {
-  res.status(201).json(res.locals.getMetrics);
+  res.status(200).json(res.locals.getMetrics);
 });
 
-//Retrieves data from user's database, measures the time, posts to our Redis instance, measures time.
+// Retrieves data from user's database, measures the time, posts to our Redis instance, measures time.
 router.post('/redis-metrics', authenticationMiddleware ,clientDBController.queryTimeSQL, redisController.latency, (req, res) => {
-  res.status(201).json(res.locals.comparisonData);
+  res.status(200).json(res.locals.comparisonData);
 });
 
-//Deletes a query from the PostgreSQL metrics table by id
+// Deletes a query from the PostgreSQL metrics table by id
 router.delete('/delete-metrics-id', authenticationMiddleware, ourDBController.deleteQueryById, (req, res) => {
-  res.status(201).json({msg: 'Query Deleted'});
+  res.status(200).json({msg: 'Query Deleted'});
 });
 
-//Deletes a query from the PostgreSQL metrics table by name
-router.delete('/delete-metrics-name', ourDBController.deleteQueryByName, (req, res) => {
-  res.status(201).json({msg: 'Query Deleted'});
-});
+// ===== Unused route, preserving for later use if needed =====
+// Deletes a query from the PostgreSQL metrics table by name
+// router.delete('/delete-metrics-name', ourDBController.deleteQueryByName, (req, res) => {
+//   res.status(200).json({msg: 'Query Deleted'});
+// });
 
 export default router;
