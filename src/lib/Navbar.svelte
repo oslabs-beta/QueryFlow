@@ -45,7 +45,7 @@
 
 	<div class="flex-1">
 		<a class="btn btn-ghost normal-case text-xl logo-text" href="http://localhost:5173/">
-			<img src={logo} alt="logo" width="26px" />
+			<img src={logo} alt="logo" class="w-6 mt-1" />
 			QueryFlow
 		</a>
 	</div>

@@ -133,8 +133,8 @@
     <Drawer />
   </div>
 
-  <div class="mt-8 w-screen grid sm:grid-cols-1 md:grid-cols-2 justify-center content-center">
-    <div class="h-screen scrollbar-hide  overflow-y-auto column-width">
+  <div class="mt-8 pb-10 w-screen grid sm:grid-cols-1 md:grid-cols-2 justify-center content-center">
+    <div class="h-screen scrollbar-hide overflow-y-auto column-width">
       <!-- Selection dropdown input -->
       <select
         bind:value={groupQueries}
@@ -175,7 +175,7 @@
         <option>{value}</option>
         {/each}
       </select>
-      <div class="space-y-4 flex flex-col items-center justify-center  mx-6">
+      <div class="space-y-4 flex flex-col items-center justify-center mx-6">
         {#each filterMetricsArrTwo as metric, i}
         {#key metric}
         <!-- add 1000 to i to give id individuality and so it doesn't get confused with the first column Metric components -->
@@ -186,4 +186,6 @@
     </div>
   </div>
 </div>
+
+
 

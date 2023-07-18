@@ -8,10 +8,11 @@
 	let queryString: string;
 	let queryCount: number = 1;
 	let queryDelay: number = 2;
-
+  let isDrawerOpen:boolean = false;
   // Add Query Post Function - POST Request
 	const postQuery = async (e: any) => {
     e.preventDefault();
+    isDrawerOpen = false;
     const token = localStorage.getItem('token')
     try {
       const response = await fetch('/api/query-metrics', {
@@ -45,7 +46,7 @@
 <div>
 	<!-- left div 1/3 of screen -->
 	<div class="drawer">
-		<input id="my-drawer" type="checkbox" class="drawer-toggle" />
+		<input id="my-drawer" type="checkbox" class="drawer-toggle" bind:checked={isDrawerOpen}/>
 		<div class="drawer-content">
 			<!-- Page content here -->
 		</div>
