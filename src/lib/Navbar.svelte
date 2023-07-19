@@ -44,7 +44,7 @@
 
 </script>
 
-<div class="navbar bg-base-100 fixed top-0 z-20">
+<div class="h-16 navbar bg-base-100 fixed top-0 z-20">
 
 	<div class="flex-1">
 		<a class="btn btn-ghost normal-case text-xl logo-text" href="/">
