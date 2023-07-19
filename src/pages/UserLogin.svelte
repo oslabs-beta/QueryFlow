@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Login from '../lib/Login.svelte';
 	import Signup from '../lib/Signup.svelte';
-	import flowBackground from "../assets/flow-background.jpg"
+	import flowBackground from "../assets/flow-background.avif"
 	import { navigate } from 'svelte-routing';
 	import { onMount } from 'svelte';
 

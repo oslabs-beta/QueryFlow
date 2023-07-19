@@ -1,5 +1,8 @@
 <script lang="ts">
-
+  import { Modal,Button } from 'flowbite-svelte'
+ 
+  //boolean for the modal
+  let clickOutsideModal:boolean = false;
 	// initializing vars for database
 	let firstName: string;
 	let lastName: string;
@@ -7,6 +10,13 @@
 	let database: string;
 	let email: string;
 	let password: string;
+
+  //used for terms and conditions checkbox
+  let isChecked:boolean = false;
+
+  function acceptTerms() {
+     isChecked = true;
+   }
 
   // used for rendering signup component vs. login component
 	export let renderSignup: boolean;
@@ -82,82 +92,71 @@
 				</div>
 				<!-- form that holds/binds all info in it to submit with below on:submit -->
 				<form class="space-y-4 md:space-y-6" on:submit={postData}>
-					<div class="flex flex-wrap -mx-3 mb-6">
-						<div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-							<label
-								class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-								for="grid-first-name">
-								First Name
-								<span class="asterisk">*</span>
-							</label>
-							<input
-								class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-								id="grid-first-name"
-								type="text"
-								placeholder="Jane"
-								required
-								bind:value={firstName}
-							/>
-						</div>
-						<div class="w-full md:w-1/2 px-3">
-							<label
-								class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-								for="grid-last-name">
-								Last Name
-								<span class="asterisk">*</span>
-							</label>
-							<input
-								class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-								id="grid-last-name"
-								type="text"
-								placeholder="Doe"
-								required
-								bind:value={lastName}
-							/>
-						</div>
-					</div>
-					<div>
-						<label
-							for="organization"
-							class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-							Organization (optional)
-						</label>
-						<input
-							type="text"
-							name="organization"
-							id="organization"
-							class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-							placeholder="e.g. TSM"
-							bind:value={organization}
-						/>
-					</div>
-					<div class="inline-block relative w-64">
-						<label
-							for="database"
-							class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
-							Preferred Database (optional)
-						</label>
-						<select
-							bind:value={database}
-							name="database"
-							id="database"
-							class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-							<option value="" disabled selected hidden>Please choose...</option>
-							<option>PSQL</option>
-							<option>MySQL</option>
-							<option>Redis</option>
-						</select>
-						<div
-							class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-							<svg
-								class="fill-current h-4 w-4"
-								xmlns="http://www.w3.org/2000/svg"
-								viewBox="0 0 20 20"
-								><path
-									d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-								/></svg>
-						</div>
-					</div>
+          <div class="flex flex-wrap -mx-3">
+            <div class="w-1/2 px-3">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="grid-first-name">
+                    First Name
+                    <span class="asterisk">*</span>
+                </label>
+                <input
+                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    id="grid-first-name"
+                    type="text"
+                    placeholder="Jane"
+                    required
+                    bind:value={firstName}
+                />
+            </div>
+            <div class="w-1/2 px-3">
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white xs:text-xs" for="grid-last-name">
+                    Last Name
+                    <span class="asterisk">*</span>
+                </label>
+                <input
+                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    id="grid-last-name"
+                    type="text"
+                    placeholder="Doe"
+                    required
+                    bind:value={lastName}
+                />
+            </div>
+        </div>
+        <div class="flex flex-wrap -mx-3">
+            <div class="w-1/2 px-3">
+                <label
+                    for="organization"
+                    class="block shrink-text mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Organization
+                </label>
+                <input
+                    type="text"
+                    name="organization"
+                    id="organization"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="e.g. TSM"
+                    bind:value={organization}
+                />
+            </div>
+            <div class="w-1/2 px-3">
+                <label
+                    for="database"
+                    class="block shrink-text mb-2 text-sm font-medium text-gray-900 dark:text-white">
+                    Preferred Database
+                </label>
+                <select
+                    bind:value={database}
+                    name="database"
+                    id="database"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option value="" disabled selected hidden>Please choose...</option>
+                    <option>PSQL</option>
+                    <option>MySQL</option>
+                    <option>Redis</option>
+                </select>
+            </div>
+        </div>
+          
 					<div>
 						<label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
 							Your email
@@ -210,6 +209,7 @@
 					<div class="flex items-start">
 						<div class="flex items-center h-5">
 							<input
+              bind:checked={isChecked}
 								id="terms"
 								aria-describedby="terms"
 								type="checkbox"
@@ -220,10 +220,20 @@
 						<div class="ml-3 text-sm">
 							<label for="terms" class="font-light text-gray-500 dark:text-gray-300">
 								I accept the <a
+                on:click={() => clickOutsideModal = true}
 									class="font-medium text-primary-600 hover:underline dark:text-primary-500"
 									href={'#'}>
 									Terms and Conditions
 								</a>
+                <Modal title="Terms and Conditions" bind:open={clickOutsideModal} autoclose outsideclose>
+                  <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                    With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.
+                  </p>
+                  <svelte:fragment slot='footer'>
+                    <Button on:click={acceptTerms} color="green">I accept</Button>
+                    <Button color="red">Decline</Button>
+                  </svelte:fragment>
+                </Modal>
 								</label>
 						</div>
 					</div>
@@ -247,3 +257,16 @@
 		</div>
 	</div>
 </section>
+
+
+<style>
+  .asterisk{
+    color:red;
+  }
+   /* mostly for preferred database  */
+  @media (max-width: 378px) {
+    .shrink-text {
+        font-size: 0.75rem; /* Adjust this value as desired */
+    }
+}
+</style>
