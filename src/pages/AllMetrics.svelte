@@ -11,6 +11,9 @@
 	import RedisForm from '../lib/RedisForm.svelte';
 	import { Modal } from 'flowbite-svelte';
 
+
+
+
 	// reactive metrics array
 	$: metrics = [];
 
@@ -50,8 +53,10 @@
 
 	// calculating buckets dynamically to limit number of buckets with smaller/larger data sizes
 	// VERY IMPORTANT!
+
 	let buckets = metrics.length > 4 ? Math.ceil(Math.log2(metrics.length - 3) * 1.7) : 2;
 	if (!metrics.length) buckets = 0;
+
 
 	// formatting data
 	const barChartData: WorkingArr[] = format(metrics, buckets);
@@ -70,6 +75,7 @@
 		.range([height - margin.top - margin.bottom, 0]);
 
 	let hoveredData: WorkingArr;
+	
 </script>
 
 <!-- button to return to home page -->
