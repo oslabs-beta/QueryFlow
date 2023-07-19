@@ -124,7 +124,7 @@ onMount(() => {
 <section class="flex carousel-container pt-12">
   <div class="grid md:grid-cols-2 sm:grid-cols-1 justify-center">
     <div class="max-w-4xl carousel-container flex justify-center">
-      <Carousel divClass="overflow-auto" {images} loop showCaptions={false} showThumbs={false} duration="4000" />
+      <Carousel divClass="overflow-auto" {images} loop showCaptions={false} classIndicatorDiv="bottom-0" showThumbs={false} duration="8000" />
     </div>
     
     <div class="p-6">

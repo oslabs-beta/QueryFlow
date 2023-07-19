@@ -12,11 +12,11 @@
 	});
 </script>
 
-<div class="landing-login-container flex flex-col mt-5 lg:flex-row">
+<div class="landing-login-container items-center flex flex-col mt-5 lg:flex-row">
 	<div
 		class="flex-1 flex flex-col items-center justify-center px-6 py-8 mx-auto lg:py-0 responsive-column"
 	>
-		<img class="object-contain rounded-lg" src={loginPic} alt="graph" />
+		<img style="max-height: 80vh;" class="object-contain rounded-lg" src={loginPic} alt="graph" />
 	</div>
 	<!-- conditional statement to render signup or login -->
 	{#if renderSignup}
@@ -28,9 +28,6 @@
 
 <style>
 
-	.landing-login-container {
-		height: 80vh;
-	}
 	.responsive-column {
 		height: 90vh;
 	}

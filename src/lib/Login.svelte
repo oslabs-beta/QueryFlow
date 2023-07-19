@@ -45,7 +45,7 @@
 </script>
 
 <!-- framework for login -->
-<div class="flex flex-col items-center justify-center px-6 pt-8 mx-9 mx-auto md:h-full lg:py-0 w-96 login">
+<div class="flex flex-col items-center justify-center px-6 pt-8 mx-9 mx-auto md:h-full lg:py-0 max-w-96">
 	<div
 		class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700 "
 	>
@@ -113,9 +113,3 @@
 		</div>
 	</div>
 </div>
-
-<style>
-  .login{
-    width:496px;   
-  } 
-</style>
