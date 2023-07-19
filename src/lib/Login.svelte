@@ -2,6 +2,7 @@
 	import { navigate } from 'svelte-routing';
 	import { userInfoStore } from '../store';
 	
+	// used for rendering signup component vs. login component
 	export let renderSignup: boolean;
 
 	let email: string;

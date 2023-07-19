@@ -1,7 +1,7 @@
 import { writable } from 'svelte/store';
 import type { QueryData, UserType,RedisData } from './types';
 import type { Writable } from 'svelte/store';
-//37e2e7e2-1bcb-4b51-a811-080fb1648523
+
 // initially empty, updatable through source code
 export const userInfoStore = writable<UserType>({
   firstName: '',
@@ -18,6 +18,7 @@ export const filterMetricData: Writable<QueryData[]> = writable<QueryData[]>([])
 export const filterMetricDataTwo: Writable<QueryData[]> = writable<QueryData[]>([]);
 
 //Store for Redis data
-export const redisData:Writable<RedisData> = writable<RedisData>();
+export const redisData: Writable<RedisData> = writable<RedisData>();
 
+// initially false, updatable through source code
 export const isAuthenticated = writable(false);

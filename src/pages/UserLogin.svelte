@@ -4,7 +4,8 @@
 	import loginPic from '../assets/login-background-img.avif';
 	import { navigate } from 'svelte-routing';
 	import { onMount } from 'svelte';
-	// toggle signup/login component
+
+	// used for rendering signup component vs. login component
 	let renderSignup: boolean = false;
 
 	onMount(async () => {
@@ -18,7 +19,8 @@
 	>
 		<img class="object-contain rounded-lg" src={loginPic} alt="graph" />
 	</div>
-	<!-- conditional statement to render signup or login -->
+	
+	<!-- renders signup/login component -->
 	<div class="flex items-center">
 		{#if renderSignup}
 			<Signup bind:renderSignup />
