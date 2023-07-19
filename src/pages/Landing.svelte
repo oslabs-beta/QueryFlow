@@ -247,7 +247,6 @@ onMount(() => {
   background-position: center;
   height: 85vh;
 	background-repeat: no-repeat;
-  margin-top: 12px;
 }
 .landing-background-text{
   position: absolute;
