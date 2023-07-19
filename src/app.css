@@ -14,12 +14,14 @@
 body {
 	min-height: 100vh;
 }
+.range {
+	--range-shdw: var(--bc) !important;
+}
 
 /* body no scrollbar */
 body::-webkit-scrollbar {
 	display: none;
 }
-
 
 /* Dots Colors */
 .dot.A {
@@ -110,4 +112,17 @@ td {
 
 article > h1 {
 	text-align: center;
+}
+::-webkit-scrollbar {
+	width: 5px; /* Adjust as per your preference */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #888; /* Change the color as you wish */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #555; /* Change the color as you wish */
 }
