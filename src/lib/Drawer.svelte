@@ -62,9 +62,9 @@
 		<div class="drawer-side">
 			<label for="my-drawer" class="drawer-overlay" />
 			<!-- sidebar content here -->
-			<div class="menu p-4 w-1/3 bg-base-200 text-base-content ">
+			<div class="menu p-4 w-1/3 bg-base-200  text-base-content ">
 				<form on:submit={postQuery}>
-					<div class="flex flex-col pt-8 h-screen">
+					<div class="flex flex-col pt-8 mt-10 h-screen">
 						<!-- name of query label/input -->
 						<div class="w-full my-2">
 							<label
@@ -111,12 +111,13 @@
 								id="queryString"
 								required
 								bind:value={queryString}
+                rows="8"
 								placeholder="e.g. SELECT * FROM your_table"
 								class="textarea textarea-bordered textarea-lg w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 							/>
 						</div>
 
-					<div class="grid grid-cols-2 gap-2 justify-center">
+					<div class="grid grid-cols-2 mt-6 gap-2 justify-center">
             <div class="grid grid-cols-1 text-center justify-center">
               <Button class="bg-primary"><Chevron>Query Count: {queryCount}</Chevron></Button>
 <Dropdown class="text-center overflow-y-auto h-48">

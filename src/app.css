@@ -10,7 +10,6 @@
 	min-height: 100vh;
 }
 
-
 /* body full screen height */
 body {
 	min-height: 100vh;
@@ -24,7 +23,6 @@ body {
 body::-webkit-scrollbar {
 	display: none;
 }
-
 
 /* dot styles/colors */
 
@@ -107,19 +105,16 @@ article > h1 {
 
 /* responsiveness for different media types */
 @media only screen and (max-width: 667px) {
-
 	/* hide the group bar graph on the bottom left */
 	.group-query {
 		display: none;
 	}
 }
 @media only screen and (min-width: 768px) and (max-width: 1300px) {
-
 	/* hide the group bar graph on the bottom left */
 	.group-query {
 		display: none;
 	}
-
 }
 
 article > h1 {
@@ -138,4 +133,3 @@ article > h1 {
 ::-webkit-scrollbar-thumb:hover {
 	background: #555; /* Change the color as you wish */
 }
-
