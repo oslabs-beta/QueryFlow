@@ -4,7 +4,7 @@
 	import { isAuthenticated } from '../store';
 	import { onMount } from 'svelte';
 
-	let revealNavDropdown = false;
+	let revealNavDropdown: boolean = false;
 
 	// hamburger menu collapses when clicking outside of it
 	const toggleNavWindow = () => {
@@ -18,7 +18,8 @@
 		}
 	}
 	
-	const logout = async () => {
+	// removes tokens to exit auth status
+	const logout = async (): Promise<void> => {
 		localStorage.removeItem('token');
 		const revoke = localStorage.getItem('revoke');
 		if (revoke) {
@@ -30,22 +31,22 @@
 		navigate('/login', { replace: true });
 	};
 
-	const login = async () => {
-		navigate('/login')
+	// using this for some on:click methods
+	const login = async (): Promise<void> => {
+		navigate('/login');
 	}
 
-	onMount(()=>{
+	onMount(() => {
 		if (localStorage.getItem('token')){
 			isAuthenticated.set(true);
-		}   
-	})
+		}
+	});
 
 </script>
 
 
 
 <div class="navbar bg-base-100 fixed top-0 z-10">
-
 	<div class="flex-1">
 		<a class="btn btn-ghost normal-case text-xl logo-text" href="/">
 			<img src={logo} alt="logo" class="w-6 mt-1" />
@@ -54,11 +55,11 @@
 	</div>
 	<div class="flex-none">
 		<ul class="flex space-x-1 menu menu-horizontal text-lg">
+      <li><a class="navtags active:shadow-xl active:ring active:ring-primary-100" href="/login">Home</a></li>
 			{#if $isAuthenticated}
 			<!-- replacing (on:click=navigate) with (href=/all-metrics) here breaks the navigation -->
-      <li><a class="navtags active:shadow-xl active:ring active:ring-primary-100" on:click={() => {navigate('/all-metrics')}}>Global Metrics</a></li>
+      <li><a class="navtags active:shadow-xl active:ring active:ring-primary-100" on:click={() => {navigate('/all-metrics')}}>All Metrics</a></li>
 			{/if}
-      <li><a class="navtags active:shadow-xl active:ring active:ring-primary-100" href="/login">Home</a></li>
 			<li><a class="navtags active:shadow-xl active:ring active:ring-primary-100" href="/about">About</a></li>
       <li><a class="navtags active:shadow-xl active:ring active:ring-primary-100" href="/tips">SQL Tips</a></li>
 			<li><a class="navtags active:shadow-xl active:ring active:ring-primary-100" href="https://github.com/oslabs-beta/QueryFlow" target="_blank">GitHub</a></li>
@@ -81,12 +82,12 @@
 					{#if $isAuthenticated}
 					<!-- replacing (on:click=navigate) with (href=/all-metrics) here breaks the navigation -->
 					<li>
-						<a on:click={() => {navigate('/all-metrics')}} class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" aria-current="page">Global Metrics</a>
-					</li>
-					{/if}
-					<li>
 						<a href="/" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" aria-current="page">Home</a>
 					</li>
+					<li>
+						<a on:click={() => {navigate('/all-metrics')}} class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" aria-current="page">All Metrics</a>
+					</li>
+					{/if}
 					<li>
 						<a href="/about" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">About</a>
 					</li>
