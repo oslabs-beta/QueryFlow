@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@600&family=Sarabun:wght@600&display=swap');
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -23,8 +22,7 @@ body::-webkit-scrollbar {
 	display: none;
 }
 
-
-/* Dots Colors */
+/* dot styles/colors */
 .dot.A {
 	fill: #1245a8;
 }
@@ -37,7 +35,7 @@ body::-webkit-scrollbar {
 	fill: green;
 }
 
-/* Bar Colors */
+/* bar styles/colors */
 .bar {
 	fill-opacity: 0.7;
 }
@@ -50,27 +48,28 @@ body::-webkit-scrollbar {
 	fill: #efce00;
 }
 
+.bar.C {
+	fill: green;
+}
+
+/* navbar 'QueryFlow' text styles */
 .logo-text {
 	font-family: 'Sarabun', sans-serif;
 	font-size: 25px;
 }
 
-.bar.C {
-	fill: green;
-}
-
-/* bottom of the graph text label */
+/* card graph axis label styles */
 .axis-label {
 	font-size: 12px;
 	font-weight: bold;
 	color: white !important;
 }
 
-/* for when you hover over a metric on the graph, the pop-up */
+/* card hover tooltip styles */
 .tooltip {
 	background-color: rgba(0, 0, 0, 0.7);
 	color: white;
-	padding: 5px;
+	padding: 7px;
 	font-size: 12px;
 }
 
@@ -79,7 +78,7 @@ body::-webkit-scrollbar {
 	display: none;
 }
 
-/* For IE, Edge and Firefox */
+/* for IE, Edge and Firefox */
 .scrollbar-hide {
 	-ms-overflow-style: none; /* IE and Edge */
 	scrollbar-width: none; /* Firefox */
@@ -97,20 +96,22 @@ td {
 	padding-right: 5px !important;
 }
 
-/* responsive for different media types */
+article > h1 {
+	text-align: center;
+}
+
+/* responsiveness for different media types */
 @media only screen and (max-width: 667px) {
+
 	/* hide the group bar graph on the bottom left */
 	.group-query {
 		display: none;
 	}
 }
 @media only screen and (min-width: 768px) and (max-width: 1300px) {
+
 	/* hide the group bar graph on the bottom left */
 	.group-query {
 		display: none;
 	}
-}
-
-article > h1 {
-	text-align: center;
 }

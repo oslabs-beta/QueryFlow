@@ -32,20 +32,20 @@ export interface RedisData{
   totalTimeSQL: number;
 }
 
-export type UserType = {
-  firstName: string,
-  lastName: string,
-}
-
 export interface WorkingArr {
-  topValue?: number,
-  bottomValue?: number,
-  numberOfQueries?: number
+  topValue?: number;
+  bottomValue?: number;
+  numberOfQueries?: number;
 }
 
 export interface Directions {
-  top: number,
-  right: number,
-  left: number,
-  bottom: number
+  top: number;
+  right: number;
+  left: number;
+  bottom: numbe;
+}
+
+export type UserType = {
+  firstName: string;
+  lastName: string;
 }
