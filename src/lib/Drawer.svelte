@@ -11,7 +11,7 @@
 	let isDrawerOpen: boolean = false;
 
   // submit query POST Request
-	const postQuery = async (e: any) => {
+	const postQuery = async (e: any): Promise<void> => {
     e.preventDefault();
     isDrawerOpen = false;
     const token = localStorage.getItem('token');
