@@ -10,10 +10,13 @@ import george from '../assets/george_profile.avif'
 import ryan from '../assets/ryan_ariba_profile.avif'
 import niko from '../assets/niko_profile.avif'
 import philip from '../assets/philip_profile.avif'
-import { Carousel,Card, MenuButton, Dropdown, DropdownItem, Avatar, Button } from 'flowbite-svelte'
+import { Carousel,Card, Modal, Avatar, Button } from 'flowbite-svelte'
 import { navigate } from 'svelte-routing';
 import packageIcon from "../assets/package.avif"
 import registryEditor from "../assets/registry-editor_hires.avif"
+
+//boolean for modal
+let clickOutsideModal:boolean = false;
 
 // images for carousel
 export const images = [
@@ -115,7 +118,12 @@ onMount(() => {
 </section>
 <section class="grid justify-center text-center ">
   <div class="mt-4 flex justify-center ">
-    <img alt="queryFlow diagram" src={queryFlowMainChart} />
+    <button on:click={() => clickOutsideModal = true}>
+      <img alt="queryFlow diagram" class="cursor-pointer" src={queryFlowMainChart} />
+    </button>
+    <Modal size="xl" bind:open={clickOutsideModal} autoclose outsideclose>
+      <img alt="queryFlow diagram" class="cursor-pointer" src={queryFlowMainChart} />
+    </Modal>
   </div>
 </section>
 <section class="text-4xl font-bold transition-container3 text-center flex items-center justify-center">
