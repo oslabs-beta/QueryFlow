@@ -1,7 +1,7 @@
 <script lang="ts">
 	import logo from '../assets/Query-Flow-icon.png';
 	import { navigate } from 'svelte-routing';
-	import { isAuthenticated } from '../store';
+	import { isAuthenticated, isLoading } from '../store';
 	import { onMount } from 'svelte';
 
 	let revealNavDropdown: boolean = false;
@@ -40,6 +40,12 @@
 		if (localStorage.getItem('token')){
 			isAuthenticated.set(true);
 		}
+
+		// adds/removes spinning animation when a query begins/finishes running
+		isLoading.subscribe((value: boolean): void => {
+		if (value) document.getElementById('logo').classList.add('animate-spin');
+		else document.getElementById('logo').classList.remove('animate-spin');
+	})
 	});
 
 </script>
@@ -48,7 +54,7 @@
 
 	<div class="flex-1">
 		<a class="btn btn-ghost normal-case text-xl logo-text" href="/">
-			<img src={logo} alt="logo" class="w-6 mt-1" />
+			<img id="logo" src={logo} alt="logo" class="w-6 mt-1" />
 			QueryFlow
 		</a>
 	</div>
