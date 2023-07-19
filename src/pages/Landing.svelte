@@ -12,9 +12,9 @@ import niko from '../assets/niko_profile.avif'
 import philip from '../assets/philip_profile.avif'
 import { Carousel,Card, Modal, Avatar, Button } from 'flowbite-svelte'
 import { navigate } from 'svelte-routing';
-import packageIcon from "../assets/package.avif"
-import registryEditor from "../assets/registry-editor_hires.avif"
-
+import packageIcon from '../assets/package.avif'
+import registryEditor from '../assets/registry-editor_hires.avif'
+import queryFlowGif from '../assets/queryflow_gif3.gif'
 //boolean for modal
 let clickOutsideModal:boolean = false;
 
@@ -129,8 +129,13 @@ onMount(() => {
 <section class="text-4xl font-bold transition-container3 text-center flex items-center justify-center">
   <h1 class="text-white text-4xl font-bold">Let's dive into the features of our Visualizer!</h1>
 </section>
-
-<section class="flex carousel-container pt-12">
+<section class="flex justify-center">
+  <img src={queryFlowGif} alt="queryflow visualizer gif">
+</section >
+<section class="text-4xl font-bold transition-container4 text-center flex items-center justify-center">
+  <div class="horizontal-line"></div>
+</section>
+<section class="flex carousel-container">
   <div class="grid md:grid-cols-2 sm:grid-cols-1 justify-center">
     <div class="max-w-4xl carousel-container flex justify-center">
       <Carousel divClass="overflow-auto" {images} loop showCaptions={false} classIndicatorDiv="bottom-0" showThumbs={false} duration="8000" />
@@ -153,7 +158,7 @@ onMount(() => {
 <section class="meet-team text-center">
   <h1 class="text-4xl font-bold py-4">Meet the team</h1>
   <div class="grid grid-cols-5 gap-4 justify-around items-center h-60"> 
-    <Card padding='sm' class="hover:shadow-lg hover:-translate-y-2 bg-transparent border-none shadow-2xl">
+    <Card padding='sm' class="hover:shadow-lg hover:-translate-y-2 transition ease-in-out delay-200 bg-transparent border-none shadow-2xl">
       <div class="flex flex-col items-center pb-4">
         <Avatar size="xl" src={george} />
         <h5 class="mb-1 text-xl font-medium text-gray-100 dark:text-white">George Greer</h5>
@@ -161,7 +166,7 @@ onMount(() => {
         <a class="text-gray-100" href="https://www.linkedin.com/in/george-greer/">Linkedin</a>
       </div>
     </Card>
-    <Card padding='sm' class="hover:shadow-lg hover:-translate-y-2 bg-transparent shadow-lg border-none shadow-2xl">
+    <Card padding='sm' class="hover:shadow-lg hover:-translate-y-2 bg-transparent shadow-lg border-none shadow-2xl transition ease-in-out delay-200 ">
       <div class="flex flex-col items-center pb-4">
         <Avatar size="xl" src={vivek} />
         <h5 class="mb-1 text-xl font-medium text-gray-100 dark:text-white">Vivek Patel</h5>
@@ -169,7 +174,7 @@ onMount(() => {
         <a class="text-gray-100" href="https://www.linkedin.com/in/vivekpatel607/">Linkedin</a>
       </div>
     </Card>
-    <Card padding='sm' class="hover:shadow-lg hover:-translate-y-2 bg-transparent border-none shadow-2xl">
+    <Card padding='sm' class="hover:shadow-lg hover:-translate-y-2 bg-transparent border-none shadow-2xl transition ease-in-out delay-200 ">
       <div class="flex flex-col items-center pb-4">
         <Avatar size="xl" src={niko} />
         <h5 class="mb-1 text-xl font-medium text-gray-100 dark:text-white">Niko Amescua</h5>
@@ -177,7 +182,7 @@ onMount(() => {
         <a class="text-gray-100" href="https://www.linkedin.com/in/nikoamescua">Linkedin</a>
       </div>
     </Card>
-    <Card padding='sm' class="hover:shadow-lg hover:-translate-y-2 bg-transparent shadow-lg border-none shadow-2xl">
+    <Card padding='sm' class="hover:shadow-lg hover:-translate-y-2 bg-transparent shadow-lg border-none shadow-2xl transition ease-in-out delay-200 ">
       <div class="flex flex-col items-center pb-4">
         <Avatar size="xl" src={ryan} />
         <h5 class="mb-1 text-xl font-medium text-gray-100 dark:text-white">The Oracle</h5>
@@ -185,7 +190,7 @@ onMount(() => {
         <a class="text-gray-100" href="https://www.linkedin.com/in/ryancampbelladr/">Linkedin</a>
       </div>
     </Card>
-    <Card padding='sm' class="hover:shadow-lg hover:-translate-y-2 bg-transparent shadow-lg border-none shadow-2xl">
+    <Card padding='sm' class="hover:shadow-lg hover:-translate-y-2 bg-transparent shadow-lg border-none shadow-2xl transition ease-in-out delay-200 ">
       <div class="flex flex-col items-center pb-4">
         <Avatar size="xl" src={philip} />
         <h5 class="mb-1 text-xl font-medium text-gray-100 dark:text-white">Philip Brown</h5>
@@ -200,13 +205,13 @@ onMount(() => {
     <span class="text-sm text-gray-500 dark:text-gray-300 sm:text-center">© 2023 <a href="https://www.query-flow.com">QueryFlow™</a>. All Rights Reserved.
     </span>
     <div class="flex mt-4 space-x-5 sm:justify-center md:mt-0">
-        <a href="https://github.com/oslabs-beta/QueryFlow" class="text-gray-400 hover:text-gray-900 dark:hover:text-white">
+        <a href="https://www.facebook.com/profile.php?id=100094996360163&is_tour_dismissed=true" class="text-gray-400 hover:text-gray-900 dark:hover:text-white">
               <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 8 19">
                     <path fill-rule="evenodd" d="M6.135 3H8V0H6.135a4.147 4.147 0 0 0-4.142 4.142V6H0v3h2v9.938h3V9h2.021l.592-3H5V3.591A.6.6 0 0 1 5.592 3h.543Z" clip-rule="evenodd"/>
                 </svg>
               <span class="sr-only">Facebook page</span>
           </a>
-          <a href="https://github.com/oslabs-beta/QueryFlow" class="text-gray-400 hover:text-gray-900 dark:hover:text-white">
+          <a href="https://twitter.com/Query_Flow" class="text-gray-400 hover:text-gray-900 dark:hover:text-white">
               <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 17">
                 <path fill-rule="evenodd" d="M20 1.892a8.178 8.178 0 0 1-2.355.635 4.074 4.074 0 0 0 1.8-2.235 8.344 8.344 0 0 1-2.605.98A4.13 4.13 0 0 0 13.85 0a4.068 4.068 0 0 0-4.1 4.038 4 4 0 0 0 .105.919A11.705 11.705 0 0 1 1.4.734a4.006 4.006 0 0 0 1.268 5.392 4.165 4.165 0 0 1-1.859-.5v.05A4.057 4.057 0 0 0 4.1 9.635a4.19 4.19 0 0 1-1.856.07 4.108 4.108 0 0 0 3.831 2.807A8.36 8.36 0 0 1 0 14.184 11.732 11.732 0 0 0 6.291 16 11.502 11.502 0 0 0 17.964 4.5c0-.177 0-.35-.012-.523A8.143 8.143 0 0 0 20 1.892Z" clip-rule="evenodd"/>
             </svg>
@@ -270,14 +275,15 @@ onMount(() => {
 .landing-background-text p{
   font-size: 45px;
 }
+
 .transition-container{
   margin-top:50px;
   width:100vw;
   height:200px;
   background-image: linear-gradient(to right,var(--tw-gradient-stops));
-  --tw-gradient-from:#28557a;
-  --tw-gradient-stops:var(--tw-gradient-from), var(--tw-graident-to,#209DEE);
-  --tw-gradient-to: #597bb8;
+  --tw-gradient-from:#7b6a96;
+  --tw-gradient-stops:var(--tw-gradient-from), var(--tw-graident-to,#6444c2);
+  --tw-gradient-to: #7e4397;
   background-repeat:no-repeat;
 }
 .transition-container2{
@@ -299,6 +305,18 @@ onMount(() => {
   --tw-gradient-stops:var(--tw-gradient-from), var(--tw-graident-to,#5a8fba);
   --tw-gradient-to: #5a8fba;
   background-repeat:no-repeat;
+}
+
+.transition-container4{
+  width:100vw;
+  height:150px;
+}
+
+.horizontal-line{
+  height:2px;
+  width:50%;
+  background-color: rgba(181, 181, 181, 0.303);
+  border-radius: 25px;
 }
 
 .meet-team{
