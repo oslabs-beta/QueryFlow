@@ -1,6 +1,7 @@
 <script lang="ts">
-  import { metricData, filterMetricData, filterMetricDataTwo } from '../store';
+  import { metricData, filterMetricData, filterMetricDataTwo, isLoading } from '../store';
   import { Button, Dropdown, DropdownItem, Chevron } from 'flowbite-svelte'
+
 	// initializing vars for database
 	let queryName: string;
 	let uri: string;
@@ -9,11 +10,14 @@
 	let queryDelay: number = 2;
 	let isDrawerOpen: boolean = false;
 
-
   // submit query POST Request
 	const postQuery = async (e: any): Promise<void> => {
     e.preventDefault();
     isDrawerOpen = false;
+
+		// adds spinning animation to logo
+		isLoading.set(true);
+
     const token = localStorage.getItem('token');
     try {
       const response = await fetch('/api/query-metrics', {
@@ -37,6 +41,9 @@
         metricData.update((arr) => [data, ...arr]);
         filterMetricData.update((arr) => [data, ...arr]);
         filterMetricDataTwo.update((arr) => [data, ...arr]);
+
+				// ends spinning animation
+				isLoading.set(false);
       }
     } catch (error) {
       console.error(error);
