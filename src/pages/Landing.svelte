@@ -58,7 +58,7 @@ onMount(() => {
     <div class="landing-background-text">
       <h1>QueryFlow</h1>
       <p>Visualizing and Caching Slow Queries in Real-Time</p>
-      <button class="get-started btn btn-lg btn-primary drawer-button border-primary m-8 hover:bg-secondary hover:text-white hover:border-secondary" on:click={() => navigate('/login')}>Get started</button>
+      <button class="get-started btn btn-lg btn-primary drawer-button border-primary m-8 hover:bg-secondary hover:text-white hover:border-secondary font-semibold" on:click={() => navigate('/login')}>Get started</button>
     </div>
   </section>
 <section class="transition-section">
@@ -125,7 +125,7 @@ onMount(() => {
 <section class="flex carousel-container pt-12">
   <div class="grid md:grid-cols-2 sm:grid-cols-1 justify-center">
     <div class="max-w-4xl carousel-container flex justify-center">
-      <Carousel divClass="overflow-auto" {images} loop showCaptions={false} showThumbs={false} duration="4000" />
+      <Carousel divClass="overflow-auto" {images} loop showCaptions={false} classIndicatorDiv="bottom-0" showThumbs={false} duration="8000" />
     </div>
     
     <div class="p-6">
@@ -137,7 +137,7 @@ onMount(() => {
       <p class="mt-2 xl:text-lg">
         QueryFlow optimizes your SQL queries by offering performance comparisons and a global metrics chart for an overview of all your queries. Our standout feature, done with your consent, benchmarks your queries against Redis performance, showcasing caching benefits. You can leverage these insights using our NPM package, enabling seamless, dynamic caching for your application.</p>
       <div class="flex justify-center mt-4">
-    <button class="btn btn-warning" on:click={() => navigate('/login')}>Try it Today</button>
+    <button class="btn btn-warning text-base" on:click={() => navigate('/login')}>Try it Today</button>
       </div>
     </div>
   </div>

@@ -8,20 +8,19 @@
 	let email: string;
 	let password: string;
 
-  // Toggle the signup and login boolean. To get back to login screen
+  // used for rendering signup component vs. login component
 	export let renderSignup: boolean;
 
-  // comparison string to make sure user typed correct password
+  // used for comparing passwords when creating acc
 	let confirmPassword: string;
 
-  // Signup Function - POST request
+  // signing up - POST request
 	const postData = async (e: any) => {
 		e.preventDefault();
-		
-    // check passwords
     if (password !== confirmPassword) return alert('Please make sure your passwords match');
 
-    // body package for post request
+    // body var for post request
+		// needs adjustment, database/organization both optional, doesn't account for all conditions
 		const body = database
 			? { firstName, lastName, organization, database, email, password }
 			: { firstName, lastName, organization, email, password };
@@ -36,23 +35,24 @@
 			});
 			if (response.ok) {      
 				alert('account created');
-        // switch boolean to back to login component
+
+        // switches to login component
 				renderSignup = false;
+
 			} else {
-				console.error('error in signup')
+				console.error('Error signing up');
 			}
 		} catch (error) {
-      console.error(error)
+      console.error(error);
     }
 	};
 </script>
 
-
-<section>
-	<div class="flex flex-col px-6 mx-auto lg:py-0">
+<!-- signup component -->
+<section class="z-10">
+	<div class="flex-col px-6 mx-auto lg:py-0">
 		<div
-			class="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700"
-		>
+			class="w-full bg-white rounded-lg shadow shadow-xl dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
 			<div class="p-6 space-y-4 md:space-y-6 sm:p-8">
 				<div class="flex items-center">
 					<button
@@ -76,20 +76,17 @@
 							/>
 						</svg>
 					</button>
-					<h1
-						class="ml-4 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white"
-					>
-						Sign up
+					<h1 class="ml-4 text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
+						Sign Up
 					</h1>
 				</div>
-
-				<form class="space-y-4 md:space-y-6" action="#" on:submit={postData}>
+				<!-- form that holds/binds all info in it to submit with below on:submit -->
+				<form class="space-y-4 md:space-y-6" on:submit={postData}>
 					<div class="flex flex-wrap -mx-3 mb-6">
 						<div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
 							<label
 								class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-								for="grid-first-name"
-							>
+								for="grid-first-name">
 								First Name
 								<span class="asterisk">*</span>
 							</label>
@@ -101,13 +98,11 @@
 								required
 								bind:value={firstName}
 							/>
-
 						</div>
 						<div class="w-full md:w-1/2 px-3">
 							<label
 								class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-								for="grid-last-name"
-							>
+								for="grid-last-name">
 								Last Name
 								<span class="asterisk">*</span>
 							</label>
@@ -124,9 +119,9 @@
 					<div>
 						<label
 							for="organization"
-							class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-							>Organization (optional)</label
-						>
+							class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+							Organization (optional)
+						</label>
 						<input
 							type="text"
 							name="organization"
@@ -139,36 +134,33 @@
 					<div class="inline-block relative w-64">
 						<label
 							for="database"
-							class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-							>Preferred Database (optional)</label
-						>
+							class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+							Preferred Database (optional)
+						</label>
 						<select
 							bind:value={database}
 							name="database"
 							id="database"
-							class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-						>
+							class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
 							<option value="" disabled selected hidden>Please choose...</option>
 							<option>PSQL</option>
 							<option>MySQL</option>
 							<option>Redis</option>
 						</select>
 						<div
-							class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
-						>
+							class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
 							<svg
 								class="fill-current h-4 w-4"
 								xmlns="http://www.w3.org/2000/svg"
 								viewBox="0 0 20 20"
 								><path
 									d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-								/></svg
-							>
+								/></svg>
 						</div>
 					</div>
 					<div>
-						<label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-							>Your email
+						<label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+							Your email
 							<span class="asterisk">*</span>
 						</label>
 						<input
@@ -184,8 +176,8 @@
 					<div>
 						<label
 							for="password"
-							class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-							>Password
+							class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+							Password
 							<span class="asterisk">*</span>
 						</label>
 						<input
@@ -201,8 +193,8 @@
 					<div>
 						<label
 							for="confirm-password"
-							class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-							>Confirm password
+							class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
+							Confirm password
 							<span class="asterisk">*</span>
 						</label>
 						<input
@@ -226,12 +218,13 @@
 							/>
 						</div>
 						<div class="ml-3 text-sm">
-							<label for="terms" class="font-light text-gray-500 dark:text-gray-300"
-								>I accept the <a
+							<label for="terms" class="font-light text-gray-500 dark:text-gray-300">
+								I accept the <a
 									class="font-medium text-primary-600 hover:underline dark:text-primary-500"
-									href={'#'}>Terms and Conditions</a
-								></label
-							>"#"
+									href={'#'}>
+									Terms and Conditions
+								</a>
+								</label>
 						</div>
 					</div>
 					<button
@@ -241,16 +234,13 @@
 					>
 					<p class="text-sm font-light text-gray-500 dark:text-gray-400">
 						Already have an account? 
-            
-            <a
-							href={'#'}
+            <a href={'#'}
 							on:click={() => {
 								renderSignup = false;
 							}}
-							class="font-medium text-primary-600 hover:underline dark:text-primary-500"
-							>Login here</a
-              
-						>
+							class="font-medium text-primary-600 hover:underline dark:text-primary-500">
+							Login
+						</a>
 					</p>
 				</form>
 			</div>
