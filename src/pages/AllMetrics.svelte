@@ -95,7 +95,7 @@
 		on:mouseleave={() => {
 			hoveredData = null;
 		}}>
-		<div class="flex justify-center">
+		<div class="flex justify-center mb-8">
 			<h1 class="title">Average query times</h1>
 
 			<!-- 'on:click' below needs to be looked at later -->

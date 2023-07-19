@@ -14,7 +14,7 @@
 </script>
 
 <div class="fill-remaining-space flex items-center justify-center">
-	<img class="w-12 absolute h-full w-full top-0" src={flowBackground} alt="flowing rays of light" />
+	<img class="fixed top-0 min-h-full min-w-full" src={flowBackground} alt="flowing rays of light" />
 	<!-- renders signup/login component -->
 	{#if renderSignup}
 		<Signup bind:renderSignup />
