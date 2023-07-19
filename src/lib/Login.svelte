@@ -111,7 +111,7 @@
 </div>
 
 <style>
-  .login{
-    width:496px;   
+  .login {
+    width: 496px;   
   } 
 </style>
