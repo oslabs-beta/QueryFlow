@@ -124,12 +124,14 @@
 </script>
 
 <div class="w-full flex flex-col items-center content-center justify-center mt-6">
-  <!-- TEMPORARY BUTTON FOR GOING TO /all-metrics -->
-<button class="btn btn-primary m-1 border-primary hover:bg-secondary hover:text-white hover:border-secondary" on:click={() => {navigate('/all-metrics')}}>Global Metrics</button>
-<!-- END OF TEMPORARY BUTTON -->
-<label for="my-drawer" class="btn btn-primary drawer-button border-primary hover:bg-secondary hover:text-white hover:border-secondary">Add a query</label>
+  <div>
+    <!-- add a query button, padding to match Global Metrics btn size -->
+    <label for="my-drawer" class="btn btn-primary drawer-button border-primary hover:bg-secondary hover:text-white hover:border-secondary text-base">Add a Query</label>
+  <!-- global metrics button -->
+<!-- <button class="btn btn-primary border-primary hover:bg-secondary hover:text-white hover:border-secondary text-base" on:click={() => {navigate('/all-metrics')}}>Global Metrics</button> -->
+</div>
   <div class="flex-shrink-0">
-    <!-- Add Query Sliding Drawer -->
+    <!-- renders the sliding drawer component -->
     <Drawer />
   </div>
 

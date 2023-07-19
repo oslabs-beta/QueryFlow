@@ -64,7 +64,7 @@
 								for="queryName"
 								class="block mb-2 text-lg font-medium"
 							>
-								Name of your query
+								Category of your query
 							</label>
 							<input
 								type="text"
@@ -72,6 +72,7 @@
 								id="queryName"
 								class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 								placeholder="e.g. My query"
+								required
 								bind:value={queryName}
 							/>
 						</div>
@@ -86,6 +87,7 @@
 								id="uri"
 								class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 								placeholder="e.g. postgres://exampleURI.com/example"
+								required
 								bind:value={uri}
 							/>
 						</div>
@@ -100,6 +102,7 @@
 							<textarea
 								name="queryString"
 								id="queryString"
+								required
 								bind:value={queryString}
 								placeholder="e.g. SELECT * FROM your_table"
 								class="textarea textarea-bordered textarea-lg w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -117,6 +120,7 @@
                       max="20"
                       class="range range-primary"
                       step="1"
+											required
                       bind:value={queryCount}
                   />
               </div>
@@ -159,6 +163,7 @@
 								max="20"
 								class="range range-primary"
 								step="2"
+								required
 								bind:value={queryDelay}
 							/>
 							<div class="w-full flex justify-between text-xs px-2">
