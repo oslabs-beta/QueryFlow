@@ -5,7 +5,6 @@ import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import { dirname, resolve } from 'path';
 import compression from 'compression';
-import bodyParser from 'body-parser';
 import apiRouter from './routes/apiRoutes.mjs';
 import loginRouter from './routes/loginRoutes.mjs';
 
@@ -24,7 +23,6 @@ app.use(compression());
 app.use(cors());
 app.use(cookieParser());
 app.use(express.json());
-app.use(bodyParser.json());
 
 // Serve static assets
 // Change to '../src' if problem. This current setup is for distribution

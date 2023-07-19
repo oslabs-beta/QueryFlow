@@ -10,7 +10,7 @@
 </script>
 
 <!-- holding all our routes for their respective pages -->
-<main>
+<main class="min-h-screen">
 	<Navbar />
 	<div class="pt-16">
 		<Router>
@@ -23,6 +23,3 @@
 		</Router>
 	</div>
 </main>
-
-<style>
-</style>

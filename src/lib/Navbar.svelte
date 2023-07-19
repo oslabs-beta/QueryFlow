@@ -41,7 +41,7 @@
 	})
 </script>
 
-<div class="navbar bg-base-100 fixed top-0 z-10">
+<div class="navbar bg-base-100 fixed top-0 z-20">
 
 	<div class="flex-1">
 		<a class="btn btn-ghost normal-case text-xl logo-text" href="/">
@@ -104,6 +104,7 @@
 <style>
 	.navbar {
 		border-bottom: 1px solid #cecece;
+		background: rgba(255, 255, 255, 0.9)
 	}
 
 	#hamburger-menu {
