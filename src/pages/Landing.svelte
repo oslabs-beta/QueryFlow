@@ -52,7 +52,7 @@ onMount(() => {
   });
 </script>
 
-<!-- hero -->
+
 <main>
   <section class="landing-background object-cover w-full h-full inset-0">
     <div class="landing-background-text">
@@ -61,14 +61,14 @@ onMount(() => {
       <button class="get-started btn btn-lg btn-primary drawer-button border-primary m-8 hover:bg-secondary hover:text-white hover:border-secondary font-semibold" on:click={() => navigate('/login')}>Get started</button>
     </div>
   </section>
-  <section class="transition-section">
+<section class="transition-section">
   </section>
   <div class="flex justify-center items-center my-16">
     <h1 class="text-4xl font-bold text-center">A Package And A Visualizer Working Together</h1>
   </div>
 
-  <!-- A Package And A Visualizer -->
-  <section class="grid md:grid-cols-2 sm:grid-cols-1 justify-center">
+
+ <section class="grid md:grid-cols-2 sm:grid-cols-1 justify-center">
     <div class="flex justify-center">
       <div class="rounded p-6 top-column" > 
         <div class="icon-div">
@@ -88,7 +88,8 @@ onMount(() => {
         <p class="pt-4">QueryFlow is a tool designed to optimize the performance of PostgreSQL queries by mapping out planning, execution, and overall timing in comparison to other queries. It also provides a detailed table view showcasing shared, hit, and read blocks, facilitating the identification of performance deficiencies. Additionally, QueryFlow allows for comprehensive query comparisons and even offers a specific benchmarking feature against a Redis database. These capabilities make QueryFlow an essential tool for enhancing the performance of your PostgreSQL databases.</p>
       </div>
     </div>
-  </section>
+  </section> 
+
 <section class="transition-container text-center flex items-center justify-center">
   <h1 class=" text-white text-4xl font-bold">Accelerating Your Database Queries, One Cache at a Time.</h1>
 </section>
@@ -120,7 +121,7 @@ onMount(() => {
 <section class="text-4xl font-bold transition-container3 text-center flex items-center justify-center">
   <h1 class="text-white text-4xl font-bold">Let's dive into the features of our Visualizer!</h1>
 </section>
-<!-- carousel -->
+
 <section class="flex carousel-container pt-12">
   <div class="grid md:grid-cols-2 sm:grid-cols-1 justify-center">
     <div class="max-w-4xl carousel-container flex justify-center">
@@ -144,51 +145,51 @@ onMount(() => {
 <section class="meet-team text-center">
   <h1 class="text-4xl font-bold py-4">Meet the team</h1>
   <div class="grid grid-cols-5 gap-4 justify-around items-center h-60"> 
-    <Card padding='sm' class="bg-transparent border-none shadow-2xl">
+    <Card padding='sm' class="hover:shadow-lg hover:-translate-y-2 bg-transparent border-none shadow-2xl">
       <div class="flex flex-col items-center pb-4">
         <Avatar size="xl" src={george} />
-        <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">George Greer</h5>
+        <h5 class="mb-1 text-xl font-medium text-gray-100 dark:text-white">George Greer</h5>
         <span class="text-sm text-gray-100 dark:text-gray-400">Software Engineer</span>
         <a class="text-gray-100" href="https://www.linkedin.com/in/george-greer/">Linkedin</a>
       </div>
     </Card>
-    <Card padding='sm' class="bg-transparent shadow-lg border-none shadow-2xl">
+    <Card padding='sm' class="hover:shadow-lg hover:-translate-y-2 bg-transparent shadow-lg border-none shadow-2xl">
       <div class="flex flex-col items-center pb-4">
         <Avatar size="xl" src={vivek} />
-        <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Vivek Patel</h5>
-        <span class="text-sm text-gray-200 dark:text-gray-400">Software Engineer</span>
-        <a class="text-gray-200" href="https://www.linkedin.com/in/vivekpatel607/">Linkedin</a>
+        <h5 class="mb-1 text-xl font-medium text-gray-100 dark:text-white">Vivek Patel</h5>
+        <span class="text-sm text-gray-100 dark:text-gray-400">Software Engineer</span>
+        <a class="text-gray-100" href="https://www.linkedin.com/in/vivekpatel607/">Linkedin</a>
       </div>
     </Card>
-    <Card padding='sm' class="bg-transparent border-none shadow-2xl">
+    <Card padding='sm' class="hover:shadow-lg hover:-translate-y-2 bg-transparent border-none shadow-2xl">
       <div class="flex flex-col items-center pb-4">
         <Avatar size="xl" src={niko} />
-        <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Niko Amescua</h5>
-        <span class="text-sm text-gray-300 dark:text-gray-400">Software Engineer</span>
-        <a class="text-gray-300" href="https://www.linkedin.com/in/nikoamescua">Linkedin</a>
+        <h5 class="mb-1 text-xl font-medium text-gray-100 dark:text-white">Niko Amescua</h5>
+        <span class="text-sm text-gray-100 dark:text-gray-400">Software Engineer</span>
+        <a class="text-gray-100" href="https://www.linkedin.com/in/nikoamescua">Linkedin</a>
       </div>
     </Card>
-    <Card padding='sm' class="bg-transparent shadow-lg border-none shadow-2xl">
+    <Card padding='sm' class="hover:shadow-lg hover:-translate-y-2 bg-transparent shadow-lg border-none shadow-2xl">
       <div class="flex flex-col items-center pb-4">
         <Avatar size="xl" src={ryan} />
-        <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">The Oracle</h5>
-        <span class="text-sm text-gray-500 dark:text-gray-400">Software Engineer</span>
-        <a class="text-gray-500" href="https://www.linkedin.com/in/ryancampbelladr/">Linkedin</a>
+        <h5 class="mb-1 text-xl font-medium text-gray-100 dark:text-white">The Oracle</h5>
+        <span class="text-sm text-gray-100 dark:text-gray-400">Software Engineer</span>
+        <a class="text-gray-100" href="https://www.linkedin.com/in/ryancampbelladr/">Linkedin</a>
       </div>
     </Card>
-    <Card padding='sm' class="bg-transparent shadow-lg border-none shadow-2xl">
+    <Card padding='sm' class="hover:shadow-lg hover:-translate-y-2 bg-transparent shadow-lg border-none shadow-2xl">
       <div class="flex flex-col items-center pb-4">
         <Avatar size="xl" src={philip} />
-        <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">Philip Brown</h5>
-        <span class="text-sm text-gray-500 dark:text-gray-400">Software Engineer</span>
-        <a class="text-gray-500" href="https://www.linkedin.com/in/philiplbrown/">Linkedin</a>
+        <h5 class="mb-1 text-xl font-medium text-gray-100 dark:text-white">Philip Brown</h5>
+        <span class="text-sm text-gray-100 dark:text-gray-400">Software Engineer</span>
+        <a class="text-gray-100" href="https://www.linkedin.com/in/philiplbrown/">Linkedin</a>
       </div>
     </Card>
   </div>
 </section>
 <section>
   <div class="px-4 py-6 bg-gray-100 dark:bg-gray-700 md:flex md:items-center md:justify-between">
-    <span class="text-sm text-gray-500 dark:text-gray-300 sm:text-center">© 2023 <a href="https://flowbite.com/">QueryFlow™</a>. All Rights Reserved.
+    <span class="text-sm text-gray-500 dark:text-gray-300 sm:text-center">© 2023 <a href="https://www.query-flow.com">QueryFlow™</a>. All Rights Reserved.
     </span>
     <div class="flex mt-4 space-x-5 sm:justify-center md:mt-0">
         <a href="https://github.com/oslabs-beta/QueryFlow" class="text-gray-400 hover:text-gray-900 dark:hover:text-white">
@@ -239,15 +240,14 @@ onMount(() => {
   background: linear-gradient(180deg, rgb(0, 0, 9) 0%, rgb(255, 255, 255) 100%);
 }
 
-.top-column{
-  width:600px;
-}
+
 .landing-background{
   background-image: url('../assets/graph3.avif');
   background-size: cover;
   background-position: center;
   height: 85vh;
 	background-repeat: no-repeat;
+  margin-top: 12px;
 }
 .landing-background-text{
   position: absolute;
@@ -268,9 +268,9 @@ onMount(() => {
   width:100vw;
   height:200px;
   background-image: linear-gradient(to right,var(--tw-gradient-stops));
-  --tw-gradient-from:#002585;
+  --tw-gradient-from:#28557a;
   --tw-gradient-stops:var(--tw-gradient-from), var(--tw-graident-to,#209DEE);
-  --tw-gradient-to: #209DEE;
+  --tw-gradient-to: #597bb8;
   background-repeat:no-repeat;
 }
 .transition-container2{
@@ -278,7 +278,7 @@ onMount(() => {
   width:100vw;
   height:200px;
   background-image: linear-gradient(to right,var(--tw-gradient-stops));
-  --tw-gradient-from:#3d0492;
+  --tw-gradient-from:#7e4397;
   --tw-gradient-stops:var(--tw-gradient-from), var(--tw-graident-to,#7b6a96);
   --tw-gradient-to: #209DEE;
   background-repeat:no-repeat;
@@ -288,9 +288,9 @@ onMount(() => {
   width:100vw;
   height:200px;
   background-image: linear-gradient(to right,var(--tw-gradient-stops));
-  --tw-gradient-from:#ff0000;
-  --tw-gradient-stops:var(--tw-gradient-from), var(--tw-graident-to,#209DEE);
-  --tw-gradient-to: #209DEE;
+  --tw-gradient-from:#9347A6ff ;
+  --tw-gradient-stops:var(--tw-gradient-from), var(--tw-graident-to,#5a8fba);
+  --tw-gradient-to: #5a8fba;
   background-repeat:no-repeat;
 }
 
@@ -300,9 +300,9 @@ onMount(() => {
   height:400px;
 
   background-image: linear-gradient(to right,var(--tw-gradient-stops));
-  --tw-gradient-from:#0011ff;
-  --tw-gradient-stops:var(--tw-gradient-from), var(--tw-graident-to,#e3fa87);
-  --tw-gradient-to: #209DEE;
+  --tw-gradient-from:#535cd2;
+  --tw-gradient-stops:var(--tw-gradient-from), var(--tw-graident-to,rgb(136, 110, 182));
+  --tw-gradient-to: rgb(118, 104, 163);
   background-repeat:no-repeat;
 }
 
@@ -329,20 +329,20 @@ onMount(() => {
     padding: 12px 24px;
     font-size: 16px;
   }
+}
+
+@media (min-width: 1200px) {
   .top-column{
-    width:500px;
+    width:600px;
   }
 }
-@media (max-width: 420px) {
+@media (max-width: 430px) {
   .landing-background-text{
     margin-right:5px;
     margin-top:30px;
   }
-
-  .top-column{
-    width:400px;
-  }
 }
+
 @media only screen and (min-width: 641px) and (max-width: 1030px) {
   .meet-team {
     display: flex;
