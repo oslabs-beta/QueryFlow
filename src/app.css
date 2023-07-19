@@ -16,13 +16,18 @@ body {
 	min-height: 100vh;
 	min-width: 100vw;
 }
+.range {
+	--range-shdw: var(--bc) !important;
+}
 
 /* body no scrollbar */
 body::-webkit-scrollbar {
 	display: none;
 }
 
+
 /* dot styles/colors */
+
 .dot.A {
 	fill: #1245a8;
 }
@@ -114,4 +119,23 @@ article > h1 {
 	.group-query {
 		display: none;
 	}
+
 }
+
+article > h1 {
+	text-align: center;
+}
+::-webkit-scrollbar {
+	width: 5px; /* Adjust as per your preference */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #888; /* Change the color as you wish */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #555; /* Change the color as you wish */
+}
+
