@@ -47,7 +47,7 @@
 <!-- binded values automatically update -->
 <div>
 	<!-- sidebar named drawer -->
-	<div class="drawer">
+	<div class="drawer z-30">
 		<input id="my-drawer" type="checkbox" class="drawer-toggle" bind:checked={isDrawerOpen}/>
 		<div class="drawer-content">
 			<!-- page content here -->
@@ -195,9 +195,6 @@
 </div>
 
 <style>
-	.drawer {
-		z-index: 11; /* places drawer above everything else */
-	}
 
   .drawer-side {
 	left: -80vw; /* Initially set to negative of the drawer's width to guarantee staying off screen */

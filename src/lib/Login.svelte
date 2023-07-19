@@ -44,7 +44,7 @@
 </script>
 
 <!-- login component -->
-<div class="flex flex-col items-center justify-center px-6 pt-8 mx-9 mx-auto md:h-full lg:py-0 w-96 login">
+<div style="height:100vh - 1px;" class="z-10 flex flex-col items-center justify-center px-6 pt-8 mx-9 mx-auto lg:py-0 max-w-96">
 	<div class="w-full bg-white rounded-lg shadow shadow-xl dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
 		<div class="p-6 space-y-4 md:space-y-6 sm:p-8 login-shadow">
       {#if wrongEmailPassword}
@@ -96,8 +96,9 @@
 				on:click={() => {
 					renderSignup = true;
 				}}
-				class="w-full text-white bg-primary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-				>Sign Up</button>
+				class="w-full text-white bg-primary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-primary font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+				Sign Up
+			</button>
 				<!-- remove the div below if we don't want the oauth button centered -->
 			<div class="flex justify-center">	
       	<button type="button" on:click={googleLogin} class="text-white bg-[#4285F4] hover:bg-[#4285F4]/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:focus:ring-[#4285F4]/55 mr-2 mb-2">
@@ -112,7 +113,5 @@
 </div>
 
 <style>
-  .login {
-    width: 496px;   
-  } 
+
 </style>

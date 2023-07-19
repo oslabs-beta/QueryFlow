@@ -7,11 +7,14 @@
 #app {
 	margin: 0;
 	padding: 0;
+	min-height: 100vh;
 }
+
 
 /* body full screen height */
 body {
 	min-height: 100vh;
+	min-width: 100vw;
 }
 
 /* body no scrollbar */
