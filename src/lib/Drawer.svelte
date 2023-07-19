@@ -7,7 +7,6 @@
 	let queryString: string;
 	let queryCount: number = 1;
 	let queryDelay: number = 2;
-
 	let isDrawerOpen: boolean = false;
 
 

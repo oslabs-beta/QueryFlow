@@ -247,6 +247,7 @@ onMount(() => {
   background-position: center;
   height: 85vh;
 	background-repeat: no-repeat;
+  margin-top: 12px;
 }
 .landing-background-text{
   position: absolute;
@@ -292,11 +293,7 @@ onMount(() => {
   --tw-gradient-to: #5a8fba;
   background-repeat:no-repeat;
 }
-/* --purpureus: #9347A6ff;
---lapis-lazuli: #3F64A3ff;
---delft-blue: #3B3A5Eff;
---indian-red: #D85A6Dff;
---claret: #872445ff; */
+
 .meet-team{
   margin-top:50px;
   width:100vw;
@@ -332,7 +329,6 @@ onMount(() => {
     padding: 12px 24px;
     font-size: 16px;
   }
-  
 }
 
 @media (min-width: 1200px) {
