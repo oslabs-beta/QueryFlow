@@ -1,21 +1,20 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
 	import RedisChart from '../graphs/RedisChart.svelte';
 	import { redisData } from '../store';
 	import type { RedisData } from '../types';
 
+	// initializing vars for database
 	let uri: string = '';
 	let queryString: string = '';
 	let metricRun: boolean = false;
-
 	let redisMetrics: RedisData;
 
-	// if store changes then redo the redisMetrics variable
 	redisData.subscribe((data) => {
 		redisMetrics = data;
 	});
 
-	const getRedisData: Function = async () => {
+	// working with redis - POST request
+	const getRedisData: Function = async (): Promise<void> => {
 		const token = localStorage.getItem('token');
 		const response = await fetch('/api/redis-metrics', {
 			method: 'POST',
@@ -38,7 +37,7 @@
 </script>
 
 <main>
-	<h1 class="text-lg text-black font-bold">Redis -v- PostgreSQL Performance</h1>
+	<h1 class="text-lg text-black font-bold">Redis vs. PostgreSQL Performance</h1>
 	<div>
 		<form on:submit|preventDefault={() => getRedisData()}>
 			<div class="w-full my-2">
@@ -67,7 +66,7 @@
 				</div>
 			</div>
 
-			<button class="btn btn-primary" type="submit">Return Metrics</button>
+			<button class="btn btn-primary text-base" type="submit">Return Metrics</button>
 		</form>
 	</div>
 	{#if metricRun}
@@ -84,4 +83,5 @@
 </main>
 
 <style>
+	
 </style>

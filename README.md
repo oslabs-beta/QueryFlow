@@ -1,144 +1,156 @@
-//Port
+# QueryFlow
 
-<!-- DO NOT DELETE - Heroku Dependency stuff -->
+<!-- PROJECT LOGO -->
+<br />
+<div align="center">
+  <a href="www.query-flow.com">
+    <img src="./src/assets/QueryFlow-logo-white.png" alt="Logo" width="80" height="80">
+  </a>
 
-moved @tsconfig/svelte": "^4.0.1", "@sveltejs/vite-plugin-svelte": "^2.4.2", vite to dependencies, daisyUi, autoprefixer and tailwind 
+<h3 align="center">QueryFlow</h3>
 
-<!-- Vercel.json for vercel -->
-{
-  "builds": [
-    {
-      "src": "/server/server.mjs",
-      "use": "@vercel/node"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/server/server.mjs"
-    }
-  ]
-}
+  <p align="center">
+    Analyze and visualize the performance of SQL queries
+    <br />
+    <br />
+    <!--Do we need explore the docs? The README is basically the documentation.-->
+    <a href="https://www.query-flow.com"><strong>Analyze & Visualize Now »</strong></a>
+    <br />
+    <br />
+    <a href="https://github.com/oslabs-beta/query-flow-npm/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/oslabs-beta/query-flow-npm/issues">Request Feature</a>
+  </p>
+</div>
 
-<!-- Procfile for heroku -->
-web: npm run build && node server/server.mjs
+</br>
 
-<!-- Also random Vite.Config File for Render -->
+<!-- TABLE OF CONTENTS -->
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+    </li>
+    <li><a href="#usage">Usage</a></li>
+    <li><a href="#contributing">Contributing</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#acknowledgments">Acknowledgments</a></li>
+    <li><a href="#license">License</a></li>
+  </ol>
+</details>
 
-import { defineConfig } from 'vite';
-import { svelte } from '@sveltejs/vite-plugin-svelte';
-const PORT = process.env.PORT || 3000;
+<!-- ABOUT THE PROJECT -->
 
-// https://vitejs.dev/config/
-export default defineConfig({
-  server: {
-    proxy: {
-      '/api': {
-        target: `http://localhost:${PORT}`,
-        changeOrigin: true,
-      },
-    },
-  },
-  build: {
-    rollupOptions: {
-      input: '/src/main.ts', // specify the input file
-      output: {
-        entryFileNames: '[name].js'
-      }
-    }
-  },
-  base: './',
-  plugins: [svelte()],
-});
- 
+## About The Project
+</br>
+<div align="center">
+  <a href="https://www.query-flow.com" target="_blank">
+    <img src="./src/assets/QueryFlow Tag Logo.png" alt="Logo" width="" height="55">
+  </a>
+</div>
+</br>
 
-
-<!-- "build": "tsc vite build", -->
-
-changed package.json script build tsc vite build. Remove tsc
-
- <!-- Do Not Delete TsConfig -->
-{
-	"extends": "@tsconfig/svelte/tsconfig.json",
-	"compilerOptions": {
-		"noImplicitAny":true,
-		"target": "ESNext",
-		"useDefineForClassFields": true,
-		"module": "ESNext",
-		"resolveJsonModule": true,
-		/**
-		 * Typecheck JS in `.svelte` and `.js` files by default.
-		 * Disable checkJs if you'd like to use dynamic types in JS.
-		 * Note that setting allowJs false does not prevent the use
-		 * of JS in `.svelte` files.
-		 */
-		"allowJs": true,
-		"checkJs": true,
-		"isolatedModules": true
-	},
-	"include": ["src/**/*.d.ts", "src/**/*.ts", "src/**/*.js", "src/**/*.svelte"],
-	"references": [{ "path": "./tsconfig.node.json" }]
-} 
+QueryFlow is a web application that securely highlights and visualizes how long a client's queries to a relational database take to complete. With these insights into the performance of an application's backend queries, developers can set data-backed thresholds with the queryflow.js NPM package, such that queries slower than a set threshold will be stored in a cache database. The [NPM package](https://github.com/oslabs-beta/query-flow-npm) automates the storage and retrieval of slow result sets from relational databases into a cache database.
 
 
+<!-- GETTING STARTED -->
+
+## Getting Started
+
+Please visit: [https://www.query-flow.com](https://www.query-flow.com)
+
+<!-- USAGE EXAMPLES -->
+
+## Usage
+<br />
+
+1. After creating an account or logging in with your Gmail account, analyze a SQL query by clicking the blue 'ADD A QUERY' button.
+
+2. Enter the _category of your query_, the _database URI_ **(not saved)**, the _query string_, the _number of query iterations_ used to calculate the average performance and the _delay_ between each of the iterations. Click 'Run Query'.
+
+3. The QueryFlow logo in the top left corner will spin until the query analysis is complete. The analysis for each query will appear in an individual component.
+
+<div align="center">
+  <a>
+    <img src="./src/assets/queryflow_gif3.gif" alt="gif1" width="" height="">
+  </a>
+
+</br>
+</div>
+
+4. Within each query's component, toggle between the query string used and a table of the performance of each iteration of the query. A bar chart shows the average speed for each time "Run Query" was executed for a particular query name. The scatter plot shows the most recent time "Run Query" was executed, with speeds (planning time, execution time, total time) for each iteration that contributes to the average time.
+
+5. A dropdown menu at the top of the components allow you to select past queries for a side-by-side comparison. If you no longer need a particular query, there is a trashcan button to delete that particular query analysis.
+
+  <div align="center">
+  <a>
+    <img src="./src/assets/queryflow_gif_single2.gif" alt="gif2" width="" height="">
+  </a>
+  </div>
+
+6. The navigation bar at the top contains the 'All Metrics' page, which shows the average query times of all the different queries run. Furthermore, you can compare the performance of these queries with a Redis database by clicking the "GET REDIS METRICS" button on this page.
+
+  <div align="center">
+  <a>
+    <img src="./src/assets/queryflow_allmetrics.gif" alt="gif3" width="" height="">
+  </a>
+  </div>
+
+<!-- CONTRIBUTING -->
+
+## Contributing
+
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
 
 
+<!-- CONTACT -->
 
-POLISHING TO-DO LIST:
+## Contact
 
-- Remove numbers in Signup.svelte to fix color scheme
-- Add parameterized queries in backend (security)
-- Add option for different graph viewing (scatter plots, bar charts, pie charts, etc...)
-- In the all-metrics bar chart, fix the bar positioning to start from the x-axis, rather than have a gap
-- Exit sidebar after clicking run query
-  - Loading animation after running a query
-- Skeleton loaders when cards aren't visible (e.g. after logging in, running query for the first time)
--
+Email - queryflow58@gmail.com
 
-<!-- # Svelte + TS + Vite
+Twitter - [@Query_Flow](https://twitter.com/Query_Flow)
 
-This template should help get you started developing with Svelte and TypeScript in Vite.
+LinkedIn - [Team Page](https://www.linkedin.com/company/query-flow/about/)
 
-## Recommended IDE Setup
+## Team
 
-[VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
+<!-- Include github and linkedin handles and links here? -->
 
-## Need an official Svelte framework?
+- []() **Vivek Patel** - [GitHub](https://github.com/vkpatel007) - [LinkedIn](https://www.linkedin.com/in/vivekpatel607/)
+- []() **Niko Amescua** - [GitHub](https://github.com/NikoAmescua) - [LinkedIn](https://www.linkedin.com/in/nikoamescua/)
+- []() **Ryan Campbell** - [GitHub](https://github.com/cronullarc) - [LinkedIn](https://www.linkedin.com/in/ryancampbelladr/)
+- []() **Philip Brown** - [GitHub](https://github.com/starfishpanda) - [LinkedIn](https://www.linkedin.com/in/philiplbrown/)
+- []() **George Greer** - [GitHub](https://github.com/ggreer91) - [LinkedIn](https://www.linkedin.com/in/george-greer/)
 
-Check out [SvelteKit](https://github.com/sveltejs/kit#readme), which is also powered by Vite. Deploy anywhere with its serverless-first approach and adapt to various platforms, with out of the box support for TypeScript, SCSS, and Less, and easily-added support for mdsvex, GraphQL, PostCSS, Tailwind CSS, and more.
 
-## Technical considerations
+## Acknowledgements
 
-**Why use this over SvelteKit?**
+The Team wholeheartedly thanks Chris Suzukida for his mentorship and support throughout the development of this project.
 
-- It brings its own routing solution which might not be preferable for some users.
-- It is first and foremost a framework that just happens to use Vite under the hood, not a Vite app.
+Here are his links!
+- []() [GitHub](https://github.com/csuzukida)
+- []() [LinkedIn](https://www.linkedin.com/in/chris-suzukida/)
 
-This template contains as little as possible to get started with Vite + TypeScript + Svelte, while taking into account the developer experience with regards to HMR and intellisense. It demonstrates capabilities on par with the other `create-vite` templates and is a good starting point for beginners dipping their toes into a Vite + Svelte project.
+<!-- LICENSE -->
 
-Should you later need the extended capabilities and extensibility provided by SvelteKit, the template has been structured similarly to SvelteKit so that it is easy to migrate.
+## License
 
-**Why `global.d.ts` instead of `compilerOptions.types` inside `jsconfig.json` or `tsconfig.json`?**
+Distributed under the MIT License. See `LICENSE.txt` for more information.
 
-Setting `compilerOptions.types` shuts out all other types not explicitly listed in the configuration. Using triple-slash references keeps the default TypeScript setting of accepting type information from the entire workspace, while also adding `svelte` and `vite/client` type information.
-
-**Why include `.vscode/extensions.json`?**
-
-Other templates indirectly recommend extensions via the README, but this file allows VS Code to prompt the user to install the recommended extension upon opening the project.
-
-**Why enable `allowJs` in the TS template?**
-
-While `allowJs: false` would indeed prevent the use of `.js` files in the project, it does not prevent the use of JavaScript syntax in `.svelte` files. In addition, it would force `checkJs: false`, bringing the worst of both worlds: not being able to guarantee the entire codebase is TypeScript, and also having worse typechecking for the existing JavaScript. In addition, there are valid use cases in which a mixed codebase may be relevant.
-
-**Why is HMR not preserving my local component state?**
-
-HMR state preservation comes with a number of gotchas! It has been disabled by default in both `svelte-hmr` and `@sveltejs/vite-plugin-svelte` due to its often surprising behavior. You can read the details [here](https://github.com/rixo/svelte-hmr#svelte-hmr).
-
-If you have state that's important to retain within a component, consider creating an external store which would not be replaced by HMR.
-
-```ts
-// store.ts
-// An extremely simple external store
-import { writable } from 'svelte/store'
-export default writable(0)
-``` -->
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
