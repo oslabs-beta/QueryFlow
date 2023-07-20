@@ -48,20 +48,20 @@
 ## About The Project
 </br>
 <div align="center">
-  <a href="www.query-flow.com">
+  <a href="https://www.query-flow.com" target="_blank">
     <img src="./src/assets/QueryFlow Tag Logo.png" alt="Logo" width="" height="55">
   </a>
 </div>
 </br>
 
-QueryFlow is a web application that securely highlights and visualizes how long a client's queries to a relational database take to complete. With these insights into the performance of an application's backend queries, developers can set data-backed thresholds with the queryflow.js NPM package, such that queries slower than a set threshold will be stored in a cache database.  The [NPM package](https://github.com/oslabs-beta/query-flow-npm) automates the storage and retrieval of slow result sets from relational databases into a cache database.
+QueryFlow is a web application that securely highlights and visualizes how long a client's queries to a relational database take to complete. With these insights into the performance of an application's backend queries, developers can set data-backed thresholds with the queryflow.js NPM package, such that queries slower than a set threshold will be stored in a cache database. The [NPM package](https://github.com/oslabs-beta/query-flow-npm) automates the storage and retrieval of slow result sets from relational databases into a cache database.
 
 
 <!-- GETTING STARTED -->
 
 ## Getting Started
 
-Please Visit: [https://www.query-flow.com](https://www.query-flow.com)
+Please visit: [https://www.query-flow.com](https://www.query-flow.com)
 
 <!-- USAGE EXAMPLES -->
 
@@ -70,7 +70,7 @@ Please Visit: [https://www.query-flow.com](https://www.query-flow.com)
 
 1. After creating an account or logging in with your Gmail account, analyze a SQL query by clicking the blue 'ADD A QUERY' button.
 
-2. Enter the _name of your query_, the _database URI_ **(not saved)**, the _query string_, the _number of query iterations_ used to calculate the average performance and the _delay_ between each of the iterations. Click 'Run Query'.
+2. Enter the _category of your query_, the _database URI_ **(not saved)**, the _query string_, the _number of query iterations_ used to calculate the average performance and the _delay_ between each of the iterations. Click 'Run Query'.
 
 3. The QueryFlow logo in the top left corner will spin until the query analysis is complete. The analysis for each query will appear in an individual component.
 
@@ -82,9 +82,9 @@ Please Visit: [https://www.query-flow.com](https://www.query-flow.com)
 </br>
 </div>
 
-4. Within each query's component, toggle between the query string used and a table of the performance of each iteration of the query. A bar chart shows the average speed for each time "Run Query" was executed for a particular query name. The scatter plot shows the most recent time "Run Query" was executed, with speeds (planning time, execution time, total) for each iteration that contributes to the average time.
+4. Within each query's component, toggle between the query string used and a table of the performance of each iteration of the query. A bar chart shows the average speed for each time "Run Query" was executed for a particular query name. The scatter plot shows the most recent time "Run Query" was executed, with speeds (planning time, execution time, total time) for each iteration that contributes to the average time.
 
-5. A dropdown menu at the top of the components allow you to select past queries for side-by-side comparison. If you no longer need a particular query, there is a trashcan button to delete that particular query analysis.
+5. A dropdown menu at the top of the components allow you to select past queries for a side-by-side comparison. If you no longer need a particular query, there is a trashcan button to delete that particular query analysis.
 
   <div align="center">
   <a>
@@ -92,8 +92,7 @@ Please Visit: [https://www.query-flow.com](https://www.query-flow.com)
   </a>
   </div>
 
-6. The navigation bar at the top contains the 'All Metrics' page, which shows the average query times of all the different queries run. Furthermore, you can compare the performance of these queries with a Redis cache database by clicking the "GET REDIS METRICS" button on this page.
-
+6. The navigation bar at the top contains the 'All Metrics' page, which shows the average query times of all the different queries run. Furthermore, you can compare the performance of these queries with a Redis database by clicking the "GET REDIS METRICS" button on this page.
 
   <div align="center">
   <a>
@@ -143,6 +142,10 @@ LinkedIn - [Team Page](https://www.linkedin.com/company/query-flow/about/)
 ## Acknowledgements
 
 The Team wholeheartedly thanks Chris Suzukida for his mentorship and support throughout the development of this project.
+
+Here are his links!
+- []() [GitHub](https://github.com/csuzukida)
+- []() [LinkedIn](https://www.linkedin.com/in/chris-suzukida/)
 
 <!-- LICENSE -->
 
