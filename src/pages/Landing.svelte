@@ -1,5 +1,6 @@
 <script lang="ts">
 import { onMount } from 'svelte';
+import { onDestroy } from 'svelte'
 import queryFlowMainChart from '../assets/queryflow_main_chart.avif';
 import queryFlowNPMChart from '../assets/install_chart.avif'
 import averageQueryMetrics from '../assets/average_query_metrics.avif'
@@ -49,6 +50,33 @@ onMount(() => {
       document.execCommand('copy');
       document.body.removeChild(tempTextArea);
     });
+  });
+
+  const audioSrc = 'https://audio.jukehost.co.uk/6P9cPj081OYmwhzjsKqqHfSHxTgvzRe9';
+
+  let audioElement;
+
+  function playAudio() {
+    if (audioElement && audioElement.paused) {
+      audioElement.play();
+    }
+  }
+
+  function pauseAudio() {
+    if (audioElement && !audioElement.paused) {
+      audioElement.pause();
+    }
+  }
+
+  onMount(() => {
+    audioElement = new Audio(audioSrc);
+  });
+
+  onDestroy(() => {
+    if (audioElement) {
+      audioElement.pause();
+      audioElement = null;
+    }
   });
 </script>
 
@@ -168,14 +196,23 @@ onMount(() => {
         <a class="text-gray-300" href="https://www.linkedin.com/in/nikoamescua">Linkedin</a>
       </div>
     </Card>
-    <Card padding='sm' class="bg-transparent shadow-lg border-none shadow-2xl">
-      <div class="flex flex-col items-center pb-4">
-        <Avatar size="xl" src={ryan} />
-        <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">The Oracle</h5>
-        <span class="text-sm text-gray-500 dark:text-gray-400">Software Engineer</span>
-        <a class="text-gray-500" href="https://www.linkedin.com/in/ryancampbelladr/">Linkedin</a>
-      </div>
-    </Card>
+    <Card
+        padding="sm"
+        class="bg-transparent shadow-lg border-none shadow-2xl"
+        on:mouseenter={() => {
+          playAudio();
+        }}
+        on:mouseleave={() => {
+          pauseAudio();
+        }}
+      >
+        <div class="flex flex-col items-center pb-4">
+          <Avatar size="xl" src={ryan} />
+          <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">The Oracle</h5>
+          <span class="text-sm text-gray-500 dark:text-gray-400">Software Engineer</span>
+          <a class="text-gray-500" href="https://www.linkedin.com/in/ryancampbelladr/">Linkedin</a>
+        </div>
+      </Card>
     <Card padding='sm' class="bg-transparent shadow-lg border-none shadow-2xl">
       <div class="flex flex-col items-center pb-4">
         <Avatar size="xl" src={philip} />
