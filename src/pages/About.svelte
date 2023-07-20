@@ -1,7 +1,11 @@
 <script lang="ts">
 	import addAQuery from '../assets/add-a-query.avif';
 	import drawerExample from '../assets/drawer-example.avif';
+	import pagila from "../assets/Pagila-ER-Diagram.png"
+	import { Modal } from 'flowbite-svelte'
+	let defaultModal = false;
 </script>
+
 
 <article class="mt-10 mx-auto pb-10 mb-0 prose">
 	<h1>Purpose and Benefits</h1>
@@ -13,9 +17,13 @@
 	</p>
 	<h1>Getting Started</h1>
 	<p>
-		To get comfortable, you can test query strings in our sandbox PostgreSQL database. Start by
+		To get comfortable, you can test query strings in our <span class="cursor-pointer underline text-blue-700" on:keydown={() => defaultModal = true} on:click={() => defaultModal = true}>sandbox PostgreSQL database</span>. Start by
 		navigating to our homepage, then select “Add A Query”.
 	</p>
+	<Modal bind:open={defaultModal} size="xl" autoclose>
+		<h1>Sandbox Database Entity Relationship Diagram</h1>
+		<img src={pagila} alt="Entity relationship diagram for our sandbox database." />
+	</Modal>
 	<img src={addAQuery} alt="screenshot of 'Add a Query' button" />
 	<p>When the drawer opens, enter the following information into the provided fields:</p>
 	<p>
