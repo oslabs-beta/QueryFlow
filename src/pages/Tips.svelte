@@ -8,7 +8,7 @@
 	let joinNotOptimizedUrl: string = 'https://stephenn.com/2021/03/sql-join-queries-temporary-tables/';
 </script>
 
-<article class="mt-10 mx-auto pb-10 mb-0 prose">
+<article class="mt-10 mx-auto pb-10 mb-0 prose tips">
 	<h1>PostgreSQL database efficiency</h1>
 	<h3 class="text-center">
 		Below are some general options for improving the performance of slow queries:
@@ -80,3 +80,15 @@
 		2023, {cacheAsideURL}
 	</p>
 </article>
+
+<style>
+  .tips p{
+    padding:10px;
+  }
+  .tips h1{
+    padding:10px;
+  }
+  .tips h3{
+    padding:10px;
+  }
+</style>

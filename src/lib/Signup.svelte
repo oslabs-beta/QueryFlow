@@ -1,6 +1,6 @@
 <script lang="ts">
   import { Modal,Button } from 'flowbite-svelte'
- 
+  import Terms from './Terms.svelte';
   //boolean for the modal
   let clickOutsideModal:boolean = false;
 	// initializing vars for database
@@ -225,12 +225,10 @@
 									href={'#'}>
 									Terms and Conditions
 								</a>
-                <Modal title="Terms and Conditions" bind:open={clickOutsideModal} autoclose outsideclose>
-                  <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                    With less than a month to go before the European Union enacts new consumer privacy laws for its citizens, companies around the world are updating their terms of service agreements to comply.
-                  </p>
+                <Modal class="mt-12 prose-lg prose" size="lg" title="QueryFlow Terms and Conditions" bind:open={clickOutsideModal} autoclose outsideclose>
+                  <Terms />
                   <svelte:fragment slot='footer'>
-                    <Button on:click={acceptTerms} color="green">I accept</Button>
+                    <Button on:click={acceptTerms} color="green">I Accept</Button>
                     <Button color="red">Decline</Button>
                   </svelte:fragment>
                 </Modal>
