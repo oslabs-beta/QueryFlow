@@ -388,7 +388,7 @@ onMount(() => {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height:1500px;
+    height:1550px;
   }
   .grid-cols-5 {
     grid-template-columns: 1fr;

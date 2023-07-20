@@ -6,7 +6,6 @@
 	export let data: WorkingArr;
 	export let xScale: ScaleBand<string>;
 	export let yScale: ScaleLinear<number, number>;
-	console.log(data)
 </script>
 
 
@@ -14,7 +13,7 @@
     class="tooltip"
     style="position: absolute;
     top: {yScale(data.numberOfQueries)}px;
-    left: {xScale(`${data.numberOfQueries}`)}px"
+    left: {xScale(`${data}`)}px"
 >
     <h1>Number of queries</h1>
     <p>{data.numberOfQueries}</p>
