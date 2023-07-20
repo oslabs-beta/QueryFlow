@@ -100,6 +100,7 @@
   .append('div')
   .attr('class', 'tooltip')
   .style('position', 'absolute')
+  .style('top', '0')
   .style('visibility', 'hidden');
   
   // plot points, also adds the tooltip
