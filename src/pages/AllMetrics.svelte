@@ -53,7 +53,6 @@
 
 	// calculating buckets dynamically to limit number of buckets with smaller/larger data sizes
 	// VERY IMPORTANT!
-
 	let buckets = metrics.length > 4 ? Math.ceil(Math.log2(metrics.length - 3) * 1.7) : 2;
 	if (!metrics.length) buckets = 0;
 

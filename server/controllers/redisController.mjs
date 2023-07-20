@@ -11,6 +11,7 @@ redisController.latency = async (req, res, next) => {
 
   try {
     redisModel.json.set('Result', '.', resultData, (err) => {
+    redisModel.expire('Result', 2);
       if (err) {
         console.error('Error storing data in Redis: ', err);
         return res.status(500).json({ error: 'Failed to store data in Redis' });
