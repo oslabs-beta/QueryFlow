@@ -20,7 +20,7 @@
 	<p>When the drawer opens, enter the following information into the provided fields:</p>
 	<p>
 		<strong>Category of your query:</strong><br />
-		pagila-customer-select-10 <br /><br />
+		pagila-customer-select-10-delay-2 <br /><br />
 		<strong>Postgres DB URI/URL:</strong><br />
 		postgres://yttdzhlk:HnLO6cyc9fLwqqNjttS-HhsEnie7-aT5@mahmud.db.elephantsql.com/yttdzhlk<br /><br
 		/>

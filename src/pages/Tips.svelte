@@ -2,7 +2,7 @@
 	import denormalize from '../assets/denormalize.avif';
 	import cacheAside from '../assets/cache-aside.avif';
 	import joinNotOptimized from '../assets/join-not-optimized.avif';
-	
+
 	let DenormalizedLinkURL: string = 'https://rubygarage.org/blog/database-denormalization-with-examples';
 	let cacheAsideURL: string = 'https://blog.cdemi.io/design-patterns-cache-aside-pattern/';
 	let joinNotOptimizedUrl: string = 'https://stephenn.com/2021/03/sql-join-queries-temporary-tables/';

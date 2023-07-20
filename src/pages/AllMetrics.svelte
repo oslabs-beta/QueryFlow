@@ -11,12 +11,9 @@
 	import RedisForm from '../lib/RedisForm.svelte';
 	import { Modal } from 'flowbite-svelte';
 
-
-
-
 	// reactive metrics array
 	$: metrics = [];
-
+	
 	metricData.subscribe((data: QueryData[]) => {
 		metrics = data;
 	});

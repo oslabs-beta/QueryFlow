@@ -60,13 +60,13 @@
 	</div>
 	<div class="flex-none">
 		<ul class="flex space-x-1 menu menu-horizontal text-lg">
-      <li><a class="navtags active:shadow-xl active:ring active:ring-primary-100" href="/login">Home</a></li>
+      <li><p class="navtags active:shadow-xl active:ring active:ring-primary-100" on:keydown={() => {navigate('/login')}} on:click={() => {navigate('/login')}}>Home</p></li>
 			{#if $isAuthenticated}
 			<!-- replacing (on:click=navigate) with (href=/all-metrics) here breaks the navigation -->
-      <li><a class="navtags active:shadow-xl active:ring active:ring-primary-100" on:click={() => {navigate('/all-metrics')}}>All Metrics</a></li>
+      <li><p class="navtags active:shadow-xl active:ring active:ring-primary-100" on:keydown={() => {navigate('/all-metrics')}} on:click={() => {navigate('/all-metrics')}}>All Metrics</p></li>
 			{/if}
-			<li><a class="navtags active:shadow-xl active:ring active:ring-primary-100" href="/about">About</a></li>
-      <li><a class="navtags active:shadow-xl active:ring active:ring-primary-100" href="/tips">SQL Tips</a></li>
+			<li><p class="navtags active:shadow-xl active:ring active:ring-primary-100" on:keydown={() => {navigate('/about')}} on:click={() => {navigate('/all-metrics')}}>About</p></li>
+      <li><p class="navtags active:shadow-xl active:ring active:ring-primary-100" on:keydown={() => {navigate('/tips')}} on:click={() => {navigate('/tips')}}>SQL Tips</p></li>
 			<li><a class="navtags active:shadow-xl active:ring active:ring-primary-100" href="https://github.com/oslabs-beta/QueryFlow" target="_blank">GitHub</a></li>
 			<li>
 				{#if $isAuthenticated}
@@ -87,17 +87,17 @@
 					{#if $isAuthenticated}
 					<!-- replacing (on:click=navigate) with (href=/all-metrics) here breaks the navigation -->
 					<li>
-						<a href="/" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" aria-current="page">Home</a>
+						<p on:keydown={() => {navigate('/login')}} on:click={() => {navigate('/login')}} class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" aria-current="page">Home</p>
 					</li>
 					<li>
-						<a on:click={() => {navigate('/all-metrics')}} class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" aria-current="page">All Metrics</a>
+						<p on:keydown={() => {navigate('/all-metrics')}} on:click={() => {navigate('/all-metrics')}} class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" aria-current="page">All Metrics</p>
 					</li>
 					{/if}
 					<li>
-						<a href="/about" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">About</a>
+						<p on:keydown={() => {navigate('/about')}} on:click={() => {navigate('/about')}} class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">About</p>
 					</li>
 					<li>
-						<a href="/tips" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-200 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white">SQL Tips</a>
+						<p on:keydown={() => {navigate('/tips')}} on:click={() => {navigate('/tips')}} class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-200 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white">SQL Tips</p>
 					</li>
 					<li>
 						<a href="https://github.com/oslabs-beta/QueryFlow" class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-200 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white" target="_blank">GitHub</a>
