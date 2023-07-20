@@ -2,8 +2,9 @@
 
 <!-- PROJECT LOGO -->
 <br />
+<a id="readme-top"></a>
 <div align="center">
-  <a href="www.query-flow.com">
+  <a href="https://www.query-flow.com">
     <img src="./src/assets/QueryFlow-logo-white.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -54,14 +55,14 @@
 </div>
 </br>
 
-QueryFlow is a web application that securely highlights and visualizes how long a client's queries to a relational database take to complete. With these insights into the performance of an application's backend queries, developers can set data-backed thresholds with the queryflow.js NPM package, such that queries slower than a set threshold will be stored in a cache database. The [NPM package](https://github.com/oslabs-beta/query-flow-npm) automates the storage and retrieval of slow result sets from relational databases into a cache database.
+QueryFlow is a web application that securely highlights and visualizes how long a client's queries to a relational database take to complete. With these insights into the performance of an application's backend queries, developers can set data-backed thresholds with the queryflow.js NPM package, such that queries slower than a set threshold will be stored in a cache database. The [NPM package](https://www.npmjs.com/package/queryflow.js) automates the storage and retrieval of slow result sets from relational databases into a cache database.
 
 
 <!-- GETTING STARTED -->
 
 ## Getting Started
 
-Please visit: [https://www.query-flow.com](https://www.query-flow.com)
+Please visit: [www.query-flow.com](https://www.query-flow.com)
 
 <!-- USAGE EXAMPLES -->
 
@@ -115,7 +116,7 @@ Don't forget to give the project a star! Thanks again!
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-See the [open issues](https://github.com/github_username/repo_name/issues) for a full list of proposed features (and known issues).
+See the [open issues](https://github.com/oslabs-beta/query-flow-npm/issues) for a full list of proposed features (and known issues).
 
 
 <!-- CONTACT -->
@@ -153,4 +154,4 @@ Here are his links!
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+<p align="right">(<a href="#readme-top">Back to Top</a>)</p>
