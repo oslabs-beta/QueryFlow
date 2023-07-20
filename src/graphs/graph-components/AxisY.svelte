@@ -25,12 +25,12 @@
 
 <g transform="translate({margin.left} {margin.top})">
 	{#each yTicks as tick}
-		<text x={-15} y={yScale(tick)} dy="-6">{tick} {tick == yTicks.at(-1) ? ' number of queries' : ''}</text>
+		<text x={-15} y={yScale(tick)} dy="-6">{tick}</text>
 		<line
 			x1="-15"
-			y1={yScale(tick)}
+			y1={yScale(tick) - 20}
 			x2={width}
-			y2={yScale(tick)}
+			y2={yScale(tick) - 20}
 			stroke={tick == 0 ? 'black' : '#cecece'}
 		/>
 	{/each}

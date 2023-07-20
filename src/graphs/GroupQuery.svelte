@@ -106,7 +106,7 @@
 </script>
 
 <div class="h-80 group-query">
-  <h4 class="flex justify-center -my-3 font-semibold">Average {metricName} metrics</h4>
+  <h4 class="flex justify-center -my-3 font-semibold">Average {metricName} Metrics</h4>
   <svg id={`groupBarChart${i}`} class="w-74 h-full"></svg>
 </div>
 
