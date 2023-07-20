@@ -84,7 +84,6 @@ onMount(() => {
     <h1 class="text-4xl font-bold text-center">A Package And A Visualizer Working Together</h1>
   </div>
 
-
  <section class="grid md:grid-cols-2 sm:grid-cols-1 justify-center">
     <div class="flex justify-center">
       <div class="rounded p-6 top-column" > 
@@ -113,9 +112,9 @@ onMount(() => {
 <section>
   <div class="grid justify-center mt-4 npm-package-container text-center">
     <h1 class="text-4xl font-bold mt-10 mb-4">QueryFlow NPM Package </h1>
-    <div class="mt-10 flex rounded-md bg-slate-600 text-slate-100 h-10 justify-between items-center">
+    <div class="mt-10 flex rounded-md bg-slate-600 text-slate-100 h-10 justify-between items-center npm-install">
       <h6 class="font-bold p-2">$</h6>
-      <div class=" grid justify-center place-items-center font-bold">npm install queryflow.js</div>
+      <div class="grid justify-center place-items-center font-bold">npm install queryflow.js</div>
       
 
         <button id="copyButton" class="btn btn-square btn-sm bg-transparent border-0 hover:bg-transparent p-0 mr-2">
@@ -420,6 +419,12 @@ onMount(() => {
   }
 }
 
+@media (max-width: 440px) {
+  .npm-install{
+    margin-left:10px;
+    margin-right:10px;
+  }
+}
 @media only screen and (min-width: 641px) and (max-width: 1030px) {
   .meet-team {
     display: flex;

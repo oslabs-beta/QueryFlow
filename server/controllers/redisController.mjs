@@ -3,21 +3,18 @@ import redisModel from '../models/redisModel.mjs';
 const redisController = {};
 
 redisController.latency = async (req, res, next) => {
-  redisModel.on('connect',() => {
-    console.log('connected to redis successfully!');
-  });
 
   const { resultData, totalTimeSQL } = res.locals.queryResultSQL;
 
   try {
-    redisModel.json.set('Result', '.', resultData, (err) => {
-    redisModel.expire('Result', 2);
+    await redisModel.json.set('Result', '.', resultData, (err) => {
       if (err) {
         console.error('Error storing data in Redis: ', err);
         return res.status(500).json({ error: 'Failed to store data in Redis' });
       }
       return res.status(200).json({ message: 'Data stored successfully' });
     });
+    await redisModel.expire('Result', 2);
     // Calculates performance metrics (e.g., time taken to retrieve the value)
     const startTime = process.hrtime();
     const getResult = await redisModel.json.get('Result', {
