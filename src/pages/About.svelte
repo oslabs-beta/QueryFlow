@@ -1,6 +1,6 @@
 <script lang="ts">
-	import addAQuery from '../assets/add-a-query.avif';
-	import drawerExample from '../assets/drawer-example.avif';
+	import add_query from '../assets/add_query.png';
+	import drawer from '../assets/drawer.png';
 	import pagila from "../assets/Pagila-ER-Diagram.png"
 	import { Modal } from 'flowbite-svelte'
 	let defaultModal = false;
@@ -24,7 +24,7 @@
 		<h1>Sandbox Database Entity Relationship Diagram</h1>
 		<img src={pagila} alt="Entity relationship diagram for our sandbox database." />
 	</Modal>
-	<img src={addAQuery} alt="screenshot of 'Add a Query' button" />
+	<img src={add_query} alt="screenshot of 'Add a Query' button" />
 	<p>When the drawer opens, enter the following information into the provided fields:</p>
 	<p>
 		<strong>Category of your query:</strong><br />
@@ -45,7 +45,7 @@
 		<strong>Set # of query runs to 3 and leave Delay between queries at 2</strong> <br /><br />
 		The data should look like this:
 	</p>
-	<img src={drawerExample} class="w-52" alt="drawer with above data as input" />
+    <img src={drawer} class="w-92" alt="drawer with above data as input" />
 	<p>Now run the query and browse the metrics data!</p>
 	<p>
 		Try changing the query string, # of query runs, and delay between queries to see how metrics are
