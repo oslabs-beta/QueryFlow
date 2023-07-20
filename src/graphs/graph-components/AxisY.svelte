@@ -25,7 +25,7 @@
 
 <g transform="translate({margin.left} {margin.top})">
 	{#each yTicks as tick}
-		<text x={-15} y={yScale(tick)} dy="-6">{tick} {tick == yTicks.at(-1) ? ' number of queries' : ''}</text>
+		<text x={-15} y={yScale(tick)} dy="-6">{tick}</text>
 		<line
 			x1="-15"
 			y1={yScale(tick) - 20}
