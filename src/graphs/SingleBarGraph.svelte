@@ -81,6 +81,7 @@
       .append('div')
       .attr('class', 'tooltip')
       .style('position', 'absolute')
+      .style('top', '0')
       .style('visibility', 'hidden')
       .style('background-color', 'rgba(0, 0, 0, 0.7)')
       .style('color', 'white')

@@ -114,7 +114,7 @@ onMount(() => {
     <h1 class="text-4xl font-bold mt-10 mb-4">QueryFlow NPM Package </h1>
     <div class="mt-10 flex rounded-md bg-slate-600 text-slate-100 h-10 justify-between items-center npm-install">
       <h6 class="font-bold p-2">$</h6>
-      <div class="grid justify-center place-items-center font-bold">npm install queryflow.js</div>
+      <div class="codeText grid justify-center place-items-center font-bold">npm install queryflow.js</div>
       
 
         <button id="copyButton" class="btn btn-square btn-sm bg-transparent border-0 hover:bg-transparent p-0 mr-2">
@@ -123,6 +123,7 @@ onMount(() => {
           </svg>
       </button>
       <Tooltip>copy</Tooltip>
+      
   </div>
 </div>
 <div class="mt-12 flex justify-center ">
@@ -222,7 +223,7 @@ onMount(() => {
     <Card padding='sm' class="hover:shadow-lg hover:-translate-y-2 bg-transparent shadow-lg border-none shadow-2xl transition ease-in-out delay-200 ">
       <div class="flex flex-col items-center pb-4">
         <Avatar size="xl" src={ryan} />
-        <h5 class="mb-1 text-xl font-medium text-gray-100 dark:text-white">The Oracle</h5>
+        <h5 class="mb-1 text-xl font-medium text-gray-100 dark:text-white">Ryan Campbell</h5>
         <span class="text-sm text-gray-100 dark:text-gray-400">Software Engineer</span>
         <div class="flex gap-2 mt-2">
           <a class="text-gray-100" href="https://github.com/cronullarc" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">

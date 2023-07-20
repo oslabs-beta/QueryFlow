@@ -6,22 +6,22 @@
 	export let data: WorkingArr;
 	export let xScale: ScaleBand<string>;
 	export let yScale: ScaleLinear<number, number>;
+	console.log(data)
 </script>
 
 
 <div
-	class="tooltip"
-	style="position: absolute;
+    class="tooltip"
+    style="position: absolute;
     top: {yScale(data.numberOfQueries)}px;
-    left: {xScale(`${data}`)}px"
+    left: {xScale(`${data.numberOfQueries}`)}px"
 >
-	<h1>Number of queries</h1>
-	<p>{data.numberOfQueries}</p>
+    <h1>Number of queries</h1>
+    <p>{data.numberOfQueries}</p>
 
-	<h1>Average time</h1>
-	<p>{data.bottomValue} - {data.topValue} ms</p>
+    <h1>Average time</h1>
+    <p>{data.bottomValue} - {data.topValue} ms</p>
 </div>
-
 <style>
 	.tooltip {
 		padding: 6px;
