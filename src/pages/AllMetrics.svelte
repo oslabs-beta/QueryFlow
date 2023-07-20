@@ -48,6 +48,9 @@
 		return workingArr;
 	};
 
+  
+
+
 	// calculating buckets dynamically to limit number of buckets with smaller/larger data sizes
 	// VERY IMPORTANT!
 
@@ -62,6 +65,7 @@
 	let height: number = 600;
 	const margin: Directions = { top: 20, right: 40, left: 40, bottom: 25 };
 
+  
 	const xScale: ScaleBand<string> = scaleBand()
 		.domain(barChartData.map((_, i) => `${i}`))
 		.range([margin.left, width - margin.right])
@@ -99,7 +103,7 @@
 			hoveredData = null;
 		}}>
 		<div class="flex justify-center mb-8">
-			<h1 class="title">Average query times</h1>
+			<h1 class="title">Average Query Times</h1>
 
 			<!-- 'on:click' below needs to be looked at later -->
 			<button class="btn btn-primary text-base ml-4" on:click={() => (formModal = true)}>Get Redis Metrics</button>
@@ -109,22 +113,24 @@
 				</form>
 			</Modal>
 		</div>
-		<svg {width} {height}>
-			<AxisX {barChartData} {height} {xScale} {margin} />
-			<AxisY {barChartData} {width} {yScale} {margin} />
-			<g class="bars">
-				<!-- svelte-ignore a11y-no-noninteractive-tabindex -->
+    <div class="flex w-10/12 ml-10">
+
+      <svg {width} {height} class="all-metrics">
+        <AxisX {barChartData} {height} {xScale} {margin} />
+        <AxisY {barChartData} {width} {yScale} {margin} />
+        <g class="bars">
+          <!-- svelte-ignore a11y-no-noninteractive-tabindex -->
 				{#each barChartData as data, i}
 					<rect
-						x={xScale(`${i}`)}
-						y={yScale(data.numberOfQueries)}
-						width={xScale.bandwidth()}
+          x={xScale(`${i}`)}
+          y={yScale(data.numberOfQueries)}
+          width={xScale.bandwidth()}
 						height={height - margin.top - margin.bottom - yScale(data.numberOfQueries)}
 						fill={hoveredData && hoveredData == data ? 'purple' : 'steelblue'}
 						opacity={hoveredData ? (hoveredData == data ? '1' : '.3') : '1'}
 						stroke="black"
 						on:mouseover={() => {
-							hoveredData = data;
+              hoveredData = data;
 						}}
 						on:focus={() => {
 							hoveredData = data;
@@ -133,26 +139,34 @@
 					/>
 				{/each}
 			</g>
+      <text
+  transform={`rotate(-90) translate(${-height / 2}, ${margin.left - 35})`}
+  dy=".71em"
+  style="text-anchor: middle; font-size: 20px;"
+>
+  Number of Queries
+</text>
 		</svg>
+  </div>
 		{#if hoveredData}
 			<Tooltip data={hoveredData} {xScale} {yScale} />
-		{/if}
-	</div>
-{:else}
-<!-- only renders h1 when no queries exist -->
-	<div class="p-8">
-		<h1>Enter queries to see all metrics</h1>
-	</div>
-{/if}
-
-<style>
-	.title {
-		display: flex;
-		justify-content: center;
-	}
-
-	rect {
-		transition: opacity 300ms ease;
+      {/if}
+    </div>
+    {:else}
+    <!-- only renders h1 when no queries exist -->
+    <div class="p-8">
+      <h1>Enter queries to see all metrics</h1>
+    </div>
+    {/if}
+    
+    <style>
+      .title {
+        display: flex;
+        justify-content: center;
+      }
+      
+      rect {
+        transition: opacity 300ms ease;
 		cursor: pointer;
 	}
 
@@ -165,4 +179,5 @@
 		font-weight: 600;
 		margin-bottom: 0.5rem;
 	}
+ 
 </style>

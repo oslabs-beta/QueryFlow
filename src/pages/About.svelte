@@ -7,7 +7,7 @@
 </script>
 
 
-<article class="mt-10 mx-auto pb-10 mb-0 prose">
+<article class="mt-10 mx-auto pb-10 mb-0 prose about">
 	<h1>Purpose and Benefits</h1>
 	<p>
 		QueryFlow enables you to analyze the database performance of PostgreSQL queries by running
@@ -54,3 +54,12 @@
 	</p>
 	<p class="text-xs">* For your security, QueryFlow does not save PostgreSQL database URI/URLs</p>
 </article>
+
+<style>
+  .about p{
+    padding:10px;
+  }
+  .about img{
+    padding:10px;
+  }
+</style>
