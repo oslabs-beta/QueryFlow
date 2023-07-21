@@ -14,6 +14,7 @@
   // get all the metrics from the store
   const allMetrics: QueryData[] = get(metricData);
 
+  
   // Boolean values for toggling are bar/scatter graph or table/string div
   let scatterBarToggle: boolean = false;
   let queryTableToggle: boolean = false;

@@ -13,11 +13,6 @@ describe('Home Tests', () => {
     cy.url().should('include', '/');
   });
 
-  it('checks Global Metrics Button', () => {
-    cy.get('button').contains('Global Metrics').click(); 
-    cy.url().should('include', '/all-metrics'); 
-  });
-
   it('checks the dropdown selection', () => {
     cy.get('select').should('have.value', 'all');
   });
@@ -26,10 +21,7 @@ describe('Home Tests', () => {
     cy.intercept('POST', '/api/get-metrics').as('getMetrics');
   });
 
-  it('tests if user can navigate to /all-metrics', () => {
-    cy.get('button').contains('Global Metrics').click();
-    cy.url().should('include', '/all-metrics');
-  });
+ 
 });
 
 

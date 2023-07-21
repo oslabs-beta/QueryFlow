@@ -426,7 +426,7 @@ onMount(() => {
     margin-right:10px;
   }
 }
-@media only screen and (min-width: 641px) and (max-width: 1030px) {
+@media only screen and (min-width: 641px) and (max-width: 1070px) {
   .meet-team {
     display: flex;
     flex-direction: column;
