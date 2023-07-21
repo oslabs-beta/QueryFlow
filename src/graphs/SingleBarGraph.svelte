@@ -160,7 +160,7 @@
 </script>
 
 <div class="h-80">
-  <h4 class="flex justify-center -my-3 font-semibold">Single {metric.queryName} Metrics</h4>
+  <h4 class="flex justify-center -my-3 font-semibold text-xs">Single {metric.queryName} Metrics</h4>
   <svg id={`barChart${i}`} class="w-74 h-full"></svg>
 </div>
 

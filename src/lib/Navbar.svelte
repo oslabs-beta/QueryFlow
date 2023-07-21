@@ -40,7 +40,9 @@
 		if (localStorage.getItem('token')){
 			isAuthenticated.set(true);
 		}
-
+    
+  
+		// y
 		// adds/removes spinning animation when a query begins/finishes running
 		isLoading.subscribe((value: boolean): void => {
 		if (value) document.getElementById('logo').classList.add('animate-spin');
