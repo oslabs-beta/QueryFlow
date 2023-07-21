@@ -114,7 +114,7 @@
 		<path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
 	</svg>
 </button>
-<div class="flex items-center justify-center mb-8">
+<div class="flex items-center justify-center mb-8 text-center pt-2">
   <h1 class="title text-xl">Average Query Times</h1>
 
   <!-- 'on:click' below needs to be looked at later -->
@@ -131,7 +131,7 @@
   {#if width && height}
   <svg viewBox={`0 0 ${width} ${height}`} preserveAspectRatio="xMidYMid meet" class="h-full w-full all-metrics">
     <g transform={`translate(0,${innerHeight})`}>
-      <text transform={`translate(${width / 2},${margin.bottom + 40})`} class="text-xl font-medium" text-anchor="middle">milliseconds</text>
+      <text transform={`translate(${width / 2},${margin.bottom + 27})`} class="text-xl font-medium" text-anchor="middle">milliseconds</text>
     </g>
     <g transform={`translate(${margin.left},${margin.top})`}>
       <!-- ... (the same as the previous code for xScale ticks) ... -->
@@ -181,7 +181,9 @@
     </g>
   </svg>
   {/if}
+  
 </div>
+
   <style>
     .all-metrics {
     display: block;
@@ -201,4 +203,5 @@
   .tooltip-rect {
     pointer-events: none;  
   }
+  
   </style>
