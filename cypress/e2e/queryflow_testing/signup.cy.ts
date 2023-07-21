@@ -2,7 +2,7 @@
 
 describe('Signup tests', () => {
   beforeEach(() => {
-    cy.visit('http://localhost:5173/');
+    cy.visit('http://localhost:5173/login');
     cy.get('button').contains('Sign Up').click();
 
   });
