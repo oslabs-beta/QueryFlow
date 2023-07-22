@@ -63,10 +63,6 @@
 	<div class="flex-none">
 		<ul class="flex space-x-1 menu menu-horizontal text-lg">
       <li><p class="navtags active:shadow-xl active:ring active:ring-primary-100" on:keydown={() => {navigate('/login')}} on:click={() => {navigate('/login')}}>Home</p></li>
-			{#if $isAuthenticated}
-			<!-- replacing (on:click=navigate) with (href=/all-metrics) here breaks the navigation -->
-      <li><p class="navtags active:shadow-xl active:ring active:ring-primary-100" on:keydown={() => {navigate('/all-metrics')}} on:click={() => {navigate('/all-metrics')}}>All Metrics</p></li>
-			{/if}
 			<li><p class="navtags active:shadow-xl active:ring active:ring-primary-100" on:keydown={() => {navigate('/about')}} on:click={() => {navigate('/about')}}>About</p></li>
       <li><p class="navtags active:shadow-xl active:ring active:ring-primary-100" on:keydown={() => {navigate('/tips')}} on:click={() => {navigate('/tips')}}>SQL Tips</p></li>
 			<li><a class="navtags active:shadow-xl active:ring active:ring-primary-100" href="https://github.com/oslabs-beta/QueryFlow" target="_blank">GitHub</a></li>
