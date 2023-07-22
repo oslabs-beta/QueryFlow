@@ -71,7 +71,7 @@
 	<p>
 		Caching in a secondary database is an ideal option for fast data retrieval. Especially for
 		queries where SQL optimization is not feasible. Caching is configurable for most SQL databases,
-		but geocaching is another option. See the <a href="https://www.npmjs.com/package/@query-flow/query-flow" target="_blank">QueryFlow auto-caching engine.</a>
+		but geocaching is another option. See the <a href="https://www.npmjs.com/package/queryflow.js" target="_blank">QueryFlow auto-caching engine.</a>
 	</p>
 	
 	<img src={cacheAside} alt="Cache Aside Graphic" />
