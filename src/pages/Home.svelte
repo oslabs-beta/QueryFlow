@@ -7,7 +7,8 @@
   import { derived } from 'svelte/store'
   import Cookies from 'js-cookie';
   import {isAuthenticated} from '../store'
- 
+  import { navigate } from 'svelte-routing';
+
   //Fun console.log for our landing page;
 console.log(`
  ________  ___  ___  _______   ________      ___    ___ ________ ___       ________  ___       __      
@@ -126,8 +127,10 @@ console.log(`
 
 <div class="w-full flex flex-col items-center content-center justify-center mt-6">
   <div>
+    
     <!-- add a query button -->
     <label for="my-drawer" class="btn btn-primary drawer-button border-none hover:bg-secondary hover:text-white text-base">Add a Query</label>
+    <button on:click={()=>navigate('/all-metrics')} class="ml-4 btn btn-primary drawer-button border-none hover:bg-secondary hover:text-white text-base">All Metrics</button>
   </div>
   <div class="flex-shrink-0">
     <!-- renders the sliding drawer component -->

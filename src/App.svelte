@@ -7,6 +7,7 @@
 	import Landing from './pages/Landing.svelte';
 	import Tips from './pages/Tips.svelte';
 	import AllMetrics from './pages/AllMetrics.svelte';
+  import Privacy from './pages/Privacy.svelte';
 </script>
 
 <!-- holding all our routes for their respective pages -->
@@ -19,6 +20,7 @@
 			<Route path="/about" component={About} />
 			<Route path="/tips" component={Tips} />
 			<Route path="/home" component={Home} />
+			<Route path="/privacy" component={Privacy} />
 			<Route path="/all-metrics" component={AllMetrics} />
 		</Router>
 	</div>

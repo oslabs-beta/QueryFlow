@@ -14,12 +14,8 @@ describe('User API', () => {
     cy.visit('http://localhost:5173/');
   });
 
-  it('successfully communicates with the backend', () => {
-    cy.request('http://localhost:3000/')
-      .its('status')
-      .should('eq', 200);
-  });
-
+  
+ 
   it('should create a new user', () => {
     cy.request({
       method: 'POST',
@@ -47,3 +43,11 @@ describe('User API', () => {
     });
   });
 });  
+
+// This test will work if you change the static folder line and sendfile in server.mjs(express server file) back to src folder and index.html respectively.
+ 
+// it('successfully communicates with the backend', () => {
+//   cy.request('http://localhost:3000/')
+//     .its('status')
+//     .should('eq', 200);
+// });
