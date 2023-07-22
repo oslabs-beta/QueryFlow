@@ -16,12 +16,11 @@ describe('Navbar Tests', () => {
   });
 
   it('displays the navigation links', () => {
-    cy.get('.navtags').should('have.length', 6);
+    cy.get('.navtags').should('have.length', 5);
     cy.get('.navtags').eq(0).should('have.text', 'Home');
-    cy.get('.navtags').eq(1).should('have.text', 'All Metrics');
-    cy.get('.navtags').eq(2).should('have.text', 'About');
-    cy.get('.navtags').eq(3).should('have.text', 'SQL Tips');
-    cy.get('.navtags').eq(4).should('have.text', 'GitHub').should('have.attr', 'href', 'https://github.com/oslabs-beta/QueryFlow');
+    cy.get('.navtags').eq(1).should('have.text', 'About');
+    cy.get('.navtags').eq(2).should('have.text', 'SQL Tips');
+    cy.get('.navtags').eq(3).should('have.text', 'GitHub').should('have.attr', 'href', 'https://github.com/oslabs-beta/QueryFlow');
   });
 
 
