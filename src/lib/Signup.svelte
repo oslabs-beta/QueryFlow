@@ -2,7 +2,7 @@
 	import { Modal, Button } from 'flowbite-svelte';
 	import { toasts } from 'svelte-toasts';
 	import Terms from './Terms.svelte';
-  import { renderSignup } from '../store';
+	import { renderSignup } from '../store';
 	//boolean for the modal
 	let clickOutsideModal: boolean = false;
 	// initializing vars for database
@@ -26,7 +26,8 @@
 	// signing up - POST request
 	const postData = async (e: any) => {
 		e.preventDefault();
-		if (password !== confirmPassword) return alert('Please make sure your passwords match');
+		if (password !== confirmPassword)
+			return toasts.error('', 'Password does not match', { placement: 'top-center' });
 
 		// body var for post request
 		// needs adjustment, database/organization both optional, doesn't account for all conditions
