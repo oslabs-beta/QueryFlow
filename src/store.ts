@@ -8,20 +8,23 @@ export const userInfoStore = writable<UserType>({
   lastName: '',
 });
 
-//Store for main metrics array from metric get request in the home.svelte
+// Store for main metrics array from metric get request in the home.svelte
 export const metricData: Writable<QueryData[]> = writable<QueryData[]>([]);
 
-//Store for first column on the homepage. Basically filtered metricsData based on the selection dropdown
+// Store for first column on the homepage. Basically filtered metricsData based on the selection dropdown
 export const filterMetricData: Writable<QueryData[]> = writable<QueryData[]>([]);
 
-//Store for second column on the homepage. Basically filtered metricsData based on the selection dropdown
+// Store for second column on the homepage. Basically filtered metricsData based on the selection dropdown
 export const filterMetricDataTwo: Writable<QueryData[]> = writable<QueryData[]>([]);
 
-//Store for Redis data
+// Store for Redis data
 export const redisData: Writable<RedisData> = writable<RedisData>();
 
-// authentication status, initially false, updatable through source code
+// Authentication status, initially false, updatable through source code
 export const isAuthenticated: Writable<boolean> = writable(false);
 
-// loading status for running queries, initially false, updatable through source code
+// Loading status for running queries, initially false, updatable through source code
 export const isLoading: Writable<boolean> = writable(false);
+
+// Render the login or signup component on the userlogin page
+export const renderSignup: Writable<boolean> = writable(false);

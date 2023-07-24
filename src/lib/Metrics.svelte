@@ -10,7 +10,8 @@
   import {Tooltip} from 'flowbite-svelte'
   export let metric: QueryData;
   export let i: number;
-  
+  import { toasts } from 'svelte-toasts';
+
   // get all the metrics from the store
   const allMetrics: QueryData[] = get(metricData);
 
@@ -36,7 +37,7 @@
         body: JSON.stringify({ _id: metric._id }),
       })
       if (response.ok) {
-        alert('metric deleted');
+        toasts.success('', 'Metric Deleted', { placement: 'top-center' });
         // removes the metric by id from the local metrics array
         const newFilteredMetrics: QueryData[] = allMetrics.filter(obj => obj._id !== metric._id);
       
