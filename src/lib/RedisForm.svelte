@@ -1,7 +1,9 @@
 <script lang="ts">
 	import RedisChart from '../graphs/RedisChart.svelte';
 	import { redisData } from '../store';
+  import { toasts } from 'svelte-toasts';
 	import type { RedisData } from '../types';
+
 
 	// initializing vars for database
 	let uri: string = '';
@@ -27,6 +29,8 @@
 
 		if (response.ok) {
 			const result = await response.json();
+      toasts.success('', 'Success', { placement: 'top-center' });
+
 			metricRun = true;
 			redisData.set({
 				totalTimeRedis: Number(result.totalTimeRedis),

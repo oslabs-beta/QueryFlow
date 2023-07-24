@@ -1,6 +1,7 @@
 <script lang="ts">
   import { metricData, filterMetricData, filterMetricDataTwo, isLoading } from '../store';
   import { Button, Dropdown, DropdownItem, Chevron } from 'flowbite-svelte'
+	import { toasts } from 'svelte-toasts';
 
 	// initializing vars for database
 	let queryName: string;
@@ -43,6 +44,7 @@
         filterMetricDataTwo.update((arr) => [data, ...arr]);
 
 				// ends spinning animation
+        toasts.success('', 'Success', { placement: 'top-center' });
 				isLoading.set(false);
       }
       isLoading.set(false);

@@ -7,6 +7,8 @@
 	import { Modal } from 'flowbite-svelte';
 	import { onMount, tick } from 'svelte';
 	import { get } from 'svelte/store';
+	import { toasts } from 'svelte-toasts';
+
 	// reactive metrics array
 	$: metrics = [];
 
@@ -60,7 +62,7 @@
 
 		const allMetrics: QueryData[] = get(metricData);
 		if (allMetrics.length === 0) {
-			alert('You are going to home, to get your data');
+			toasts.info('', 'Welcome Back!', { placement: 'top-center' });
 			navigate('/home');
 		}
 
@@ -243,10 +245,10 @@
 	}
 	@media (max-width: 600px) {
 		.text-xs {
-			font-size: 0.6rem; 
+			font-size: 0.6rem;
 		}
 		.text-xl {
-			font-size: 0.8rem; 
+			font-size: 0.8rem;
 		}
 		.tooltip2 {
 			font-size: 0.5em;
