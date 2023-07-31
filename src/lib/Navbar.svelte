@@ -30,7 +30,7 @@
 	};
 
 	// removes tokens to exit auth status
-	const logout = async (e): Promise<void> => {
+	const logout = async (e: any): Promise<void> => {
 		e.preventDefault();
 		toasts.success('', 'Successful Logout', { placement: 'top-center' });
 		localStorage.removeItem('token');
