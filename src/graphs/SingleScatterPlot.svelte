@@ -45,7 +45,7 @@
 
   const getHighValue = (array: {x: number, y: number}[], property: 'x' | 'y') => {
     if (!array.length) return 0;
-    let highVal = -Infinity;
+    let highVal: number = -Infinity;
     array.forEach((el) => {
       if (highVal < el[property]) highVal = el[property];
     });
@@ -71,7 +71,7 @@
   svg
   .append('g')
   .attr('transform', `translate(${margin.left}, ${height + margin.top})`)
-  .call(axisBottom(xScale).ticks(metric.queryMetrics.length+1));
+  .call(axisBottom(xScale).ticks(metric.queryMetrics.length + 1));
 
   // x-axis label
   svg
