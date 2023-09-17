@@ -11,9 +11,15 @@
 	let queryDelay: number = 2;
 	let isDrawerOpen: boolean = false;
 
+	// for closing dropdown onclicks
+	let dropdownOpenCount: boolean = false;
+	let dropdownOpenDelay: boolean = false;
+
   // submit query POST Request
 	const postQuery = async (e: any): Promise<void> => {
     e.preventDefault();
+
+		// closes drawer
     isDrawerOpen = false;
 
 		// adds spinning animation to logo
@@ -37,14 +43,16 @@
       });
 
       if (response.ok) {
+
 				// updates metricData and filterMetricData
         const data = await response.json();
         metricData.update((arr) => [data, ...arr]);
         filterMetricData.update((arr) => [data, ...arr]);
         filterMetricDataTwo.update((arr) => [data, ...arr]);
 
-				// ends spinning animation
         toasts.success('', 'Success', { placement: 'top-center' });
+
+				// ends spinning animation
 				isLoading.set(false);
       }
       isLoading.set(false);
@@ -121,44 +129,52 @@
 								class="textarea textarea-bordered textarea-lg w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
 							/>
 						</div>
-
-					<div class="grid grid-cols-2 mt-6 gap-2 justify-center">
-            <div class="grid grid-cols-1 text-center justify-center">
-              <Button class="bg-primary"><Chevron>Query Count: {queryCount}</Chevron></Button>
-<Dropdown class="text-center overflow-y-auto h-48">
-  <DropdownItem on:click={() => queryCount = 1}>1</DropdownItem>
-  <DropdownItem on:click={() => queryCount = 2}>2</DropdownItem>
-  <DropdownItem on:click={() => queryCount = 3}>3</DropdownItem>
-  <DropdownItem on:click={() => queryCount = 4}>4</DropdownItem>
-  <DropdownItem on:click={() => queryCount = 5}>5</DropdownItem>
-  <DropdownItem on:click={() => queryCount = 6}>6</DropdownItem>
-  <DropdownItem on:click={() => queryCount = 7}>7</DropdownItem>
-  <DropdownItem on:click={() => queryCount = 8}>8</DropdownItem>
-  <DropdownItem on:click={() => queryCount = 9}>9</DropdownItem>
-  <DropdownItem on:click={() => queryCount = 10}>10</DropdownItem>
-  <DropdownItem on:click={() => queryCount = 11}>11</DropdownItem>
-  <DropdownItem on:click={() => queryCount = 12}>12</DropdownItem>
-  <DropdownItem on:click={() => queryCount = 13}>13</DropdownItem>
-  <DropdownItem on:click={() => queryCount = 14}>14</DropdownItem>
-  <DropdownItem on:click={() => queryCount = 15}>15</DropdownItem>
-</Dropdown>
-            </div>
-            <div class="grid grid-cols-1 text-center flex justify-center">
-              <Button class="bg-primary"><Chevron>Query Delay: {queryDelay}</Chevron></Button>
-<Dropdown class="text-center overflow-y-auto h-48" >
-  <DropdownItem on:click={() => queryDelay = 2}>2</DropdownItem>
-  <DropdownItem on:click={() => queryDelay = 4}>4</DropdownItem>
-  <DropdownItem on:click={() => queryDelay = 6}>6</DropdownItem>
-  <DropdownItem on:click={() => queryDelay = 8}>8</DropdownItem>
-  <DropdownItem on:click={() => queryDelay = 10}>10</DropdownItem>
-  <DropdownItem on:click={() => queryDelay = 12}>12</DropdownItem>
-  <DropdownItem on:click={() => queryDelay = 14}>14</DropdownItem>
-  <DropdownItem on:click={() => queryDelay = 16}>16</DropdownItem>
-  <DropdownItem on:click={() => queryDelay = 18}>18</DropdownItem>
-  <DropdownItem on:click={() => queryDelay = 20}>20</DropdownItem>
-</Dropdown>
-            </div>
-          </div>
+						<div class="grid grid-cols-2 mt-6 gap-2 justify-center">
+							<div class="grid grid-cols-1 text-center justify-center">
+								<Button class="bg-primary"><Chevron>Query Count: {queryCount}</Chevron></Button>
+								<Dropdown class="text-center overflow-y-auto h-48" bind:open={dropdownOpenCount}>
+									<DropdownItem on:click={() => { queryCount = 1; dropdownOpenCount = false }}>1</DropdownItem>
+									<DropdownItem on:click={() => { queryCount = 2; dropdownOpenCount = false }}>2</DropdownItem>
+									<DropdownItem on:click={() => { queryCount = 3; dropdownOpenCount = false }}>3</DropdownItem>
+									<DropdownItem on:click={() => { queryCount = 4; dropdownOpenCount = false }}>4</DropdownItem>
+									<DropdownItem on:click={() => { queryCount = 5; dropdownOpenCount = false }}>5</DropdownItem>
+									<DropdownItem on:click={() => { queryCount = 6; dropdownOpenCount = false }}>6</DropdownItem>
+									<DropdownItem on:click={() => { queryCount = 7; dropdownOpenCount = false }}>7</DropdownItem>
+									<DropdownItem on:click={() => { queryCount = 8; dropdownOpenCount = false }}>8</DropdownItem>
+									<DropdownItem on:click={() => { queryCount = 9; dropdownOpenCount = false }}>9</DropdownItem>
+									<DropdownItem on:click={() => { queryCount = 10; dropdownOpenCount = false }}>10</DropdownItem>
+									<DropdownItem on:click={() => { queryCount = 11; dropdownOpenCount = false }}>11</DropdownItem>
+									<DropdownItem on:click={() => { queryCount = 12; dropdownOpenCount = false }}>12</DropdownItem>
+									<DropdownItem on:click={() => { queryCount = 13; dropdownOpenCount = false }}>13</DropdownItem>
+									<DropdownItem on:click={() => { queryCount = 14; dropdownOpenCount = false }}>14</DropdownItem>
+									<DropdownItem on:click={() => { queryCount = 15; dropdownOpenCount = false }}>15</DropdownItem>
+								</Dropdown>
+							</div>
+							<div class="grid grid-cols-1 text-center flex justify-center">
+								<Button class="bg-primary"><Chevron>Query Delay: {queryDelay}</Chevron></Button>
+								<Dropdown class="text-center overflow-y-auto h-48" bind:open={dropdownOpenDelay}>
+									<DropdownItem on:click={() => { queryDelay = 2; dropdownOpenDelay = false }}>2</DropdownItem>
+									<DropdownItem on:click={() => { queryDelay = 3; dropdownOpenDelay = false }}>3</DropdownItem>
+									<DropdownItem on:click={() => { queryDelay = 4; dropdownOpenDelay = false }}>4</DropdownItem>
+									<DropdownItem on:click={() => { queryDelay = 5; dropdownOpenDelay = false }}>5</DropdownItem>
+									<DropdownItem on:click={() => { queryDelay = 6; dropdownOpenDelay = false }}>6</DropdownItem>
+									<DropdownItem on:click={() => { queryDelay = 7; dropdownOpenDelay = false }}>7</DropdownItem>
+									<DropdownItem on:click={() => { queryDelay = 8; dropdownOpenDelay = false }}>8</DropdownItem>
+									<DropdownItem on:click={() => { queryDelay = 9; dropdownOpenDelay = false }}>9</DropdownItem>
+									<DropdownItem on:click={() => { queryDelay = 10; dropdownOpenDelay = false }}>10</DropdownItem>
+									<DropdownItem on:click={() => { queryDelay = 11; dropdownOpenDelay = false }}>11</DropdownItem>
+									<DropdownItem on:click={() => { queryDelay = 12; dropdownOpenDelay = false }}>12</DropdownItem>
+									<DropdownItem on:click={() => { queryDelay = 13; dropdownOpenDelay = false }}>13</DropdownItem>
+									<DropdownItem on:click={() => { queryDelay = 14; dropdownOpenDelay = false }}>14</DropdownItem>
+									<DropdownItem on:click={() => { queryDelay = 15; dropdownOpenDelay = false }}>15</DropdownItem>
+									<DropdownItem on:click={() => { queryDelay = 16; dropdownOpenDelay = false }}>16</DropdownItem>
+									<DropdownItem on:click={() => { queryDelay = 17; dropdownOpenDelay = false }}>17</DropdownItem>
+									<DropdownItem on:click={() => { queryDelay = 18; dropdownOpenDelay = false }}>18</DropdownItem>
+									<DropdownItem on:click={() => { queryDelay = 19; dropdownOpenDelay = false }}>19</DropdownItem>
+									<DropdownItem on:click={() => { queryDelay = 20; dropdownOpenDelay = false }}>20</DropdownItem>
+								</Dropdown>
+							</div>
+						</div>
 						<!-- post query button -->
 						<div class="flex justify-center my-6">
 							<button
@@ -193,5 +209,4 @@
 	#my-drawer:not(:checked) ~ .drawer-side {
 		transition: all 0.8s ease-in;
 	}
-
 </style>

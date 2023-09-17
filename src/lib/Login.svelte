@@ -6,15 +6,16 @@
 	let email: string;
 	let password: string=''
 	let wrongEmailPassword: boolean = false;
-	let passwordVisible: boolean = false;
-
+	
 	// password visibility function
 
+	let hidePassword: boolean = true;
+
 	function toggleVisibility() {
-		passwordVisible = !passwordVisible;
+		hidePassword = !hidePassword;
 	}
 
-	function updatePassword(event) {
+	function updatePassword(event: any) {
 		password = event.target.value;
 	}
 	// logging in POST Request
@@ -103,7 +104,7 @@
 						>Password</label
 					>
 					<input
-						type={passwordVisible ? 'text' : 'password'}
+						type={hidePassword ? 'password' : 'text'}
 						name="password"
 						id="password"
 						placeholder="••••••••"
@@ -117,8 +118,8 @@
 						on:click={toggleVisibility}
 						class="absolute showPassword right-0 top-12 transform -translate-y-1/2 p-2"
 					>
-						<!-- {passwordVisible ? 'Hide' : 'Show'} -->
-						{#if passwordVisible}
+						<!-- {hidePassword ? 'Hide' : 'Show'} -->
+						{#if hidePassword}
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
 								width="18"
