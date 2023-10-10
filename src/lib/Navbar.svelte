@@ -255,7 +255,7 @@
 						{:else}
 							<a
 								on:click={login}
-								href="/tuna"
+								href="/login"
 								class="block py-2 pl-3 pr-4 text-gray-900 rounded hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
 								>Login</a
 							>
