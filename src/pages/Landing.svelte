@@ -60,7 +60,7 @@
 		copyButton2.addEventListener('click', function () {
 			// Create a temporary textarea to select the text and copy
 			const tempTextArea: HTMLTextAreaElement = document.createElement('textarea');
-			tempTextArea.value = 'npm -install query-flow';
+			tempTextArea.value = 'npm i queryflow.js';
 			document.body.appendChild(tempTextArea);
 			tempTextArea.select();
 			document.execCommand('copy');
@@ -139,7 +139,7 @@
 			>
 				<h6 class="font-bold p-2">$</h6>
 				<div class="codeText grid justify-center place-items-center font-bold">
-					npm install queryflow.js
+					npm i queryflow.js
 				</div>
 
 				<button

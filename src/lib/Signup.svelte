@@ -16,10 +16,6 @@
 	//used for terms and conditions checkbox
 	let isChecked: boolean = false;
 
-	function acceptTerms() {
-		isChecked = true;
-	}
-
 	// used for comparing passwords when creating acc
 	let confirmPassword: string;
 
@@ -249,8 +245,8 @@
 								>
 									<Terms />
 									<svelte:fragment slot="footer">
-										<Button on:click={acceptTerms} color="green">I Accept</Button>
-										<Button color="red">Decline</Button>
+										<Button on:click={() => isChecked = true} color="green">Accept</Button>
+										<Button on:click={() => isChecked = false} color="red">Decline</Button>
 									</svelte:fragment>
 								</Modal>
 							</label>
