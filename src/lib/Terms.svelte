@@ -117,6 +117,6 @@
       <li>By email: <a href="mailto:queryflow58@gmail.com">queryflow58@gmail.com</a></li>
   </ul>
   
-  <p><i>Note: The above continuation is a generic addition to the given terms and conditions and may need specific details like contact information to be filled in. Always consult with a legal professional when crafting or amending terms and conditions to ensure they are appropriate for your specific needs.</i></p>
+  <!-- <p><i>Note: The above continuation is a generic addition to the given terms and conditions and may need specific details like contact information to be filled in. Always consult with a legal professional when crafting or amending terms and conditions to ensure they are appropriate for your specific needs.</i></p> -->
   
   </section>
