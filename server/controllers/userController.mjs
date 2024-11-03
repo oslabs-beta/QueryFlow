@@ -1,14 +1,10 @@
-import ourDBModel from '../models/ourDBModel.mjs';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import ourDBModel from '../models/ourDBModel.mjs';
 
 const userController = {};
 
 const workFactor = 10;
-
-// Signs users up
-const bcrypt = require('bcrypt');
-const workFactor = 10; // Adjust work factor as needed
 
 userController.create = async (req, res, next) => {
   try {
