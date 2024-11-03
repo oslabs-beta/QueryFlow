@@ -4,6 +4,23 @@
 	import pagila from "../assets/Pagila-ER-Diagram.png"
 	import { Modal } from 'flowbite-svelte'
 	let defaultModal = false;
+	const sqlQuery = `
+    		SELECT film.title,
+    			   category.name AS category,
+    			   actor.first_name || ' ' || actor.last_name AS actor_name,
+    			   rental.rental_date
+    		FROM film
+    		JOIN film_category ON film.film_id = film_category.film_id
+    		JOIN category ON film_category.category_id = category.category_id
+    		JOIN film_actor ON film.film_id = film_actor.film_id
+    		JOIN actor ON film_actor.actor_id = actor.actor_id
+    		JOIN inventory ON film.film_id = inventory.film_id
+    		JOIN rental ON inventory.inventory_id = rental.inventory_id
+    		WHERE category.name = 'Action'
+    		AND rental.rental_date >= '2005-05-24 21:54:33 +0000'
+    		AND rental.rental_date <= '2005-05-25 08:41:01 +0000'
+    		ORDER BY rental.rental_date DESC;
+    	`;
 </script>
 
 
@@ -28,22 +45,19 @@
 	<p>When the drawer opens, enter the following information into the provided fields:</p>
 	<p>
 		<strong>Category of your query:</strong><br />
-		pagila-customer-select-10-delay-2 <br /><br />
+		All data from films in the action category <br /><br />
 		<strong>Postgres DB URI/URL:</strong><br />
-		postgres://yttdzhlk:HnLO6cyc9fLwqqNjttS-HhsEnie7-aT5@mahmud.db.elephantsql.com/yttdzhlk<br /><br
+		postgresql://postgres:u1Flgeub6ZSpwD8m@tremulously-definite-giraffe.data-1.use1.tembo.io:5432/postgres<br /><br
 		/>
-		<strong>Query string:</strong><br />
+		<strong>Query string:</strong><br /><br />
 
-		SELECT customer.customer_id, customer.first_name, customer.last_name, SUM(payment.amount) AS
-		total_revenue<br />
-		FROM customer<br />
-		JOIN payment ON customer.customer_id = payment.customer_id<br />
-		GROUP BY customer.customer_id<br />
-		ORDER BY total_revenue DESC<br />
-		LIMIT 10;<br /><br />
+        	{sqlQuery}<br /><br />
 
-		<strong>Set # of query runs to 3 and leave Delay between queries at 2</strong> <br /><br />
-		The data should look like this:
+
+        <strong>Set the number of query runs to 3 and leave the delay between queries at 2.</strong><br /><br />
+        <strong>The query should look like this:</strong>
+
+
 	</p>
     <img src={drawer} class="w-92" alt="drawer with above data as input" />
 	<p>Now run the query and browse the metrics data!</p>

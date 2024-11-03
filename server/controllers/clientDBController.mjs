@@ -11,7 +11,10 @@ clientDBController.queryMetrics = async (req, res, next) => {
   // Initiating new model
   const { Pool } = pg;
   const pool = new Pool({
-    connectionString: uri
+    connectionString: uri,
+    ssl: {
+      rejectUnauthorized: false,
+    },
   });
 
 
@@ -72,7 +75,10 @@ clientDBController.queryTimeSQL = async (req, res, next) => {
   // Initiating new model
   const { Pool } = pg;
   const pool = new Pool({
-    connectionString: uri
+    connectionString: uri,
+    ssl: {
+      rejectUnauthorized: false,
+    },
   });
 
   const clientDBModel = function(text, params, callback) {
